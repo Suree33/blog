@@ -1,28 +1,17 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import PostItem from '../components/PostItem.astro';
+import { formatDate } from '../scripts/date';
+const posts = await Astro.glob('./posts/*.md');
+const pageTitle = 'Blog';
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>sur33.com</h1>
-    <ul>
-      <li>
-        <a href="/posts/fan-for-my-right-hand">
-          手を乾かすために卓上扇風機を買った
-        </a>
-      </li>
-      <li>
-        <a href="/posts/logi-mx-master-is-better-than-lift">
-          Logicool MX Liftを買ってみたけど、やっぱりMX Masterが最高だった
-        </a>
-      </li>
-    </ul>
-  </body>
-</html>
+<Layout pageTitle={pageTitle}>
+  <div class="mt-10 flex w-full justify-center px-4">
+    <div class="container">
+      <ul class="flex flex-col gap-y-4">
+        {posts.map((post) => <PostItem post={post} />)}
+      </ul>
+    </div>
+  </div>
+</Layout>

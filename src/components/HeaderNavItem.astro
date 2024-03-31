@@ -1,0 +1,22 @@
+---
+const { path, title } = Astro.props;
+const { pathname: currentPath } = Astro.url;
+---
+
+{
+  currentPath === path ? (
+    <a
+      class="border-b border-current text-base uppercase"
+      href={path}
+    >
+      {title}
+    </a>
+  ) : (
+    <a
+      class="text-base uppercase"
+      href={path}
+    >
+      {title}
+    </a>
+  )
+}

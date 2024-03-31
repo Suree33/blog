@@ -1,8 +1,8 @@
 ---
-title: 'Logicool MX Liftを買ってみたけど、やっぱりMX Masterが最高だった'
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Logicool MX Liftを買ってみて、MX Masterの良さを再認識した'
 pubDate: 2024-03-31
-author: 'Daiki Sato'
-tags: ['マウス', 'Logicool', 'Logitech']
+tags: ['マウス', 'Logi']
 ---
 
 ## Logicool MX Master

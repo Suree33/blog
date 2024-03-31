@@ -1,22 +1,11 @@
 ---
-const pageTitle = "About";
+import Layout from '../layouts/Layout.astro';
+const pageTitle = 'About';
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <header>
-      <a href="/">Blog</a>
-      <a href="/about">About</a>
-    </header>
-    <article>
-      <h1>{pageTitle}</h1>
+<Layout pageTitle={pageTitle}>
+  <div class="mt-10 flex w-full justify-center px-4">
+    <article class="prose w-full dark:prose-invert">
       <h2>ソーシャルメディア</h2>
       <ul>
         <li><a href="https://twitter.com/thisissuree">X (Twitter)</a></li>
@@ -30,5 +19,5 @@ const pageTitle = "About";
         <li><a href="https://www.last.fm/user/ThisIsSuree">last.fm</a></li>
       </ul>
     </article>
-  </body>
-</html>
+  </div>
+</Layout>
