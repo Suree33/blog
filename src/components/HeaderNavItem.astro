@@ -8,13 +8,13 @@ const { pathname: currentPath } = Astro.url;
     if (currentPath === '/') {
       if (currentPath === path) {
         return (
-          <a class="border-b border-current text-base uppercase" href={path}>
+          <a class="border-b border-current uppercase" href={path}>
             {title}
           </a>
         );
       } else {
         return (
-          <a class="text-base uppercase" href={path}>
+          <a class="uppercase" href={path}>
             {title}
           </a>
         );
@@ -23,13 +23,13 @@ const { pathname: currentPath } = Astro.url;
       if (currentPath.startsWith('/posts')) {
         if (path === '/') {
           return (
-            <a class="border-b border-current text-base uppercase" href={path}>
+            <a class="border-b border-current uppercase" href={path}>
               {title}
             </a>
           );
         } else {
           return (
-            <a class="text-base uppercase" href={path}>
+            <a class="uppercase" href={path}>
               {title}
             </a>
           );
@@ -40,13 +40,13 @@ const { pathname: currentPath } = Astro.url;
           (currentPath.startsWith(path) && path !== '/')
         ) {
           return (
-            <a class="border-b border-current text-base uppercase" href={path}>
+            <a class="border-b border-current uppercase" href={path}>
               {title}
             </a>
           );
         } else {
           return (
-            <a class="text-base uppercase" href={path}>
+            <a class="uppercase" href={path}>
               {title}
             </a>
           );
