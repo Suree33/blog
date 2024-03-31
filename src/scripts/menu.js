@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
-  const menu = document.querySelector('.hamburger-toggle');
+  const menu = document.querySelectorAll('.hamburger-toggle');
   if (hamburger) {
     hamburger.addEventListener('click', () => {
       if (hamburger.classList.contains('start')) {
@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.classList.toggle('active');
       }
       if (hamburger.classList.contains('active')) {
-        menu.classList.add('active');
+        menu.forEach((item) => item.classList.add('active'));
       } else {
-        menu.classList.remove('active');
+        menu.forEach((item) => item.classList.remove('active'));
       }
     });
   }

@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 const { class: classList } = Astro.props;
+import config from '../config.json';
 ---
 
 <div class={classList}>
@@ -13,10 +14,10 @@ const { class: classList } = Astro.props;
   <a href="https://www.instagram.com/thisissuree/" target="_blank">
     <Icon name="fa6-brands:instagram" />
   </a>
-  <a href="https://unsplash.com/@sur33">
-    <Icon name="fa6-brands:unsplash" />
-  </a>
   <a href="https://github.com/Suree33">
     <Icon name="fa6-brands:github" />
+  </a>
+  <a href={`${config.url}/rss.xml`}>
+    <Icon name="fa6-solid:rss" />
   </a>
 </div>

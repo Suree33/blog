@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import '../styles/global.css';
+import config from '../config.json';
 const { pageTitle } = Astro.props;
 ---
 
@@ -10,9 +11,9 @@ const { pageTitle } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <title>{pageTitle} — {config.siteName}</title>
   </head>
-  <body class="bg-gray-100 dark:bg-gray-900">
+  <body class="bg-neutral-100 dark:bg-neutral-900">
     <Header />
     <slot />
   </body>

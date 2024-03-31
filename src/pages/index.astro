@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import PostItem from '../components/PostItem.astro';
 import { formatDate } from '../scripts/date';
 const posts = await Astro.glob('./posts/*.md');
 const pageTitle = 'Blog';
 ---
 
-<Layout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle}>
   <div class="mt-10 flex w-full justify-center sm:px-4">
     <div class="container">
       <ul
@@ -16,4 +16,4 @@ const pageTitle = 'Blog';
       </ul>
     </div>
   </div>
-</Layout>
+</BaseLayout>

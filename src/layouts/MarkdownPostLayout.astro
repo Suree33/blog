@@ -1,15 +1,15 @@
 ---
-import Layout from './Layout.astro';
+import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
 import { formatDate } from '../scripts/date';
 const pubDate = formatDate(frontmatter.pubDate);
 ---
 
-<Layout pageTitle={frontmatter.title}>
+<BaseLayout pageTitle={frontmatter.title}>
   <div class="mb-16 mt-10 flex w-full justify-center px-4">
-    <article class="prose w-full dark:prose-invert">
+    <article class="prose prose-neutral w-full dark:prose-invert">
       <div
-        class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold uppercase text-gray-500"
+        class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold uppercase text-neutral-500"
       >
         {
           frontmatter.tags.map((tag: string) => (
@@ -35,4 +35,4 @@ const pubDate = formatDate(frontmatter.pubDate);
       <hr />
     </article>
   </div>
-</Layout>
+</BaseLayout>

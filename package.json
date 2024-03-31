@@ -11,8 +11,10 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.5",
     "@astrojs/tailwind": "^5.1.0",
     "@iconify-json/fa6-brands": "^1.1.18",
+    "@iconify-json/fa6-solid": "^1.1.20",
     "@tailwindcss/typography": "^0.5.12",
     "astro": "^4.5.12",
     "astro-icon": "^1.1.0",

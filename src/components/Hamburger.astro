@@ -5,8 +5,6 @@ const height = 'calc(' + width + ' * 0.45)';
 
 <style define:vars={{ width, height, textColor }}>
   .hamburger {
-    --width: 2rem;
-    --height: 0.9rem;
     display: flex;
     box-sizing: content-box;
     flex-direction: column;
@@ -23,7 +21,7 @@ const height = 'calc(' + width + ' * 0.45)';
     }
     &:not(.start) {
       .line {
-        animation-duration: 0.3s;
+        animation-duration: 0.5s;
         animation-fill-mode: forwards;
         animation-direction: alternate;
         &:first-child {
