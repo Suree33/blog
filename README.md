@@ -1,4 +1,4 @@
-# sur33.com Blog
+# sur33.com blog
 
 ## 使用ツール・サービス
 
