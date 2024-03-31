@@ -1,0 +1,23 @@
+---
+import { Icon } from 'astro-icon/components';
+const { class: classList } = Astro.props;
+import config from '../config.json';
+---
+
+<div class={classList}>
+  <a href="https://twitter.com/thisissuree" target="_blank">
+    <Icon name="fa6-brands:x-twitter" />
+  </a>
+  <a href="https://www.threads.net/@thisissuree" target="_blank">
+    <Icon name="fa6-brands:threads" />
+  </a>
+  <a href="https://www.instagram.com/thisissuree/" target="_blank">
+    <Icon name="fa6-brands:instagram" />
+  </a>
+  <a href="https://github.com/Suree33">
+    <Icon name="fa6-brands:github" />
+  </a>
+  <a href="/rss.xml">
+    <Icon name="fa6-solid:rss" />
+  </a>
+</div>

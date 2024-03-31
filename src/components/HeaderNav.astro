@@ -1,0 +1,9 @@
+---
+import HeaderNavItem from './HeaderNavItem.astro';
+const { class: classList } = Astro.props;
+---
+
+<nav class={classList}>
+  <HeaderNavItem path="/" title="Blog" />
+  <HeaderNavItem path="/about/" title="About" />
+</nav>

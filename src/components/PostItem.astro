@@ -1,0 +1,30 @@
+---
+import { formatDate } from '../scripts/date';
+const { post } = Astro.props;
+const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
+---
+
+<li
+  class="transition hover:bg-neutral-200 sm:rounded lg:bg-white hover:dark:bg-neutral-700 lg:dark:bg-neutral-800"
+>
+  <a class="block px-4 py-3 lg:px-5 lg:py-5" href={post.url}>
+    <div
+      class="dot-separated flex flex-wrap text-neutral-500 dark:text-neutral-400"
+    >
+      {tags.map((tag: string) => <div class="inline-flex text-sm ">{tag}</div>)}
+      <time class="text-sm" datetime="{formatDate(post.frontmatter.pubDate)}">
+        {formatDate(post.frontmatter.pubDate)}
+      </time>
+    </div>
+    <div class="my-1 text-lg font-bold sm:text-xl dark:text-white">
+      {post.frontmatter.title}
+    </div>
+    {
+      post.frontmatter.description && (
+        <div class="line-clamp-1 text-neutral-600 dark:text-neutral-300">
+          {post.frontmatter.description}
+        </div>
+      )
+    }
+  </a>
+</li>

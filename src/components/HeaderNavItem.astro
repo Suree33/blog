@@ -1,0 +1,57 @@
+---
+const { path, title } = Astro.props;
+const { pathname: currentPath } = Astro.url;
+---
+
+{
+  () => {
+    if (currentPath === '/') {
+      if (currentPath === path) {
+        return (
+          <a class="border-b border-current uppercase" href={path}>
+            {title}
+          </a>
+        );
+      } else {
+        return (
+          <a class="uppercase" href={path}>
+            {title}
+          </a>
+        );
+      }
+    } else {
+      if (currentPath.startsWith('/posts')) {
+        if (path === '/') {
+          return (
+            <a class="border-b border-current uppercase" href={path}>
+              {title}
+            </a>
+          );
+        } else {
+          return (
+            <a class="uppercase" href={path}>
+              {title}
+            </a>
+          );
+        }
+      } else {
+        if (
+          currentPath === path ||
+          (currentPath.startsWith(path) && path !== '/')
+        ) {
+          return (
+            <a class="border-b border-current uppercase" href={path}>
+              {title}
+            </a>
+          );
+        } else {
+          return (
+            <a class="uppercase" href={path}>
+              {title}
+            </a>
+          );
+        }
+      }
+    }
+  }
+}

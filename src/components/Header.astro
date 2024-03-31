@@ -1,0 +1,73 @@
+---
+import Hamburger from './Hamburger.astro';
+import SocialIcons from './SocialIcons.astro';
+import HeaderNav from './HeaderNav.astro';
+---
+
+<header
+  class="sticky top-0 z-50 flex justify-center px-0 py-0 backdrop-blur-xl backdrop-saturate-150 sm:px-4 sm:py-4 dark:text-white"
+>
+  <div class="container flex items-center justify-between">
+    <div class="flex items-center justify-between gap-8">
+      <style>
+        h1.active {
+          opacity: 0;
+        }
+      </style>
+      <h1 class="hamburger-toggle transition">
+        <a class="block px-4 py-3 sm:p-0" href="/">
+          <img
+            class="aspect-square w-8 rounded-full border sm:w-10"
+            src="/profile-icon.jpg"
+            alt=""
+          />
+        </a>
+      </h1>
+      <HeaderNav class="hidden gap-6 text-base sm:flex" />
+    </div>
+    <SocialIcons class="hidden items-center gap-x-6 text-xl sm:flex" />
+    <div class="flex h-full items-center sm:hidden">
+      <Hamburger
+        width="1.7rem"
+        classList="px-4 py-4"
+        textColor="text-black dark:text-white"
+      />
+    </div>
+    <style>
+      .sm-menu {
+        height: 0;
+        padding: 2.5rem;
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+        &.active {
+          height: calc(100vh - (14 * 0.25rem));
+          visibility: visible;
+          opacity: 1;
+          z-index: 40;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+    <div
+      class="hamburger-toggle sm-menu fixed top-14 z-40 flex w-full flex-col justify-between gap-y-6 bg-neutral-100 transition-all duration-500 sm:hidden dark:bg-neutral-900"
+    >
+      <HeaderNav
+        class="flex w-full basis-full flex-col items-center justify-center gap-y-8 text-2xl sm:flex sm:gap-x-6"
+      />
+      <SocialIcons
+        class="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 text-xl"
+      />
+    </div>
+  </div>
+</header>
+<script>
+  import '../scripts/menu';
+</script>

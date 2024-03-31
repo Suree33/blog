@@ -1,0 +1,107 @@
+---
+const { state = 'start', textColor, width = '2rem', classList } = Astro.props;
+const height = 'calc(' + width + ' * 0.45)';
+---
+
+<style define:vars={{ width, height, textColor }}>
+  .hamburger {
+    display: flex;
+    box-sizing: content-box;
+    flex-direction: column;
+    justify-content: space-between;
+    width: var(--width);
+    height: var(--height);
+    cursor: pointer;
+
+    .line {
+      --line-size: 1px;
+      width: 100%;
+      height: var(--line-size);
+      background-color: currentColor;
+    }
+    &:not(.start) {
+      .line {
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        animation-direction: alternate;
+        &:first-child {
+          animation-name: line-animation-1;
+        }
+        &:last-child {
+          animation-name: line-animation-2;
+        }
+      }
+    }
+    &.active {
+      .line {
+        animation-direction: alternate;
+        &:first-child {
+          animation-name: line-animation-1-active;
+        }
+        &:last-child {
+          animation-name: line-animation-2-active;
+        }
+      }
+    }
+  }
+  @keyframes line-animation-1 {
+    0% {
+      transform: translateY(calc((var(--height) / 2) - (var(--line-size) / 2)))
+        rotate(45deg);
+    }
+    40% {
+      transform: translateY(calc((var(--height) / 2) - (var(--line-size) / 2)));
+    }
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+  @keyframes line-animation-2 {
+    0% {
+      transform: translateY(
+          calc((-1) * ((var(--height) / 2) - (var(--line-size) / 2)))
+        )
+        rotate(-45deg);
+    }
+    40% {
+      transform: translateY(
+        calc((-1) * ((var(--height) / 2) - (var(--line-size) / 2)))
+      );
+    }
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+  @keyframes line-animation-1-active {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    40% {
+      transform: translateY(calc((var(--height) / 2) - (var(--line-size) / 2)));
+    }
+    100% {
+      transform: translateY(calc((var(--height) / 2) - (var(--line-size) / 2)))
+        rotate(45deg);
+    }
+  }
+  @keyframes line-animation-2-active {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    40% {
+      transform: translateY(
+        calc((-1) * ((var(--height) / 2) - (var(--line-size) / 2)))
+      );
+    }
+    100% {
+      transform: translateY(
+          calc((-1) * ((var(--height) / 2) - (var(--line-size) / 2)))
+        )
+        rotate(-45deg);
+    }
+  }
+</style>
+<div class={`hamburger ${state} ${textColor} ${classList}`}>
+  <div class="line"></div>
+  <div class="line"></div>
+</div>

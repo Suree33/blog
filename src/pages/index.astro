@@ -1,16 +1,19 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostItem from '../components/PostItem.astro';
+import { formatDate } from '../scripts/date';
+const posts = await Astro.glob('./posts/*.md');
+const pageTitle = 'Blog';
 ---
 
-<html lang="ja">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>sur33.com</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+  <div class="mt-10 flex w-full justify-center sm:px-4">
+    <div class="container">
+      <ul
+        class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4 lg:grid-cols-2"
+      >
+        {posts.map((post) => <PostItem post={post} />)}
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

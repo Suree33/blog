@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = 'About';
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="mt-10 flex w-full justify-center px-4">
+    <article class="prose prose-neutral w-full dark:prose-invert">
+      <h2>ソーシャルメディア</h2>
+      <ul>
+        <li><a href="https://twitter.com/thisissuree">X (Twitter)</a></li>
+        <li><a href="https://www.threads.net/@thisissuree">Threads</a></li>
+        <li><a href="https://mstdn.guru/@suree">Mastodon</a></li>
+        <li><a href="https://www.last.fm/user/ThisIsSuree">last.fm</a></li>
+      </ul>
+      <h2>写真</h2>
+      <ul>
+        <li>
+          <a href="https://www.instagram.com/thisissuree/">Instagram</a>
+        </li>
+        <li><a href="https://unsplash.com/ja/@sur33">Unsplash</a></li>
+      </ul>
+      <h2>技術系</h2>
+      <ul>
+        <li><a href="https://github.com/Suree33">GitHub</a></li>
+        <li><a href="https://zenn.dev/suree">zenn</a></li>
+      </ul>
+    </article>
+  </div>
+</BaseLayout>
