@@ -1,25 +1,33 @@
 ---
 import { formatDate } from '../scripts/date';
 const { post } = Astro.props;
+const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
 ---
 
-<li class="rounded px-4 py-3 transition hover:bg-gray-100">
-  <a href={post.url}>
-    <time
-      class="text-gray-600"
-      datetime="{formatDate(post.frontmatter.pubDate)}"
-    >
-      {formatDate(post.frontmatter.pubDate)}
-    </time>
-    <div class="text-lg font-bold sm:text-xl">
-      {post.frontmatter.title}
-    </div>
-    <div class="flex gap-x-4">
+<li class="transition hover:bg-gray-200 sm:rounded lg:bg-white">
+  <a class="block px-4 py-3 lg:px-5 lg:py-5" href={post.url}>
+    <div class="dot-separated flex flex-wrap">
       {
-        post.frontmatter.tags.map((tag: string) => (
-          <a href={`/tags/${tag}`}>{tag}</a>
+        tags.map((tag: string) => (
+          <div class="inline-flex text-sm text-gray-500">{tag}</div>
         ))
       }
+      <time
+        class="text-sm text-gray-500"
+        datetime="{formatDate(post.frontmatter.pubDate)}"
+      >
+        {formatDate(post.frontmatter.pubDate)}
+      </time>
     </div>
+    <div class="my-1 text-lg font-bold sm:text-xl">
+      {post.frontmatter.title}
+    </div>
+    {
+      post.frontmatter.description && (
+        <div class="text-gray-600 lg:overflow-hidden lg:text-ellipsis lg:whitespace-nowrap">
+          {post.frontmatter.description}
+        </div>
+      )
+    }
   </a>
 </li>

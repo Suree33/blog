@@ -1,8 +1,9 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: '手を乾かすために卓上扇風機を買った'
-pubDate: 2024-03-31
+pubDate: 2024-03-10
 tags: ['ガジェット', 'ゲーム']
+description: '手汗対策のためにエレコムの卓上扇風機を買ってみました。'
 ---
 
 ## 手汗対策

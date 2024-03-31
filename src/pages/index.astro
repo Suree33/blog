@@ -7,9 +7,11 @@ const pageTitle = 'Blog';
 ---
 
 <Layout pageTitle={pageTitle}>
-  <div class="mt-10 flex w-full justify-center px-4">
+  <div class="mt-10 flex w-full justify-center sm:px-4">
     <div class="container">
-      <ul class="flex flex-col gap-y-4">
+      <ul
+        class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4 lg:grid-cols-2"
+      >
         {posts.map((post) => <PostItem post={post} />)}
       </ul>
     </div>

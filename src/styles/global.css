@@ -1,0 +1,12 @@
+.dot-separated {
+  > * {
+    &::after {
+      content: '•';
+      margin: 0 0.5em;
+    }
+    &:last-child::after {
+      content: '';
+      margin: 0;
+    }
+  }
+}

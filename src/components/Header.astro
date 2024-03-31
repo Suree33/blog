@@ -1,16 +1,16 @@
 ---
-import HeaderNavItem from './HeaderNavItem.astro';
 import Hamburger from './Hamburger.astro';
-import { Icon } from 'astro-icon/components';
+import SocialIcons from './SocialIcons.astro';
+import HeaderNav from './HeaderNav.astro';
 ---
 
 <header
-  class="sticky top-0 z-50 flex justify-center px-4 py-3 backdrop-blur-xl backdrop-saturate-150 sm:py-4 dark:text-white"
+  class="sticky top-0 z-50 flex justify-center px-0 py-0 backdrop-blur-xl backdrop-saturate-150 sm:px-4 sm:py-4 dark:text-white"
 >
   <div class="container flex items-center justify-between">
     <div class="flex items-center justify-between gap-8">
       <h1>
-        <a href="/">
+        <a class="block px-4 py-3 sm:p-0" href="/">
           <img
             class="aspect-square w-8 rounded-full border sm:w-10"
             src="/profile-icon.jpg"
@@ -18,49 +18,46 @@ import { Icon } from 'astro-icon/components';
           />
         </a>
       </h1>
-      <nav class="hidden gap-6 sm:flex">
-        <HeaderNavItem
-          path="/"
-          title="Blog"
-        />
-        <HeaderNavItem
-          path="/about"
-          title="About"
-        />
-      </nav>
+      <HeaderNav class="hidden gap-6 text-base sm:flex" />
     </div>
-    <div class="hidden items-center gap-x-6 text-xl sm:flex">
-      <a
-        href="https://twitter.com/thisissuree"
-        target="_blank"
-      >
-        <Icon name="fa6-brands:x-twitter" />
-      </a>
-      <a
-        href="https://www.threads.net/@thisissuree"
-        target="_blank"
-      >
-        <Icon name="fa6-brands:threads" />
-      </a>
-      <a
-        href="https://www.instagram.com/thisissuree/"
-        target="_blank"
-      >
-        <Icon name="fa6-brands:instagram" />
-      </a>
-      <a href="https://unsplash.com/@sur33">
-        <Icon name="fa6-brands:unsplash" />
-      </a>
-      <a href="https://github.com/Suree33">
-        <Icon name="fa6-brands:github" />
-      </a>
-    </div>
-    <div class="flex h-full items-center px-2 sm:hidden">
+    <SocialIcons class="hidden items-center gap-x-6 text-xl sm:flex" />
+    <div class="flex h-full items-center sm:hidden">
       <Hamburger
         width="1.7rem"
         height="0.9rem"
+        classList="px-4 py-4"
         textColor="text-black"
       />
+    </div>
+    <style>
+      .hamburger-toggle {
+        height: calc(100vh - (14 * 0.25rem));
+        padding: 2.5rem;
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+        &.active {
+          visibility: visible;
+          opacity: 1;
+          z-index: 40;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+    <div
+      class="hamburger-toggle fixed top-14 z-40 flex w-full flex-col justify-between bg-gray-100 transition-all sm:hidden"
+    >
+      <HeaderNav
+        class="flex w-full flex-col items-center gap-y-4 text-xl sm:flex sm:gap-x-6"
+      />
+      <SocialIcons class="flex items-center justify-center gap-x-6 text-xl" />
     </div>
   </div>
 </header>

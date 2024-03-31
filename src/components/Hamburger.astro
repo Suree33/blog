@@ -1,5 +1,5 @@
 ---
-const { state = 'start', textColor, width = '2rem' } = Astro.props;
+const { state = 'start', textColor, width = '2rem', classList } = Astro.props;
 const height = 'calc(' + width + ' * 0.45)';
 ---
 
@@ -8,6 +8,7 @@ const height = 'calc(' + width + ' * 0.45)';
     --width: 2rem;
     --height: 0.9rem;
     display: flex;
+    box-sizing: content-box;
     flex-direction: column;
     justify-content: space-between;
     width: var(--width);
@@ -102,7 +103,7 @@ const height = 'calc(' + width + ' * 0.45)';
     }
   }
 </style>
-<div class={`hamburger ${state} ${textColor}`}>
+<div class={`hamburger ${state} ${textColor} ${classList}`}>
   <div class="line"></div>
   <div class="line"></div>
 </div>

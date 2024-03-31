@@ -5,48 +5,34 @@ import { formatDate } from '../scripts/date';
 const pubDate = formatDate(frontmatter.pubDate);
 ---
 
-<style>
-  ul.dot-separated {
-    li {
-      &::after {
-        content: '•';
-        margin: 0 0.5em;
-      }
-      &:last-child::after {
-        content: '';
-        margin: 0;
-      }
-    }
-  }
-</style>
-
 <Layout pageTitle={frontmatter.title}>
   <div class="mb-16 mt-10 flex w-full justify-center px-4">
     <article class="prose w-full dark:prose-invert">
-      <ul
-        class="dot-separated flex list-none justify-center p-0 text-base font-bold uppercase text-gray-500"
+      <div
+        class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold uppercase text-gray-500"
       >
         {
           frontmatter.tags.map((tag: string) => (
-            <li class="p-0">
-              <a
-                href={`/tags/${tag}`}
-                class="font-bold text-current no-underline"
-              >
-                {tag}
-              </a>
-            </li>
+            <a
+              href={`/tags/${tag}`}
+              class="inline-flex font-bold text-current no-underline"
+            >
+              {tag}
+            </a>
           ))
         }
-        <li class="p-0">
-          <time datetime={pubDate}>
-            {pubDate}
-          </time>
-        </li>
-      </ul>
+        <time datetime={pubDate}>
+          {pubDate}
+        </time>
+      </div>
       <div class="text-center"></div>
-      <h1 class="mb-20 mt-6 text-center text-2xl">{frontmatter.title}</h1>
+      <h1 class="mb-10 mt-6 text-center text-2xl">{frontmatter.title}</h1>
+      <p class="text-center">
+        {frontmatter.description}
+      </p>
+      <hr />
       <slot />
+      <hr />
     </article>
   </div>
 </Layout>
