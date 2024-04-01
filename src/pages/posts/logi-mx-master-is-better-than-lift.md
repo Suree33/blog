@@ -15,7 +15,7 @@ tags: ['ガジェット', 'マウス', 'Logi']
 
 Logicoolのエルゴマウスには、現在（トラックボール式を除けば）MX VerticalとLiftがありますが、手が小さい自分にとってMX Verticalは大きすぎたため、Liftを買ってみました。
 
-[Logicool Lift M800GR - Amazon](https://amzn.asia/d/e1Hu8fT)
+[Logicool Lift M800GR - Amazon](https://amzn.to/3IYOiS3)
 
 MX Master 3を使い続けている主な理由に、ジェスチャーによる仮想デスクトップの切り替えがあります。Liftでもマウスホイールの下にあるボタンをジェスチャー操作に割り当てることができるため、同様の操作が可能です。
 
@@ -27,4 +27,4 @@ MX Masterでは親指を置く部分を下に押し込むことでジェスチ�
 
 というわけで、次に買うべきマウスはMX Master 3Sかもしれないという結論に至りました。ただ、今MX Master 3Sを買おうとすると16,900円もするんですよね…
 
-[Logicool MX Master 3S](https://amzn.asia/d/bZYlzkv)
+[Logicool MX Master 3S](https://amzn.to/4aD6soy)
