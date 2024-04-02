@@ -5,7 +5,10 @@ let posts = await Astro.glob('./posts/*.md');
 posts = posts
   .filter((post) => !post.frontmatter.draft)
   .sort((a, b) => {
-    return Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date);
+    return (
+      new Date(b.frontmatter.pubDate).getTime() -
+      new Date(a.frontmatter.pubDate).getTime()
+    );
   });
 const pageTitle = 'Blog';
 ---
@@ -16,7 +19,11 @@ const pageTitle = 'Blog';
       <ul
         class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4 lg:grid-cols-2"
       >
-        {posts.map((post) => <PostItem post={post} />)}
+        {
+          posts.map(
+            (post) => post.url !== undefined && <PostItem post={post} />,
+          )
+        }
       </ul>
     </div>
   </div>
