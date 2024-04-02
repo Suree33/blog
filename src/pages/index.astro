@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostItem from '../components/PostItem.astro';
-import { formatDate } from '../scripts/date';
 const posts = await Astro.glob('./posts/*.md');
 const pageTitle = 'Blog';
 ---
@@ -12,7 +11,18 @@ const pageTitle = 'Blog';
       <ul
         class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4 lg:grid-cols-2"
       >
-        {posts.map((post) => <PostItem post={post} />)}
+        {
+          posts &&
+            posts
+              .filter((post) => !post.frontmatter.draft)
+              .sort((a, b) => {
+                return (
+                  new Date(b.frontmatter.pubDate).getTime() -
+                  new Date(a.frontmatter.pubDate).getTime()
+                );
+              })
+              .map((post) => post.url !== undefined && <PostItem post={post} />)
+        }
       </ul>
     </div>
   </div>
