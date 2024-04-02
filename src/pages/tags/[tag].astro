@@ -34,7 +34,18 @@ const { posts } = Astro.props;
       <ul
         class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4 lg:grid-cols-2"
       >
-        {posts ? posts.map((post) => <PostItem post={post} />) : null}
+        {
+          posts &&
+            posts
+              .filter((post) => !post.frontmatter.draft)
+              .sort((a, b) => {
+                return (
+                  new Date(b.frontmatter.pubDate).getTime() -
+                  new Date(a.frontmatter.pubDate).getTime()
+                );
+              })
+              .map((post) => post.url !== undefined && <PostItem post={post} />)
+        }
       </ul>
     </div>
   </div>
