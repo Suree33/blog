@@ -1,8 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostItem from '../components/PostItem.astro';
-import { formatDate } from '../scripts/date';
-const posts = await Astro.glob('./posts/*.md');
+let posts = await Astro.glob('./posts/*.md');
+posts = posts
+  .filter((post) => !post.frontmatter.draft)
+  .sort((a, b) => {
+    return Date.parse(b.frontmatter.date) - Date.parse(a.frontmatter.date);
+  });
 const pageTitle = 'Blog';
 ---
 
