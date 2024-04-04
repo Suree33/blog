@@ -3,7 +3,7 @@ import Header from '../components/Header.astro';
 import config from '../config.json';
 import '../styles/global.css';
 import SpeedInsights from '@vercel/speed-insights/astro';
-const { pageTitle, thumbnail, description } = Astro.props;
+const { pageTitle, ogimage, description } = Astro.props;
 ---
 
 <html lang="ja">
@@ -32,7 +32,7 @@ const { pageTitle, thumbnail, description } = Astro.props;
       property="og:description"
       content={description ? description : config.description}
     />
-    {thumbnail && <meta property="og:image" content={config.url + thumbnail} />}
+    {ogimage && <meta property="og:image" content={config.url + ogimage} />}
     <meta property="og:locale" content="ja-JP" />
   </head>
   <body class="bg-neutral-100 dark:bg-neutral-900">
