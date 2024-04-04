@@ -20,7 +20,7 @@ const { pageTitle, thumbnail } = Astro.props;
     <meta property="og:site_name" content={config.siteName} />
     {pageTitle && <meta property="og:title" content={pageTitle} />}
     <meta property="og:url" content={Astro.url} />
-    {thumbnail && <meta property="og:image" content={thumbnail} />}
+    {thumbnail && <meta property="og:image" content={config.url + thumbnail} />}
   </head>
   <body class="bg-neutral-100 dark:bg-neutral-900">
     <Header />
