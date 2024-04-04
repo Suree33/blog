@@ -4,6 +4,9 @@ title: Astroにおけるremark-link-cardを使ったリンクカード
 pubDate: 2024-04-05
 tags: ['ウェブ開発', 'Astro', 'remark']
 description: Astroで、remarkプラグインであるremark-link-cardを使いリンクをカード形式で表示できるようにしました。
+image:
+  src: '/src/pages/posts/images/remark-link-card-with-astro.png'
+  alt: 'Astroにおけるremark-link-cardを使ったリンクカード'
 ---
 
 ## remark-link-card

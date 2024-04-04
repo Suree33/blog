@@ -5,7 +5,10 @@ import { formatDate } from '../scripts/date';
 const pubDate = formatDate(frontmatter.pubDate);
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout
+  pageTitle={frontmatter.title}
+  thumbnail={frontmatter.image && frontmatter.image.src}
+>
   <div class="mb-16 mt-10 flex w-full justify-center px-4">
     <article class="prose prose-neutral w-full dark:prose-invert">
       <div
@@ -27,6 +30,15 @@ const pubDate = formatDate(frontmatter.pubDate);
       </div>
       <div class="text-center"></div>
       <h1 class="mb-10 mt-6 text-center text-2xl">{frontmatter.title}</h1>
+      {
+        frontmatter.image && (
+          <img
+            class="rounded"
+            src={frontmatter.image.src}
+            alt={frontmatter.image.alt}
+          />
+        )
+      }
       <p class="text-left">
         {frontmatter.description}
       </p>
