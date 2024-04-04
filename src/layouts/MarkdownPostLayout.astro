@@ -8,6 +8,7 @@ const pubDate = formatDate(frontmatter.pubDate);
 <BaseLayout
   pageTitle={frontmatter.title}
   thumbnail={frontmatter.image && frontmatter.image.src}
+  description={frontmatter.description}
 >
   <div class="mb-16 mt-10 flex w-full justify-center px-4">
     <article class="prose prose-neutral w-full dark:prose-invert">
