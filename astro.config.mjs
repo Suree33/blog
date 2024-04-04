@@ -27,7 +27,10 @@ export default defineConfig({
       ],
     ],
     shikiConfig: {
-      theme: 'dracula',
+      themes: {
+        dark: 'github-dark',
+        light: 'github-light',
+      },
     },
   },
   site: 'https://sur33.com/',
