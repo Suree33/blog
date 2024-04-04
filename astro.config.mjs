@@ -16,8 +16,8 @@ export default defineConfig({
     },
   }),
   markdown: {
-    remarkCodeTitles,
     remarkPlugins: [
+      remarkCodeTitles,
       [
         remarkLinkCard,
         {
@@ -26,6 +26,9 @@ export default defineConfig({
         },
       ],
     ],
+    shikiConfig: {
+      theme: 'dracula',
+    },
   },
   site: 'https://sur33.com/',
   integrations: [
