@@ -71,6 +71,9 @@ CSSは以下のようにしました。
 
   &:hover {
     background-color: #e5e5e5;
+    @media (prefers-color-scheme: dark) {
+      background-color: #262626;
+    }
   }
 
   width: 100%;
