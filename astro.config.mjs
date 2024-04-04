@@ -2,7 +2,10 @@ import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel/serverless';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
 import icon from 'astro-icon';
+import remarkCodeTitles from 'remark-flexible-code-titles';
+import remarkLinkCard from 'remark-link-card';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,6 +15,18 @@ export default defineConfig({
       enabled: true,
     },
   }),
+  markdown: {
+    remarkCodeTitles,
+    remarkPlugins: [
+      [
+        remarkLinkCard,
+        {
+          cache: true,
+          shortenUrl: true,
+        },
+      ],
+    ],
+  },
   site: 'https://sur33.com/',
   integrations: [
     tailwind({
@@ -19,5 +34,6 @@ export default defineConfig({
     }),
     sitemap(),
     icon(),
+    mdx(),
   ],
 });

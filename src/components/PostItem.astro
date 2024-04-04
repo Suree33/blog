@@ -4,10 +4,11 @@ const { post } = Astro.props;
 const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
 ---
 
-<li
-  class="transition hover:bg-neutral-200 sm:rounded lg:bg-white hover:dark:bg-neutral-700 lg:dark:bg-neutral-800"
->
-  <a class="block px-4 py-3 lg:px-5 lg:py-5" href={post.url}>
+<li>
+  <a
+    class="block px-4 py-3 transition hover:bg-neutral-200 sm:rounded lg:bg-white lg:px-5 lg:py-5 hover:dark:bg-neutral-700 lg:dark:bg-neutral-800"
+    href={post.url}
+  >
     <div
       class="dot-separated flex flex-wrap text-neutral-500 dark:text-neutral-400"
     >
