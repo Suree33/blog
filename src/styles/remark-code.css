@@ -1,3 +1,4 @@
+/* Code block */
 .remark-code-container {
   &:has(.remark-code-title) {
     margin-top: 1.7142857em;
@@ -33,5 +34,21 @@
     font-style: var(--shiki-dark-font-style) !important;
     font-weight: var(--shiki-dark-font-weight) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+/* Code span */
+:not(.astro-code) > code {
+  &::before,
+  &::after {
+    content: '';
+  }
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.25rem;
+  background-color: #e5e5e5;
+  color: #525252;
+  @media (prefers-color-scheme: dark) {
+    background-color: #404040;
+    color: #e5e5e5;
   }
 }
