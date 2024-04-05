@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Hamburger from './Hamburger.astro';
 import SocialIcons from './SocialIcons.astro';
 import HeaderNav from './HeaderNav.astro';
+import headerIcon from '../assets/images/profile-icon.jpg';
 ---
 
 <style>
@@ -28,10 +29,10 @@ import HeaderNav from './HeaderNav.astro';
         <a class="block px-4 py-3 sm:p-0" href="/">
           <Image
             class="aspect-square w-8 rounded-full border sm:w-10"
-            src="/profile-icon.jpg"
+            src={headerIcon}
             alt="サイトのロゴ画像（アイコン画像）"
-            width="128"
-            height="128"
+            width="256"
+            height="256"
           />
         </a>
       </h1>
