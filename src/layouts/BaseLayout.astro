@@ -34,11 +34,13 @@ const { pageTitle, ogimage, description } = Astro.props;
     />
     {ogimage && <meta property="og:image" content={config.url + ogimage} />}
     <meta property="og:locale" content="ja-JP" />
+    <!-- Google Analytics -->
     <!-- Google tag (gtag.js) -->
     <script
-      type="text/partytown"
+      is:inline
+      async
       src="https://www.googletagmanager.com/gtag/js?id=G-8ZCMEEKWF9"></script>
-    <script type="text/partytown">
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);

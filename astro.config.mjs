@@ -36,10 +36,5 @@ export default defineConfig({
     sitemap(),
     icon(),
     mdx(),
-    partytown({
-      config: {
-        forward: ['dataLayer.push'],
-      },
-    }),
   ],
 });
