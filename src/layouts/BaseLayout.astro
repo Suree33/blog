@@ -34,6 +34,19 @@ const { pageTitle, ogimage, description } = Astro.props;
     />
     {ogimage && <meta property="og:image" content={config.url + ogimage} />}
     <meta property="og:locale" content="ja-JP" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      type="text/partytown"
+      src="https://www.googletagmanager.com/gtag/js?id=G-8ZCMEEKWF9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-8ZCMEEKWF9');
+    </script>
   </head>
   <body class="bg-neutral-100 dark:bg-neutral-900">
     <Header />
