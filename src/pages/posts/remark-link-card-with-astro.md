@@ -28,7 +28,7 @@ bun install remark-link-card
 ```
 
 ### 2. 設定
-`astro.config.mjs` 以下のように追記します。
+`astro.config.mjs` を以下のように追記します。
 
 ```javascript:astro.config.mjs
 import remarkLinkCard from 'remark-link-card';
