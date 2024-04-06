@@ -56,7 +56,7 @@ export const toggleHamburgerMenu = (
     document.body.style.overflow = 'hidden';
   }
   function enableScroll() {
-    document.body.style.overflow = 'visible';
+    document.body.style.overflow = 'unset';
   }
 };
 
