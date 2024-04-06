@@ -16,7 +16,7 @@ import headerIcon from '../assets/images/profile-icon.jpg';
   }
 </style>
 <header
-  class="hamburger-toggle backdrop-brightness-sm sticky top-0 z-50 flex justify-center px-0 py-0 backdrop-blur-xl backdrop-saturate-150 sm:px-4 sm:py-4 dark:text-white"
+  class="hamburger-toggle backdrop-brightness-sm sticky top-0 z-50 flex justify-center px-0 py-0 backdrop-blur-xl backdrop-saturate-150 transition-all duration-500 sm:px-4 sm:py-4 dark:text-white"
 >
   <div class="container flex items-center justify-between">
     <div class="flex items-center justify-between gap-8">
@@ -82,5 +82,9 @@ import headerIcon from '../assets/images/profile-icon.jpg';
   </div>
 </header>
 <script>
-  import '../scripts/menu';
+  import { toggleHamburgerMenu, toggleHeaderOnScroll } from '../scripts/menu';
+  document.addEventListener('DOMContentLoaded', () => {
+    toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
+    toggleHeaderOnScroll('header');
+  });
 </script>

@@ -1,6 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.querySelector('.hamburger');
-  const menu = document.querySelectorAll('.hamburger-toggle');
+/**
+ * ハンバーガーメニューによるトグル機能をを提供する
+ *
+ * @function
+ * @name toggleHamburgerMenu
+ * @param {string} hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
+ * @param {string} toggleTargetSelector - トグルする要素を指定するCSSセレクタ
+ * @description
+ * 指定されたハンバーガーメニューをクリックすると、ハンバーガーメニューとトグル対象の要素にactiveクラスを付与したり削除したりすることで、
+ * メニューの開閉を行う。初回クリック時には'start'クラスを削除し、'active'クラスを追加する。
+ * それ以降のクリックでは'active'クラスのトグルを行う。
+ * 'active'クラスが付与されている場合、トグル対象の要素にも'active'クラスを付与し、
+ * 'active'クラスが削除された場合はトグル対象の要素からも'active'クラスを削除する。
+ *
+ * @example
+ * // HTMLでハンバーガーメニューとトグル対象の要素を定義
+ * <button class="hamburger start"></button>
+ * <nav class="hamburger-toggle"></nav>
+ *
+ * // CSSでハンバーガーメニューとトグル対象の要素のスタイルを定義
+ * .hamburger {
+ *   // ハンバーガーメニューのスタイル
+ * }
+ * .hamburger-toggle {
+ *   // トグル対象の要素のスタイル
+ * }
+ *
+ * // 関数を呼び出してハンバーガーメニューのトグル機能を有効化
+ * import { toggleHamburgerMenu } from './hamburgerMenu.js';
+ * toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
+ */
+export const toggleHamburgerMenu = (
+  hamburgerSelector,
+  toggleTargetSelector,
+) => {
+  const hamburger = document.querySelector(hamburgerSelector);
+  const menu = document.querySelectorAll(toggleTargetSelector);
   if (hamburger) {
     hamburger.addEventListener('click', () => {
       if (hamburger.classList.contains('start')) {
@@ -16,4 +50,43 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-});
+};
+
+/**
+ * スクロールに応じてヘッダーを隠したり表示したりする
+ *
+ * @function
+ * @name toggleHeaderOnScroll
+ * @param {string} headerSelector - ヘッダーの要素を指定するCSSセレクタ
+ * @param {number} [threshold=2000] - スクロール速度のしきい値（ピクセル/秒）
+ * @description スクロールイベントを監視し、スクロール速度に応じてヘッダーを隠したり表示したりする。
+ * スクロール速度がしきい値を超えた場合、上にスクロールした場合はヘッダーを表示し、下にスクロールした場合はヘッダーを隠す。
+ */
+export const toggleHeaderOnScroll = (headerSelector, threshold = 2000) => {
+  let prevScrollpos = window.pageYOffset;
+  let prevTime = Date.now();
+  const header = document.querySelector(headerSelector);
+
+  window.addEventListener('scroll', () => {
+    const currentScrollPos = window.pageYOffset;
+    const currentTime = Date.now();
+    const elapsedTime = currentTime - prevTime;
+
+    // スクロール速度を計算（ピクセル/秒）
+    const scrollSpeed =
+      Math.abs(currentScrollPos - prevScrollpos) / (elapsedTime / 1000);
+
+    if (scrollSpeed > threshold) {
+      if (prevScrollpos > currentScrollPos) {
+        // 上にスクロールした場合
+        header.style.top = '0';
+      } else {
+        // 下にスクロールした場合
+        header.style.top = `-${header.offsetHeight}px`;
+      }
+    }
+
+    prevScrollpos = currentScrollPos;
+    prevTime = currentTime;
+  });
+};
