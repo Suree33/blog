@@ -85,6 +85,6 @@ import headerIcon from '../assets/images/profile-icon.jpg';
   import { toggleHamburgerMenu, toggleHeaderOnScroll } from '../scripts/menu';
   document.addEventListener('DOMContentLoaded', () => {
     toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
-    toggleHeaderOnScroll('header');
+    toggleHeaderOnScroll('header', { upThreshold: 1500, downThreshold: 1000 });
   });
 </script>

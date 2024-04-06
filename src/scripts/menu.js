@@ -58,11 +58,18 @@ export const toggleHamburgerMenu = (
  * @function
  * @name toggleHeaderOnScroll
  * @param {string} headerSelector - ヘッダーの要素を指定するCSSセレクタ
- * @param {number} [threshold=2000] - スクロール速度のしきい値（ピクセル/秒）
+ * @param {Object} [options={}] - オプション設定
+ * @param {number} [options.upThreshold=1500] - 上スクロールの速度しきい値（ピクセル/秒）
+ * @param {number} [options.downThreshold=1000] - 下スクロールの速度しきい値（ピクセル/秒）
  * @description スクロールイベントを監視し、スクロール速度に応じてヘッダーを隠したり表示したりする。
- * スクロール速度がしきい値を超えた場合、上にスクロールした場合はヘッダーを表示し、下にスクロールした場合はヘッダーを隠す。
+ * 上にスクロールした場合、スクロール速度が上スクロールのしきい値を超えるとヘッダーを表示する。
+ * 下にスクロールした場合、スクロール速度が下スクロールのしきい値を超えるとヘッダーを隠す。
  */
-export const toggleHeaderOnScroll = (headerSelector, threshold = 2000) => {
+export const toggleHeaderOnScroll = (
+  headerSelector,
+  options = { upThreshold: 1500, downThreshold: 1000 },
+) => {
+  const { upThreshold = 50, downThreshold = 50 } = options;
   let prevScrollpos = window.pageYOffset;
   let prevTime = Date.now();
   const header = document.querySelector(headerSelector);
@@ -76,12 +83,14 @@ export const toggleHeaderOnScroll = (headerSelector, threshold = 2000) => {
     const scrollSpeed =
       Math.abs(currentScrollPos - prevScrollpos) / (elapsedTime / 1000);
 
-    if (scrollSpeed > threshold) {
-      if (prevScrollpos > currentScrollPos) {
-        // 上にスクロールした場合
+    if (prevScrollpos > currentScrollPos) {
+      // 上にスクロールした場合
+      if (scrollSpeed > upThreshold) {
         header.style.top = '0';
-      } else {
-        // 下にスクロールした場合
+      }
+    } else {
+      // 下にスクロールした場合
+      if (scrollSpeed > downThreshold) {
         header.style.top = `-${header.offsetHeight}px`;
       }
     }
