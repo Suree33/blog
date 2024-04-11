@@ -96,20 +96,35 @@ export const toggleHeaderOnScroll = (
         Math.abs(currentScrollPos - prevScrollpos) / (elapsedTime / 1000);
 
       if (prevScrollpos > currentScrollPos) {
-        // 上にスクロールした場合
         if (scrollSpeed > upThreshold) {
+          // 上にスクロールした場合
+          // ヘッダーを表示
           header.style.top = '0';
         }
       } else {
-        // 下にスクロールした場合
         if (scrollSpeed > downThreshold) {
-          header.style.top = `-${header.offsetHeight}px`;
+          // 下にスクロールした場合
+          // ヘッダーを隠す
+          if (
+            window.innerHeight + currentScrollPos >=
+            document.body.clientHeight - 400
+          ) {
+            header.style.top = '0';
+            console.log('bottom');
+          } else {
+            header.style.top = `-${header.offsetHeight}px`;
+          }
         }
+      }
+
+      // スクロールが一番下まで到達した場合
+      // ヘッダーを表示
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        header.style.top = '0';
       }
 
       prevScrollpos = currentScrollPos;
       prevTime = currentTime;
-    } else {
     }
   });
 };
