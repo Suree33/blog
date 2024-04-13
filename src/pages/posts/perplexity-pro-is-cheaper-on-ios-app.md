@@ -5,7 +5,7 @@ pubDate: 2024-04-14
 tags:
   - AI
   - Perplexity
-description:
+description: ChatGPT PlusやClaude Proの代わりにPerplexity Proを契約してみました。
 ---
 
 ## $20.00 + $20.00 + $20.00 + ...
