@@ -1,10 +1,15 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-const { frontmatter, url } = Astro.props;
+const { frontmatter } = Astro.props;
 import { formatDate } from '../scripts/date';
 const pubDate = formatDate(frontmatter.pubDate);
 ---
 
+<style is:global>
+  article > p > img {
+    border-radius: 0.5rem;
+  }
+</style>
 <BaseLayout
   pageTitle={frontmatter.title}
   ogimage={frontmatter.ogimage && frontmatter.ogimage.src}

@@ -1,11 +1,20 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = 'About';
+import taxiImage from '../assets/images/daiki-sato-xzItvPFgpBQ-unsplash.jpg';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="mt-10 flex w-full justify-center px-4">
+  <div class="mb-16 mt-10 flex w-full justify-center px-4">
     <article class="prose prose-neutral w-full dark:prose-invert">
+      <h1>Daiki Sato</h1>
+      <Image
+        class="aspect-video rounded-lg object-cover"
+        src={taxiImage}
+        alt="渋谷のスクランブル交差点でタクシーを横から撮影した写真"
+      />
+      <hr />
       <h2>ソーシャルメディア</h2>
       <ul>
         <li><a href="https://twitter.com/thisissuree">X (Twitter)</a></li>
@@ -20,11 +29,14 @@ const pageTitle = 'About';
         </li>
         <li><a href="https://unsplash.com/ja/@sur33">Unsplash</a></li>
       </ul>
-      <h2>技術系</h2>
-      <ul>
-        <li><a href="https://github.com/Suree33">GitHub</a></li>
-        <li><a href="https://zenn.dev/suree">zenn</a></li>
-      </ul>
+      <section>
+        <h2>技術系</h2>
+        <ul>
+          <li><a href="https://github.com/Suree33">GitHub</a></li>
+          <li><a href="https://zenn.dev/suree">zenn</a></li>
+        </ul>
+        <hr />
+      </section>
     </article>
   </div>
 </BaseLayout>

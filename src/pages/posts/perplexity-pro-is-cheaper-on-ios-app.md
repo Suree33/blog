@@ -42,14 +42,15 @@ Perplexityのデフォルトのフォントの設定ではカギかっこの表�
 
 https://zenn.dev/inaniwaudon/scraps/f224417d4c51ee
 
-
 これを避ける意味も含めて、[Amino](https://aminoeditor.com/)を使ってユーザーCSSを追加しました。今回は、Google Fontsから[BIZ UDPGothic](https://fonts.google.com/specimen/BIZ+UDPGothic)を読み込んで使うことにしました。
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap');
 
-html, .font-display, .font-sans {
-      font-family: "BIZ UDPGothic", sans-serif;
+html,
+.font-display,
+.font-sans {
+  font-family: 'BIZ UDPGothic', sans-serif;
 }
 ```
 
