@@ -9,6 +9,10 @@ import remarkLinkCard from 'remark-link-card';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://sur33.com/',
+  redirects: {
+    '/posts': '/',
+  },
   markdown: {
     remarkPlugins: [
       remarkCodeTitles,
@@ -27,7 +31,6 @@ export default defineConfig({
       },
     },
   },
-  site: 'https://sur33.com/',
   integrations: [
     tailwind({
       nesting: true,
