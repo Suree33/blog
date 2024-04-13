@@ -31,9 +31,7 @@ const { posts } = Astro.props;
       <h1 class="mb-10 mt-6 text-center text-2xl text-black dark:text-white">
         {tag}のタグが付いた記事
       </h1>
-      <ul
-        class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4 lg:grid-cols-2"
-      >
+      <ul class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4">
         {
           posts &&
             posts
