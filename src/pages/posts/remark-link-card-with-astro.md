@@ -28,6 +28,7 @@ bun install remark-link-card
 ```
 
 ### 2. 設定
+
 `astro.config.mjs` を以下のように追記します。
 
 ```javascript:astro.config.mjs
@@ -61,19 +62,19 @@ export default defineConfig({
 CSSは以下のようにしました。
 
 ```scss:remark-link-card.css
-/* ブレークポイント: 60ch（Tailwindcss/Typographyのproseのmax-width: 65chを参考に） */
+/* ブレークポイント: 60ch（Tailwindcss/Typographyのproseのmax-widthを参考に） */
 .rlc-container {
   --padding-x: 1rem;
   --padding-y: 0.7rem;
-  --border-radius: 0.5rem;
+  --border-radius: calc(0.5rem - 1px);
   border: 1px solid var(--tw-prose-hr);
-  border-radius: var(--border-radius);
+  border-radius: calc(var(--border-radius) + 1px);
   text-decoration: none;
 
   transition: background-color 150ms;
 
   &:hover {
-    background-color: #e5e5e5;
+    background-color: #f5f5f5;
     @media (prefers-color-scheme: dark) {
       background-color: #262626;
     }
@@ -83,7 +84,7 @@ CSSは以下のようにしました。
   margin-bottom: 1.25em;
 
   display: grid;
-  grid-template-columns: 1fr 130px;
+  grid-template-columns: 1fr 116px;
   gap: 1rem;
   @media (min-width: 60ch) {
     grid-template-columns: 1fr 220px;
