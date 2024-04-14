@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import config from '../config.json';
 import '../styles/global.css';
@@ -23,7 +22,6 @@ const { pageTitle, ogimage, description } = Astro.props;
     />
     <title>{pageTitle} — {config.siteName}</title>
     <SpeedInsights />
-    <ViewTransitions />
     <!-- og -->
     <meta property="og:site_name" content={config.siteName} />
     <meta
