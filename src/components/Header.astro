@@ -90,13 +90,11 @@ import headerIcon from '../assets/images/profile-icon.jpg';
 <script>
   import { toggleHamburgerMenu, toggleHeaderOnScroll } from '../scripts/menu';
   document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('astro:page-load', () => {
-      toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
-      toggleHeaderOnScroll(
-        'header',
-        { upThreshold: 1500, downThreshold: 1000 },
-        '.hamburger',
-      );
-    });
+    toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
+    toggleHeaderOnScroll(
+      'header',
+      { upThreshold: 1500, downThreshold: 1000 },
+      '.hamburger',
+    );
   });
 </script>
