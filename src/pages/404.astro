@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = '404: Page Not Found';
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="mb-16 mt-10 flex w-full justify-center px-4">
+    <article class="prose prose-neutral w-full dark:prose-invert">
+      <h1 class="mb-10 mt-6 text-center text-2xl">{pageTitle}</h1>
+      <p class="text-center">このページは見つかりませんでした…</p>
+      <div class="flex justify-center">
+        <a
+          href="/"
+          class="mt-4 rounded-full border border-neutral-800 px-8 py-2 font-medium no-underline transition duration-300 hover:bg-neutral-800 hover:text-white hover:shadow-xl active:bg-neutral-800 active:text-white active:shadow-none"
+          >ホームに戻る</a
+        >
+      </div>
+      <hr />
+    </article>
+  </div>
+</BaseLayout>
