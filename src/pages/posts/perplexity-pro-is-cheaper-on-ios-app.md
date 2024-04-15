@@ -22,7 +22,7 @@ https://cursor.sh/pricing
 
 PerplexityはAIモデルを使った強力な検索ツールくらいに思っていたのですが、Writingモードに変更すればChatGPTやClaudeのようなテキスト・チャット生成ツールとして使うこともできることがわかりました。
 
-![Perplexityのフォーカス選択メニュー](./images/perplexity-focus.png)
+![Perplexityのフォーカス選択メニュー](./images/_perplexity-focus.png)
 
 また、Perplexityの有料プランであるPerplexity Proに契約すると、GPT-4 TurboやClaude 3 Opusなどの強力なAIモデルを利用できるようになります。つまり、ChatGPT PlusやClaude Proを別々に契約することなく、Perplexity Pro一つでこれらのAIモデルを利用できるわけです。ただ、ChatGPTとは違いコード実行や様々なプラグインを活用することはできないため、その点には注意が必要です。
 
@@ -32,7 +32,7 @@ https://perplexity.ai/pro?referral_code=9RY9B1DG
 
 Perplexity Proはウェブで契約すると月額20ドルですが、iOSアプリ内課金では月額3000円に設定されています。2024年4月14日現在、20ドルは約3,065円なので、iOSアプリ内課金で契約する方が若干安くなります（円安……）。
 
-![Perplexity ProのiOSサブスクリプション詳細画面。月額3000円。](./images/screenshot20240414043606.jpeg)
+![Perplexity ProのiOSサブスクリプション詳細画面。月額3000円。](./images/_screenshot20240414043606.jpeg)
 
 一般的には、ウェブからの契約とiOSアプリ内課金が用意されているサービスでは、iOSアプリ内課金の方が高いことが多い（Appleの手数料が原因）ところ、円安のせいかここでは逆転しているようです。
 
