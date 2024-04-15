@@ -8,7 +8,7 @@ tags:
 description: ChatGPT PlusやClaude Proの代わりにPerplexity Proを契約してみました。
 ---
 
-## $20.00 + $20.00 + $20.00 + ...
+## $20.00 + $20.00 + ...
 
 先月OpenAIの[ChatGPT](https://chat.openai.com/)からAnthropicの[Claude 3](https://claude.ai/chats)に乗り換えましたが、時々Claude 3 OpusとChatGPTのGPT-4 Turboを比較したくなります。しかし、それぞれ20ドルで合計40ドルは支払いたくありません。そこで、Perplexity Proの契約を検討しました。
 
@@ -28,7 +28,7 @@ PerplexityはAIモデルを使った強力な検索ツールくらいに思っ�
 
 https://perplexity.ai/pro?referral_code=9RY9B1DG
 
-## iOSアプリ内課金のほうが若干安かった
+## iOSアプリ内課金のほうが安い
 
 Perplexity Proはウェブで契約すると月額20ドルですが、iOSアプリ内課金では月額3000円に設定されています。2024年4月14日現在、20ドルは約3,065円なので、iOSアプリ内課金で契約する方が若干安くなります（円安……）。
 
