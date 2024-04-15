@@ -1,58 +1,47 @@
 ---
-import BaseLayout from './BaseLayout.astro';
+import ProseArticleLayout from './ProseArticleLayout.astro';
 const { frontmatter } = Astro.props;
 import { formatDate } from '../scripts/date';
 const pubDate = formatDate(frontmatter.pubDate);
 ---
 
-<style is:global>
-  article > p > img {
-    border-radius: 0.5rem;
-  }
-</style>
-<BaseLayout
+<ProseArticleLayout
   pageTitle={frontmatter.title}
   ogimage={frontmatter.ogimage && frontmatter.ogimage.src}
   description={frontmatter.description}
 >
-  <div class="mb-16 mt-10 flex w-full justify-center px-4">
-    <article
-      class="prose prose-neutral w-full dark:prose-invert prose-h2:border-b prose-h2:pb-2 prose-h2:text-3xl prose-h3:border-b prose-h3:pb-2 prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h5:font-bold prose-h6:font-bold"
-    >
-      <div
-        class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold uppercase text-neutral-500"
-      >
-        {
-          frontmatter.tags.map((tag: string) => (
-            <a
-              href={`/tags/${tag}`}
-              class="inline-flex font-bold text-current no-underline"
-            >
-              {tag}
-            </a>
-          ))
-        }
-        <time datetime={pubDate}>
-          {pubDate}
-        </time>
-      </div>
-      <div class="text-center"></div>
-      <h1 class="mb-10 mt-6 text-center text-3xl">
-        {frontmatter.title}
-      </h1>
-      {
-        frontmatter.image && (
-          <img
-            class="rounded"
-            src={frontmatter.image.src}
-            alt={frontmatter.image.alt}
-          />
-        )
-      }
-      <p class="text-left">
-        {frontmatter.description}
-      </p>
-      <slot />
-    </article>
+  <div
+    class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold uppercase text-neutral-500"
+  >
+    {
+      frontmatter.tags.map((tag: string) => (
+        <a
+          href={`/tags/${tag}`}
+          class="inline-flex font-bold text-current no-underline"
+        >
+          {tag}
+        </a>
+      ))
+    }
+    <time datetime={pubDate}>
+      {pubDate}
+    </time>
   </div>
-</BaseLayout>
+  <div class="text-center"></div>
+  <h1 class="mb-10 mt-6 text-center text-3xl">
+    {frontmatter.title}
+  </h1>
+  {
+    frontmatter.image && (
+      <img
+        class="rounded"
+        src={frontmatter.image.src}
+        alt={frontmatter.image.alt}
+      />
+    )
+  }
+  <p class="text-left">
+    {frontmatter.description}
+  </p>
+  <slot />
+</ProseArticleLayout>

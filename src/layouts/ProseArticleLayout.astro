@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro';
+const { pageTitle, ogimage, description } = Astro.props;
+---
+
+<BaseLayout
+  pageTitle={pageTitle}
+  ogimage={ogimage && ogimage.src}
+  description={description}
+>
+  <div class="mb-16 mt-10 flex w-full justify-center px-4">
+    <article
+      class="prose prose-neutral w-full dark:prose-invert prose-h2:border-b prose-h2:pb-2 prose-h2:text-3xl prose-h3:border-b prose-h3:pb-2 prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h5:font-bold prose-h6:font-bold prose-img:rounded-lg"
+    >
+      <slot />
+    </article>
+  </div>
+</BaseLayout>
