@@ -85,11 +85,11 @@ CouchDBのサーバが立ち上がったら、ObsidianのSelf-hosted LiveSyncの
 
 1. Obsidianの設定画面から、**コミュニティプラグイン**を開き、**閲覧**をクリックして、**Self-hosted LiveSync** をインストールします。
 
-   ![alt text](./images/_obsidian-plugin-livesync-install.png)
+   ![ObsidianでSelf-hosted LiveSyncプラグインをインストールした画面](./images/_obsidian-plugin-livesync-install.png)
 
 2. Self-hosted LiveSyncをインストールしたら、**有効化** をクリックして有効化します。すると、ポップアップが開かれるため、一番下の **Use the copied setup URL** クリックします。
-   ![alt text](./images/_obsidian-plugin-livesync-setup.png)
 3. 先ほどのセットアップ用のURIを貼り付けて、**Ok**をクリックします。
+   ![ObsidianでSelf-hosted LiveSyncの初期化を行っている画面](./images/_obsidian-plugin-livesync-setup.png)
 4. パスワードを求められるので、先ほどのセットアップ用パスワードを入力し、**Ok**をクリックします。
 5. `Importing LiveSync's conf, OK?` と表示されるので、**OK**をクリックします。
 6. `How would you like to set it up?` と表示されたら、 **Set it up as secondary or subsequent device** を選択すると、初期設定が開始されます。
