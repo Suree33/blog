@@ -1,42 +1,42 @@
 ---
+import ProseArticleLayout from '../layouts/ProseArticleLayout.astro';
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = 'About';
 import taxiImage from '../assets/images/daiki-sato-xzItvPFgpBQ-unsplash.jpg';
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-  <div class="mb-16 mt-10 flex w-full justify-center px-4">
-    <article class="prose prose-neutral w-full dark:prose-invert">
-      <h1>Daiki Sato</h1>
-      <Image
-        class="aspect-video rounded-lg object-cover"
-        src={taxiImage}
-        alt="渋谷のスクランブル交差点でタクシーを横から撮影した写真"
-      />
-      <hr />
-      <h2>ソーシャルメディア</h2>
-      <ul>
-        <li><a href="https://twitter.com/thisissuree">X (Twitter)</a></li>
-        <li><a href="https://www.threads.net/@thisissuree">Threads</a></li>
-        <li><a href="https://mstdn.guru/@suree">Mastodon</a></li>
-        <li><a href="https://www.last.fm/user/ThisIsSuree">last.fm</a></li>
-      </ul>
-      <h2>写真</h2>
-      <ul>
-        <li>
-          <a href="https://www.instagram.com/thisissuree/">Instagram</a>
-        </li>
-        <li><a href="https://unsplash.com/ja/@sur33">Unsplash</a></li>
-      </ul>
-      <section>
-        <h2>技術系</h2>
-        <ul>
-          <li><a href="https://github.com/Suree33">GitHub</a></li>
-          <li><a href="https://zenn.dev/suree">Zenn</a></li>
-        </ul>
-        <hr />
-      </section>
-    </article>
+<ProseArticleLayout pageTitle={pageTitle}>
+  <div
+    class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold uppercase text-neutral-500"
+  >
+    <div>Tech</div>
+    <div>Design</div>
+    <div>Photography</div>
   </div>
-</BaseLayout>
+  <h1 class="!text-4xl">Daiki Sato</h1>
+  <Image
+    class="aspect-video rounded-lg object-cover"
+    src={taxiImage}
+    alt="渋谷のスクランブル交差点でタクシーを横から撮影した写真"
+  />
+  <h2>ソーシャルメディア</h2>
+  <ul>
+    <li><a href="https://twitter.com/thisissuree">X (Twitter)</a></li>
+    <li><a href="https://www.threads.net/@thisissuree">Threads</a></li>
+    <li><a href="https://mstdn.guru/@suree">Mastodon</a></li>
+    <li><a href="https://www.last.fm/user/ThisIsSuree">last.fm</a></li>
+  </ul>
+  <h2>写真</h2>
+  <ul>
+    <li>
+      <a href="https://www.instagram.com/thisissuree/">Instagram</a>
+    </li>
+    <li><a href="https://unsplash.com/ja/@sur33">Unsplash</a></li>
+  </ul>
+  <h2>技術系</h2>
+  <ul>
+    <li><a href="https://github.com/Suree33">GitHub</a></li>
+    <li><a href="https://zenn.dev/suree">Zenn</a></li>
+  </ul>
+</ProseArticleLayout>
