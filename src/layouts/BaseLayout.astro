@@ -36,7 +36,10 @@ const { pageTitle, ogimage, description } = Astro.props;
       property="og:description"
       content={description ? description : config.description}
     />
-    {ogimage && <meta property="og:image" content={config.url + ogimage} />}
+    <meta
+      property="og:image"
+      content={ogimage ? config.url + ogimage : config.url + config.ogImage}
+    />
     <meta property="og:locale" content="ja-JP" />
     <!-- Google Analytics -->
     <!-- Google tag (gtag.js) -->

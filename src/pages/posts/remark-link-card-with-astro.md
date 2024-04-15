@@ -6,7 +6,6 @@ tags: ['ウェブ開発', 'Astro', 'remark']
 description: Astroで、remarkプラグインであるremark-link-cardを使いリンクをカード形式で表示できるようにしました。
 ogimage:
   src: '/ogimage/remark-link-card-with-astro.og.png'
-  alt: 'Astroにおけるremark-link-cardを使ったリンクカード'
 ---
 
 ## remark-link-card
