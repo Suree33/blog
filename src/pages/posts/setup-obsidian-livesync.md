@@ -6,8 +6,7 @@ tags:
   - アプリ
   - Obsidian
 description: Obsidian公式のSyncは高いので、コミュニティプラグインのSelf-hosted LiveSyncを使って同期、Obsidian Gitでバックアップするようにしてみました。
-ogimage:
-  src: '/ogimage/setup-obsidian-livesync.png'
+ogimage: '/ogimage/setup-obsidian-livesync.png'
 ---
 
 ## Obsidian Sync
