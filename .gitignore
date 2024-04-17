@@ -110,7 +110,3 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
-
-# remark-link-card
-
-/public/remark-link-card/
