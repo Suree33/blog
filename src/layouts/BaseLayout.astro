@@ -2,7 +2,6 @@
 import Header from '../components/Header.astro';
 import config from '../config.json';
 import '../styles/global.css';
-import SpeedInsights from '@vercel/speed-insights/astro';
 const { pageTitle, ogimage, description } = Astro.props;
 ---
 
@@ -21,7 +20,6 @@ const { pageTitle, ogimage, description } = Astro.props;
       content={description ? description : config.description}
     />
     <title>{pageTitle} — {config.siteName}</title>
-    <SpeedInsights />
     <!-- og -->
     <meta property="og:site_name" content={config.siteName} />
     <meta

@@ -6,4 +6,4 @@
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Iconify](https://iconify.design/)
 - [Pritter](https://prettier.io/)
-- [Vercel](https://vercel.com/)
+- [Cloudflare Pages](https://pages.cloudflare.com/)
