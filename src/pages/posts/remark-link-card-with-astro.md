@@ -2,7 +2,10 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: Astroにおけるremark-link-cardを使ったリンクカード
 pubDate: 2024-04-05
-tags: ['ウェブ開発', 'Astro', 'remark']
+tags:
+  - ウェブ開発
+  - Astro
+  - remark
 description: Astroで、remarkプラグインであるremark-link-cardを使いリンクをカード形式で表示できるようにしました。
 ogimage: '/ogimage/remark-link-card-with-astro.og.png'
 ---
