@@ -1,7 +1,6 @@
 ---
 import ProseArticleLayout from '../layouts/ProseArticleLayout.astro';
 import { Image } from 'astro:assets';
-import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = 'About';
 import taxiImage from '../assets/images/daiki-sato-xzItvPFgpBQ-unsplash.jpg';
 ---
@@ -20,21 +19,26 @@ import taxiImage from '../assets/images/daiki-sato-xzItvPFgpBQ-unsplash.jpg';
     src={taxiImage}
     alt="渋谷のスクランブル交差点でタクシーを横から撮影した写真"
   />
-  <h2>ソーシャルメディア</h2>
+  <h2>アイデア</h2>
+  <ul>
+    <li><a href="/dreamhouse">理想の家のアイデア</a></li>
+  </ul>
+  <h2>リンク</h2>
+  <h3>ソーシャルメディア</h3>
   <ul>
     <li><a href="https://twitter.com/thisissuree">X (Twitter)</a></li>
     <li><a href="https://www.threads.net/@thisissuree">Threads</a></li>
     <li><a href="https://mstdn.guru/@suree">Mastodon</a></li>
     <li><a href="https://www.last.fm/user/ThisIsSuree">last.fm</a></li>
   </ul>
-  <h2>写真</h2>
+  <h3>写真</h3>
   <ul>
     <li>
       <a href="https://www.instagram.com/thisissuree/">Instagram</a>
     </li>
     <li><a href="https://unsplash.com/ja/@sur33">Unsplash</a></li>
   </ul>
-  <h2>技術系</h2>
+  <h3>技術系</h3>
   <ul>
     <li><a href="https://github.com/Suree33">GitHub</a></li>
     <li><a href="https://zenn.dev/suree">Zenn</a></li>
