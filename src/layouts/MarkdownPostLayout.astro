@@ -1,8 +1,10 @@
 ---
 import ProseArticleLayout from './ProseArticleLayout.astro';
+import { Icon } from 'astro-icon/components';
 const { frontmatter } = Astro.props;
 import { formatDate } from '../scripts/date';
 const pubDate = formatDate(frontmatter.pubDate);
+const updatedDate = formatDate(frontmatter.updatedDate);
 ---
 
 <ProseArticleLayout
@@ -23,9 +25,22 @@ const pubDate = formatDate(frontmatter.pubDate);
         </a>
       ))
     }
-    <time datetime={pubDate}>
-      {pubDate}
-    </time>
+    {
+      pubDate && (
+        <div>
+          <Icon name="fa6-solid:feather" class="mb-[.12em] inline text-sm" />
+          <time datetime={pubDate}>{pubDate}</time>
+        </div>
+      )
+    }
+    {
+      updatedDate && (
+        <div>
+          <Icon name="fa6-solid:rotate" class="mb-[.12em] inline text-sm" />
+          <time datetime={updatedDate}>{updatedDate}</time>
+        </div>
+      )
+    }
   </div>
   <div class="text-center"></div>
   <h1>
