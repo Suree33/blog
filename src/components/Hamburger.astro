@@ -3,7 +3,7 @@ const { state = 'start', textColor, width = '2rem', classList } = Astro.props;
 const height = 'calc(' + width + ' * 0.45)';
 ---
 
-<style define:vars={{ width, height, textColor }}>
+<style define:vars={{ width, height }}>
   .hamburger {
     display: flex;
     box-sizing: content-box;
