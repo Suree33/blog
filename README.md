@@ -60,6 +60,7 @@ bun run preview
 - [ESLint](https://eslint.org/)
   - [eslint-plugin-astro](https://github.com/ota-meshi/eslint-plugin-astro)
   - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
+  - [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 - [Pritter](https://prettier.io/)
   - [prettier-plugin-astro](https://github.com/withastro/prettier-plugin-astro)
   - [prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
