@@ -12,10 +12,6 @@ export default defineConfig({
   site: 'https://sur33.com/',
   redirects: {
     '/posts': '/',
-    '/blog': '/',
-    '/articles': '/',
-    '/blog/[...slug]': '/posts/[...slug]',
-    '/articles/[...slug]': '/posts/[...slug]',
   },
   markdown: {
     remarkPlugins: [
