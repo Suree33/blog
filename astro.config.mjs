@@ -19,10 +19,7 @@ export default defineConfig({
       [
         remarkLinkCard,
         {
-          // remark-link-card の https://github.com/gladevise/remark-link-card/pull/16
-          // がデプロイされるまでは長いファイル名のOGP画像でエラーになるので
-          // 一次的にキャッシュを無効化してる
-          cache: false,
+          cache: true,
           shortenUrl: true,
         },
       ],
