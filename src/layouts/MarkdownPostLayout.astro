@@ -42,7 +42,6 @@ const updatedDate = formatDate(frontmatter.updatedDate);
       )
     }
   </div>
-  <div class="text-center"></div>
   <h1>
     {frontmatter.title}
   </h1>
@@ -55,7 +54,7 @@ const updatedDate = formatDate(frontmatter.updatedDate);
       />
     )
   }
-  <p class="text-left">
+  <p class="rounded bg-neutral-100 px-4 py-3 text-left dark:bg-neutral-800">
     {frontmatter.description}
   </p>
   <slot />
