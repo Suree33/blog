@@ -2,6 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: Intel Core i5-13600KFでゲームがクラッシュする問題
 pubDate: 2024-07-31
+updatedDate: 2024-08-02
 tags:
   - ガジェット
   - PC
@@ -91,7 +92,7 @@ https://www.intel.co.jp/content/www/jp/ja/support/contact-us.html
 
 https://www.asus.com/jp/motherboards-components/motherboards/prime/prime-z790-a-wifi/helpdesk_bios?model2Name=PRIME-Z790-A-WIFI
 
-これは今回の問題の原因の一つとして考えられているもので、一時的な解決策のようで、結局、根本的な問題を解決するためには8月のパッチを待つ必要があるようですが、とりあえずサポートの指示通りにBIOSのアップデートを行いましたが、やはり問題は解決しませんでした。
+これは今回の問題の原因の一つとして考えられているもので、一時的な解決策のようです。結局、根本的な問題を解決するためには8月のパッチを待つ必要があるようですが、とりあえずサポートの指示通りにBIOSのアップデートを行いました。が、やはり問題は解決しませんでした。
 
 上記の内容をIntelに返信しました。
 
@@ -100,3 +101,5 @@ https://www.asus.com/jp/motherboards-components/motherboards/prime/prime-z790-a-
 ここで、驚くべきことに、交換対応の提案がありました。[The Vergeによる問い合わせ結果](https://www.theverge.com/2024/7/26/24206529/intel-13th-14th-gen-crashing-instability-cpu-voltage-q-a)によるとリコールや保証の延長の予定は無いということだったので、交換もしてもらえないと思い込んでいたので、正直驚きました。
 
 具体的な手順は、こちらからCPUを着払いで送り、IntelがCPUを検査した後に交換品（良品）を送ってくれるというものです。つまり、その間はPCが使えないということになります。辛い……。
+
+とりあえず60日以内に済ませれば良いようです。交換品が届いてもまた壊れたら意味がないので、8月のパッチがリリースされるまで様子を見ることにしました。
