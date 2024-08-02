@@ -98,6 +98,13 @@
     }
   }
 
+  &:not(:has(.rlc-image-container)) {
+    grid-template-columns: 1fr;
+    .rlc-info {
+      padding: var(--padding-y) var(--padding-x);
+    }
+  }
+
   .rlc-image-container {
     grid-column: 2;
     aspect-ratio: 1 / 1;
