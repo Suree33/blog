@@ -54,8 +54,12 @@ const updatedDate = formatDate(frontmatter.updatedDate);
       />
     )
   }
-  <p class="rounded bg-neutral-100 px-4 py-3 text-left dark:bg-neutral-800">
-    {frontmatter.description}
-  </p>
+  {
+    frontmatter.description && (
+      <p class="rounded bg-neutral-100 px-4 py-3 text-left dark:bg-neutral-800">
+        {frontmatter.description}
+      </p>
+    )
+  }
   <slot />
 </ProseArticleLayout>
