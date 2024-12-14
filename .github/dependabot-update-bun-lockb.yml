@@ -3,14 +3,14 @@ name: 'Dependabot: Update bun.lockb'
 on:
   pull_request:
     paths:
-      - "package.json"
+      - 'package.json'
 
 permissions:
   contents: write
 
 jobs:
   update-bun-lockb:
-    name: "Update bun.lockb"
+    name: 'Update bun.lockb'
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
