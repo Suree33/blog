@@ -22,7 +22,6 @@
     "@tailwindcss/typography": "^0.5.15",
     "astro": "^5.0.4",
     "astro-icon": "^1.1.4",
-    "caniuse-lite": "^1.0.30001687",
     "remark-flexible-code-titles": "^1.2.0",
     "remark-link-card": "git+https://github.com/gladevise/remark-link-card.git",
     "sanitize-html": "^2.13.1",
