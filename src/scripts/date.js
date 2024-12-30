@@ -1,3 +1,7 @@
+function isValidDate(date) {
+  return date instanceof Date && !isNaN(date.getTime());
+}
+
 export function formatDate(dateString) {
   if (!dateString) {
     throw new Error('Invalid date string');
@@ -12,8 +16,4 @@ export function formatDate(dateString) {
   } else {
     return false;
   }
-}
-
-function isValidDate(date) {
-  return date instanceof Date && !isNaN(date.getTime());
 }
