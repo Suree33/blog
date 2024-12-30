@@ -1,6 +1,6 @@
 export function formatDate(dateString) {
   if (!dateString) {
-    return false;
+    throw new Error('Invalid date string');
   }
   const date = new Date(dateString);
   if (isValidDate(date)) {
