@@ -1,6 +1,14 @@
 ---
 import ProseArticleLayout from './ProseArticleLayout.astro';
 import { Icon } from 'astro-icon/components';
+
+import ProseArticleLayout from 'src/layouts/ProseArticleLayout.astro';
+import { formatDate } from 'src/scripts/date';
+import { type Frontmatter } from 'src/types/Post';
+
+interface Props {
+  frontmatter: Frontmatter;
+}
 const { frontmatter } = Astro.props;
 import { formatDate } from '../scripts/date';
 const pubDate = formatDate(frontmatter.pubDate);
