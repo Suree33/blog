@@ -2,7 +2,7 @@ function isValidDate(date: Date) {
   return date instanceof Date && !isNaN(date.getTime());
 }
 
-export function formatDate(dateString: string) {
+export function formatDate(dateString: Date | string) {
   if (!dateString) {
     throw new Error('Invalid date string');
   }
