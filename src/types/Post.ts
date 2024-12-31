@@ -24,4 +24,5 @@ export interface Frontmatter {
 export interface Post {
   frontmatter: Frontmatter;
   url: string;
+  compiledContent: () => string;
 }
