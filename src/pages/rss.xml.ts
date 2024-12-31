@@ -1,10 +1,12 @@
 import rss from '@astrojs/rss';
-import config from '../config.json';
 import sanitizeHtml from 'sanitize-html';
+import config from 'src/config.json';
+import type { Post } from 'src/types/Post';
 
 export async function GET() {
-  const postImportResult = import.meta.glob('./**/*.md', { eager: true });
-  const posts = Object.values(postImportResult);
+  const posts: Post[] = Object.values(
+    import.meta.glob('./**/*.{md,mdx}', { eager: true }),
+  );
   return rss({
     title: config.siteName,
     description: config.description,
