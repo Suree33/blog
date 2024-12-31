@@ -1,7 +1,10 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
 import PostItem from '../components/PostItem.astro';
-const posts = await Astro.glob('./posts/*.{md,mdx}');
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Post } from '../types/Post';
+const posts: Post[] = Object.values(
+  import.meta.glob('./posts/*.{md,mdx}', { eager: true }),
+);
 const pageTitle = 'Blog';
 ---
 
