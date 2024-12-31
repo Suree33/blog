@@ -30,8 +30,8 @@
  * toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
  */
 export const toggleHamburgerMenu = (
-  hamburgerSelector,
-  toggleTargetSelector,
+  hamburgerSelector: string,
+  toggleTargetSelector: string,
 ) => {
   const hamburger = document.querySelector(hamburgerSelector);
   const menu = document.querySelectorAll(toggleTargetSelector);
@@ -75,18 +75,20 @@ export const toggleHamburgerMenu = (
  * 下にスクロールした場合、スクロール速度が下スクロールのしきい値を超えるとヘッダーを隠す。
  */
 export const toggleHeaderOnScroll = (
-  headerSelector,
+  headerSelector: string,
   options = { upThreshold: 1500, downThreshold: 1000 },
-  hamburgerSelector = null,
+  hamburgerSelector: string | undefined = undefined,
 ) => {
   const { upThreshold = 50, downThreshold = 50 } = options;
   let prevScrollpos = window.pageYOffset;
   let prevTime = Date.now();
-  const header = document.querySelector(headerSelector);
-  const hamburger = document.querySelector(hamburgerSelector);
+  const header = document.querySelector(headerSelector) as HTMLElement;
+  const hamburger = hamburgerSelector
+    ? document.querySelector(hamburgerSelector)
+    : undefined;
 
   window.addEventListener('scroll', () => {
-    if (!(hamburger && hamburger.classList.contains('active'))) {
+    if (!(hamburger && hamburger.classList.contains('active')) && header) {
       const currentScrollPos = window.pageYOffset;
       const currentTime = Date.now();
       const elapsedTime = currentTime - prevTime;
