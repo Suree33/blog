@@ -1,9 +1,15 @@
+export interface OgImage {
+  src: string;
+}
+
+export type Tag = string;
+
 export interface Frontmatter {
   title: string;
-  pubDate: string;
-  updatedDate?: string;
+  pubDate: Date;
+  updatedDate?: Date;
   description: string;
-  tags: string[];
+  tags: Tag[];
   draft?: boolean;
   ogimage?: {
     src: string;
