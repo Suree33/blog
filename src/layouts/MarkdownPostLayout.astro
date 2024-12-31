@@ -11,12 +11,14 @@ interface Props {
 const { frontmatter } = Astro.props;
 
 const pubDate = formatDate(frontmatter.pubDate);
-const updatedDate = formatDate(frontmatter.updatedDate);
+const updatedDate = frontmatter.updatedDate
+  ? formatDate(frontmatter.updatedDate)
+  : undefined;
 ---
 
 <ProseArticleLayout
   pageTitle={frontmatter.title}
-  ogimage={frontmatter.ogimage && frontmatter.ogimage.src}
+  ogimage={frontmatter.ogimage}
   description={frontmatter.description}
 >
   <div

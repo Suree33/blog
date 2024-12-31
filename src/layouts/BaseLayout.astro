@@ -1,12 +1,13 @@
 ---
+import type { OgImage } from 'src/types/Post';
 import Header from '../components/Header.astro';
 import config from '../config.json';
 import '../styles/global.css';
 
 interface Props {
   pageTitle: string;
-  ogimage?: string;
-  description?: string;
+  ogimage?: OgImage | undefined;
+  description?: string | undefined;
 }
 const { pageTitle, ogimage, description } = Astro.props;
 ---
@@ -42,7 +43,7 @@ const { pageTitle, ogimage, description } = Astro.props;
     />
     <meta
       property="og:image"
-      content={ogimage ? config.url + ogimage : config.url + config.ogImage}
+      content={ogimage ? config.url + ogimage.src : config.url + config.ogImage}
     />
     <meta property="og:locale" content="ja-JP" />
     <!-- Google Analytics -->
