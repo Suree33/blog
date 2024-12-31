@@ -2,6 +2,12 @@
 import Header from '../components/Header.astro';
 import config from '../config.json';
 import '../styles/global.css';
+
+interface Props {
+  pageTitle: string;
+  ogimage?: string;
+  description?: string;
+}
 const { pageTitle, ogimage, description } = Astro.props;
 ---
 
