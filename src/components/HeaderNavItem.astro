@@ -1,4 +1,8 @@
 ---
+interface Props {
+  path: string;
+  title: string;
+}
 const { path, title } = Astro.props;
 const { pathname: currentPath } = Astro.url;
 ---

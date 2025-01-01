@@ -1,4 +1,10 @@
 ---
+interface Props {
+  state?: 'start' | 'active';
+  textColor?: string;
+  width?: string;
+  classList?: string;
+}
 const { state = 'start', textColor, width = '2rem', classList } = Astro.props;
 const height = 'calc(' + width + ' * 0.45)';
 ---
