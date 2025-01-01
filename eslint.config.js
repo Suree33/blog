@@ -6,8 +6,8 @@ import tseslint from 'typescript-eslint';
 
 export default [
   js.configs.recommended,
-  tseslint.configs.recommendedTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
   eslintConfigPrettier,
   ...eslintPluginAstro.configs['flat/recommended'],
   ...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
@@ -16,6 +16,10 @@ export default [
       globals: {
         ...globals.browser,
         dataLayer: false,
+      },
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
   },
