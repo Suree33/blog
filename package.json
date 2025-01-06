@@ -14,7 +14,7 @@
   "dependencies": {
     "@astrojs/mdx": "4.0.3",
     "@astrojs/partytown": "2.1.2",
-    "@astrojs/rss": "4.0.10",
+    "@astrojs/rss": "4.0.11",
     "@astrojs/sitemap": "3.2.1",
     "@astrojs/tailwind": "5.1.4",
     "@iconify-json/fa6-brands": "^1.2.3",
