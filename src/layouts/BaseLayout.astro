@@ -49,9 +49,10 @@ const { pageTitle, ogimage, description } = Astro.props;
     <!-- Google Analytics -->
     <!-- Google tag (gtag.js) -->
     <script
+      is:inline
       type="text/partytown"
       src="https://www.googletagmanager.com/gtag/js?id=G-8ZCMEEKWF9"></script>
-    <script type="text/partytown">
+    <script is:inline type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         window.dataLayer.push(arguments);
