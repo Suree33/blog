@@ -1,7 +1,7 @@
 ---
 layout: ../../../layouts/MarkdownPostLayout.astro
 title: 
-pubDate: ""
+pubDate: {{date}}
 tags: 
 description:
 ---

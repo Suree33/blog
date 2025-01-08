@@ -13,26 +13,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "intel-core-i5-13600kf-game-crash.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "intel-core-i5-13600kf-game-crash"
-            }
-          }
-        ]
-      },
-      {
-        "id": "8b0ed1372b0379ea",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "ddc6a376b1a58c23",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "template/_blog-post.md",
                 "mode": "source",
                 "source": false
@@ -199,11 +179,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ddc6a376b1a58c23",
+  "active": "e7398d094d5274ee",
   "lastOpenFiles": [
-    "logi-mx-master-is-better-than-lift.md",
-    "intel-core-i5-13600kf-game-crash.md",
+    "無題のファイル.md",
     "template/_blog-post.md",
+    "intel-core-i5-13600kf-game-crash.md",
+    "logi-mx-master-is-better-than-lift.md",
     "template/blog-post.md",
     "fan-for-my-right-hand.md",
     "audio-interface-under-the-desk.md",
