@@ -33,12 +33,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "template/filename-here.md",
+                "file": "template/_blog-post.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "filename-here"
+              "title": "_blog-post"
             }
           }
         ]
@@ -113,7 +113,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "template/filename-here.md",
+                "file": "template/_blog-post.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "filename-hereへのバックリンク"
+              "title": "_blog-postへのバックリンク"
             }
           },
           {
@@ -132,12 +132,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "template/filename-here.md",
+                "file": "template/_blog-post.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "filename-hereからのアウトゴーイングリンク"
+              "title": "_blog-postからのアウトゴーイングリンク"
             }
           },
           {
@@ -159,10 +159,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "template/filename-here.md"
+                "file": "template/_blog-post.md"
               },
               "icon": "lucide-list",
-              "title": "filename-hereのアウトライン"
+              "title": "_blog-postのアウトライン"
             }
           },
           {
@@ -202,9 +202,10 @@
   "active": "ddc6a376b1a58c23",
   "lastOpenFiles": [
     "logi-mx-master-is-better-than-lift.md",
-    "fan-for-my-right-hand.md",
     "intel-core-i5-13600kf-game-crash.md",
-    "template/filename-here.md",
+    "template/_blog-post.md",
+    "template/blog-post.md",
+    "fan-for-my-right-hand.md",
     "audio-interface-under-the-desk.md",
     "setup-obsidian-livesync.md",
     "wishlist-2024-04.md",
