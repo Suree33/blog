@@ -1,5 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strictest",
+  "extends": "astro/tsconfigs/strict",
   "include": [
     "src/**/*",
     "eslint.config.js"
@@ -15,5 +15,6 @@
         "src/*"
       ]
     }
-  }
+  },
+  "allowSyntheticDefaultImports": true
 }
