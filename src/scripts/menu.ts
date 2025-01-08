@@ -1,10 +1,10 @@
 /**
- * ハンバーガーメニューによるトグル機能をを提供する
+ * ハンバーガーメニューによるトグル機能を提供する
  *
  * @function
  * @name toggleHamburgerMenu
- * @param {string} hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
- * @param {string} toggleTargetSelector - トグルする要素を指定するCSSセレクタ
+ * @param hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
+ * @param toggleTargetSelector - トグルする要素を指定するCSSセレクタ
  * @description
  * 指定されたハンバーガーメニューをクリックすると、ハンバーガーメニューとトグル対象の要素にactiveクラスを付与したり削除したりすることで、
  * メニューの開閉を行う。初回クリック時には'start'クラスを削除し、'active'クラスを追加する。
@@ -65,11 +65,11 @@ export const toggleHamburgerMenu = (
  *
  * @function
  * @name toggleHeaderOnScroll
- * @param {string} headerSelector - ヘッダーの要素を指定するCSSセレクタ
- * @param {Object} [options={}] - オプション設定
- * @param {number} [options.upThreshold=1500] - 上スクロールの速度しきい値（ピクセル/秒）
- * @param {number} [options.downThreshold=1000] - 下スクロールの速度しきい値（ピクセル/秒）
- * @param {string} hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
+ * @param headerSelector - ヘッダーの要素を指定するCSSセレクタ
+ * @param [options={}] - オプション設定
+ * @param [options.upThreshold=1500] - 上スクロールの速度しきい値（ピクセル/秒）
+ * @param [options.downThreshold=1000] - 下スクロールの速度しきい値（ピクセル/秒）
+ * @param hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
  * @description スクロールイベントを監視し、スクロール速度に応じてヘッダーを隠したり表示したりする。
  * 上にスクロールした場合、スクロール速度が上スクロールのしきい値を超えるとヘッダーを表示する。
  * 下にスクロールした場合、スクロール速度が下スクロールのしきい値を超えるとヘッダーを隠す。
@@ -80,7 +80,7 @@ export const toggleHeaderOnScroll = (
   hamburgerSelector: string | undefined = undefined,
 ) => {
   const { upThreshold = 50, downThreshold = 50 } = options;
-  let prevScrollpos = window.pageYOffset;
+  let prevScrollpos = window.scrollY;
   let prevTime = Date.now();
   const header = document.querySelector(headerSelector) as HTMLElement;
   const hamburger = hamburgerSelector
@@ -89,7 +89,7 @@ export const toggleHeaderOnScroll = (
 
   window.addEventListener('scroll', () => {
     if (!(hamburger && hamburger.classList.contains('active')) && header) {
-      const currentScrollPos = window.pageYOffset;
+      const currentScrollPos = window.scrollY;
       const currentTime = Date.now();
       const elapsedTime = currentTime - prevTime;
 
