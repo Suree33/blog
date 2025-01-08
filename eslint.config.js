@@ -6,11 +6,16 @@ import tseslint from 'typescript-eslint';
 
 export default [
   js.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.stylistic,
   eslintConfigPrettier,
   ...eslintPluginAstro.configs['flat/recommended'],
   ...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
+  {
+    rules: {
+      '@typescript-eslint/no-floating-promises': 'error',
+    },
+  },
   {
     languageOptions: {
       globals: {
