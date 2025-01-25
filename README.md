@@ -2,6 +2,7 @@
 
 [![Static Badge](https://img.shields.io/badge/blog-sur33.com-fb5607?style=flat&link=https%3A%2F%2Fsur33.com%2F)](https://sur33.com/)
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Suree33/blog/main?style=flat)](https://github.com/Suree33/blog/commits/master/)
+[![wakatime](https://wakatime.com/badge/github/Suree33/blog.svg)](https://wakatime.com/badge/github/Suree33/blog)
 
 [![Bun](https://img.shields.io/badge/bun-282a36?style=flat&logo=bun&logoColor=fbf0df)](https://bun.sh/)
 [![Astro](https://img.shields.io/badge/Astro-0C1222?style=flat&logo=astro&logoColor=FDFDFE)](https://astro.build/)
