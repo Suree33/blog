@@ -1,18 +1,36 @@
 ---
 export const prerender = true;
-import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostItem from '../../components/PostItem.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Post } from '../../types/Post';
 
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob('../**/*.md');
+  const posts = await Promise.all(
+    Object.values(import.meta.glob<Post>('../**/*.md', { eager: true }))
+  );
 
   const uniqueTags = [
-    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+    ...new Set(
+      posts
+        .filter((post) => {
+          if (!post.frontmatter.tags) {
+            console.warn(`Warning: Post "${post.url}" has no tags`);
+            return false;
+          }
+          if (!Array.isArray(post.frontmatter.tags)) {
+            console.warn(`Warning: Post "${post.url}" has invalid tags format`);
+            return false;
+          }
+          return true;
+        })
+        .map((post) => post.frontmatter.tags)
+        .flat()
+    ),
   ];
 
   return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post) =>
-      post.frontmatter.tags.includes(tag),
+    const filteredPosts = posts.filter((post) =>
+      post.frontmatter.tags ? post.frontmatter.tags.includes(tag) : false
     );
     return {
       params: { tag },
@@ -35,14 +53,14 @@ const { posts } = Astro.props;
         {
           posts &&
             posts
-              .filter((post) => !post.frontmatter.draft)
-              .sort((a, b) => {
+              .filter((post: Post) => !post.frontmatter.draft)
+              .sort((a: Post, b: Post) => {
                 return (
                   new Date(b.frontmatter.pubDate).getTime() -
                   new Date(a.frontmatter.pubDate).getTime()
                 );
               })
-              .map((post) => post.url !== undefined && <PostItem post={post} />)
+              .map((post: Post) => post.url !== undefined && <PostItem post={post} />)
         }
       </ul>
     </div>

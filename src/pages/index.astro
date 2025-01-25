@@ -1,7 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostItem from '../components/PostItem.astro';
-const posts = await Astro.glob('./posts/*.{md,mdx}');
+import type { MarkdownInstance } from 'astro';
+
+interface Frontmatter {
+  title: string;
+  pubDate: string;
+  draft?: boolean;
+  // Add other frontmatter fields you might have
+}
+
+const posts = await Promise.all(
+  Object.values(import.meta.glob<MarkdownInstance<Frontmatter>>('./posts/*.{md,mdx}', { eager: true }))
+);
 const pageTitle = 'Blog';
 ---
 
@@ -10,16 +21,15 @@ const pageTitle = 'Blog';
     <div class="container">
       <ul class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4">
         {
-          posts &&
-            posts
-              .filter((post) => !post.frontmatter.draft)
-              .sort((a, b) => {
-                return (
-                  new Date(b.frontmatter.pubDate).getTime() -
-                  new Date(a.frontmatter.pubDate).getTime()
-                );
-              })
-              .map((post) => post.url !== undefined && <PostItem post={post} />)
+          posts
+            .filter((post) => !post.frontmatter.draft)
+            .sort((a, b) => {
+              return (
+                new Date(b.frontmatter.pubDate).getTime() -
+                new Date(a.frontmatter.pubDate).getTime()
+              );
+            })
+            .map((post) => <PostItem post={post} />)
         }
       </ul>
     </div>
