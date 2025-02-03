@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import 'rehype-callouts/theme/github';
 import { formatDate } from '../scripts/date';
 import ProseArticleLayout from './ProseArticleLayout.astro';
 const { frontmatter } = Astro.props;
@@ -7,6 +8,25 @@ const pubDate = formatDate(frontmatter.pubDate);
 const updatedDate = formatDate(frontmatter.updatedDate);
 ---
 
+<style is:global>
+  .callout-content {
+    line-height: 1.75;
+  }
+  .callout[data-callout='warning'] {
+    .callout-title-icon svg {
+      fill: unset;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .callout {
+      border-left-color: var(--rc-color-dark, var(--rc-color-default));
+    }
+
+    .callout-title {
+      color: var(--rc-color-dark, var(--rc-color-default));
+    }
+  }
+</style>
 <ProseArticleLayout
   pageTitle={frontmatter.title}
   ogimage={frontmatter.ogimage && frontmatter.ogimage.src}
