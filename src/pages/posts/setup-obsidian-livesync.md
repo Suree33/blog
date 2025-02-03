@@ -2,6 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: Obsidian Syncは高いので、Self-hosted LiveSyncを使う
 pubDate: 2024-04-15
+updatedDate: 2025-02-03
 tags:
   - アプリ
   - Obsidian
@@ -25,7 +26,7 @@ Obsidianが公式に提供している同期サービスObsidian Syncには、�
 
 <p class="text-right">（2024年4月15日現在）</p>
 
-https://obsidian.md/sync
+<https://obsidian.md/sync>
 
 Obsidian Syncは公式サービスであることから、安定していることが期待されますが、1GBの容量は画像などを含む文書を扱うには心許ないサイズです。10GBあれば当面は困らないかもしれませんが、ノートアプリに月額10ドルは高すぎます。
 
@@ -33,13 +34,16 @@ Obsidian Syncは公式サービスであることから、安定しているこ�
 
 そこで、色々と調べた結果、ObsidianのコミュニティプラグインであるSelf-hosted LiveSyncを使ってみることにしました。Self-hosted LiveSyncは、ObsidianのvaultをCouchDBのサーバを使って同期するプラグインです。
 
-https://github.com/vrtmrz/obsidian-livesync/tree/main
+<https://github.com/vrtmrz/obsidian-livesync/tree/main>
 
 上記GitHubの[How to use](https://github.com/vrtmrz/obsidian-livesync/tree/main?tab=readme-ov-file#how-to-use)を参考にし、fly.ioを使ってCouchDBのサーバを立ち上げ、Self-hosted LiveSyncを使ってみました。
 
 fly.ioでは無料でCouchDBのサーバを立ち上げることができ、3GBの容量が無料で与えられます。3GBを超える場合、1GBあたり0.15ドルの月額料金がかかります。
 
-https://fly.io/
+<https://fly.io/>
+
+> [!WARNING]
+> 本記事を書いた直後にfly.ioのCouchDBサーバは無料ではなくなりました。最初の$5分のHobby Trial Usageを使い切ると、その後は課金されるようになります。
 
 ### 1. CouchDBの設定
 
@@ -47,7 +51,7 @@ Self-hosted LiveSyncの設定ドキュメントに自動セットアップスク
 
 この手順は、Self-hosted LiveSyncの作成者による動画がYouTubeにアップされているため、そちらを参考に進めていきます。
 
-https://www.youtube.com/watch?v=7sa_I1832Xc
+<https://www.youtube.com/watch?v=7sa_I1832Xc>
 
 1. まず、[setup-flyio-on-the-fly-v2.ipynb](https://github.com/vrtmrz/obsidian-livesync/blob/main/setup-flyio-on-the-fly-v2.ipynb) を開き、 `Open in Colab` をクリックします。
    すると、Google Colabが開かれます。そこで、regionを `nrt/Tokyo, Japan` に設定します（日本の場合）。
@@ -98,12 +102,12 @@ CouchDBのサーバが立ち上がったら、ObsidianのSelf-hosted LiveSyncの
 
 Self-hosted LiveSyncでは同期はできますが、何らかの要因でデータが消えてしまう不安があるため、Obsidian Gitを使ってバックアップを取ることにしました。これはPC版Obsidianのみに設定しました。また、基本的にバックアップのみが目的のため、定期実行はCommitとPushのみとし、定期的なPullは無効化しました。
 
-https://github.com/denolehov/obsidian-git
+<https://github.com/denolehov/obsidian-git>
 
 ## 参考にしたサイトなど
 
-https://note.com/wolf_horo/n/n94388d45a83e
+<https://note.com/wolf_horo/n/n94388d45a83e>
 
-https://zenn.dev/ayumukob/articles/3b034fcb6874d2
+<https://zenn.dev/ayumukob/articles/3b034fcb6874d2>
 
-https://github.com/vrtmrz/obsidian-livesync/blob/main/README.md
+<https://github.com/vrtmrz/obsidian-livesync/blob/main/README.md>
