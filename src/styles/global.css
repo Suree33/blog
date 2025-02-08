@@ -1,6 +1,7 @@
 @import url('remark-link-card.css');
 @import url('remark-code.css');
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 /* アイテム1・アイテム2・アイテム3 みたいな中黒で分割したリスト */
 .dot-separated {
