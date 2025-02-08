@@ -1,7 +1,7 @@
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import { defineConfig } from 'astro/config';
 import rehypeCallouts from 'rehype-callouts';
@@ -13,6 +13,9 @@ export default defineConfig({
   site: 'https://sur33.com/',
   redirects: {
     '/posts': '/',
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
   markdown: {
     remarkPlugins: [
@@ -34,9 +37,6 @@ export default defineConfig({
     },
   },
   integrations: [
-    tailwind({
-      nesting: true,
-    }),
     sitemap(),
     icon(),
     mdx(),
