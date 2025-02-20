@@ -1,6 +1,15 @@
 @import url('remark-link-card.css');
 @import url('remark-code.css');
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
+/* Tailwind CSS configs */
+@theme {
+  --breakpoint-xsm: 450px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+}
 /* アイテム1・アイテム2・アイテム3 みたいな中黒で分割したリスト */
 .dot-separated {
   > * {
