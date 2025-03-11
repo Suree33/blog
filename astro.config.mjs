@@ -1,4 +1,3 @@
-import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
@@ -39,7 +38,6 @@ export default defineConfig({
     }),
     sitemap(),
     icon(),
-    mdx(),
     partytown({
       config: {
         forward: ['dataLayer.push'],
