@@ -1,3 +1,14 @@
+@import 'tailwindcss';
+
+/* Tailwind v4の設定 */
+@theme {
+  /* ブレークポイント設定 */
+  --breakpoint-xsm: 450px; /* max-width */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+}
+
 @import url('remark-link-card.css');
 @import url('remark-code.css');
 
