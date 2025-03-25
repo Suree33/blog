@@ -55,7 +55,7 @@
   background-color: #e5e5e5;
   color: #525252;
   @media (prefers-color-scheme: dark) {
-    background-color: #404040;
-    color: #e5e5e5;
+    background-color: #404040 !important;
+    color: #e5e5e5 !important;
   }
 }
