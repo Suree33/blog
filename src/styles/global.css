@@ -1,7 +1,7 @@
-@import url('remark-link-card.css');
-@import url('remark-code.css');
-
 @import 'tailwindcss';
+@import './remark-link-card.css';
+@import './remark-code.css';
+
 @plugin "@tailwindcss/typography";
 @theme {
   --breakpoint-xl: initial;
