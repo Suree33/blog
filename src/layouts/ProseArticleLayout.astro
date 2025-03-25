@@ -8,9 +8,9 @@ const { pageTitle, ogimage, description } = Astro.props;
   ogimage={ogimage && ogimage.src}
   description={description}
 >
-  <div class="mb-16 mt-10 flex w-full justify-center px-4">
+  <div class="mt-10 mb-16 flex w-full justify-center px-4">
     <article
-      class="prose prose-neutral w-full break-words dark:prose-invert prose-h1:mb-10 prose-h1:mt-6 prose-h1:text-center prose-h1:text-3xl prose-h2:border-b prose-h2:pb-2 prose-h2:text-3xl prose-h3:border-b prose-h3:pb-2 prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h5:font-bold prose-h6:font-bold prose-img:rounded"
+      class="prose prose-neutral dark:prose-invert prose-h1:mb-10 prose-h1:mt-6 prose-h1:text-center prose-h1:text-3xl prose-h2:border-b prose-h2:border-b-neutral-300 prose-h2:pb-2 prose-h2:text-3xl prose-h3:border-b prose-h3:border-b-neutral-300 prose-h3:pb-2 prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h5:font-bold prose-h6:font-bold prose-img:rounded prose-code:font-normal w-full break-words"
     >
       <slot />
     </article>

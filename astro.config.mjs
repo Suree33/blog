@@ -1,6 +1,6 @@
 import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import { defineConfig } from 'astro/config';
 import rehypeCallouts from 'rehype-callouts';
@@ -32,10 +32,10 @@ export default defineConfig({
       },
     },
   },
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [
-    tailwind({
-      nesting: true,
-    }),
     sitemap(),
     icon(),
     partytown({

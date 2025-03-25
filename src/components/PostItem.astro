@@ -6,7 +6,7 @@ const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
 
 <li>
   <a
-    class="flex h-full justify-between gap-4 p-4 transition hover:bg-neutral-200 xsm:flex-col sm:rounded lg:px-5 lg:py-5 hover:dark:bg-neutral-800"
+    class="flex h-full justify-between gap-4 p-4 transition hover:bg-neutral-200 max-sm:flex-col sm:rounded lg:px-5 lg:py-5 hover:dark:bg-neutral-800"
     href={post.url}
   >
     <div>
@@ -32,7 +32,7 @@ const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
     {
       post.frontmatter.image && (
         <img
-          class="aspect-square w-28 rounded xsm:aspect-auto xsm:w-full md:aspect-[1.91/1] md:w-56"
+          class="aspect-square w-28 rounded max-sm:aspect-auto max-sm:w-full md:aspect-[1.91/1] md:w-56"
           src={post.frontmatter.image.src}
           alt={post.frontmatter.image.alt}
         />
