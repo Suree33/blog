@@ -4,9 +4,8 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 @theme {
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
+  --breakpoint-xl: initial;
+  --breakpoint-2xl: initial;
 }
 
 /* アイテム1・アイテム2・アイテム3 みたいな中黒で分割したリスト */
