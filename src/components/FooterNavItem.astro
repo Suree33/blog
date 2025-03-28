@@ -12,8 +12,10 @@ const isLinkActive =
 ---
 
 <a
-  class={`uppercase ${isLinkActive ? 'border-b border-current' : ''}`}
   href={path}
+  class={`text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white ${
+    isLinkActive ? 'font-medium text-gray-900 dark:text-white' : ''
+  }`}
 >
   {title}
 </a>

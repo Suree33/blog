@@ -12,6 +12,7 @@
     "lint": "eslint \"src/**/*.{js,astro}\""
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/partytown": "2.1.4",
     "@astrojs/rss": "4.0.11",
     "@astrojs/sitemap": "3.2.1",

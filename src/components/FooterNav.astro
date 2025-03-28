@@ -1,0 +1,9 @@
+---
+import FooterNavItem from './FooterNavItem.astro';
+const { class: classList } = Astro.props;
+---
+
+<nav class={classList}>
+  <FooterNavItem path="/" title="Blog" />
+  <FooterNavItem path="/about/" title="About" />
+</nav>
