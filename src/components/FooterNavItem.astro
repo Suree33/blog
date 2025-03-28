@@ -1,0 +1,14 @@
+---
+const { path, title } = Astro.props;
+const pathname = Astro.url.pathname;
+const isActive = pathname === path || (path !== '/' && pathname.startsWith(path));
+---
+
+<a
+  href={path}
+  class={`text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white ${
+    isActive ? 'font-medium text-gray-900 dark:text-white' : ''
+  }`}
+>
+  {title}
+</a>

@@ -1,5 +1,6 @@
 ---
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import config from '../config.json';
 import '../styles/global.css';
 const { pageTitle, ogimage, description } = Astro.props;
@@ -53,10 +54,11 @@ const { pageTitle, ogimage, description } = Astro.props;
       gtag('config', 'G-8ZCMEEKWF9');
     </script>
   </head>
-  <body class="bg-white pb-12 dark:bg-neutral-900">
+  <body class="bg-white dark:bg-neutral-900">
     <Header />
     <main>
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
