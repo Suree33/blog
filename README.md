@@ -40,6 +40,22 @@ bun run build
 bun run preview
 ```
 
+### テストの実行
+
+```bash
+# テストを実行
+bun run test
+
+# テストをウォッチモードで実行
+bun run test -- --watch
+
+# テストUIを起動
+bun run test:ui
+
+# カバレッジレポートを生成
+bunx vitest run --coverage
+```
+
 ## 使用ツール・サービス
 
 ### ランタイム
@@ -72,6 +88,11 @@ bun run preview
 - [Pritter](https://prettier.io/)
   - [prettier-plugin-astro](https://github.com/withastro/prettier-plugin-astro)
   - [prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
+
+### テスト
+
+- [Vitest](https://vitest.dev/)
+  - [Astro Container API](https://docs.astro.build/ja/reference/container-reference/)
 
 ### ホスティング
 
