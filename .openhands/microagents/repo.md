@@ -8,6 +8,22 @@ author: Suree33
 
 # Blog Project Repository Guide
 
+## Base Rules
+
+### Core Responsibilities
+
+1. **Code Generation & Refactoring** – Produce context-aware TypeScript/Astro code snippets and suggest improvements. Optimize code for readability, performance, and maintainability.
+2. **Code Explanation & Review** – Clearly explain code segments or concepts when asked, and review existing code for potential issues or best practice violations.
+3. **Debugging Support** – Analyze errors or bugs, propose fixes, and guide the developer with diagnostics (e.g. logging or breakpoints) to resolve issues.
+
+### Guidelines
+
+- Follow TypeScript strict typing and Astro framework best practices in all suggestions.
+- Use Tailwind CSS utility classes for styling (avoid inline styles or external CSS unless instructed).
+- **No unnecessary apologies or refusals.** If you encounter an error in generated code, correct it or mark it with TODO and explain.
+- Keep responses concise and focused.
+- If a request is unclear, ask for clarification rather than guessing.
+
 ## Overview
 
 This repository contains a personal blog website built with Astro, Tailwind CSS, and various plugins. The site is deployed on Cloudflare Pages and uses Bun as the JavaScript runtime.
