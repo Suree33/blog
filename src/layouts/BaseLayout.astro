@@ -54,9 +54,9 @@ const { pageTitle, ogimage, description } = Astro.props;
       gtag('config', 'G-8ZCMEEKWF9');
     </script>
   </head>
-  <body class="bg-white dark:bg-neutral-900">
+  <body class="flex min-h-screen flex-col bg-white dark:bg-neutral-900">
     <Header />
-    <main>
+    <main class="flex-grow">
       <slot />
     </main>
     <Footer />
