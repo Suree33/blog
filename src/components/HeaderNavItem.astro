@@ -1,57 +1,19 @@
 ---
 const { path, title } = Astro.props;
 const { pathname: currentPath } = Astro.url;
+
+// ホームページかブログ記事ページの場合はホームリンクをアクティブに
+const isHomeActive = currentPath === '/' || currentPath.startsWith('/posts');
+
+// その他のページではパスが一致するか、現在のパスがそのパスで始まる場合（ルートパス以外）にアクティブに
+const isLinkActive =
+  (path === '/' && isHomeActive) ||
+  (path !== '/' && currentPath !== '/' && currentPath.startsWith(path));
 ---
 
-{
-  () => {
-    if (currentPath === '/') {
-      if (currentPath === path) {
-        return (
-          <a class="border-b border-current uppercase" href={path}>
-            {title}
-          </a>
-        );
-      } else {
-        return (
-          <a class="uppercase" href={path}>
-            {title}
-          </a>
-        );
-      }
-    } else {
-      if (currentPath.startsWith('/posts')) {
-        if (path === '/') {
-          return (
-            <a class="border-b border-current uppercase" href={path}>
-              {title}
-            </a>
-          );
-        } else {
-          return (
-            <a class="uppercase" href={path}>
-              {title}
-            </a>
-          );
-        }
-      } else {
-        if (
-          currentPath === path ||
-          (currentPath.startsWith(path) && path !== '/')
-        ) {
-          return (
-            <a class="border-b border-current uppercase" href={path}>
-              {title}
-            </a>
-          );
-        } else {
-          return (
-            <a class="uppercase" href={path}>
-              {title}
-            </a>
-          );
-        }
-      }
-    }
-  }
-}
+<a
+  class={`uppercase ${isLinkActive ? 'border-b border-current' : ''}`}
+  href={path}
+>
+  {title}
+</a>
