@@ -1,23 +1,23 @@
 ---
+import UnsplashRandomImage from '../components/UnsplashRandomImage.astro';
 import ProseArticleLayout from '../layouts/ProseArticleLayout.astro';
-import { Image } from 'astro:assets';
 const pageTitle = 'About';
-import taxiImage from '../assets/images/daiki-sato-xzItvPFgpBQ-unsplash.jpg';
 ---
 
 <ProseArticleLayout pageTitle={pageTitle}>
   <div
-    class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold uppercase text-neutral-500"
+    class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold text-neutral-500 uppercase"
   >
     <div>Tech</div>
     <div>Design</div>
     <div>Photography</div>
   </div>
   <h1 class="!text-4xl">Daiki Sato</h1>
-  <Image
+  <UnsplashRandomImage
     class="rounded-lg object-cover"
-    src={taxiImage}
-    alt="渋谷のスクランブル交差点でタクシーを横から撮影した写真"
+    alt="東京の風景写真 by Daiki Sato"
+    username="sur33"
+    count={20}
   />
   <h2>アイデア</h2>
   <ul>

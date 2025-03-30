@@ -28,7 +28,7 @@ Astroは高性能なWebサイト構築のためのオールインワンのWebフ
 
 ## ファイル構造
 
-```
+```plaintext
 /
 ├── public/
 ├── src/

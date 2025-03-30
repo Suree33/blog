@@ -12,9 +12,11 @@ import FooterNav from './FooterNav.astro';
           {config.siteName}
         </a>
       </div>
-      
-      <FooterNav class="flex flex-wrap justify-center gap-6 text-sm sm:justify-end" />
-      
+
+      <FooterNav
+        class="flex flex-wrap justify-center gap-6 text-sm sm:justify-end"
+      />
+
       <div class="flex items-center gap-4 text-lg">
         <a
           href="https://twitter.com/thisissuree"
@@ -25,6 +27,14 @@ import FooterNav from './FooterNav.astro';
           <Icon name="fa6-brands:x-twitter" />
         </a>
         <a
+          href="https://www.instagram.com/thisissuree/"
+          aria-label="Instagram profile page (@thisissuree)"
+          target="_blank"
+          class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+        >
+          <Icon name="fa6-brands:instagram" />
+        </a>
+        <a
           href="https://github.com/Suree33"
           aria-label="GitHub profile page (@Suree33)"
           target="_blank"
@@ -32,8 +42,8 @@ import FooterNav from './FooterNav.astro';
         >
           <Icon name="fa6-brands:github" />
         </a>
-        <a 
-          href="/rss.xml" 
+        <a
+          href="/rss.xml"
           aria-label="RSS feed"
           class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
         >

@@ -12,7 +12,7 @@ description: オーディオインターフェースを両面テープで机の�
 
 机の上が狭いので、机の裏にオーディオインターフェースを固定してみました。ちなみに、使っているオーディオインターフェースはSteinbergのUR22mkIIです。
 
-https://www.steinberg.net/ja/audio-interfaces/ur22c-recording-pack/ur22mkii/
+<https://www.steinberg.net/ja/audio-interfaces/ur22c-recording-pack/ur22mkii/>
 
 実はこれまでも色々試していて、例えば[面ファスナー](https://amzn.to/3WKgHn8)を机の裏とオーディオインターフェースに貼り付けて固定してみたり、[貼り付けられる磁石シート](https://amzn.to/3WGNWrq)を使ってみたりしましたが、どれも失敗に終わっていました。
 

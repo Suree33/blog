@@ -47,8 +47,8 @@ const { pageTitle, ogimage, description } = Astro.props;
       src="https://www.googletagmanager.com/gtag/js?id=G-8ZCMEEKWF9"></script>
     <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
+      function gtag(...args) {
+        window.dataLayer.push(args);
       }
       gtag('js', new Date());
       gtag('config', 'G-8ZCMEEKWF9');

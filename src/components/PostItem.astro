@@ -13,7 +13,11 @@ const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
       <div
         class="dot-separated flex flex-wrap text-neutral-500 dark:text-neutral-400"
       >
-        {tags.map((tag) => <div class="inline-flex text-sm">{tag}</div>)}
+        {
+          tags.map((tag: string) => (
+            <div class="inline-flex text-sm">{tag}</div>
+          ))
+        }
         <time class="text-sm" datetime="{formatDate(post.frontmatter.pubDate)}">
           {formatDate(post.frontmatter.pubDate)}
         </time>
