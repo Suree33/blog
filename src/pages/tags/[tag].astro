@@ -5,97 +5,65 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import type { Post } from '../../types/Post';
 
 export async function getStaticPaths() {
-  // 1. Fetch all posts
-  const allPosts = await Promise.all(
+  const posts = await Promise.all(
     Object.values(import.meta.glob<Post>('../**/*.md', { eager: true })),
   );
 
-  // 2. Create a map to store posts per tag
-  const postsByTag = new Map<string, Post[]>();
+  const uniqueTags = [
+    ...new Set(
+      posts
+        .filter((post) => {
+          if (!post.frontmatter.tags) {
+            console.warn(`Warning: Post "${post.url}" has no tags`);
+            return false;
+          }
+          if (!Array.isArray(post.frontmatter.tags)) {
+            console.warn(`Warning: Post "${post.url}" has invalid tags format`);
+            return false;
+          }
+          return true;
+        })
+        .map((post) => post.frontmatter.tags)
+        .flat(),
+    ),
+  ];
 
-  // 3. Iterate over posts once to populate the map
-  for (const post of allPosts) {
-    // Skip posts without URL (shouldn't happen with glob, but safe check)
-    if (!post.url) {
-      continue;
-    }
-
-    const tags = post.frontmatter.tags;
-
-    // Validate tags: must exist and be an array
-    if (!tags) {
-      console.warn(`Warning: Post "${post.url}" has no tags`);
-      continue; // Skip posts without tags
-    }
-    if (!Array.isArray(tags)) {
-      console.warn(
-        `Warning: Post "${post.url}" has invalid tags format (not an array)`,
-      );
-      continue; // Skip posts with invalid tag format
-    }
-
-    // Add the post to the map for each valid tag
-    for (const tag of tags) {
-      // Ensure tag is a non-empty string
-      if (typeof tag === 'string' && tag.trim() !== '') {
-        const postsForThisTag = postsByTag.get(tag) || [];
-        postsForThisTag.push(post);
-        postsByTag.set(tag, postsForThisTag);
-      } else {
-        console.warn(
-          `Warning: Post "${post.url}" contains an invalid tag: ${tag}`,
-        );
-      }
-    }
-  }
-
-  // 4. Convert the map into the format required by getStaticPaths
-  const paths = Array.from(postsByTag.entries()).map(([tag, posts]) => {
+  return uniqueTags.map((tag) => {
+    const filteredPosts = posts.filter((post) =>
+      post.frontmatter.tags ? post.frontmatter.tags.includes(tag) : false,
+    );
     return {
       params: { tag },
-      props: { posts }, // Pass the already filtered posts for this tag
+      props: { posts: filteredPosts },
     };
   });
-
-  return paths;
 }
 
 const { tag } = Astro.params;
-// Ensure posts is always an array, even if getStaticPaths somehow fails
-// Although with prerender=true, this case is less likely during build.
-const { posts = [] } = Astro.props;
+const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={tag}>
   <div class="mt-10 flex w-full justify-center sm:px-4">
     <div class="container">
       <h1 class="mt-6 mb-10 text-center text-2xl text-black dark:text-white">
-        「{tag}」タグの記事
+        {tag}のタグが付いた記事
       </h1>
-      {
-        /* Always render the list, as SSG ensures posts exist for generated tag pages */
-      }
       <ul class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4">
         {
-          posts
-            // Filter out draft posts directly in the template
-            .filter((post: Post) => !post.frontmatter.draft)
-            // Sort posts by publication date (newest first)
-            .sort((a: Post, b: Post) => {
-              // Handle potential invalid dates gracefully (optional, but good practice)
-              const dateA = a.frontmatter.pubDate
-                ? new Date(a.frontmatter.pubDate).getTime()
-                : 0;
-              const dateB = b.frontmatter.pubDate
-                ? new Date(b.frontmatter.pubDate).getTime()
-                : 0;
-              return dateB - dateA;
-            })
-            .map(
-              (post: Post) =>
-                // Render PostItem only if URL exists (redundant check due to getStaticPaths logic, but safe)
-                post.url && <PostItem post={post} />,
-            )
+          posts &&
+            posts
+              .filter((post: Post) => !post.frontmatter.draft)
+              .sort((a: Post, b: Post) => {
+                return (
+                  new Date(b.frontmatter.pubDate).getTime() -
+                  new Date(a.frontmatter.pubDate).getTime()
+                );
+              })
+              .map(
+                (post: Post) =>
+                  post.url !== undefined && <PostItem post={post} />,
+              )
         }
       </ul>
     </div>
