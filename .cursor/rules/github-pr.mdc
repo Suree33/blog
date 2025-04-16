@@ -52,7 +52,14 @@ git push -u origin {{ BRANCH_NAME }}
 gh pr create --title "{{ TITLE }}" --body "{{ DESCRIPTION }}" --base {{ BASE_BRANCH || 'main' }} --assignee @me
 
 # descriptionにファイルを用いてプルリクエスト作成
-gh pr create --title "{{ TITLE }}" --body-file "{{ DESCRIPTION_FILE_PATH }}" --base {{ BASE_BRANCH || 'main' }} --assignee @me & rm {{ DESCRIPTION_FILE_PATH }}
+gh pr create --title "{{ TITLE }}" --body-file "{{ DESCRIPTION_FILE_PATH }}" --base {{ BASE_BRANCH || 'main' }} --assignee @me; rm {{ DESCRIPTION_FILE_PATH }}
+```
+
+プルリクエスト作成後、ブラウザでプルリクエストのページを表示します。
+
+```bash
+# ブラウザでプルリクエストページを開く
+gh pr view --web
 ```
 
 ### プルリクエストのカスタマイズ
