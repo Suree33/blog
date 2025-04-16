@@ -1,0 +1,11 @@
+name = "blog-unsplash-cache"
+main = "src/workers/unsplash-cache.ts"
+compatibility_date = "2024-03-20"
+
+[[kv_namespaces]]
+binding = "UNSPLASH_CACHE"
+id = "8cfacf7facfb44288dc95d22f0c1e953"
+preview_id = "dc6dd3a09ab84defbe973a4d4454a78a"
+
+[triggers]
+crons = ["0 0 * * 1"] # 毎週月曜日の午前0時に実行

@@ -33,6 +33,7 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250416.0",
     "@eslint/js": "^9.19.0",
     "@types/bun": "^1.2.8",
     "@typescript-eslint/parser": "^8.22.0",
@@ -43,6 +44,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript-eslint": "^8.22.0"
+    "typescript-eslint": "^8.22.0",
+    "wrangler": "^4.11.1"
   }
 }
