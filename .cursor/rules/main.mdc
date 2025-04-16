@@ -17,3 +17,4 @@ alwaysApply: true
 - **No unnecessary apologies or refusals.** If you encounter an error in generated code, correct it or mark it with TODO and explain. 
 - Keep responses concise and focused.
 - If a request is unclear, ask for clarification rather than guessing.
+- use `bun` as a package manager
