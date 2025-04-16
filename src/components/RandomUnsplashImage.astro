@@ -1,0 +1,176 @@
+---
+import { getImage } from 'astro:assets';
+import taxiImage from '../assets/images/daiki-sato-xzItvPFgpBQ-unsplash.jpg';
+
+// Define allowed orientation values
+type Orientation = 'landscape' | 'portrait' | 'squarish';
+
+interface Props {
+  class?: string;
+  orientation?: Orientation; // Add optional orientation prop
+  username?: string; // Add optional username prop
+}
+
+const { class: classList, orientation, username } = Astro.props; // Get orientation and username from props
+
+// Optimize the fallback image using getImage
+const optimizedFallbackImage = await getImage({
+  src: taxiImage,
+  // width: 1200, // Optional: Specify width for optimization
+  format: 'webp', // Optimize to WebP format
+});
+---
+
+<div class={classList}>
+  <a
+    id="random-image-container"
+    class="relative flex aspect-[3/2] h-full w-full items-center justify-center overflow-hidden rounded-lg bg-transparent"
+    href="https://unsplash.com/ja/%E5%86%99%E7%9C%9F/%E5%A4%9C%E3%81%AE%E6%A8%AA%E6%96%AD%E6%AD%A9%E9%81%93%E3%81%AB%E3%82%BF%E3%82%AF%E3%82%B7%E3%83%BC%E3%81%8C%E5%81%9C%E8%BB%8A-xzItvPFgpBQ"
+    target="_blank"
+    rel="noopener noreferrer"
+    data-fallback-src={optimizedFallbackImage.src}
+    data-fallback-alt="画像の読み込みに失敗しました"
+    data-fallback-width={optimizedFallbackImage.attributes.width}
+    data-fallback-height={optimizedFallbackImage.attributes.height}
+    data-orientation={orientation ?? undefined}
+    data-username={username ?? undefined}
+  >
+    <div
+      id="loading-indicator"
+      class="absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800"
+    >
+      <div
+        class="h-8 w-8 animate-spin rounded-full border-2 border-neutral-400 border-t-transparent"
+      >
+      </div>
+    </div>
+    <img
+      id="random-image"
+      src=""
+      alt=""
+      width=""
+      height=""
+      class="mt-0 mb-0 h-auto w-auto rounded-lg object-contain opacity-0 transition-opacity"
+      style="max-height: 100%;"
+    />
+  </a>
+  <p class="mt-2 text-right text-xs text-neutral-500">
+    Photo by <a
+      href="https://unsplash.com/@daikisato"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-inherit hover:text-neutral-600">Daiki Sato</a
+    > on <a
+      href="https://unsplash.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-inherit hover:text-neutral-600">Unsplash</a
+    >
+  </p>
+</div>
+
+<script>
+  let isLoading = false;
+  const imageContainer = document.getElementById(
+    'random-image-container',
+  ) as HTMLAnchorElement;
+  const loadingIndicator = document.getElementById('loading-indicator');
+  const imageElement = document.getElementById(
+    'random-image',
+  ) as HTMLImageElement;
+
+  // Get orientation and username from data attributes
+  const orientation = imageContainer.dataset.orientation;
+  const username = imageContainer.dataset.username;
+
+  async function loadRandomImage() {
+    if (isLoading || !imageContainer || !loadingIndicator || !imageElement)
+      return;
+    isLoading = true;
+    loadingIndicator.classList.remove('opacity-0');
+    imageElement.classList.add('opacity-0');
+
+    try {
+      // Construct API URL with orientation and username query parameters
+      let apiUrl = '/api/random-image';
+      const params = new URLSearchParams();
+      if (orientation) {
+        params.append('orientation', orientation);
+      }
+      if (username) {
+        params.append('username', username);
+      }
+      if (params.toString()) {
+        apiUrl += `?${params.toString()}`;
+      }
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error('Failed to fetch image');
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+
+      const optimizedUrl = `${data.url}&w=1200&fm=webp&fit=crop&crop=entropy`;
+
+      // Preload the new image
+      const newImage = new Image();
+      newImage.src = optimizedUrl;
+
+      await new Promise((resolve, reject) => {
+        newImage.onload = () => {
+          imageElement.removeAttribute('width');
+          imageElement.removeAttribute('height');
+          resolve(newImage);
+        };
+        newImage.onerror = reject;
+      });
+
+      // Display the loaded Unsplash image
+      imageContainer.href = data.url;
+      imageElement.src = optimizedUrl;
+      imageElement.alt = data.alt;
+      imageElement.removeAttribute('width');
+      imageElement.removeAttribute('height');
+      imageElement.classList.remove('opacity-0');
+      loadingIndicator.classList.add('opacity-0');
+    } catch (error) {
+      console.error('画像の読み込みに失敗しました:', error);
+      const fallbackSrc = imageContainer.dataset.fallbackSrc;
+      const fallbackAlt = imageContainer.dataset.fallbackAlt;
+      const fallbackWidth = imageContainer.dataset.fallbackWidth;
+      const fallbackHeight = imageContainer.dataset.fallbackHeight;
+
+      if (fallbackSrc) {
+        imageElement.src = fallbackSrc;
+        imageElement.alt = fallbackAlt || 'Fallback image';
+        if (fallbackWidth) imageElement.width = parseInt(fallbackWidth, 10);
+        if (fallbackHeight) imageElement.height = parseInt(fallbackHeight, 10);
+
+        imageElement.classList.remove('opacity-0');
+        loadingIndicator.classList.add('opacity-0');
+      } else {
+        imageContainer.classList.add('bg-neutral-200');
+        loadingIndicator.innerHTML = `
+          <div class="text-neutral-600 text-center p-4">
+            <p>画像の読み込みに失敗しました</p>
+          </div>
+        `;
+        loadingIndicator.classList.remove('opacity-0');
+      }
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadRandomImage);
+</script>
+
+<style>
+  #loading-indicator {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  #loading-indicator.opacity-0 {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
