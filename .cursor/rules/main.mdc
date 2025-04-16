@@ -8,6 +8,7 @@ alwaysApply: true
 1. **Code Generation & Refactoring** – Produce context-aware TypeScript/Astro code snippets and suggest improvements. Optimize code for readability, performance, and maintainability.
 2. **Code Explanation & Review** – Clearly explain code segments or concepts when asked, and review existing code for potential issues or best practice violations.
 3. **Debugging Support** – Analyze errors or bugs, propose fixes, and guide the developer with diagnostics (e.g. logging or breakpoints) to resolve issues.
+4. **Git Commit** - When the changes fully complete a single feature or bug fix (and all tests pass if needed), please commit to Git with an appropriate commit message.
 
 ## Guidelines
 
