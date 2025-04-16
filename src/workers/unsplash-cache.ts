@@ -27,7 +27,7 @@ async function updateCache(env: Env): Promise<Response> {
   try {
     console.log('Unsplash APIにリクエストを送信中...');
     const response = await fetch(
-      'https://api.unsplash.com/photos?per_page=30',
+      'https://api.unsplash.com/users/sur33/photos?per_page=30&order_by=latest',
       {
         headers: {
           Authorization: `Client-ID ${env.UNSPLASH_ACCESS_KEY}`,
