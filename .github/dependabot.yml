@@ -8,54 +8,52 @@ updates:
   - package-ecosystem: bun # See documentation for possible values
     directory: '/' # Location of package manifests
     schedule:
-      interval: 'weekly'
-      day: 'friday'
-      time: '21:00'
+      interval: 'daily'
+      time: '10:00'
       timezone: 'Asia/Tokyo'
     groups:
-      astro-packages:
+      astro:
         patterns:
           - '@astrojs*'
           - 'astro*'
         update-types:
           - 'minor'
           - 'patch'
-      tailwind-packages:
+      tailwind:
         patterns:
           - '@tailwindcss*'
           - 'tailwindcss'
         update-types:
           - 'minor'
           - 'patch'
-      postcss-packages:
+      postcss:
         patterns:
           - 'postcss*'
           - 'autoprefixer'
         update-types:
           - 'minor'
           - 'patch'
-      markdown-packages:
+      markdown:
         patterns:
           - 'rehype*'
           - 'remark*'
         update-types:
           - 'minor'
           - 'patch'
-      icon-packages:
+      icon:
         patterns:
           - '@iconify-json*'
         update-types:
           - 'minor'
           - 'patch'
-      dev-typescript:
+      typescript:
         patterns:
           - 'typescript'
           - '@types/*'
         update-types:
           - 'minor'
           - 'patch'
-      dev-eslint:
-        dependency-type: 'development'
+      eslint:
         patterns:
           - '@eslint*'
           - 'eslint*'
@@ -64,8 +62,7 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-      dev-prettier:
-        dependency-type: 'development'
+      prettier:
         patterns:
           - 'prettier*'
         update-types:
