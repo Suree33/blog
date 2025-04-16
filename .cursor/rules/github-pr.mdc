@@ -52,7 +52,7 @@ git push -u origin {{ BRANCH_NAME }}
 gh pr create --title "{{ TITLE }}" --body "{{ DESCRIPTION }}" --base {{ BASE_BRANCH || 'main' }} --assignee @me
 
 # descriptionにファイルを用いてプルリクエスト作成
-gh pr create --title "{{ TITLE }}" --body-file "{{ DESCRIPTION_FILE_PATH }}" --base {{ BASE_BRANCH || 'main' }} --assignee @me
+gh pr create --title "{{ TITLE }}" --body-file "{{ DESCRIPTION_FILE_PATH }}" --base {{ BASE_BRANCH || 'main' }} --assignee @me & rm {{ DESCRIPTION_FILE_PATH }}
 ```
 
 ### プルリクエストのカスタマイズ
@@ -116,7 +116,7 @@ gh pr diff
 ```
 
 `gh pr` コマンドの使い方は [gh pr](mdc:https:/cli.github.com/manual/gh_pr) を参照してください。
-その他、 `gh` コマンド全般の使い方については [GitHub CLI manual](https://cli.github.com/manual/) を参照してください。
+その他、 `gh` コマンド全般の使い方については [GitHub CLI manual](mdc:https:/cli.github.com/manual) を参照してください。
 
 ## 完了
 
