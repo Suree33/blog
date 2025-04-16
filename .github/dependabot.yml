@@ -12,3 +12,65 @@ updates:
       day: 'friday'
       time: '21:00'
       timezone: 'Asia/Tokyo'
+    groups:
+      astro-packages:
+        patterns:
+          - '@astrojs*'
+          - 'astro*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      tailwind-packages:
+        patterns:
+          - '@tailwindcss*'
+          - 'tailwindcss'
+        update-types:
+          - 'minor'
+          - 'patch'
+      postcss-packages:
+        patterns:
+          - 'postcss*'
+          - 'autoprefixer'
+        update-types:
+          - 'minor'
+          - 'patch'
+      markdown-packages:
+        patterns:
+          - 'rehype*'
+          - 'remark*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      icon-packages:
+        patterns:
+          - '@iconify-json*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      dev-typescript:
+        patterns:
+          - 'typescript'
+          - '@types/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      dev-eslint:
+        dependency-type: 'development'
+        patterns:
+          - '@eslint*'
+          - 'eslint*'
+          - 'typescript-eslint'
+          - '@typescript-eslint*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      dev-prettier:
+        dependency-type: 'development'
+        patterns:
+          - 'prettier*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      major-updates:
+        update-types:
+          - 'major'
