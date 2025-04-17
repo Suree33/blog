@@ -28,7 +28,7 @@
     "rehype-callouts": "^2.0.2",
     "remark-flexible-code-titles": "^1.2.0",
     "remark-link-card": "git+https://github.com/gladevise/remark-link-card.git",
-    "sanitize-html": "^2.15.0",
+    "sanitize-html": "^2.16.0",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3"
   },
