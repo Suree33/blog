@@ -11,6 +11,8 @@ updates:
       interval: 'daily'
       time: '10:00'
       timezone: 'Asia/Tokyo'
+    reviewers:
+      - 'Suree33'
     groups:
       astro:
         patterns:
