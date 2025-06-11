@@ -24,7 +24,7 @@
     "astro": "^5.8.0",
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.21",
-    "postcss-nesting": "^13.0.1",
+    "postcss-nesting": "^13.0.2",
     "rehype-callouts": "^2.1.0",
     "remark-flexible-code-titles": "^1.2.0",
     "remark-link-card": "git+https://github.com/gladevise/remark-link-card.git",
