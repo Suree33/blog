@@ -151,8 +151,9 @@ const { pageTitle, ogimage, description } = Astro.props;
         return;
       }
       
-      // Mark TOC heading for CSS hiding
+      // Mark TOC heading for CSS hiding and directly hide it
       tocHeading.setAttribute('data-toc-heading', 'true');
+      tocHeading.style.display = 'none';
       
       const mobileTocContent = document.getElementById('mobile-toc-content');
       const desktopTocContent = document.getElementById('desktop-toc-content');
