@@ -3,16 +3,199 @@ import BaseLayout from './BaseLayout.astro';
 const { pageTitle, ogimage, description } = Astro.props;
 ---
 
+<style>
+  /* Table of Contents styling */
+  .prose h2 + ul {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .prose h2 + ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose h2 + ul a {
+    color: #525252;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+  }
+
+  .prose h2 + ul a:hover {
+    color: #171717;
+  }
+
+  .prose h2 + ul ul {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .prose h2 + ul a {
+      color: #a3a3a3;
+    }
+    
+    .prose h2 + ul a:hover {
+      color: #f5f5f5;
+    }
+  }
+
+  .prose h2 + ul a.active {
+    color: #2563eb;
+    font-weight: 500;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .prose h2 + ul a.active {
+      color: #60a5fa;
+    }
+  }
+
+  /* Mobile TOC styling */
+  .mobile-toc {
+    display: block;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .mobile-toc {
+      background-color: #1f2937;
+      border-color: #374151;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-toc {
+      display: none;
+    }
+  }
+
+  .mobile-toc h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .mobile-toc h3 {
+      color: #d1d5db;
+    }
+  }
+
+  /* Desktop TOC styling */
+  .desktop-toc {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .desktop-toc {
+      display: block;
+      padding: 1rem;
+      background-color: #f9fafb;
+      border-radius: 0.5rem;
+      border: 1px solid #e5e7eb;
+    }
+  }
+
+  @media (min-width: 1024px) and (prefers-color-scheme: dark) {
+    .desktop-toc {
+      background-color: #1f2937;
+      border-color: #374151;
+    }
+  }
+
+  .desktop-toc h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .desktop-toc h3 {
+      color: #d1d5db;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    function initTableOfContents() {
+      const tocHeading = document.querySelector('h2');
+      const tocList = document.querySelector('h2 + ul');
+      
+      if (!tocHeading || !tocList || !tocHeading.textContent.includes('Contents')) {
+        return;
+      }
+      
+      const mobileTocContent = document.getElementById('mobile-toc-content');
+      const desktopTocContent = document.getElementById('desktop-toc-content');
+      
+      if (mobileTocContent && desktopTocContent) {
+        mobileTocContent.innerHTML = tocList.outerHTML;
+        desktopTocContent.innerHTML = tocList.outerHTML;
+        
+        tocHeading.style.display = 'none';
+        tocList.style.display = 'none';
+      }
+      
+      const tocLinks = document.querySelectorAll('#mobile-toc-content a, #desktop-toc-content a');
+      const headings = document.querySelectorAll('h2, h3');
+      
+      function updateActiveLink() {
+        let activeHeading = null;
+        const scrollTop = window.scrollY + 100;
+        
+        headings.forEach(heading => {
+          if (heading.offsetTop <= scrollTop && !heading.textContent.includes('Contents')) {
+            activeHeading = heading;
+          }
+        });
+        
+        tocLinks.forEach(link => link.classList.remove('active'));
+        
+        if (activeHeading) {
+          const activeLinks = document.querySelectorAll(`#mobile-toc-content a[href="#${activeHeading.id}"], #desktop-toc-content a[href="#${activeHeading.id}"]`);
+          activeLinks.forEach(link => link.classList.add('active'));
+        }
+      }
+      
+      window.addEventListener('scroll', updateActiveLink);
+      updateActiveLink();
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTableOfContents);
+    } else {
+      initTableOfContents();
+    }
+  })();
+</script>
+
 <BaseLayout
   pageTitle={pageTitle}
   ogimage={ogimage && ogimage.src}
   description={description}
 >
   <div class="mt-10 mb-16 flex w-full justify-center px-4">
-    <article
-      class="prose prose-neutral dark:prose-invert prose-h1:mb-10 prose-h1:mt-6 prose-h1:text-center prose-h1:text-3xl prose-h2:border-b prose-h2:border-b-neutral-300 prose-h2:pb-2 prose-h2:text-3xl prose-h3:border-b prose-h3:border-b-neutral-300 prose-h3:pb-2 prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h5:font-bold prose-h6:font-bold prose-img:rounded prose-code:font-normal w-full break-words"
-    >
-      <slot />
-    </article>
+    <div class="flex w-full max-w-none lg:max-w-7xl gap-8">
+      <article
+        class="prose prose-neutral dark:prose-invert prose-h1:mb-10 prose-h1:mt-6 prose-h1:text-center prose-h1:text-3xl prose-h2:border-b prose-h2:border-b-neutral-300 prose-h2:pb-2 prose-h2:text-3xl prose-h3:border-b prose-h3:border-b-neutral-300 prose-h3:pb-2 prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h5:font-bold prose-h6:font-bold prose-img:rounded prose-code:font-normal w-full break-words lg:flex-1"
+      >
+        <slot />
+      </article>
+      
+      <aside class="hidden lg:block lg:w-64 flex-shrink-0">
+        <div class="sticky top-24">
+          <slot name="toc" />
+        </div>
+      </aside>
+    </div>
   </div>
 </BaseLayout>

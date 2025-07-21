@@ -6,6 +6,7 @@ import { defineConfig } from 'astro/config';
 import rehypeCallouts from 'rehype-callouts';
 import remarkCodeTitles from 'remark-flexible-code-titles';
 import remarkLinkCard from 'remark-link-card';
+import remarkToc from 'remark-toc';
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,6 +22,13 @@ export default defineConfig({
         {
           cache: true,
           shortenUrl: true,
+        },
+      ],
+      [
+        remarkToc,
+        {
+          maxDepth: 3,
+          tight: true,
         },
       ],
     ],

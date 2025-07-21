@@ -81,5 +81,16 @@ const updatedDate = formatDate(frontmatter.updatedDate);
       </p>
     )
   }
+  
+  <div class="mobile-toc lg:hidden">
+    <h3>目次</h3>
+    <div id="mobile-toc-content"></div>
+  </div>
+  
   <slot />
+  
+  <div class="desktop-toc" slot="toc">
+    <h3>目次</h3>
+    <div id="desktop-toc-content"></div>
+  </div>
 </ProseArticleLayout>
