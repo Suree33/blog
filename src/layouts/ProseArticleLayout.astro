@@ -16,6 +16,11 @@ const { pageTitle, ogimage, description } = Astro.props;
   .prose h2[data-toc-heading] {
     display: none !important;
   }
+  
+  /* Additional selector to ensure TOC headings are hidden regardless of scoping */
+  h2[data-toc-heading] {
+    display: none !important;
+  }
 
   .prose h2 + ul li {
     margin-bottom: 0.5rem;
