@@ -166,7 +166,10 @@ const { pageTitle, ogimage, description } = Astro.props;
       mobileTocContent.innerHTML = tocList.outerHTML;
       desktopTocContent.innerHTML = tocList.outerHTML;
       
-      console.log('TOC: Successfully populated containers');
+      // Hide the original TOC list to prevent duplication
+      tocList.style.display = 'none';
+      
+      console.log('TOC: Successfully populated containers and hidden original list');
       
       const tocLinks = document.querySelectorAll('#mobile-toc-content a, #desktop-toc-content a');
       const headings = document.querySelectorAll('h2, h3');
