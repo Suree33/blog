@@ -10,8 +10,6 @@ description: Astroで、remarkプラグインであるremark-link-cardを使い�
 ogimage: '/ogimage/remark-link-card-with-astro.og.png'
 ---
 
-## 目次
-
 ## remark-link-card
 
 remark-link-card は、remarkプラグインで、リンクをカード形式で表示するためのプラグインです。カード形式のリンクとは、以下のようなものです。

@@ -12,8 +12,8 @@ const { pageTitle, ogimage, description } = Astro.props;
     margin-bottom: 2rem;
   }
 
-  /* Hide TOC headings */
-  .prose h2:has(+ ul) {
+  /* Hide TOC headings - using attribute selector for better browser compatibility */
+  .prose h2[data-toc-heading] {
     display: none !important;
   }
 
@@ -145,6 +145,9 @@ const { pageTitle, ogimage, description } = Astro.props;
         console.log('TOC: Heading does not match expected patterns');
         return;
       }
+      
+      // Mark TOC heading for CSS hiding
+      tocHeading.setAttribute('data-toc-heading', 'true');
       
       const mobileTocContent = document.getElementById('mobile-toc-content');
       const desktopTocContent = document.getElementById('desktop-toc-content');
