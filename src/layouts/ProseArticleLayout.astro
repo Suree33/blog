@@ -12,6 +12,11 @@ const { pageTitle, ogimage, description } = Astro.props;
     margin-bottom: 2rem;
   }
 
+  /* Hide TOC headings */
+  .prose h2:has(+ ul) {
+    display: none !important;
+  }
+
   .prose h2 + ul li {
     margin-bottom: 0.5rem;
   }
@@ -130,20 +135,29 @@ const { pageTitle, ogimage, description } = Astro.props;
       const tocHeading = document.querySelector('h2');
       const tocList = document.querySelector('h2 + ul');
       
-      if (!tocHeading || !tocList || !tocHeading.textContent.includes('Contents')) {
+      if (!tocHeading || !tocList) {
+        console.log('TOC: No heading or list found');
+        return;
+      }
+      
+      const headingText = tocHeading.textContent.toLowerCase();
+      if (!headingText.includes('contents') && !headingText.includes('目次')) {
+        console.log('TOC: Heading does not match expected patterns');
         return;
       }
       
       const mobileTocContent = document.getElementById('mobile-toc-content');
       const desktopTocContent = document.getElementById('desktop-toc-content');
       
-      if (mobileTocContent && desktopTocContent) {
-        mobileTocContent.innerHTML = tocList.outerHTML;
-        desktopTocContent.innerHTML = tocList.outerHTML;
-        
-        tocHeading.style.display = 'none';
-        tocList.style.display = 'none';
+      if (!mobileTocContent || !desktopTocContent) {
+        console.log('TOC: Containers not found');
+        return;
       }
+      
+      mobileTocContent.innerHTML = tocList.outerHTML;
+      desktopTocContent.innerHTML = tocList.outerHTML;
+      
+      console.log('TOC: Successfully populated containers');
       
       const tocLinks = document.querySelectorAll('#mobile-toc-content a, #desktop-toc-content a');
       const headings = document.querySelectorAll('h2, h3');
@@ -153,7 +167,10 @@ const { pageTitle, ogimage, description } = Astro.props;
         const scrollTop = window.scrollY + 100;
         
         headings.forEach(heading => {
-          if (heading.offsetTop <= scrollTop && !heading.textContent.includes('Contents')) {
+          const headingText = heading.textContent.toLowerCase();
+          if (heading.offsetTop <= scrollTop && 
+              !headingText.includes('contents') && 
+              !headingText.includes('目次')) {
             activeHeading = heading;
           }
         });
@@ -175,6 +192,8 @@ const { pageTitle, ogimage, description } = Astro.props;
     } else {
       initTableOfContents();
     }
+    
+    setTimeout(initTableOfContents, 100);
   })();
 </script>
 

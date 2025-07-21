@@ -10,7 +10,7 @@ description: Astroで、remarkプラグインであるremark-link-cardを使い�
 ogimage: '/ogimage/remark-link-card-with-astro.og.png'
 ---
 
-## Contents
+## 目次
 
 ## remark-link-card
 

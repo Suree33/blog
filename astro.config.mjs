@@ -29,6 +29,7 @@ export default defineConfig({
         {
           maxDepth: 3,
           tight: true,
+          heading: 'contents|目次',
         },
       ],
     ],
