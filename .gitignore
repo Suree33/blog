@@ -112,3 +112,4 @@ pnpm-debug.log*
 .DS_Store
 
 public/remark-link-card/
+.wrangler/
