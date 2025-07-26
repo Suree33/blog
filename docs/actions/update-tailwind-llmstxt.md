@@ -50,11 +50,11 @@ on:
 - **使用例**: 緊急でドキュメント更新が必要な場合
 
 ### `max_urls` (string)
-- **デフォルト**: `"50"`
+- **デフォルト**: `"10"`
 - **説明**: create-llmstxt-pyが処理するURL数の上限
 - **推奨値**: 
-  - 通常: 50-100
-  - 詳細: 100-200（処理時間が長くなる）
+  - 通常: 10-50
+  - 詳細: 50-100（処理時間が長くなる）
 
 ## 実行フロー
 
@@ -72,10 +72,11 @@ flowchart TD
     F --> H[Python環境セットアップ]
     H --> I[create-llmstxt-py インストール]
     I --> J[llms.txt生成]
-    J --> K[ファイル確認]
-    K --> L{ファイル生成成功?}
-    L -->|Yes| M[PR作成]
-    L -->|No| N[エラー終了]
+    J --> K[ファイル名正規化]
+    K --> L[ファイル確認]
+    L --> M{ファイル生成成功?}
+    M -->|Yes| N[PR作成]
+    M -->|No| O[エラー終了]
 ```
 
 ## 依存関係
@@ -95,12 +96,14 @@ flowchart TD
 
 ## 生成されるファイル
 
-### `llms.txt`
+**保存先**: `docs/llmstxt/` ディレクトリ
+
+### `tailwindcss-llms.txt`
 - 基本的なllms.txt形式
 - 主要なTailwind CSS情報を含む
 - LLMが理解しやすい形式
 
-### `llms-full.txt`
+### `tailwindcss-llms-full.txt`
 - 詳細版のllms.txt
 - より包括的なドキュメント内容
 - 開発者向けの詳細情報を含む
@@ -122,6 +125,17 @@ fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
 - ファイル生成成功/失敗の自動確認
 - APIキー不正・レート制限の検出
 
+### ファイル名の正規化
+create-llmstxt-pyが生成するファイルを統一的な命名規則に変換：
+
+```bash
+# 生成されるファイル名（ドメインベース）
+tailwindcss.com-llms.txt → tailwindcss-llms.txt
+tailwindcss.com-llms-full.txt → tailwindcss-llms-full.txt
+```
+
+この処理により、プロジェクト内で一貫したファイル命名が維持されます。
+
 ### 包括的なログ出力
 ```bash
 # バージョン情報の詳細表示
@@ -129,7 +143,7 @@ echo "Old version parts: $OLD_MAJOR.$OLD_MINOR.$OLD_PATCH"
 echo "New version parts: $NEW_MAJOR.$NEW_MINOR.$NEW_PATCH"
 
 # ファイル生成結果の詳細
-echo "📄 llms.txt ($(wc -l < docs/llmstxt/tailwind/llms.txt) lines, $(wc -c < docs/llmstxt/tailwind/llms.txt) bytes)"
+echo "📄 tailwindcss-llms.txt ($(wc -l < docs/llmstxt/tailwindcss-llms.txt) lines, $(wc -c < docs/llmstxt/tailwindcss-llms.txt) bytes)"
 ```
 
 ### 詳細なPR情報
@@ -146,7 +160,7 @@ echo "📄 llms.txt ($(wc -l < docs/llmstxt/tailwind/llms.txt) lines, $(wc -c < 
 ### URL数の調整
 ```yaml
 # ワークフロー内で変更
---max-urls 50  # この数値を調整
+--max-urls 10  # この数値を調整
 ```
 
 ### 対象URLの変更
@@ -272,4 +286,4 @@ with:
 
 **最終更新**: 2025-07-26  
 **作成者**: Claude Code  
-**バージョン**: 1.1.0
+**バージョン**: 1.2.0

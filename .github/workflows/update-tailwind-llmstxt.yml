@@ -174,8 +174,8 @@ jobs:
         if: steps.check-version-type.outputs.should_update == 'true'
         run: |
           echo "Creating output directory..."
-          mkdir -p docs/llmstxt/tailwind
-          echo "Output directory created: docs/llmstxt/tailwind"
+          mkdir -p docs/llmstxt
+          echo "Output directory created: docs/llmstxt"
 
       - name: Generate llms.txt for Tailwind CSS
         if: steps.check-version-type.outputs.should_update == 'true'
@@ -191,13 +191,30 @@ jobs:
           cd create-llmstxt-py
           python generate-llmstxt.py https://tailwindcss.com \
             --max-urls "$MAX_URLS" \
-            --output-dir ../docs/llmstxt/tailwind \
+            --output-dir ../docs/llmstxt \
             --verbose
             
           echo "Generation completed"
         env:
           FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Rename generated files
+        if: steps.check-version-type.outputs.should_update == 'true'
+        run: |
+          echo "Renaming generated files to desired format..."
+          
+          # Rename llms.txt if it exists
+          if [ -f "docs/llmstxt/tailwindcss.com-llms.txt" ]; then
+            mv "docs/llmstxt/tailwindcss.com-llms.txt" "docs/llmstxt/tailwindcss-llms.txt"
+            echo "✅ Renamed tailwindcss.com-llms.txt to tailwindcss-llms.txt"
+          fi
+          
+          # Rename llms-full.txt if it exists
+          if [ -f "docs/llmstxt/tailwindcss.com-llms-full.txt" ]; then
+            mv "docs/llmstxt/tailwindcss.com-llms-full.txt" "docs/llmstxt/tailwindcss-llms-full.txt"
+            echo "✅ Renamed tailwindcss.com-llms-full.txt to tailwindcss-llms-full.txt"
+          fi
 
       - name: Check if llms.txt files were generated
         if: steps.check-version-type.outputs.should_update == 'true'
@@ -207,16 +224,16 @@ jobs:
           echo "Current directory contents:"
           ls -la
 
-          if [ -f "docs/llmstxt/tailwind/llms.txt" ] || [ -f "docs/llmstxt/tailwind/llms-full.txt" ]; then
+          if [ -f "docs/llmstxt/tailwindcss-llms.txt" ] || [ -f "docs/llmstxt/tailwindcss-llms-full.txt" ]; then
             echo "✅ llms.txt files were generated successfully"
             echo "files_generated=true" >> $GITHUB_OUTPUT
             
             echo "Generated files details:"
-            if [ -f "docs/llmstxt/tailwind/llms.txt" ]; then
-              echo "📄 llms.txt ($(wc -l < docs/llmstxt/tailwind/llms.txt) lines, $(wc -c < docs/llmstxt/tailwind/llms.txt) bytes)"
+            if [ -f "docs/llmstxt/tailwindcss-llms.txt" ]; then
+              echo "📄 tailwindcss-llms.txt ($(wc -l < docs/llmstxt/tailwindcss-llms.txt) lines, $(wc -c < docs/llmstxt/tailwindcss-llms.txt) bytes)"
             fi
-            if [ -f "docs/llmstxt/tailwind/llms-full.txt" ]; then
-              echo "📄 llms-full.txt ($(wc -l < docs/llmstxt/tailwind/llms-full.txt) lines, $(wc -c < docs/llmstxt/tailwind/llms-full.txt) bytes)"
+            if [ -f "docs/llmstxt/tailwindcss-llms-full.txt" ]; then
+              echo "📄 tailwindcss-llms-full.txt ($(wc -l < docs/llmstxt/tailwindcss-llms-full.txt) lines, $(wc -c < docs/llmstxt/tailwindcss-llms-full.txt) bytes)"
             fi
           else
             echo "❌ No llms.txt files were generated"
@@ -224,8 +241,8 @@ jobs:
             
             echo "Debugging information:"
             echo "Working directory: $(pwd)"
-            echo "All files in docs/llmstxt/tailwind directory:"
-            find docs/llmstxt/tailwind -name "*.txt" -type f 2>/dev/null || echo "No .txt files found in docs/llmstxt/tailwind"
+            echo "All files in docs/llmstxt directory:"
+            find docs/llmstxt -name "*.txt" -type f 2>/dev/null || echo "No .txt files found in docs/llmstxt"
           fi
 
       - name: Create Pull Request with updated llms.txt
