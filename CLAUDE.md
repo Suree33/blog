@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-Astro + TypeScript + TailwindCSSで構築されたDaiki Satoの個人ブログ (sur33.com)。pnpmをパッケージマネージャーとして使用し、Cloudflare Pagesでホスティング。
+Astro + TypeScript + TailwindCSSで構築されたDaiki Satoの個人ブログ (sur33.com)。pnpmをパッケージマネージャーとして使用し、Cloudflare Workersでホスティング。
 
 ## 開発コマンド
 
@@ -12,6 +12,9 @@ Astro + TypeScript + TailwindCSSで構築されたDaiki Satoの個人ブログ (
 - `pnpm run dev:host` - ホストマシンからアクセス可能な開発サーバー起動  
 - `pnpm run build` - 本番ビルド
 - `pnpm run preview` - ビルド結果のプレビュー
+- `pnpm run preview:workers` - Workersローカルプレビュー
+- `pnpm run deploy` - Cloudflare Workersにデプロイ
+- `pnpm run deploy:dry-run` - デプロイの検証（実際のデプロイは行わない）
 - `pnpm run format` - Prettierでコード整形
 - `pnpm run lint` - ESLintでコード検証
 
@@ -38,6 +41,7 @@ Astro + TypeScript + TailwindCSSで構築されたDaiki Satoの個人ブログ (
 
 ### 設定ファイル
 - `astro.config.mjs` - Astro設定、remarkプラグイン、integrations
+- `wrangler.toml` - Cloudflare Workers設定、assetsディレクトリ指定
 - `eslint.config.js` - strict TypeScript + Astro + jsx-a11y ルール  
 - `tsconfig.json` - TypeScript設定
 - `.prettierrc.json` - コード整形設定
