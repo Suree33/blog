@@ -1,0 +1,6 @@
+.astro/
+.claude/
+.cursor/
+.dist/
+node_modules/
+src/pages/posts/.obsidian/
