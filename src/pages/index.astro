@@ -11,7 +11,11 @@ interface Frontmatter {
 }
 
 const posts = await Promise.all(
-  Object.values(import.meta.glob<MarkdownInstance<Frontmatter>>('./posts/*.{md,mdx}', { eager: true }))
+  Object.values(
+    import.meta.glob<MarkdownInstance<Frontmatter>>('./posts/*.{md,mdx}', {
+      eager: true,
+    }),
+  ),
 );
 const pageTitle = 'Blog';
 ---

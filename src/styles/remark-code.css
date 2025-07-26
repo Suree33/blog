@@ -4,8 +4,9 @@
     margin-top: 1.7142857em;
   }
   .remark-code-title {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      'Liberation Mono', 'Courier New', monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+      'Courier New', monospace;
     font-size: 0.875rem;
     background-color: #f0f0f0;
     color: #000;

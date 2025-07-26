@@ -4,7 +4,7 @@ import sanitizeHtml from 'sanitize-html';
 
 export async function GET() {
   const posts = await Promise.all(
-    Object.values(import.meta.glob('./**/*.md', { eager: true }))
+    Object.values(import.meta.glob('./**/*.md', { eager: true })),
   );
 
   return rss({
@@ -13,7 +13,7 @@ export async function GET() {
     site: config.url,
     stylesheet: '/rss/styles.xsl',
     items: posts
-      .filter(post => post.frontmatter.title && post.frontmatter.pubDate)
+      .filter((post) => post.frontmatter.title && post.frontmatter.pubDate)
       .map((post) => ({
         title: post.frontmatter.title,
         description: post.frontmatter.description || '',
