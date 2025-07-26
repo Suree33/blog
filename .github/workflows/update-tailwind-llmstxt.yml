@@ -1,0 +1,257 @@
+name: Update Tailwind CSS llms.txt
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - 'package.json'
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even for patch versions'
+        required: false
+        default: false
+        type: boolean
+      max_urls:
+        description: 'Maximum number of URLs to process'
+        required: false
+        default: '50'
+        type: string
+
+jobs:
+  update-llmstxt:
+    # Run if: Dependabot PR merged OR manual trigger
+    if: |
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.actor == 'dependabot[bot]') ||
+      (github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Only fetch commit history for Dependabot PRs, manual runs use current state only
+          fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Check if Tailwind CSS was updated
+        id: check-tailwind
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "🔧 Manual execution - skipping version comparison"
+            
+            # For manual runs, just get current version
+            CURRENT_VERSION=$(cat package.json | grep '"tailwindcss"' | sed -E 's/.*"tailwindcss": "([^"]+)".*/\1/' | tr -d '^~' || echo "")
+            
+            if [ -z "$CURRENT_VERSION" ]; then
+              echo "❌ Failed to extract current Tailwind CSS version"
+              echo "updated=false" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            
+            echo "Current Tailwind CSS version: $CURRENT_VERSION"
+            echo "old_version=manual" >> $GITHUB_OUTPUT
+            echo "new_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+            echo "updated=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "🤖 Dependabot execution - comparing versions"
+          
+          # Get the previous and current package.json files
+          if ! git show HEAD~1:package.json > package-old.json; then
+            echo "❌ Failed to get previous package.json"
+            echo "updated=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Extract tailwindcss versions with better error handling
+          OLD_VERSION=$(cat package-old.json | grep '"tailwindcss"' | sed -E 's/.*"tailwindcss": "([^"]+)".*/\1/' | tr -d '^~' || echo "")
+          NEW_VERSION=$(cat package.json | grep '"tailwindcss"' | sed -E 's/.*"tailwindcss": "([^"]+)".*/\1/' | tr -d '^~' || echo "")
+          
+          echo "Old version: $OLD_VERSION"
+          echo "New version: $NEW_VERSION"
+          
+          # Check if versions were extracted successfully
+          if [ -z "$OLD_VERSION" ] || [ -z "$NEW_VERSION" ]; then
+            echo "❌ Failed to extract Tailwind CSS versions"
+            echo "updated=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Check if tailwindcss was actually updated
+          if [ "$OLD_VERSION" = "$NEW_VERSION" ]; then
+            echo "No Tailwind CSS version change detected"
+            echo "updated=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "✅ Tailwind CSS version change detected: $OLD_VERSION → $NEW_VERSION"
+          echo "old_version=$OLD_VERSION" >> $GITHUB_OUTPUT
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "updated=true" >> $GITHUB_OUTPUT
+
+      - name: Check version update type
+        if: steps.check-tailwind.outputs.updated == 'true'
+        id: check-version-type
+        run: |
+          OLD_VERSION="${{ steps.check-tailwind.outputs.old_version }}"
+          NEW_VERSION="${{ steps.check-tailwind.outputs.new_version }}"
+          
+          # Manual execution handling
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "🔧 Manual execution - checking force_update parameter"
+            echo "Current Tailwind CSS version: $NEW_VERSION"
+            
+            FORCE_UPDATE="${{ github.event.inputs.force_update }}"
+            
+            if [ "$FORCE_UPDATE" = "true" ]; then
+              echo "✅ Force update enabled - proceeding with llms.txt generation"
+              echo "should_update=true" >> $GITHUB_OUTPUT
+              echo "update_type=manual-forced" >> $GITHUB_OUTPUT
+            else
+              echo "✅ Manual execution - proceeding with llms.txt generation"
+              echo "should_update=true" >> $GITHUB_OUTPUT
+              echo "update_type=manual" >> $GITHUB_OUTPUT
+            fi
+            exit 0
+          fi
+          
+          # Dependabot execution - analyze version change
+          echo "🤖 Dependabot execution - analyzing version change: $OLD_VERSION -> $NEW_VERSION"
+
+          # Extract major, minor, patch versions with validation
+          OLD_MAJOR=$(echo $OLD_VERSION | cut -d. -f1 | grep -E '^[0-9]+$' || echo "0")
+          OLD_MINOR=$(echo $OLD_VERSION | cut -d. -f2 | grep -E '^[0-9]+$' || echo "0")
+          OLD_PATCH=$(echo $OLD_VERSION | cut -d. -f3 | grep -E '^[0-9]+$' || echo "0")
+
+          NEW_MAJOR=$(echo $NEW_VERSION | cut -d. -f1 | grep -E '^[0-9]+$' || echo "0")
+          NEW_MINOR=$(echo $NEW_VERSION | cut -d. -f2 | grep -E '^[0-9]+$' || echo "0")
+          NEW_PATCH=$(echo $NEW_VERSION | cut -d. -f3 | grep -E '^[0-9]+$' || echo "0")
+
+          echo "Old version parts: $OLD_MAJOR.$OLD_MINOR.$OLD_PATCH"
+          echo "New version parts: $NEW_MAJOR.$NEW_MINOR.$NEW_PATCH"
+
+          # Check if it's a major or minor update (not patch)
+          if [ "$NEW_MAJOR" -gt "$OLD_MAJOR" ]; then
+            echo "✅ Version update type: MAJOR ($OLD_MAJOR -> $NEW_MAJOR)"
+            echo "should_update=true" >> $GITHUB_OUTPUT
+            echo "update_type=major" >> $GITHUB_OUTPUT
+          elif [ "$NEW_MAJOR" -eq "$OLD_MAJOR" ] && [ "$NEW_MINOR" -gt "$OLD_MINOR" ]; then
+            echo "✅ Version update type: MINOR ($OLD_MINOR -> $NEW_MINOR)"
+            echo "should_update=true" >> $GITHUB_OUTPUT
+            echo "update_type=minor" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Version update type: PATCH or invalid (skipping llms.txt update)"
+            echo "should_update=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Python
+        if: steps.check-version-type.outputs.should_update == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install create-llmstxt-py
+        if: steps.check-version-type.outputs.should_update == 'true'
+        run: |
+          echo "Installing create-llmstxt-py dependencies..."
+          pip install requests python-dotenv openai
+
+          echo "Cloning create-llmstxt-py repository..."
+          git clone https://github.com/mendableai/create-llmstxt-py.git
+          cd create-llmstxt-py
+
+          echo "Installing project requirements..."
+          pip install -r requirements.txt
+
+          echo "Installation completed successfully"
+
+      - name: Generate llms.txt for Tailwind CSS
+        if: steps.check-version-type.outputs.should_update == 'true'
+        run: |
+          # Set max URLs based on input or default
+          MAX_URLS="${{ github.event.inputs.max_urls || '50' }}"
+          
+          echo "Starting llms.txt generation for Tailwind CSS..."
+          echo "Target URL: https://tailwindcss.com"
+          echo "Max URLs: $MAX_URLS"
+          echo "Execution type: ${{ steps.check-version-type.outputs.update_type }}"
+
+          cd create-llmstxt-py
+          python generate-llmstxt.py https://tailwindcss.com \
+            --max-urls "$MAX_URLS" \
+            --output-dir ../ \
+            --verbose
+            
+          echo "Generation completed"
+        env:
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Check if llms.txt files were generated
+        if: steps.check-version-type.outputs.should_update == 'true'
+        id: check-files
+        run: |
+          echo "Checking for generated llms.txt files..."
+          echo "Current directory contents:"
+          ls -la
+
+          if [ -f "llms.txt" ] || [ -f "llms-full.txt" ]; then
+            echo "✅ llms.txt files were generated successfully"
+            echo "files_generated=true" >> $GITHUB_OUTPUT
+            
+            echo "Generated files details:"
+            if [ -f "llms.txt" ]; then
+              echo "📄 llms.txt ($(wc -l < llms.txt) lines, $(wc -c < llms.txt) bytes)"
+            fi
+            if [ -f "llms-full.txt" ]; then
+              echo "📄 llms-full.txt ($(wc -l < llms-full.txt) lines, $(wc -c < llms-full.txt) bytes)"
+            fi
+          else
+            echo "❌ No llms.txt files were generated"
+            echo "files_generated=false" >> $GITHUB_OUTPUT
+            
+            echo "Debugging information:"
+            echo "Working directory: $(pwd)"
+            echo "All files in current directory:"
+            find . -name "*.txt" -type f || echo "No .txt files found"
+          fi
+
+      - name: Create Pull Request with updated llms.txt
+        if: steps.check-files.outputs.files_generated == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'docs: update Tailwind CSS llms.txt for version ${{ steps.check-tailwind.outputs.new_version }}'
+          title: 'Update Tailwind CSS llms.txt for version ${{ steps.check-tailwind.outputs.new_version }}'
+          body: |
+            This PR updates the Tailwind CSS llms.txt files.
+            
+            **Update Type:** ${{ steps.check-version-type.outputs.update_type }}
+            **Version:** ${{ steps.check-tailwind.outputs.new_version }}
+            ${{ github.event_name == 'workflow_dispatch' && '**Trigger:** Manual execution' || format('**Version Change:** `{0}` → `{1}`', steps.check-tailwind.outputs.old_version, steps.check-tailwind.outputs.new_version) }}
+
+            ## Changes
+            - Updated `llms.txt` with latest Tailwind CSS documentation
+            - Updated `llms-full.txt` with comprehensive content
+
+            ## Generated by
+            ${{ github.event_name == 'workflow_dispatch' && '- Triggered by manual workflow execution' || format('- Triggered by Dependabot PR merge: #{0}', github.event.pull_request.number) }}
+            - Generated using [create-llmstxt-py](https://github.com/mendableai/create-llmstxt-py)
+            - Source: https://tailwindcss.com
+            - Max URLs processed: ${{ github.event.inputs.max_urls || '50' }}
+            
+            ## Automation Details
+            - Workflow: `${{ github.workflow }}`
+            - Run ID: `${{ github.run_id }}`
+            - Event: `${{ github.event_name }}`
+            ${{ github.event.inputs.force_update == 'true' && '- **Force update enabled** (includes patch versions)' || '' }}
+            
+            This is an automated update of Tailwind CSS documentation for LLM consumption.
+          branch: 'update-tailwind-llmstxt-v${{ steps.check-tailwind.outputs.new_version }}'
+          delete-branch: true
