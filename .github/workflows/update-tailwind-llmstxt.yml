@@ -15,7 +15,7 @@ on:
       max_urls:
         description: 'Maximum number of URLs to process'
         required: false
-        default: '50'
+        default: '10'
         type: string
 
 jobs:
@@ -25,7 +25,6 @@ jobs:
       (github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.actor == 'dependabot[bot]') ||
       (github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -59,37 +58,37 @@ jobs:
             echo "updated=true" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
+
           echo "🤖 Dependabot execution - comparing versions"
-          
+
           # Get the previous and current package.json files
           if ! git show HEAD~1:package.json > package-old.json; then
             echo "❌ Failed to get previous package.json"
             echo "updated=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
+
           # Extract tailwindcss versions with better error handling
           OLD_VERSION=$(cat package-old.json | grep '"tailwindcss"' | sed -E 's/.*"tailwindcss": "([^"]+)".*/\1/' | tr -d '^~' || echo "")
           NEW_VERSION=$(cat package.json | grep '"tailwindcss"' | sed -E 's/.*"tailwindcss": "([^"]+)".*/\1/' | tr -d '^~' || echo "")
-          
+
           echo "Old version: $OLD_VERSION"
           echo "New version: $NEW_VERSION"
-          
+
           # Check if versions were extracted successfully
           if [ -z "$OLD_VERSION" ] || [ -z "$NEW_VERSION" ]; then
             echo "❌ Failed to extract Tailwind CSS versions"
             echo "updated=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
+
           # Check if tailwindcss was actually updated
           if [ "$OLD_VERSION" = "$NEW_VERSION" ]; then
             echo "No Tailwind CSS version change detected"
             echo "updated=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
+
           echo "✅ Tailwind CSS version change detected: $OLD_VERSION → $NEW_VERSION"
           echo "old_version=$OLD_VERSION" >> $GITHUB_OUTPUT
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
@@ -101,7 +100,7 @@ jobs:
         run: |
           OLD_VERSION="${{ steps.check-tailwind.outputs.old_version }}"
           NEW_VERSION="${{ steps.check-tailwind.outputs.new_version }}"
-          
+
           # Manual execution handling
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "🔧 Manual execution - checking force_update parameter"
@@ -120,7 +119,7 @@ jobs:
             fi
             exit 0
           fi
-          
+
           # Dependabot execution - analyze version change
           echo "🤖 Dependabot execution - analyzing version change: $OLD_VERSION -> $NEW_VERSION"
 
@@ -183,7 +182,7 @@ jobs:
         run: |
           # Set max URLs based on input or default
           MAX_URLS="${{ github.event.inputs.max_urls || '50' }}"
-          
+
           echo "Starting llms.txt generation for Tailwind CSS..."
           echo "Target URL: https://tailwindcss.com"
           echo "Max URLs: $MAX_URLS"
@@ -238,7 +237,7 @@ jobs:
           title: 'Update Tailwind CSS llms.txt for version ${{ steps.check-tailwind.outputs.new_version }}'
           body: |
             This PR updates the Tailwind CSS llms.txt files.
-            
+
             **Update Type:** ${{ steps.check-version-type.outputs.update_type }}
             **Version:** ${{ steps.check-tailwind.outputs.new_version }}
             ${{ github.event_name == 'workflow_dispatch' && '**Trigger:** Manual execution' || format('**Version Change:** `{0}` → `{1}`', steps.check-tailwind.outputs.old_version, steps.check-tailwind.outputs.new_version) }}
@@ -252,13 +251,13 @@ jobs:
             - Generated using [create-llmstxt-py](https://github.com/mendableai/create-llmstxt-py)
             - Source: https://tailwindcss.com
             - Max URLs processed: ${{ github.event.inputs.max_urls || '50' }}
-            
+
             ## Automation Details
             - Workflow: `${{ github.workflow }}`
             - Run ID: `${{ github.run_id }}`
             - Event: `${{ github.event_name }}`
             ${{ github.event.inputs.force_update == 'true' && '- **Force update enabled** (includes patch versions)' || '' }}
-            
+
             This is an automated update of Tailwind CSS documentation for LLM consumption.
           branch: 'update-tailwind-llmstxt-v${{ steps.check-tailwind.outputs.new_version }}'
           delete-branch: true
