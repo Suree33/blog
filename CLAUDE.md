@@ -28,6 +28,7 @@ Astro + TypeScript + TailwindCSSで構築されたDaiki Satoの個人ブログ (
 - `src/scripts/` - クライアントサイドJavaScript
 - `src/styles/` - グローバルCSS、カスタムスタイル
 - `src/config.json` - サイト設定 (siteName, author等)
+- `docs/` - 実装ドキュメント (機能説明、カスタムコマンド等)
 
 ### ブログ記事
 - Markdownファイルに frontmatter でメタデータを記述
@@ -45,5 +46,14 @@ Astro + TypeScript + TailwindCSSで構築されたDaiki Satoの個人ブログ (
 - `eslint.config.js` - strict TypeScript + Astro + jsx-a11y ルール  
 - `tsconfig.json` - TypeScript設定
 - `.prettierrc.json` - コード整形設定
+
+## 実装ガイドライン
+
+### ドキュメント管理
+- 新機能、新コンポーネント、カスタムコマンド等を実装した際は、`docs/` ディレクトリに適切なドキュメントを追加・更新する
+- ドキュメントはMarkdown形式で作成し、実装の目的、使用方法、設定方法等を記載
+- 既存機能の大幅な変更時も関連ドキュメントを更新する
+
+## 注意事項
 
 コード変更後は `pnpm run lint` でESLint検証を実行してください。
