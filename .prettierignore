@@ -1,6 +1,12 @@
 .astro/
-.claude/
-.cursor/
 .dist/
 node_modules/
+pnpm-lock.yaml
+.claude/
+.mcp.json
+.cursor/
 src/pages/posts/.obsidian/
+
+# do not format any md/mdx files
+*.md
+*.mdx
