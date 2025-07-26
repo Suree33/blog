@@ -171,6 +171,13 @@ jobs:
 
           echo "Installation completed successfully"
 
+      - name: Create output directory
+        if: steps.check-version-type.outputs.should_update == 'true'
+        run: |
+          echo "Creating output directory..."
+          mkdir -p docs/llmstxt/tailwind
+          echo "Output directory created: docs/llmstxt/tailwind"
+
       - name: Generate llms.txt for Tailwind CSS
         if: steps.check-version-type.outputs.should_update == 'true'
         run: |
@@ -185,7 +192,7 @@ jobs:
           cd create-llmstxt-py
           python generate-llmstxt.py https://tailwindcss.com \
             --max-urls "$MAX_URLS" \
-            --output-dir ../ \
+            --output-dir ../docs/llmstxt/tailwind \
             --verbose
             
           echo "Generation completed"
@@ -201,16 +208,16 @@ jobs:
           echo "Current directory contents:"
           ls -la
 
-          if [ -f "llms.txt" ] || [ -f "llms-full.txt" ]; then
+          if [ -f "docs/llmstxt/tailwind/llms.txt" ] || [ -f "docs/llmstxt/tailwind/llms-full.txt" ]; then
             echo "✅ llms.txt files were generated successfully"
             echo "files_generated=true" >> $GITHUB_OUTPUT
             
             echo "Generated files details:"
-            if [ -f "llms.txt" ]; then
-              echo "📄 llms.txt ($(wc -l < llms.txt) lines, $(wc -c < llms.txt) bytes)"
+            if [ -f "docs/llmstxt/tailwind/llms.txt" ]; then
+              echo "📄 llms.txt ($(wc -l < docs/llmstxt/tailwind/llms.txt) lines, $(wc -c < docs/llmstxt/tailwind/llms.txt) bytes)"
             fi
-            if [ -f "llms-full.txt" ]; then
-              echo "📄 llms-full.txt ($(wc -l < llms-full.txt) lines, $(wc -c < llms-full.txt) bytes)"
+            if [ -f "docs/llmstxt/tailwind/llms-full.txt" ]; then
+              echo "📄 llms-full.txt ($(wc -l < docs/llmstxt/tailwind/llms-full.txt) lines, $(wc -c < docs/llmstxt/tailwind/llms-full.txt) bytes)"
             fi
           else
             echo "❌ No llms.txt files were generated"
@@ -218,8 +225,8 @@ jobs:
             
             echo "Debugging information:"
             echo "Working directory: $(pwd)"
-            echo "All files in current directory:"
-            find . -name "*.txt" -type f || echo "No .txt files found"
+            echo "All files in docs/llmstxt/tailwind directory:"
+            find docs/llmstxt/tailwind -name "*.txt" -type f 2>/dev/null || echo "No .txt files found in docs/llmstxt/tailwind"
           fi
 
       - name: Create Pull Request with updated llms.txt

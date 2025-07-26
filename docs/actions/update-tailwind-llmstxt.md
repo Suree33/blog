@@ -105,6 +105,42 @@ flowchart TD
 - より包括的なドキュメント内容
 - 開発者向けの詳細情報を含む
 
+## 技術的特徴
+
+### 最適化されたGit操作
+ワークフローは実行タイプに応じて異なるgit fetch戦略を使用：
+
+```yaml
+# Dependabot PR: 2つのコミット履歴が必要（比較のため）
+# 手動実行: 1つのコミットのみ（現在の状態）
+fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
+```
+
+### 高度なエラーハンドリング
+- バージョン抽出の失敗を検出・報告
+- create-llmstxt-py実行エラーの詳細ログ
+- ファイル生成成功/失敗の自動確認
+- APIキー不正・レート制限の検出
+
+### 包括的なログ出力
+```bash
+# バージョン情報の詳細表示
+echo "Old version parts: $OLD_MAJOR.$OLD_MINOR.$OLD_PATCH"
+echo "New version parts: $NEW_MAJOR.$NEW_MINOR.$NEW_PATCH"
+
+# ファイル生成結果の詳細
+echo "📄 llms.txt ($(wc -l < docs/llmstxt/tailwind/llms.txt) lines, $(wc -c < docs/llmstxt/tailwind/llms.txt) bytes)"
+```
+
+### 詳細なPR情報
+自動作成されるPRには以下の情報が含まれます：
+
+- **更新タイプ**: major/minor/manual/manual-forced
+- **バージョン情報**: 変更前後のバージョン表示
+- **トリガー情報**: Dependabot PR番号または手動実行
+- **自動化詳細**: ワークフロー実行ID、イベントタイプ
+- **処理統計**: 処理されたURL数、使用ツール情報
+
 ## 設定カスタマイズ
 
 ### URL数の調整
@@ -234,6 +270,6 @@ with:
 
 ---
 
-**最終更新**: 2025-01-26  
+**最終更新**: 2025-07-26  
 **作成者**: Claude Code  
-**バージョン**: 1.0.0
+**バージョン**: 1.1.0
