@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "bunx --bun astro dev",
+      "command": "pnpm astro dev",
       "name": "Development server",
       "request": "launch",
       "type": "node-terminal"
