@@ -3,11 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "bunx --bun astro dev",
-    "dev:host": "bunx --bun astro dev --host",
-    "build": "bunx --bun astro build",
-    "preview": "bunx --bun astro preview",
-    "astro": "bunx --bun astro",
+    "dev": "astro dev",
+    "dev:host": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "format": "prettier --write .",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,astro}\" --ignore-pattern \"**/.obsidian/**\""
   },
