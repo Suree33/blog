@@ -1,0 +1,2749 @@
+# https://tailwindcss.com llms-full.txt
+
+<|firecrawl-page-1-lllmstxt|>
+## Tailwind CSS Framework
+[Home](https://tailwindcss.com/) v4.1
+
+`⌘K`  `Ctrl K` [Docs](https://tailwindcss.com/docs) [Blog](https://tailwindcss.com/blog) [Showcase](https://tailwindcss.com/showcase) [Sponsor](https://tailwindcss.com/sponsor) [Plus](https://tailwindcss.com/plus?ref=top) [GitHub repository](https://github.com/tailwindlabs/tailwindcss)
+
+text-4xl text-5xl text-6xl text-8xl text-gray-950 text-white tracking-tightertext-balance
+
+# Rapidly build modern websites without ever leaving your HTML.
+
+text-lg text-gray-950text-white font-medium
+
+A utility-first CSS framework packed with classes likeflex,pt-4,text-center androtate-90 that can be composed to build any design, directly in your markup.
+
+[Get started](https://tailwindcss.com/docs/installation)
+
+[Get started](https://tailwindcss.com/docs/installation) Quick search `⌘K`  `Ctrl K`
+
+```
+<div class="flex flex-col items-center rounded-2xl">  <div>    <img class="size-48 shadow-xl" alt="" src="/img/cover.png" />  </div>  <div class="flex">    <span>Class Warfare</span>    <span>The Anti-Patterns</span>    <span class="flex">      <span>No. 4</span>      <span>·</span>      <span>2025</span>    </span>  </div></div>
+```
+
+![](https://tailwindcss.com/_next/static/media/cover.de1997f7.png)
+
+Class WarfareThe Anti-PatternsNo. 4·2025
+
+text-4xl text-gray-950text-white tracking-tighter text-balance
+
+Sponsors
+
+## Supported by the best.
+
+text-base text-gray-950text-white
+
+Tailwind is supported by incredible partners and sponsors who make it possible for a team of talented designers and engineers to maintain the framework full-time.
+
+[Become a sponsor](https://tailwindcss.com/sponsors)
+
+text-4xl text-gray-950text-white tracking-tighter text-balance
+
+Why Tailwind CSS?
+
+## Built for the modern web.
+
+text-base text-gray-950text-white
+
+Tailwind is unapologetically modern, and takes advantage of all the latest and greatest CSS features to make the developer experience as enjoyable as possible.
+
+Responsive design
+
+Okay, it’s not exactly cutting edge, but just throw a screen size in front of literally any utility to apply it at a specific breakpoint.
+
+Mobile
+
+sm
+
+md
+
+lg
+
+xl
+
+![](https://tailwindcss.com/_next/static/media/responsive-1.fd2e9248.png)![](https://tailwindcss.com/_next/static/media/responsive-2.8cfea49d.png)![](https://tailwindcss.com/_next/static/media/responsive-3.e7467feb.png)
+
+Entire houseBeach House on Lake Huron
+
+Entire house
+
+Beach House on Lake Huron2.66(128 reviews)·Bayfield, ON
+
+Check availability
+
+This sunny and spacious room is for those traveling light and looking for a comfy and cozy place to lay their head for a night...Show more
+
+Show more
+
+Check availability
+
+![](https://tailwindcss.com/_next/static/media/responsive-1.fd2e9248.png)![](https://tailwindcss.com/_next/static/media/responsive-2.8cfea49d.png)![](https://tailwindcss.com/_next/static/media/responsive-3.e7467feb.png)
+
+![](https://tailwindcss.com/_next/static/media/responsive-4.8e943ba2.png)![](https://tailwindcss.com/_next/static/media/responsive-5.660185c2.png)
+
+Filters
+
+What’s a website these days without a few backdrop blurs? Keep stacking filters until your designer asks you to please, please stop.
+
+blur-sm
+
+brightness-150
+
+grayscale
+
+contrast-150
+
+saturate-200
+
+sepia
+
+![](https://tailwindcss.com/_next/static/media/filters.debd0951.png)
+
+Dark mode
+
+If you’re not a fan of burning your retinas, just stick `dark:` in front of any color to apply it in dark mode.
+
+![](https://tailwindcss.com/_next/static/media/dark-mode.light.288405b1.png)
+
+![](https://tailwindcss.com/_next/static/media/dark-mode.dark.7219ba2e.png)
+
+CSS variables
+
+Customizing your theme is as simple as creating a few CSS variables.
+
+```
+@theme {  --font-sans: "Inter", sans-serif;  --font-mono: "IBM Plex Mono", monospace;  --text-tiny: 0.625rem;  --text-tiny--line-height: 1.5rem;  --color-mint-100: oklch(0.97 0.15 145);  --color-mint-200: oklch(0.92 0.18 145);  --color-mint-300: oklch(0.85 0.22 145);  --color-mint-400: oklch(0.78 0.25 145);  --color-mint-500: oklch(0.7 0.28 145);  --color-mint-600: oklch(0.63 0.3 145);  --color-mint-700: oklch(0.56 0.32 145);  --color-mint-800: oklch(0.48 0.35 145);  --color-mint-900: oklch(0.4 0.37 145);  --color-mint-950: oklch(0.3 0.4 145);}
+```
+
+P3 colors
+
+The color palette now uses more vibrant wide gamut colors without you needing to understand what any of that even means.
+
+red
+
+orange
+
+amber
+
+yellow
+
+lime
+
+green
+
+emerald
+
+teal
+
+cyan
+
+sky
+
+blue
+
+indigo
+
+violet
+
+purple
+
+fuchsia
+
+pink
+
+rose
+
+950
+
+900
+
+800
+
+700
+
+600
+
+500
+
+400
+
+300
+
+200
+
+100
+
+50
+
+CSS grid layout
+
+Using grid utilities directly in your HTML makes it so much easier to reason about complex layouts.
+
+### Browse properties
+
+![](https://tailwindcss.com/_next/static/media/css-grid-1.d6b88d05.png)![](https://tailwindcss.com/_next/static/media/css-grid-1.mobile.d0afc6a2.png)
+
+Treehouses
+
+![](https://tailwindcss.com/_next/static/media/css-grid-2.d645692f.png)
+
+Mansions
+
+![](https://tailwindcss.com/_next/static/media/css-grid-3.45c4c3d5.png)
+
+Lakefront cottages
+
+![](https://tailwindcss.com/_next/static/media/css-grid-4.308d73d9.png)
+
+Designer homes
+
+Transitions and animations
+
+Transitions that work the way you'd expect — throw a few utilities on an element and you're in business.
+
+transition duration-750linear
+
+transition duration-750ease-out
+
+transition duration-750ease-in-out
+
+transition duration-750ease-in
+
+Cascade layers
+
+Tailwind uses CSS layers so you don’t have to worry about specificity issues.
+
+```
+@layer theme, base, components, utilities;@layer theme {  :root {    /* Your theme variables */  }}@layer base {  /* Preflight styles */}@layer components {  /* Your custom components */}@layer utilities {  /* Your utility classes */}
+```
+
+Logical properties
+
+Supporting multiple language text directions is no longer a nightmare.
+
+ltr
+
+rtl
+
+![](https://tailwindcss.com/_next/static/media/avatar-4.61762eae.png)
+
+Will WintonDirector of Operations
+
+![](https://tailwindcss.com/_next/static/media/avatar-5.80ec4bd6.png)
+
+Kristin YardlyMarketing Coordinator
+
+![](https://tailwindcss.com/_next/static/media/avatar-6.4477a8c2.png)
+
+Emanual CuccittiniStaff Engineer
+
+![](https://tailwindcss.com/_next/static/media/avatar-7.7aeec531.png)
+
+Kiara SmithVP of Engineering
+
+![](https://tailwindcss.com/_next/static/media/avatar-1.4512b883.png)
+
+سارة أحمدمديرة مشاريع
+
+![](https://tailwindcss.com/_next/static/media/avatar-2.74328963.png)
+
+علي محمدمطور برمجيات
+
+![](https://tailwindcss.com/_next/static/media/avatar-3.905e2d38.png)
+
+خالد عمرمصمم واجهات المستخدم
+
+Container queries
+
+Tag an element as a container to let children adapt to changes in its size.
+
+```
+<div class="@container">  <div class="grid grid-cols-1 @sm:grid-cols-2">    <img      src="/img/photo-1.jpg"      class="aspect-square @sm:aspect-3/2 object-cover"    />    <img      src="/img/photo-2.jpg"      class="aspect-square @sm:aspect-3/2 object-cover"    />    <img      src="/img/photo-3.jpg"      class="aspect-square @sm:aspect-3/2 object-cover"    />    <img      src="/img/photo-4.jpg"      class="aspect-square @sm:aspect-3/2 object-cover"    />  </div></div>
+```
+
+Gradients
+
+No need to remember that complicated gradient syntax — create silky-smooth gradients with just a few utility classes.
+
+Power Meets Precision
+
+### Redefining real-time performance
+
+Our next-generation rendering engine delivers unmatched speed and efficiency, empowering creators to push boundaries like never before.
+
+Render time performance
+
+6.4x
+
+Real-time frame rate
+
+4.2x
+
+Multi-platform build time
+
+2.7x
+
+3D transforms
+
+Sometimes two dimensions aren’t enough. Scale, rotate, and translate any element in 3D space to add a touch of depth.
+
+![](https://tailwindcss.com/_next/static/media/3d-transforms.ebde7a6a.jpeg)
+
+text-4xl text-gray-950text-white tracking-tighter text-balance
+
+How it works
+
+## Ship faster and smaller.
+
+text-base text-gray-950text-white
+
+Tailwind automatically removes all unused CSS when building for production, which means your final CSS bundle is the smallest it could possibly be. In fact, most Tailwind projects ship less than 10kB of CSS to the client.
+
+index.htmlapp.csspackage.json
+
+```
+<!DOCTYPE html><html lang="en">  <head>    <meta charset="UTF-8" />    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Tailwind CSS</title>    <link rel="stylesheet" href="/build.css" />  </head>  <body>    <button class=""></button>  </body></html>
+```
+
+Terminal
+
+```
+
+```
+
+build.css
+
+```
+@layer utilities {}
+```
+
+text-4xl text-gray-950text-white tracking-tighter
+
+Tailwind in the wild
+
+## Build whatever you want, without touching your CSS file.
+
+text-base text-gray-950text-white
+
+Because Tailwind is so low-level, it never encourages you to design the same site twice. Some of your favorite sites are built with Tailwind, and you probably had no idea.
+
+[openai.com\\
+![OpenAI](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopenai.7382a1a8.png&w=640&q=75)](https://openai.com/) [opalcamera.com\\
+![Opal](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopal.e71c9d52.png&w=640&q=75)](https://opalcamera.com/) [feastables.com\\
+![Feastables](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeastables.d874fae5.png&w=640&q=75)](https://feastables.com/)
+
+[gumroad.com\\
+![Gumroad](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgumroad.c0cce34f.png&w=640&q=75)](https://gumroad.com/) [skims.com\\
+![Skims](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fskims.f2c24417.png&w=640&q=75)](https://skims.com/) [reddit.com\\
+![Reddit](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Freddit.407699f3.png&w=640&q=75)](https://reddit.com/)
+
+[rivian.com\\
+![Rivian](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Frivian.63ceefe0.png&w=1080&q=75)](https://rivian.com/) [shopify.com\\
+![Shopify](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fshopify.f320205a.png&w=1080&q=75)](https://shopify.com/) [clerk.dev\\
+![Clerk](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fclerk.45113e95.png&w=1080&q=75)](https://clerk.dev/)
+
+[theverge.com\\
+![The Verge](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fverge.5758388b.png&w=640&q=75)](https://www.theverge.com/) [io.google\\
+![Google IO](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgoogleio.cd41475f.png&w=640&q=75)](https://io.google/) [ted.com\\
+![TED Talks](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fted.8ce01dbc.png&w=640&q=75)](https://ted.com/)
+
+[poolside.ai\\
+![Poolside](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpoolside.a98f917b.png&w=640&q=75)](https://poolside.ai/) [midjourney.com\\
+![Midjourney](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmidjourney.99f345b9.png&w=640&q=75)](https://midjourney.com/) [jpl.nasa.gov\\
+![NASA/JPL](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnasa.aa60f22d.png&w=640&q=75)](https://www.jpl.nasa.gov/)
+
+text-4xl text-gray-950text-white tracking-tighter text-balance
+
+Ready-made Components
+
+## Move even faster with Tailwind Plus.
+
+text-base text-gray-950text-white
+
+Tailwind Plus is a collection of beautiful, fully responsive UI components, designed and developed by us, the creators of Tailwind CSS. It's got hundreds of ready-to-use examples to choose from, and is guaranteed to help you find the perfect starting point for what you want to build.
+
+[Explore Tailwind Plus](https://tailwindcss.com/plus?ref=home)
+
+Templates
+
+Visually-stunning, easy to customize site templates built with React and Next.js.
+
+UI Blocks
+
+Over 500+ professionally designed, fully responsive, expertly crafted components.
+
+UI Kit
+
+A starter kit for building your own component systems with React and Tailwind CSS.
+
+![](https://tailwindcss.com/_next/static/media/templates-col-1.44d582cd.png)![](https://tailwindcss.com/_next/static/media/templates-col-2.9768ca29.png)![](https://tailwindcss.com/_next/static/media/templates-col-3.08018dac.png)
+
+Copyright © 2025 Tailwind Labs Inc.· [Trademark Policy](https://tailwindcss.com/brand)
+
+<|firecrawl-page-2-lllmstxt|>
+## Place Items in Tailwind
+[Home](https://tailwindcss.com/) v4.1
+
+`⌘K`  `Ctrl K` [Docs](https://tailwindcss.com/docs) [Blog](https://tailwindcss.com/blog) [Showcase](https://tailwindcss.com/showcase) [Sponsor](https://tailwindcss.com/sponsor) [Plus](https://tailwindcss.com/plus?ref=top) [GitHub repository](https://github.com/tailwindlabs/tailwindcss)
+
+1. Flexbox & Grid
+2. place-items
+
+Flexbox & Grid
+
+# place-items
+
+Utilities for controlling how items are justified and aligned at the same time.
+
+| Class | Styles |
+| --- | --- |
+| `place-items-start` | `place-items: start;` |
+| `place-items-end` | `place-items: end;` |
+| `place-items-end-safe` | `place-items: safe end;` |
+| `place-items-center` | `place-items: center;` |
+| `place-items-center-safe` | `place-items: safe center;` |
+| `place-items-baseline` | `place-items: baseline;` |
+| `place-items-stretch` | `place-items: stretch;` |
+
+## [Examples](https://tailwindcss.com/docs/place-items\#examples)
+
+### [Start](https://tailwindcss.com/docs/place-items\#start)
+
+Use `place-items-start` to place grid items on the start of their grid areas on both axes:
+
+01
+
+02
+
+03
+
+04
+
+05
+
+06
+
+```
+<div class="grid grid-cols-3 place-items-start gap-4 ...">  <div>01</div>  <div>02</div>  <div>03</div>  <div>04</div>  <div>05</div>  <div>06</div></div>
+```
+
+### [End](https://tailwindcss.com/docs/place-items\#end)
+
+Use `place-items-end` to place grid items on the end of their grid areas on both axes:
+
+01
+
+02
+
+03
+
+04
+
+05
+
+06
+
+```
+<div class="grid h-56 grid-cols-3 place-items-end gap-4 ...">  <div>01</div>  <div>02</div>  <div>03</div>  <div>04</div>  <div>05</div>  <div>06</div></div>
+```
+
+### [Center](https://tailwindcss.com/docs/place-items\#center)
+
+Use `place-items-center` to place grid items on the center of their grid areas on both axes:
+
+01
+
+02
+
+03
+
+04
+
+05
+
+06
+
+```
+<div class="grid h-56 grid-cols-3 place-items-center gap-4 ...">  <div>01</div>  <div>02</div>  <div>03</div>  <div>04</div>  <div>05</div>  <div>06</div></div>
+```
+
+### [Stretch](https://tailwindcss.com/docs/place-items\#stretch)
+
+Use `place-items-stretch` to stretch items along their grid areas on both axes:
+
+01
+
+02
+
+03
+
+04
+
+05
+
+06
+
+```
+<div class="grid h-56 grid-cols-3 place-items-stretch gap-4 ...">  <div>01</div>  <div>02</div>  <div>03</div>  <div>04</div>  <div>05</div>  <div>06</div></div>
+```
+
+## [Responsive design](https://tailwindcss.com/docs/place-items\#responsive-design)
+
+Prefix a `place-items` utilitywith a breakpoint variant like `md:` to only apply the utility at mediumscreen sizes and above:
+
+```
+<div class="grid place-items-start md:place-items-center ...">  <!-- ... --></div>
+```
+
+Learn more about using variants in the [variants documentation](https://tailwindcss.com/docs/hover-focus-and-other-states).
+
+### On this page
+
+- [Quick reference](https://tailwindcss.com/docs/place-items#quick-reference)
+- [Examples](https://tailwindcss.com/docs/place-items#examples)
+  - [Start](https://tailwindcss.com/docs/place-items#start)
+  - [End](https://tailwindcss.com/docs/place-items#end)
+  - [Center](https://tailwindcss.com/docs/place-items#center)
+  - [Stretch](https://tailwindcss.com/docs/place-items#stretch)
+- [Responsive design](https://tailwindcss.com/docs/place-items#responsive-design)
+
+Copyright © 2025 Tailwind Labs Inc.· [Trademark Policy](https://tailwindcss.com/brand)
+
+<|firecrawl-page-3-lllmstxt|>
+## Support Tailwind CSS
+[Home](https://tailwindcss.com/) v4.1
+
+`⌘K`  `Ctrl K` [Docs](https://tailwindcss.com/docs) [Blog](https://tailwindcss.com/blog) [Showcase](https://tailwindcss.com/showcase) [Sponsor](https://tailwindcss.com/sponsor) [Plus](https://tailwindcss.com/plus?ref=top) [GitHub repository](https://github.com/tailwindlabs/tailwindcss)
+
+Sponsor
+
+# Support the future of Tailwind CSS
+
+Help keep Tailwind CSS sustainable long term by supporting the project individually or as a company.
+
+[Support as an individual](https://tailwindcss.com/sponsor#insiders) [Support as a company](https://tailwindcss.com/sponsor#partners)
+
+![Adam Wathan](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fadam-teaching.93a1f0fc.jpg&w=2048&q=75)
+
+Tailwind CSS exists because a passionate community believes in building better software together. By becoming a Tailwind Insider or Partner you can directly support that mission — so we can keep shipping tools you love, with no strings attached.
+
+Adam Wathan
+
+Creator of Tailwind CSS
+
+## [Insiders](https://tailwindcss.com/sponsor\#insiders)
+
+Support as an individual
+
+Join a community of enthusiasts who get early access to new features, internal tooling we've built for Tailwind, and direct connection with the team — all while supporting the project you love.
+
+Sponsor
+
+$120
+
+per year
+
+plus tax
+
+[Become an Insider](https://buy.polar.sh/polar_cl_sdvKSPOnjtdElmQ57la4wv3C91Io5vGZpJmC71jdFXv)
+
+## Insider perks
+
+- **Access to private insiders area in Discord**— where Tailwind insiders share tips, play with upcoming features, and connect directly with the core team.
+
+- **Cursor/Claude/AGENTS.md rules** — Adam's personal ruleset for working with AI coding assistants, straight from the Tailwind founder's own development setup.
+
+- **Early documentation for pre-release builds**— preview documentation for unreleased Tailwind features and start experimenting with tomorrow's CSS utilities today.
+
+- **VS Code themes** — get the VS Code themes built and battle-tested by the Tailwind team, crafted with the same attention to detail we put into Tailwind CSS itself
+
+- **Raycast extension** — instantly find the nearest Tailwind theme value for any color or size, or see the generated CSS output of any class.
+
+- **Source code + Figma files** — download the source code from our feature demos, that usually never see the light of day, to learn exactly how we prototype ideas with Tailwind.
+
+
+AGENTS.md file
+
+![Insiders GitHub repository](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Finsiders-github-repository.d9828c45.png&w=3840&q=75)![Insiders GitHub repository](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Finsiders-github-repository-dark.e08bfcc4.png&w=3840&q=75)
+
+Raycast extension
+
+![Tailwind CSS Raycast Extension](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftailwindcss-raycast-extension.ca157cae.png&w=3840&q=75)
+
+Private community
+
+Editor themes
+
+![Tailwind CSS VS Code Theme](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftailwindcss-vs-theme.6ddfb6f4.png&w=3840&q=75)
+
+## [Partners](https://tailwindcss.com/sponsor\#partners)
+
+Support as a company
+
+Become a Tailwind CSS partner to put your brand in front of 10 million developers a month, give your team early access to new features and our roadmap, and get direct access to the Tailwind CSS core team — all while helping ensure Tailwind stays around for the long haul.
+
+## Why become a partner?
+
+- **Your logo in front of millions** — the Tailwind CSS website gets over 10 million visitors per month, and your brand will be featured on the homepage as a partner.
+
+- **Insiders team access** — get all the perks of the Insiders tier for everyone in your team, including early access to new features, specialized tooling, and more.
+
+- **Tailwind Plus team access** — access to Tailwind Plus for your whole team, including the React UI Kit, expertly crafted templates, and 500+ thoughtfully designed components.
+
+- **Expedited bug fixes and issue resolution**— we’ll work to address issues you run into on an expedited schedule, even if normally they would be lower priority due to their limited impact on the user base.
+
+- **Website in the showcase** — your website will feature prominently in our showcase, bringing more attention to your brand when new Tailwind users go to see what is possible with the framework.
+
+- **Support Tailwind CSS** — you’ll be helping contribute to the sustainability of the framework, giving you peace of mind that a core technology in your stack will continue to function smoothly.
+
+
+### Supporter
+
+$500
+
+per month
+
+plus tax
+
+[Become asupporter](https://buy.polar.sh/polar_cl_som3lU3ZaBEFOr4nZlkoAuRBhRbFDMoFzJUC04Jn1Sc)
+
+For companies who want to support Tailwind while getting some extra exposure.
+
+* * *
+
+- **Logo on the sponsors page** —your logo proudly displayed on the sponsors page.
+
+- **Insiders team access** —all the perks of the Insiders tier for everyone in your team.
+
+- **Support Tailwind CSS** —sleep easy knowing that you’re supporting the development of Tailwind CSS.
+
+
+[Become asupporter](https://buy.polar.sh/polar_cl_som3lU3ZaBEFOr4nZlkoAuRBhRbFDMoFzJUC04Jn1Sc)
+
+### Ambassador
+
+22 spots left
+
+$2,500
+
+per month
+
+plus tax
+
+[Become anambassador](https://buy.polar.sh/polar_cl_TqBd09tnOwN7SQf7YpOcUZnDwxMVQB58Snhas2cdEDL)
+
+For companies looking to boost visibility and credibility with the Tailwind community.
+
+* * *
+
+- **Logo on the Tailwind homepage** —your logo displayed in a rotating spot on the homepage.
+
+- **Logo on the sponsors page** —your logo proudly displayed on the sponsors page.
+
+- **Website in the showcase** —a spot on the showcase page for your company’s website.
+
+- **Insiders team access** —all the perks of the Insiders tier for everyone in your team.
+
+- **Tailwind Plus team access** —access to the UI Kit, templates, and 500+ components for your team.
+
+- **Support Tailwind CSS** —sleep easy knowing that you’re supporting the development of Tailwind CSS.
+
+
+[Become anambassador](https://buy.polar.sh/polar_cl_TqBd09tnOwN7SQf7YpOcUZnDwxMVQB58Snhas2cdEDL)
+
+### Partner
+
+3 spots left
+
+$5,000
+
+per month
+
+plus tax
+
+[Become apartner](https://buy.polar.sh/polar_cl_Ae2EFQATomRTUPq3DVTqzjOCAEsI7m7GNrmoh1n6ZRk)
+
+For companies who want increased exposure and easy access to the Tailwind team.
+
+* * *
+
+- **Permanent logo on the Tailwind homepage** —your logo permanently displayed on the homepage.
+
+- **Priority logo placement on sponsors page** —your logo will appear at the top of the sponsors page.
+
+- **Featured spot in the showcase** —a featured spot on the showcase page for your website.
+
+- **Expedited bug fixes and issue resolution** —we’ll address issues you run into on an expedited schedule.
+
+- **Insiders team access** —all the perks of the Insiders tier for everyone in your team.
+
+- **Tailwind Plus team access** —access to the UI Kit, templates, and 500+ components for your team.
+
+- **Support Tailwind CSS** —sleep easy knowing that you’re supporting the development of Tailwind CSS.
+
+
+[Become apartner](https://buy.polar.sh/polar_cl_Ae2EFQATomRTUPq3DVTqzjOCAEsI7m7GNrmoh1n6ZRk)
+
+## Frequently asked questions
+
+Everything you need to know.
+
+### General
+
+Who can I contact about a sponsorship?
+
+If you have any questions about sponsoring, reach out to us at [support@tailwindcss.com](mailto:support@tailwindcss.com) and we'll be happy to help.
+
+Can any company sponsor?
+
+We’re excited to have support from all kinds of companies who use Tailwind CSS, but we do have a few guidelines:
+
+- **We typically don’t accept sponsorships from companies that sell commercial Tailwind UI kits, templates, or component libraries**, since that directly overlaps with our own product offerings and can create confusion about what is officially endorsed.
+- **We also reserve the right to decline sponsorships from companies or services that we feel could reflect poorly on the project**, for example products that are low-quality or deceptive.
+
+If you're unsure whether your company qualifies, feel free to reach out — we're happy to chat.
+
+How are the sponsor perks delivered?
+
+After you check out via Polar, you'll get access to a Polar customer portal where you can manage your sponsorship and access any perks that come with it.
+
+If you're sponsoring as a company, we'll follow up to coordinate how to feature you on the Tailwind CSS website as well as how to give your team **Tailwind Insider** access.
+
+How are the sponsor perks licensed?
+
+Sponsor perks are provided under a custom commercial license.
+
+They’re licensed for personal or internal use by active Tailwind CSS Insiders sponsors only. Redistribution, sublicensing, or public sharing of the perks — such as the VS Code theme, Raycast extension, or Cursor/Claude/AGENTS.md rules — is not permitted.
+
+### Support
+
+Do you offer technical support for sponsor perks?
+
+No — we don't offer technical support for sponsor perks. These perks are a bonus for supporters who want to give back to the project, but they're provided as-is.
+
+That said, the **Insiders Discord** is a great place to ask for help with anything related to the perks.
+
+How do I cancel my sponsorship?
+
+You can cancel your sponsorship at any time through the Polar customer portal. Once you cancel, your perks will remain active until the end of your current billing period.
+
+What happens if I stop sponsoring?
+
+If your sponsorship ends, you'll lose access to any perks like the Insiders Discord server, Cursor/Claude/AGENTS.md rules, and pre-release documentation. These are only available while you're actively sponsoring.
+
+What is your refund policy?
+
+Sponsorships are non-refundable, but of course you can cancel your sponsorship at any time.
+
+## [Sponsors](https://tailwindcss.com/sponsor\#sponsors)
+
+Thank you to our sponsors.
+
+We are super grateful to all the following sponsors for supporting the ongoing development and maintenance of Tailwind CSS.
+
+## Partners
+
+## Ambassadors
+
+## Supporters
+
+Copyright © 2025 Tailwind Labs Inc.· [Trademark Policy](https://tailwindcss.com/brand)
+
+<|firecrawl-page-4-lllmstxt|>
+## Text Overflow Utilities
+[Home](https://tailwindcss.com/) v4.1
+
+`⌘K`  `Ctrl K` [Docs](https://tailwindcss.com/docs) [Blog](https://tailwindcss.com/blog) [Showcase](https://tailwindcss.com/showcase) [Sponsor](https://tailwindcss.com/sponsor) [Plus](https://tailwindcss.com/plus?ref=top) [GitHub repository](https://github.com/tailwindlabs/tailwindcss)
+
+1. Typography
+2. text-overflow
+
+Typography
+
+# text-overflow
+
+Utilities for controlling how the text of an element overflows.
+
+| Class | Styles |
+| --- | --- |
+| `truncate` | `overflow: hidden;<br>text-overflow: ellipsis;<br>white-space: nowrap;` |
+| `text-ellipsis` | `text-overflow: ellipsis;` |
+| `text-clip` | `text-overflow: clip;` |
+
+## [Examples](https://tailwindcss.com/docs/text-overflow\#examples)
+
+### [Truncating text](https://tailwindcss.com/docs/text-overflow\#truncating-text)
+
+Use the `truncate` utility to prevent text from wrapping and truncate overflowing text with an ellipsis (…) if needed:
+
+The longest word in any of the major English language dictionaries ispneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a lung disease contracted from the inhalation of very fine silica particles, specifically from a volcano; medically, it is the same as silicosis.
+
+```
+<p class="truncate">The longest word in any of the major...</p>
+```
+
+### [Adding an ellipsis](https://tailwindcss.com/docs/text-overflow\#adding-an-ellipsis)
+
+Use the `text-ellipsis` utility to truncate overflowing text with an ellipsis (…) if needed:
+
+The longest word in any of the major English language dictionaries ispneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a lung disease contracted from the inhalation of very fine silica particles, specifically from a volcano; medically, it is the same as silicosis.
+
+```
+<p class="overflow-hidden text-ellipsis">The longest word in any of the major...</p>
+```
+
+### [Clipping text](https://tailwindcss.com/docs/text-overflow\#clipping-text)
+
+Use the `text-clip` utility to truncate the text at the limit of the content area:
+
+The longest word in any of the major English language dictionaries ispneumonoultramicroscopicsilicovolcanoconiosis, a word that refers to a lung disease contracted from the inhalation of very fine silica particles, specifically from a volcano; medically, it is the same as silicosis.
+
+```
+<p class="overflow-hidden text-clip">The longest word in any of the major...</p>
+```
+
+This is the default browser behavior.
+
+### [Responsive design](https://tailwindcss.com/docs/text-overflow\#responsive-design)
+
+Prefix a `text-overflow` utilitywith a breakpoint variant like `md:` to only apply the utility at mediumscreen sizes and above:
+
+```
+<p class="text-ellipsis md:text-clip ...">  Lorem ipsum dolor sit amet...</p>
+```
+
+Learn more about using variants in the [variants documentation](https://tailwindcss.com/docs/hover-focus-and-other-states).
+
+### On this page
+
+- [Quick reference](https://tailwindcss.com/docs/text-overflow#quick-reference)
+- [Examples](https://tailwindcss.com/docs/text-overflow#examples)
+  - [Truncating text](https://tailwindcss.com/docs/text-overflow#truncating-text)
+  - [Adding an ellipsis](https://tailwindcss.com/docs/text-overflow#adding-an-ellipsis)
+  - [Clipping text](https://tailwindcss.com/docs/text-overflow#clipping-text)
+  - [Responsive design](https://tailwindcss.com/docs/text-overflow#responsive-design)
+
+Copyright © 2025 Tailwind Labs Inc.· [Trademark Policy](https://tailwindcss.com/brand)
+
+<|firecrawl-page-5-lllmstxt|>
+## Tailwind CSS Flyout Menus
+- [Marketing](https://tailwindcss.com/plus/ui-blocks/marketing)
+- [Application UI](https://tailwindcss.com/plus/ui-blocks/application-ui)
+- [Ecommerce](https://tailwindcss.com/plus/ui-blocks/ecommerce)
+- [Documentation](https://tailwindcss.com/plus/ui-blocks/documentation)
+- ### Page Sections
+
+- [Hero Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/heroes)
+- [Feature Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/feature-sections)
+- [CTA Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/cta-sections)
+- [Bento Grids](https://tailwindcss.com/plus/ui-blocks/marketing/sections/bento-grids)
+- [Pricing Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/pricing)
+- [Header Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/header)
+- [Newsletter Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/newsletter-sections)
+- [Stats](https://tailwindcss.com/plus/ui-blocks/marketing/sections/stats-sections)
+- [Testimonials](https://tailwindcss.com/plus/ui-blocks/marketing/sections/testimonials)
+- [Blog Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/blog-sections)
+- [Contact Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/contact-sections)
+- [Team Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/team-sections)
+- [Content Sections](https://tailwindcss.com/plus/ui-blocks/marketing/sections/content-sections)
+- [Logo Clouds](https://tailwindcss.com/plus/ui-blocks/marketing/sections/logo-clouds)
+- [FAQs](https://tailwindcss.com/plus/ui-blocks/marketing/sections/faq-sections)
+- [Footers](https://tailwindcss.com/plus/ui-blocks/marketing/sections/footers)
+- ### Elements
+
+- [Headers](https://tailwindcss.com/plus/ui-blocks/marketing/elements/headers)
+- [Flyout Menus](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus)
+- [Banners](https://tailwindcss.com/plus/ui-blocks/marketing/elements/banners)
+- ### Feedback
+
+- [404 Pages](https://tailwindcss.com/plus/ui-blocks/marketing/feedback/404-pages)
+- ### Page Examples
+
+- [Landing Pages](https://tailwindcss.com/plus/ui-blocks/marketing/page-examples/landing-pages)
+- [Pricing Pages](https://tailwindcss.com/plus/ui-blocks/marketing/page-examples/pricing-pages)
+- [About Pages](https://tailwindcss.com/plus/ui-blocks/marketing/page-examples/about-pages)
+
+5-day Mini-Course
+
+### Build UIs that don’t suck.
+
+**Short, tactical video lessons** from the creator of Tailwind CSS, delivered directly to your inbox **every day for a week**.
+
+[Get the free course](https://tailwindcss.com/build-uis-that-dont-suck)
+
+# Flyout Menus
+
+Use these Tailwind CSS flyout menu examples to add beautiful dropdown menus to your website's navigation, featuring icons, multiple sections, and content previews. These menu examples are designed and built by the Tailwind CSS team, and include a variety of different styles, such as simple text-based, multiple sections with icons, and full-width menus.
+
+## [Stacked with footer actions](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#component-911576fb54922e5199a9434ca8a273fd)
+
+PreviewCode
+
+HTMLReactVue
+
+Solutions
+
+[Analytics](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Get a better understanding of your traffic
+
+[Engagement](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Speak directly to your customers
+
+[Security](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Your customers' data will be safe and secure
+
+[Integrations](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Connect with third-party tools
+
+[Automations](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Build strategic funnels that will convert
+
+[Watch demo](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Contact sales](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+## [Full-width two-columns](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#component-f2922faa2add4efd389ddfccc77b2f22)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+Solutions
+
+
+### Engagement
+
+[About](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Customers](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Press](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Careers](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Privacy](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+### Resources
+
+[Community](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Partners](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Guides](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Webinars](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+### Recent posts
+
+![](https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80)
+
+Mar 16, 2023 [Marketing](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+#### [Boost your conversion rate](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#)
+
+Et et dolore officia quis nostrud esse aute cillum irure do esse. Eiusmod ad deserunt cupidatat est magna Lorem.
+
+![](https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80)
+
+Mar 10, 2023 [Sales](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+#### [How to use search engine optimization to drive sales](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#)
+
+Optio cum necessitatibus dolor voluptatum provident commodi et.
+
+## [Stacked with footer list](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#component-988e9eed61ec84450b9650c7f6ad805e)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+Resources
+
+[Help center](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Get all of your questions answered
+
+[Guides](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Learn how to maximize our platform
+
+[Events](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+See meet-ups and other events near you
+
+### Recent posts
+
+[See all →](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+- Mar 5, 2023 [Boost your conversion rate](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+- Feb 25, 2023 [How to use search engine optimization to drive traffic to your site](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+- Feb 21, 2023 [Improve your customer experience](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+## [Full-width](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#component-51e7bd07cdcacb755fd1f4ad6fde01ab)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+Solutions
+
+
+[Analytics](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Get a better understanding of where your traffic is coming from
+
+[Engagement](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Speak directly to your customers with our engagement tool
+
+[Security](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Your customers' data will be safe and secure
+
+[Integrations](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Connect with third-party tools that you're already using
+
+[Watch demo](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Contact sales](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [View all products](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+## [Simple with descriptions](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#component-da3c449b5eaaf6a791a2cc48f2e87fb4)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+Solutions
+
+[Blog](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Learn about tips, product updates and company culture
+
+[Help center](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Get all of your questions answered in our forums of contact support
+
+[Guides](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Learn how to maximize our platform to get the most out of it
+
+[Events](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Check out webinars with experts and learn about our annual conference
+
+[Security](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Understand how we take your privacy seriously
+
+## [Two-column](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#component-25601925ae83e51e1b31d3bd1c286515)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+Solutions
+
+[Analytics](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Get a better understanding of your traffic
+
+[Integrations](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Connect with third-party tools and find out expectations
+
+[Engagement](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Speak directly to your customers with our engagement tool
+
+[Automations](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Build strategic funnels that will convert
+
+[Security](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Your customers' data will be safe and secure
+
+[Reports](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+Edit, manage and create newly informed decisions
+
+### Enterprise
+
+New
+
+Empower your entire team with even more advanced tools.
+
+## [Simple](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus\#component-3a091a4d7664f1d576e29f48d523edfa)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+Solutions
+
+[Analytics](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Engagement](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Security](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Integrations](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Automations](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#) [Reports](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus#)
+
+<|firecrawl-page-6-lllmstxt|>
+## Width Utilities in Tailwind
+[Home](https://tailwindcss.com/) v4.1
+
+`⌘K`  `Ctrl K` [Docs](https://tailwindcss.com/docs) [Blog](https://tailwindcss.com/blog) [Showcase](https://tailwindcss.com/showcase) [Sponsor](https://tailwindcss.com/sponsor) [Plus](https://tailwindcss.com/plus?ref=top) [GitHub repository](https://github.com/tailwindlabs/tailwindcss)
+
+1. Sizing
+2. width
+
+Sizing
+
+# width
+
+Utilities for setting the width of an element.
+
+| Class | Styles |
+| --- | --- |
+| `w-<number>` | `width: calc(var(--spacing) * <number>);` |
+| `w-<fraction>` | `width: calc(<fraction> * 100%);` |
+| `w-3xs` | `width: var(--container-3xs); /* 16rem (256px) */` |
+| `w-2xs` | `width: var(--container-2xs); /* 18rem (288px) */` |
+| `w-xs` | `width: var(--container-xs); /* 20rem (320px) */` |
+| `w-sm` | `width: var(--container-sm); /* 24rem (384px) */` |
+| `w-md` | `width: var(--container-md); /* 28rem (448px) */` |
+| `w-lg` | `width: var(--container-lg); /* 32rem (512px) */` |
+| `w-xl` | `width: var(--container-xl); /* 36rem (576px) */` |
+| `w-2xl` | `width: var(--container-2xl); /* 42rem (672px) */` |
+
+Show more
+
+## [Examples](https://tailwindcss.com/docs/width\#examples)
+
+### [Basic example](https://tailwindcss.com/docs/width\#basic-example)
+
+Use `w-<number>` utilities like `w-24` and `w-64` to set an element to a fixed width based on the spacing scale:
+
+w-96
+
+w-80
+
+w-64
+
+w-48
+
+w-40
+
+w-32
+
+w-24
+
+```
+<div class="w-96 ...">w-96</div><div class="w-80 ...">w-80</div><div class="w-64 ...">w-64</div><div class="w-48 ...">w-48</div><div class="w-40 ...">w-40</div><div class="w-32 ...">w-32</div><div class="w-24 ...">w-24</div>
+```
+
+### [Using a percentage](https://tailwindcss.com/docs/width\#using-a-percentage)
+
+Use `w-full` or `w-<fraction>` utilities like `w-1/2` and `w-2/5` to give an element a percentage-based width:
+
+w-1/2
+
+w-1/2
+
+w-2/5
+
+w-3/5
+
+w-1/3
+
+w-2/3
+
+w-1/4
+
+w-3/4
+
+w-1/5
+
+w-4/5
+
+w-1/6
+
+w-5/6
+
+w-full
+
+```
+<div class="flex ...">  <div class="w-1/2 ...">w-1/2</div>  <div class="w-1/2 ...">w-1/2</div></div><div class="flex ...">  <div class="w-2/5 ...">w-2/5</div>  <div class="w-3/5 ...">w-3/5</div></div><div class="flex ...">  <div class="w-1/3 ...">w-1/3</div>  <div class="w-2/3 ...">w-2/3</div></div><div class="flex ...">  <div class="w-1/4 ...">w-1/4</div>  <div class="w-3/4 ...">w-3/4</div></div><div class="flex ...">  <div class="w-1/5 ...">w-1/5</div>  <div class="w-4/5 ...">w-4/5</div></div><div class="flex ...">  <div class="w-1/6 ...">w-1/6</div>  <div class="w-5/6 ...">w-5/6</div></div><div class="w-full ...">w-full</div>
+```
+
+### [Using the container scale](https://tailwindcss.com/docs/width\#using-the-container-scale)
+
+Use utilities like `w-sm` and `w-xl` to set an element to a fixed width based on the container scale:
+
+w-xl
+
+w-lg
+
+w-md
+
+w-sm
+
+w-xs
+
+w-2xs
+
+w-3xs
+
+```
+<div class="w-xl ...">w-xl</div><div class="w-lg ...">w-lg</div><div class="w-md ...">w-md</div><div class="w-sm ...">w-sm</div><div class="w-xs ...">w-xs</div><div class="w-2xs ...">w-2xs</div><div class="w-3xs ...">w-3xs</div>
+```
+
+### [Matching the viewport](https://tailwindcss.com/docs/width\#matching-the-viewport)
+
+Use the `w-screen` utility to make an element span the entire width of the viewport:
+
+```
+<div class="w-screen">  <!-- ... --></div>
+```
+
+Alternatively, you can match the width of the large, small or dynamic viewports using the `w-lvw`, `w-svw`, and `w-dvw` utilities.
+
+### [Resetting the width](https://tailwindcss.com/docs/width\#resetting-the-width)
+
+Use the `w-auto` utility to remove an element's assigned width under a specific condition, like at a particular breakpoint:
+
+```
+<div class="w-full md:w-auto">  <!-- ... --></div>
+```
+
+### [Setting both width and height](https://tailwindcss.com/docs/width\#setting-both-width-and-height)
+
+Use utilities like `size-px`, `size-4`, and `size-full` to set both the width and height of an element at the same time:
+
+size-16
+
+size-20
+
+size-24
+
+size-32
+
+size-40
+
+```
+<div class="size-16 ...">size-16</div><div class="size-20 ...">size-20</div><div class="size-24 ...">size-24</div><div class="size-32 ...">size-32</div><div class="size-40 ...">size-40</div>
+```
+
+### [Using a custom value](https://tailwindcss.com/docs/width\#using-a-custom-value)
+
+Use the `w-[<value>]` syntaxto set the width based on a completely custom value:
+
+```
+<div class="w-[5px] ...">  <!-- ... --></div>
+```
+
+For CSS variables, you can also use the `w-(<custom-property>)` syntax:
+
+```
+<div class="w-(--my-width) ...">  <!-- ... --></div>
+```
+
+This is just a shorthand for `w-[var(<custom-property>)]` that adds the `var()` function for you automatically.
+
+### [Responsive design](https://tailwindcss.com/docs/width\#responsive-design)
+
+Prefix a `width` utilitywith a breakpoint variant like `md:` to only apply the utility at mediumscreen sizes and above:
+
+```
+<div class="w-1/2 md:w-full ...">  <!-- ... --></div>
+```
+
+Learn more about using variants in the [variants documentation](https://tailwindcss.com/docs/hover-focus-and-other-states).
+
+## [Customizing your theme](https://tailwindcss.com/docs/width\#customizing-your-theme)
+
+The `w-<number>` and `size-<number>` utilities are driven by the `--spacing` theme variable, which can be customized in your own theme:
+
+```
+@theme {  --spacing: 1px; }
+```
+
+Learn more about customizing the spacing scale in the [theme variable documentation](https://tailwindcss.com/docs/theme).
+
+### On this page
+
+- [Quick reference](https://tailwindcss.com/docs/width#quick-reference)
+- [Examples](https://tailwindcss.com/docs/width#examples)
+  - [Basic example](https://tailwindcss.com/docs/width#basic-example)
+  - [Using a percentage](https://tailwindcss.com/docs/width#using-a-percentage)
+  - [Using the container scale](https://tailwindcss.com/docs/width#using-the-container-scale)
+  - [Matching the viewport](https://tailwindcss.com/docs/width#matching-the-viewport)
+  - [Resetting the width](https://tailwindcss.com/docs/width#resetting-the-width)
+  - [Setting both width and height](https://tailwindcss.com/docs/width#setting-both-width-and-height)
+  - [Using a custom value](https://tailwindcss.com/docs/width#using-a-custom-value)
+  - [Responsive design](https://tailwindcss.com/docs/width#responsive-design)
+- [Customizing your theme](https://tailwindcss.com/docs/width#customizing-your-theme)
+
+Copyright © 2025 Tailwind Labs Inc.· [Trademark Policy](https://tailwindcss.com/brand)
+
+<|firecrawl-page-7-lllmstxt|>
+## Flex Grow Utilities
+[Home](https://tailwindcss.com/) v4.1
+
+`⌘K`  `Ctrl K` [Docs](https://tailwindcss.com/docs) [Blog](https://tailwindcss.com/blog) [Showcase](https://tailwindcss.com/showcase) [Sponsor](https://tailwindcss.com/sponsor) [Plus](https://tailwindcss.com/plus?ref=top) [GitHub repository](https://github.com/tailwindlabs/tailwindcss)
+
+1. Flexbox & Grid
+2. flex-grow
+
+Flexbox & Grid
+
+# flex-grow
+
+Utilities for controlling how flex items grow.
+
+| Class | Styles |
+| --- | --- |
+| `grow` | `flex-grow: 1;` |
+| `grow-<number>` | `flex-grow: <number>;` |
+| `grow-[<value>]` | `flex-grow: <value>;` |
+| `grow-(<custom-property>)` | `flex-grow: var(<custom-property>);` |
+
+## [Examples](https://tailwindcss.com/docs/flex-grow\#examples)
+
+### [Allowing items to grow](https://tailwindcss.com/docs/flex-grow\#allowing-items-to-grow)
+
+Use `grow` to allow a flex item to grow to fill any available space:
+
+01
+
+02
+
+03
+
+```
+<div class="flex ...">  <div class="size-14 flex-none ...">01</div>  <div class="size-14 grow ...">02</div>  <div class="size-14 flex-none ...">03</div></div>
+```
+
+### [Growing items based on factor](https://tailwindcss.com/docs/flex-grow\#growing-items-based-on-factor)
+
+Use `grow-<number>` utilities like `grow-3` to make flex items grow proportionally based on their growth factor, allowing them to fill the available space relative to each other:
+
+01
+
+02
+
+03
+
+```
+<div class="flex ...">  <div class="size-14 grow-3 ...">01</div>  <div class="size-14 grow-7 ...">02</div>  <div class="size-14 grow-3 ...">03</div></div>
+```
+
+### [Preventing items from growing](https://tailwindcss.com/docs/flex-grow\#preventing-items-from-growing)
+
+Use `grow-0` to prevent a flex item from growing:
+
+01
+
+02
+
+03
+
+```
+<div class="flex ...">  <div class="size-14 grow ...">01</div>  <div class="size-14 grow-0 ...">02</div>  <div class="size-14 grow ...">03</div></div>
+```
+
+### [Using a custom value](https://tailwindcss.com/docs/flex-grow\#using-a-custom-value)
+
+Use the `grow-[<value>]` syntaxto set the flex grow factor based on a completely custom value:
+
+```
+<div class="grow-[25vw] ...">  <!-- ... --></div>
+```
+
+For CSS variables, you can also use the `grow-(<custom-property>)` syntax:
+
+```
+<div class="grow-(--my-grow) ...">  <!-- ... --></div>
+```
+
+This is just a shorthand for `grow-[var(<custom-property>)]` that adds the `var()` function for you automatically.
+
+### [Responsive design](https://tailwindcss.com/docs/flex-grow\#responsive-design)
+
+Prefix a `flex-grow` utilitywith a breakpoint variant like `md:` to only apply the utility at mediumscreen sizes and above:
+
+```
+<div class="grow md:grow-0 ...">  <!-- ... --></div>
+```
+
+Learn more about using variants in the [variants documentation](https://tailwindcss.com/docs/hover-focus-and-other-states).
+
+### On this page
+
+- [Quick reference](https://tailwindcss.com/docs/flex-grow#quick-reference)
+- [Examples](https://tailwindcss.com/docs/flex-grow#examples)
+  - [Allowing items to grow](https://tailwindcss.com/docs/flex-grow#allowing-items-to-grow)
+  - [Growing items based on factor](https://tailwindcss.com/docs/flex-grow#growing-items-based-on-factor)
+  - [Preventing items from growing](https://tailwindcss.com/docs/flex-grow#preventing-items-from-growing)
+  - [Using a custom value](https://tailwindcss.com/docs/flex-grow#using-a-custom-value)
+  - [Responsive design](https://tailwindcss.com/docs/flex-grow#responsive-design)
+
+Copyright © 2025 Tailwind Labs Inc.· [Trademark Policy](https://tailwindcss.com/brand)
+
+<|firecrawl-page-8-lllmstxt|>
+## Break After Utilities
+[Home](https://tailwindcss.com/) v4.1
+
+`⌘K`  `Ctrl K` [Docs](https://tailwindcss.com/docs) [Blog](https://tailwindcss.com/blog) [Showcase](https://tailwindcss.com/showcase) [Sponsor](https://tailwindcss.com/sponsor) [Plus](https://tailwindcss.com/plus?ref=top) [GitHub repository](https://github.com/tailwindlabs/tailwindcss)
+
+1. Layout
+2. break-after
+
+Layout
+
+# break-after
+
+Utilities for controlling how a column or page should break after an element.
+
+| Class | Styles |
+| --- | --- |
+| `break-after-auto` | `break-after: auto;` |
+| `break-after-avoid` | `break-after: avoid;` |
+| `break-after-all` | `break-after: all;` |
+| `break-after-avoid-page` | `break-after: avoid-page;` |
+| `break-after-page` | `break-after: page;` |
+| `break-after-left` | `break-after: left;` |
+| `break-after-right` | `break-after: right;` |
+| `break-after-column` | `break-after: column;` |
+
+## [Examples](https://tailwindcss.com/docs/break-after\#examples)
+
+### [Basic example](https://tailwindcss.com/docs/break-after\#basic-example)
+
+Use utilities like `break-after-column` and `break-after-page` to control how a column or page break should behave after an element:
+
+```
+<div class="columns-2">  <p>Well, let me tell you something, ...</p>  <p class="break-after-column">Sure, go ahead, laugh...</p>  <p>Maybe we can live without...</p>  <p>Look. If you think this is...</p></div>
+```
+
+### [Responsive design](https://tailwindcss.com/docs/break-after\#responsive-design)
+
+Prefix a `break-after` utilitywith a breakpoint variant like `md:` to only apply the utility at mediumscreen sizes and above:
+
+```
+<div class="break-after-column md:break-after-auto ...">  <!-- ... --></div>
+```
+
+Learn more about using variants in the [variants documentation](https://tailwindcss.com/docs/hover-focus-and-other-states).
+
+### On this page
+
+- [Quick reference](https://tailwindcss.com/docs/break-after#quick-reference)
+- [Examples](https://tailwindcss.com/docs/break-after#examples)
+  - [Basic example](https://tailwindcss.com/docs/break-after#basic-example)
+  - [Responsive design](https://tailwindcss.com/docs/break-after#responsive-design)
+
+Copyright © 2025 Tailwind Labs Inc.· [Trademark Policy](https://tailwindcss.com/brand)
+
+<|firecrawl-page-9-lllmstxt|>
+## Aspect Ratio Utilities
+[Home](https://tailwindcss.com/) v4.1
+
+`⌘K`  `Ctrl K` [Docs](https://tailwindcss.com/docs) [Blog](https://tailwindcss.com/blog) [Showcase](https://tailwindcss.com/showcase) [Sponsor](https://tailwindcss.com/sponsor) [Plus](https://tailwindcss.com/plus?ref=top) [GitHub repository](https://github.com/tailwindlabs/tailwindcss)
+
+1. Layout
+2. aspect-ratio
+
+Layout
+
+# aspect-ratio
+
+Utilities for controlling the aspect ratio of an element.
+
+| Class | Styles |
+| --- | --- |
+| `aspect-<ratio>` | `aspect-ratio: <ratio>;` |
+| `aspect-square` | `aspect-ratio: 1 / 1;` |
+| `aspect-video` | `aspect-ratio: var(--aspect-ratio-video); /* 16 / 9 */` |
+| `aspect-auto` | `aspect-ratio: auto;` |
+| `aspect-(<custom-property>)` | `aspect-ratio: var(<custom-property>);` |
+| `aspect-[<value>]` | `aspect-ratio: <value>;` |
+
+## [Examples](https://tailwindcss.com/docs/aspect-ratio\#examples)
+
+### [Basic example](https://tailwindcss.com/docs/aspect-ratio\#basic-example)
+
+Use `aspect-<ratio>` utilities like `aspect-3/2` to give an element a specific aspect ratio:
+
+Resize the example to see the expected behavior
+
+![](https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80)
+
+```
+<img class="aspect-3/2 object-cover ..." src="/img/villas.jpg" />
+```
+
+### [Using a video aspect ratio](https://tailwindcss.com/docs/aspect-ratio\#using-a-video-aspect-ratio)
+
+Use the `aspect-video` utility to give a video element a 16 / 9 aspect ratio:
+
+Resize the example to see the expected behavior
+
+Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) - YouTube
+
+[Photo image of Rick Astley](https://www.youtube.com/channel/UCuAXFkgsw1L7xaCfnd5JJOw?embeds_referring_euri=https%3A%2F%2Ftailwindcss.com%2F)
+
+Rick Astley
+
+4.37M subscribers
+
+[Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+
+Rick Astley
+
+Search
+
+Info
+
+Shopping
+
+Tap to unmute
+
+If playback doesn't begin shortly, try restarting your device.
+
+You're signed out
+
+Videos you watch may be added to the TV's watch history and influence TV recommendations. To avoid this, cancel and sign in to YouTube on your computer.
+
+CancelConfirm
+
+Share
+
+Include playlist
+
+An error occurred while retrieving sharing information. Please try again later.
+
+Watch later
+
+Share
+
+Copy link
+
+Watch on
+
+0:00
+
+/
+•Live
+
+•
+
+```
+<iframe class="aspect-video ..." src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+```
+
+### [Using a custom value](https://tailwindcss.com/docs/aspect-ratio\#using-a-custom-value)
+
+Use the `aspect-[<value>]` syntaxto set the aspect ratio based on a completely custom value:
+
+```
+<img class="aspect-[calc(4*3+1)/3] ..." src="/img/villas.jpg" />
+```
+
+For CSS variables, you can also use the `aspect-(<custom-property>)` syntax:
+
+```
+<img class="aspect-(--my-aspect-ratio) ..." src="/img/villas.jpg" />
+```
+
+This is just a shorthand for `aspect-[var(<custom-property>)]` that adds the `var()` function for you automatically.
+
+### [Responsive design](https://tailwindcss.com/docs/aspect-ratio\#responsive-design)
+
+Prefix an `aspect-ratio` utilitywith a breakpoint variant like `md:` to only apply the utility at mediumscreen sizes and above:
+
+```
+<iframe class="aspect-video md:aspect-square ..." src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+```
+
+Learn more about using variants in the [variants documentation](https://tailwindcss.com/docs/hover-focus-and-other-states).
+
+## [Customizing your theme](https://tailwindcss.com/docs/aspect-ratio\#customizing-your-theme)
+
+Use the `--aspect-*` theme variables to customize the aspect ratioutilities in your project:
+
+```
+@theme {  --aspect-retro: 4 / 3; }
+```
+
+Now the `aspect-retro` utility can be used in your markup:
+
+```
+<iframe class="aspect-retro" src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+```
+
+Learn more about customizing your theme in the [theme documentation](https://tailwindcss.com/docs/theme#customizing-your-theme).
+
+### On this page
+
+- [Quick reference](https://tailwindcss.com/docs/aspect-ratio#quick-reference)
+- [Examples](https://tailwindcss.com/docs/aspect-ratio#examples)
+  - [Basic example](https://tailwindcss.com/docs/aspect-ratio#basic-example)
+  - [Using a video aspect ratio](https://tailwindcss.com/docs/aspect-ratio#using-a-video-aspect-ratio)
+  - [Using a custom value](https://tailwindcss.com/docs/aspect-ratio#using-a-custom-value)
+  - [Responsive design](https://tailwindcss.com/docs/aspect-ratio#responsive-design)
+- [Customizing your theme](https://tailwindcss.com/docs/aspect-ratio#customizing-your-theme)
+
+[![Refactoring UI](https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbook-promo.27d91093.png&w=256&q=75)\\
+\\
+From the creators of Tailwind CSS\\
+\\
+Make your ideas look awesome, without relying on a designer.\\
+\\
+> “This is the survival kit I wish I had when I started building apps.”\\
+> \\
+> Derrick Reimer, SavvyCal](https://www.refactoringui.com/?ref=sidebar)
+
+Copyright © 2025 Tailwind Labs Inc.· [Trademark Policy](https://tailwindcss.com/brand)
+
+<|firecrawl-page-10-lllmstxt|>
+## Calendars for Application UI
+- [Marketing](https://tailwindcss.com/plus/ui-blocks/marketing)
+- [Application UI](https://tailwindcss.com/plus/ui-blocks/application-ui)
+- [Ecommerce](https://tailwindcss.com/plus/ui-blocks/ecommerce)
+- [Documentation](https://tailwindcss.com/plus/ui-blocks/documentation)
+- ### Application Shells
+
+- [Stacked Layouts](https://tailwindcss.com/plus/ui-blocks/application-ui/application-shells/stacked)
+- [Sidebar Layouts](https://tailwindcss.com/plus/ui-blocks/application-ui/application-shells/sidebar)
+- [Multi-Column Layouts](https://tailwindcss.com/plus/ui-blocks/application-ui/application-shells/multi-column)
+- ### Headings
+
+- [Page Headings](https://tailwindcss.com/plus/ui-blocks/application-ui/headings/page-headings)
+- [Card Headings](https://tailwindcss.com/plus/ui-blocks/application-ui/headings/card-headings)
+- [Section Headings](https://tailwindcss.com/plus/ui-blocks/application-ui/headings/section-headings)
+- ### Data Display
+
+- [Description Lists](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/description-lists)
+- [Stats](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/stats)
+- [Calendars](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars)
+- ### Lists
+
+- [Stacked Lists](https://tailwindcss.com/plus/ui-blocks/application-ui/lists/stacked-lists)
+- [Tables](https://tailwindcss.com/plus/ui-blocks/application-ui/lists/tables)
+- [Grid Lists](https://tailwindcss.com/plus/ui-blocks/application-ui/lists/grid-lists)
+- [Feeds](https://tailwindcss.com/plus/ui-blocks/application-ui/lists/feeds)
+- ### Forms
+
+- [Form Layouts](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/form-layouts)
+- [Input Groups](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/input-groups)
+- [Select Menus](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/select-menus)
+- [Sign-in and Registration](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/sign-in-forms)
+- [Textareas](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/textareas)
+- [Radio Groups](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/radio-groups)
+- [Checkboxes](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/checkboxes)
+- [Toggles](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/toggles)
+- [Action Panels](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/action-panels)
+- [Comboboxes](https://tailwindcss.com/plus/ui-blocks/application-ui/forms/comboboxes)
+- ### Feedback
+
+- [Alerts](https://tailwindcss.com/plus/ui-blocks/application-ui/feedback/alerts)
+- [Empty States](https://tailwindcss.com/plus/ui-blocks/application-ui/feedback/empty-states)
+- ### Navigation
+
+- [Navbars](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/navbars)
+- [Pagination](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/pagination)
+- [Tabs](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/tabs)
+- [Vertical Navigation](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/vertical-navigation)
+- [Sidebar Navigation](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/sidebar-navigation)
+- [Breadcrumbs](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/breadcrumbs)
+- [Progress Bars](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/progress-bars)
+- [Command Palettes](https://tailwindcss.com/plus/ui-blocks/application-ui/navigation/command-palettes)
+- ### Overlays
+
+- [Modal Dialogs](https://tailwindcss.com/plus/ui-blocks/application-ui/overlays/modal-dialogs)
+- [Drawers](https://tailwindcss.com/plus/ui-blocks/application-ui/overlays/drawers)
+- [Notifications](https://tailwindcss.com/plus/ui-blocks/application-ui/overlays/notifications)
+- ### Elements
+
+- [Avatars](https://tailwindcss.com/plus/ui-blocks/application-ui/elements/avatars)
+- [Badges](https://tailwindcss.com/plus/ui-blocks/application-ui/elements/badges)
+- [Dropdowns](https://tailwindcss.com/plus/ui-blocks/application-ui/elements/dropdowns)
+- [Buttons](https://tailwindcss.com/plus/ui-blocks/application-ui/elements/buttons)
+- [Button Groups](https://tailwindcss.com/plus/ui-blocks/application-ui/elements/button-groups)
+- ### Layout
+
+- [Containers](https://tailwindcss.com/plus/ui-blocks/application-ui/layout/containers)
+- [Cards](https://tailwindcss.com/plus/ui-blocks/application-ui/layout/cards)
+- [List containers](https://tailwindcss.com/plus/ui-blocks/application-ui/layout/list-containers)
+- [Media Objects](https://tailwindcss.com/plus/ui-blocks/application-ui/layout/media-objects)
+- [Dividers](https://tailwindcss.com/plus/ui-blocks/application-ui/layout/dividers)
+- ### Page Examples
+
+- [Home Screens](https://tailwindcss.com/plus/ui-blocks/application-ui/page-examples/home-screens)
+- [Detail Screens](https://tailwindcss.com/plus/ui-blocks/application-ui/page-examples/detail-screens)
+- [Settings Screens](https://tailwindcss.com/plus/ui-blocks/application-ui/page-examples/settings-screens)
+
+5-day Mini-Course
+
+### Build UIs that don’t suck.
+
+**Short, tactical video lessons** from the creator of Tailwind CSS, delivered directly to your inbox **every day for a week**.
+
+[Get the free course](https://tailwindcss.com/build-uis-that-dont-suck)
+
+# Calendars
+
+Use these Tailwind CSS calendar and date picker components to add date selection and scheduling features to your interface. These components are designed and built by the Tailwind CSS team, and include a variety of different styles and layouts.
+
+## [Small with meetings](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars\#component-c6e8b2bf7f65e8987b7012d3bbe5caf1)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+## Upcoming meetings
+
+Previous month
+
+January
+
+Next month
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+272829303112345678910111213141516171819202122232425262728293031123456
+
+Add event
+
+1. ![](https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+### Leslie Alexander
+
+
+
+DateJanuary 10th, 2022 at 5:00 PM
+
+
+
+LocationStarbucks
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+2. ![](https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+### Michael Foster
+
+
+
+DateJanuary 12th, 2022 at 3:00 PM
+
+
+
+LocationTim Hortons
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+3. ![](https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+### Dries Vincent
+
+
+
+DateJanuary 12th, 2022 at 5:00 PM
+
+
+
+LocationCosta Coffee at Braehead
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+4. ![](https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+### Lindsay Walton
+
+
+
+DateJanuary 14th, 2022 at 10:00 AM
+
+
+
+LocationSilverburn
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+5. ![](https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+### Courtney Henry
+
+
+
+DateJanuary 14th, 2022 at 12:00 PM
+
+
+
+LocationThe Glasgow Green
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+
+## [Month view](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars\#component-c29139529079ea762f118812bbeaeb9e)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+Mon
+
+Tue
+
+Wed
+
+Thu
+
+Fri
+
+Sat
+
+Sun
+
+27
+
+28
+
+29
+
+30
+
+31
+
+1
+
+2
+
+3
+
+1. [Design review\\
+10AM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+2. [Sales meeting\\
+2PM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+4
+
+5
+
+6
+
+7
+
+1. [Date night\\
+6PM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+8
+
+9
+
+10
+
+11
+
+12
+
+1. [Sam's birthday party\\
+2PM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+1. [Maple syrup museum\\
+3PM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+2. [Hockey game\\
+7PM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+1
+
+2
+
+3
+
+4
+
+1. [Cinema with friends\\
+9PM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+5
+
+6
+
+27{day.events.length} events28{day.events.length} events29{day.events.length} events30{day.events.length} events31{day.events.length} events1{day.events.length} events2{day.events.length} events3{day.events.length} events4{day.events.length} events5{day.events.length} events6{day.events.length} events7{day.events.length} events8{day.events.length} events9{day.events.length} events10{day.events.length} events11{day.events.length} events12{day.events.length} events13{day.events.length} events14{day.events.length} events15{day.events.length} events16{day.events.length} events17{day.events.length} events18{day.events.length} events19{day.events.length} events20{day.events.length} events21{day.events.length} events22{day.events.length} events23{day.events.length} events24{day.events.length} events25{day.events.length} events26{day.events.length} events27{day.events.length} events28{day.events.length} events29{day.events.length} events30{day.events.length} events31{day.events.length} events1{day.events.length} events2{day.events.length} events3{day.events.length} events4{day.events.length} events5{day.events.length} events6{day.events.length} events
+
+1. Maple syrup museum
+
+
+    3PM
+
+[Edit, Maple syrup museum](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+2. Hockey game
+
+
+    7PM
+
+[Edit, Hockey game](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+## [Week view](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars\#component-89f285aeebb60ddecb7ec8b5e664d525)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+M 10T 11W 12T 13F 14S 15S 16
+
+Mon 10
+
+Tue 11
+
+Wed 12
+
+Thu 13
+
+Fri 14
+
+Sat 15
+
+Sun 16
+
+12AM
+
+1AM
+
+2AM
+
+3AM
+
+4AM
+
+5AM
+
+6AM
+
+7AM
+
+8AM
+
+9AM
+
+10AM
+
+11AM
+
+12PM
+
+1PM
+
+2PM
+
+3PM
+
+4PM
+
+5PM
+
+6PM
+
+7PM
+
+8PM
+
+9PM
+
+10PM
+
+11PM
+
+1. [Breakfast\\
+\\
+6:00 AM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+2. [Flight to Paris\\
+\\
+7:30 AM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+3. [Meeting with design team at Disney\\
+\\
+10:00 AM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+## [Day view](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars\#component-2c77a3f6925b437e983e0d07fe3288b1)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+W19T20F21S22S23M24T25
+
+12AM
+
+1AM
+
+2AM
+
+3AM
+
+4AM
+
+5AM
+
+6AM
+
+7AM
+
+8AM
+
+9AM
+
+10AM
+
+11AM
+
+12PM
+
+1PM
+
+2PM
+
+3PM
+
+4PM
+
+5PM
+
+6PM
+
+7PM
+
+8PM
+
+9PM
+
+10PM
+
+11PM
+
+1. [Breakfast\\
+\\
+6:00 AM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+2. [Flight to Paris\\
+\\
+John F. Kennedy International Airport\\
+\\
+7:30 AM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+3. [Sightseeing\\
+\\
+Eiffel Tower\\
+\\
+11:00 AM](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+Previous month
+
+January 2022
+
+Next month
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+272829303112345678910111213141516171819202122232425262728293031123456
+
+## [Year view](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars\#component-e5f12862f086eee6108f70ff74a502ff)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+## January
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+272829303112345678910111213141516171819202122232425262728293031123456
+
+## February
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+311234567891011121314151617181920212223242526272812345678910111213
+
+## March
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+281234567891011121314151617181920212223242526272829303112345678910
+
+## April
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+2829303112345678910111213141516171819202122232425262728293012345678
+
+## May
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+2526272829301234567891011121314151617181920212223242526272829303112345
+
+## June
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+303112345678910111213141516171819202122232425262728293012345678910
+
+## July
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+27282930123456789101112131415161718192021222324252627282930311234567
+
+## August
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+123456789101112131415161718192021222324252627282930311234567891011
+
+## September
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+293031123456789101112131415161718192021222324252627282930123456789
+
+## October
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+262728293012345678910111213141516171819202122232425262728293031123456
+
+## November
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+311234567891011121314151617181920212223242526272829301234567891011
+
+## December
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+2829301234567891011121314151617181920212223242526272829303112345678
+
+## [Double](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars\#component-3d940888b49b624701d5343b67536107)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+Previous monthNext month
+
+## January
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+272829303112345678910111213141516171819202122232425262728293031123456
+
+## February
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+311234567891011121314151617181920212223242526272812345678910111213
+
+## Upcoming events
+
+1. Wed, Jan 12
+Nothing on today’s schedule
+
+2. Thu, Jan 13
+View house with real estate agent
+
+2:30 PM \- 4:30 PM
+
+3. Fri, Jan 14
+Meeting with bank manager
+
+All day
+
+4. Mon, Jan 17
+Sign paperwork at lawyers
+
+10:00 AM \- 10:15 AM
+
+
+## [Borderless stacked](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars\#component-b59d3a98c34e60d43c8972caa08618a5)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+## January 2022
+
+Previous monthNext month
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+27
+
+28
+
+29
+
+30
+
+31
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+## Schedule for January 21, 2022
+
+1. ![](https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Leslie Alexander
+
+
+
+1:00 PM \- 2:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+2. ![](https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Michael Foster
+
+
+
+3:00 PM \- 4:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+3. ![](https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Dries Vincent
+
+
+
+5:00 PM \- 6:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+4. ![](https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Lindsay Walton
+
+
+
+7:00 PM \- 8:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+
+## [Borderless side-by-side](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars\#component-5bb74a1ac1c8cf96e7b3d1ea2bf4570b)
+
+Preview
+
+[Get the code →](https://tailwindcss.com/plus/ui-blocks#pricing)
+
+## January 2022
+
+Previous monthNext month
+
+M
+
+T
+
+W
+
+T
+
+F
+
+S
+
+S
+
+27
+
+28
+
+29
+
+30
+
+31
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+## Schedule for January 21, 2022
+
+1. ![](https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Leslie Alexander
+
+
+
+1:00 PM \- 2:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+2. ![](https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Michael Foster
+
+
+
+3:00 PM \- 4:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+3. ![](https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Dries Vincent
+
+
+
+5:00 PM \- 6:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+4. ![](https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Lindsay Walton
+
+
+
+7:00 PM \- 8:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+
+5. ![](https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80)
+
+
+Courtney Henry
+
+
+
+9:00 PM \- 10:30 PM
+
+
+Open options
+
+[Edit](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#) [Cancel](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars#)
+

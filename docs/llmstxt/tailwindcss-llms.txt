@@ -1,0 +1,12 @@
+# https://tailwindcss.com llms.txt
+
+- [Tailwind CSS Framework](https://tailwindcss.com): Utility-first CSS framework for rapid website development.
+- [Place Items in Tailwind](https://tailwindcss.com/docs/place-items): Utilities for aligning and justifying grid items effectively.
+- [Support Tailwind CSS](https://tailwindcss.com/sponsor): Become a sponsor to help sustain Tailwind CSS project.
+- [Text Overflow Utilities](https://tailwindcss.com/docs/text-overflow): Control text overflow with Tailwind CSS utilities easily.
+- [Tailwind CSS Flyout Menus](https://tailwindcss.com/plus/ui-blocks/marketing/elements/flyout-menus): Explore beautiful dropdown menu examples for website navigation.
+- [Width Utilities in Tailwind](https://tailwindcss.com/docs/width): Learn how to set element widths using Tailwind CSS.
+- [Flex Grow Utilities](https://tailwindcss.com/docs/flex-grow): Learn how to control flex item growth in Tailwind CSS.
+- [Break After Utilities](https://tailwindcss.com/docs/break-after): Control column and page breaks using Tailwind CSS utilities.
+- [Aspect Ratio Utilities](https://tailwindcss.com/docs/aspect-ratio): Control element aspect ratios with Tailwind CSS utilities.
+- [Calendars for Application UI](https://tailwindcss.com/plus/ui-blocks/application-ui/data-display/calendars): Explore calendar components for application user interfaces.
