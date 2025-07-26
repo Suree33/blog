@@ -1,34 +1,22 @@
 /* Code block */
 .remark-code-container {
   &:has(.remark-code-title) {
-    margin-top: 1.7142857em;
+    @apply mt-7;
   }
   .remark-code-title {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-      'Courier New', monospace;
-    font-size: 0.875rem;
-    background-color: #f0f0f0;
-    color: #000;
-    @media (prefers-color-scheme: dark) {
-      background-color: #1f2428;
-      color: #fff;
-    }
-    width: fit-content;
-    max-width: 100%;
-    padding: 0.25rem 1rem;
-    --border-radius: 0.375rem;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    @apply font-mono text-sm;
+    @apply w-fit max-w-full px-4 py-1;
+    @apply bg-gray-100 text-black dark:bg-gray-800 dark:text-white;
+    @apply rounded-md rounded-br-none rounded-bl-none;
   }
 
   .remark-code-title + .astro-code {
-    margin-top: 0;
-    border-top-left-radius: 0;
+    @apply mt-0 rounded-tl-none;
   }
 
   .astro-code {
     @media (prefers-color-scheme: light) {
-      background-color: #f7f7f7 !important;
+      @apply !bg-gray-50;
     }
   }
 }
@@ -36,11 +24,8 @@
 @media (prefers-color-scheme: dark) {
   .astro-code,
   .astro-code span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-    /* Optional, if you also want font styles */
+    @apply !bg-(--shiki-dark-bg) !font-(--shiki-dark-font-weight) !text-(--shiki-dark);
     font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;
   }
 }
@@ -51,12 +36,6 @@
   &::after {
     content: '';
   }
-  padding: 0.15rem 0.3rem;
-  border-radius: 0.25rem;
-  background-color: #f8f8f8;
-  color: #525252;
-  @media (prefers-color-scheme: dark) {
-    background-color: #212121 !important;
-    color: #e5e5e5 !important;
-  }
+  @apply rounded px-1.5 py-0.5;
+  @apply bg-gray-50 text-gray-600 dark:bg-gray-800 dark:text-gray-200;
 }
