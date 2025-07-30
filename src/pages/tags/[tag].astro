@@ -23,7 +23,7 @@ export async function getStaticPaths() {
           }
           return true;
         })
-        .map((post) => post.frontmatter.tags!)
+        .map((post) => post.frontmatter.tags as string[])
         .flat(),
     ),
   ];
