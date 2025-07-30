@@ -1,0 +1,8 @@
+# CODEOWNERS file for Suree33/blog repository
+# This file defines code ownership for different parts of the repository
+
+# Default owner for all files
+* @Suree33
+
+# Specific owner for docs directory
+docs/ @docs-owner
