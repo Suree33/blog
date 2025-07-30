@@ -1,0 +1,45 @@
+---
+import { Icon } from 'astro-icon/components';
+import { formatDate } from '../scripts/date';
+
+export interface Props {
+  tags?: string[];
+  pubDate?: string;
+  updatedDate?: string;
+}
+
+const { tags, pubDate, updatedDate } = Astro.props;
+const formattedPubDate = pubDate ? formatDate(pubDate) : null;
+const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
+---
+
+<div
+  class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold text-neutral-500 uppercase"
+>
+  {
+    tags?.map((tag: string) => (
+      <a
+        href={`/tags/${tag}`}
+        class="inline-flex font-bold text-current no-underline"
+      >
+        {tag}
+      </a>
+    ))
+  }
+  {
+    formattedPubDate && (
+      <div>
+        <Icon name="fa6-solid:feather" class="mb-[.12em] inline text-sm" />
+        <time datetime={formattedPubDate}>{formattedPubDate}</time>
+      </div>
+    )
+  }
+  {
+    formattedUpdatedDate && (
+      <div>
+        <Icon name="fa6-solid:rotate" class="mb-[.12em] inline text-sm" />
+        <time datetime={formattedUpdatedDate}>{formattedUpdatedDate}</time>
+      </div>
+    )
+  }
+</div>

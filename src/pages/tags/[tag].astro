@@ -23,7 +23,7 @@ export async function getStaticPaths() {
           }
           return true;
         })
-        .map((post) => post.frontmatter.tags)
+        .map((post) => post.frontmatter.tags!)
         .flat(),
     ),
   ];
@@ -41,6 +41,10 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+
+if (!tag) {
+  return Astro.redirect('/404');
+}
 ---
 
 <BaseLayout pageTitle={tag}>
