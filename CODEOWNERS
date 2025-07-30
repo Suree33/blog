@@ -1,0 +1,38 @@
+# Global owners
+* @Suree33
+
+# Documentation
+*.md @Suree33
+docs/ @Suree33
+
+# Configuration files
+*.json @Suree33
+*.yml @Suree33
+*.yaml @Suree33
+*.mjs @Suree33
+*.toml @Suree33
+*.config.* @Suree33
+
+# Source code
+src/ @Suree33
+
+# GitHub workflows and configuration
+.github/ @Suree33
+
+# Package management
+package.json @Suree33
+pnpm-lock.yaml @Suree33
+pnpm-workspace.yaml @Suree33
+
+# TypeScript configuration
+tsconfig.json @Suree33
+
+# Linting and formatting
+eslint.config.js @Suree33
+.prettierrc.json @Suree33
+.prettierignore @Suree33
+
+# Build and deployment
+astro.config.mjs @Suree33
+wrangler.toml @Suree33
+postcss.config.cjs @Suree33
