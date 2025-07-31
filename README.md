@@ -4,7 +4,6 @@
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Suree33/blog/main?style=flat)](https://github.com/Suree33/blog/commits/main/)
 [![wakatime](https://wakatime.com/badge/github/Suree33/blog.svg)](https://wakatime.com/badge/github/Suree33/blog)
 
-[![Bun](https://img.shields.io/badge/bun-282a36?style=flat&logo=bun&logoColor=fbf0df)](https://bun.sh/)
 [![Astro](https://img.shields.io/badge/Astro-0C1222?style=flat&logo=astro&logoColor=FDFDFE)](https://astro.build/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
@@ -13,38 +12,34 @@
 ### 依存関係のインストール
 
 ```bash
-bun install
+pnpm install
 ```
 
 ### ローカルサーバーの起動
 
 ```bash
-bun run dev
+pnpm run dev
 ```
 
 ### フォーマット
 
 ```bash
-bun run format
+pnpm run format
 ```
 
 ### ビルド
 
 ```bash
-bun run build
+pnpm run build
 ```
 
 ### ビルド結果のプレビュー
 
 ```bash
-bun run preview
+pnpm run preview
 ```
 
 ## 使用ツール・サービス
-
-### ランタイム
-
-- [Bun](https://bun.sh/)
 
 ### フレームワーク
 
