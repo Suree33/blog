@@ -9,7 +9,9 @@ on:
     #   - "src/**/*.tsx"
     #   - "src/**/*.js"
     #   - "src/**/*.jsx"
-concurrency: claude-code-review
+concurrency:
+  group: claude-code-review-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   claude-review:
