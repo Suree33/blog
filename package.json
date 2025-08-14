@@ -47,7 +47,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "typescript-eslint": "^8.39.1",
-    "wrangler": "^4.29.0"
+    "wrangler": "^4.29.1"
   },
   "packageManager": "pnpm@10.13.1"
 }
