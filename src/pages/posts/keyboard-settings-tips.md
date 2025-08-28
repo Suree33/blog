@@ -1,11 +1,11 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: Viaでキーボードを設定していて知った/気がついたTips
+title: VIAでキーボードを設定していて知った/気がついたTips
 pubDate: 2025-08-28
 tags:
   - キーボード
   - ガジェット
-description: Viaでキーボードの設定をしている時のメモ。随時更新。
+description: VIAでキーボードの設定をしている時のメモ。随時更新。
 ---
 
 ## VIA
