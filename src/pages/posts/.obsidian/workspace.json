@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "f57a3bd4a08947b9",
+        "id": "f879047d5a405912",
         "type": "tabs",
         "children": [
           {
-            "id": "e7398d094d5274ee",
+            "id": "7c9250275a27e88a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "template/_blog-post.md",
+                "file": "keyboard-settings-tip.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_blog-post"
+              "title": "keyboard-settings-tip"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "ファイルエクスプローラ"
@@ -93,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "template/_blog-post.md",
+                "file": "keyboard-settings-tip.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "_blog-postへのバックリンク"
+              "title": "keyboard-settings-tipへのバックリンク"
             }
           },
           {
@@ -163,15 +164,13 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:クイックスイッチャーを開く": false,
       "graph:グラフビューを開く": false,
-      "canvas:新規キャンバスを作成": false,
-      "daily-notes:今日のデイリーノートを開く": false,
       "templates:テンプレートを挿入": false,
       "command-palette:コマンドパレットを開く": false,
       "markdown-importer:Markdownインポーターを開く": false,
@@ -179,17 +178,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e7398d094d5274ee",
+  "active": "7c9250275a27e88a",
   "lastOpenFiles": [
-    "無題のファイル.md",
+    "keyboard-settings-tip.md",
+    "agar-keyboard.md",
+    "audio-interface-under-the-desk.md",
+    "catppuccin-coteditor.md",
+    "wishlist-2024-04.md",
     "template/_blog-post.md",
+    "fan-for-my-right-hand.md",
     "intel-core-i5-13600kf-game-crash.md",
     "logi-mx-master-is-better-than-lift.md",
     "template/blog-post.md",
-    "fan-for-my-right-hand.md",
-    "audio-interface-under-the-desk.md",
     "setup-obsidian-livesync.md",
-    "wishlist-2024-04.md",
     "template",
     "nature-remo-lapis.md",
     "perplexity-pro-is-cheaper-on-ios-app.md",
