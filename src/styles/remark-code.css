@@ -16,7 +16,7 @@
 
   .astro-code {
     @media (prefers-color-scheme: light) {
-      @apply !bg-gray-50;
+      @apply bg-gray-50!;
     }
   }
 }
@@ -24,7 +24,7 @@
 @media (prefers-color-scheme: dark) {
   .astro-code,
   .astro-code span {
-    @apply !bg-(--shiki-dark-bg) !font-(--shiki-dark-font-weight) !text-(--shiki-dark);
+    @apply bg-(--shiki-dark-bg)! font-(--shiki-dark-font-weight)! text-(--shiki-dark)!;
     font-style: var(--shiki-dark-font-style) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;
   }
