@@ -22,7 +22,7 @@
     "@iconify-json/fa6-solid": "^1.2.4",
     "@tailwindcss/postcss": "^4.1.15",
     "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.1.14",
+    "@tailwindcss/vite": "^4.1.15",
     "astro": "^5.14.7",
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.21",
