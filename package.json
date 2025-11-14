@@ -31,7 +31,7 @@
     "remark-flexible-code-titles": "^1.3.2",
     "remark-link-card": "git+https://github.com/gladevise/remark-link-card.git",
     "sanitize-html": "^2.17.0",
-    "sharp": "^0.34.4",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3"
   },
