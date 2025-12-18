@@ -23,7 +23,7 @@
     "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.4",
+    "astro": "^5.16.5",
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.22",
     "postcss-nesting": "^13.0.2",
