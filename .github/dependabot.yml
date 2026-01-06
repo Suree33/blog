@@ -61,7 +61,7 @@ updates:
           - '@eslint*'
           - 'eslint*'
           - 'typescript-eslint'
-          - '@typescript-eslint*'
+          - '@typescript-eslint/parser'
         update-types:
           - 'minor'
           - 'patch'
