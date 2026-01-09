@@ -169,3 +169,4 @@ pubDate: "2024-01-01"
 - **astro-icon**: アイコン表示
 - **rehype-callouts**: Callout機能
 - **@tailwindcss/typography**: Proseスタイリング
+
