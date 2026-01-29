@@ -45,8 +45,8 @@ importers:
         specifier: ^10.4.23
         version: 10.4.23(postcss@8.5.6)
       postcss-nesting:
-        specifier: ^13.0.2
-        version: 13.0.2(postcss@8.5.6)
+        specifier: ^14.0.0
+        version: 14.0.0(postcss@8.5.6)
       rehype-callouts:
         specifier: ^2.1.2
         version: 2.1.2
@@ -236,17 +236,17 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@csstools/selector-resolve-nested@3.1.0':
-    resolution: {integrity: sha512-mf1LEW0tJLKfWyvn5KdDrhpxHyuxpbNwTIwOYLIvsTffeyOf85j5oIzfG0yosxDgx/sswlqBnESYUcQH0vgZ0g==}
-    engines: {node: '>=18'}
+  '@csstools/selector-resolve-nested@4.0.0':
+    resolution: {integrity: sha512-9vAPxmp+Dx3wQBIUwc1v7Mdisw1kbbaGqXUM8QLTgWg7SoPGYtXBsMXvsFs/0Bn5yoFhcktzxNZGNaUt0VjgjA==}
+    engines: {node: '>=20.19.0'}
     peerDependencies:
-      postcss-selector-parser: ^7.0.0
+      postcss-selector-parser: ^7.1.1
 
-  '@csstools/selector-specificity@5.0.0':
-    resolution: {integrity: sha512-PCqQV3c4CoVm3kdPhyeZ07VmBRdH2EpMFA/pd9OASpOEC3aXNGoqPDAZ80D0cLpMBxnmk0+yNhGsEx31hq7Gtw==}
-    engines: {node: '>=18'}
+  '@csstools/selector-specificity@6.0.0':
+    resolution: {integrity: sha512-4sSgl78OtOXEX/2d++8A83zHNTgwCJMaR24FvsYL7Uf/VS8HZk9PTwR51elTbGqMuwH3szLvvOXEaVnqn0Z3zA==}
+    engines: {node: '>=20.19.0'}
     peerDependencies:
-      postcss-selector-parser: ^7.0.0
+      postcss-selector-parser: ^7.1.1
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -2873,9 +2873,9 @@ packages:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
     engines: {node: '>= 0.4'}
 
-  postcss-nesting@13.0.2:
-    resolution: {integrity: sha512-1YCI290TX+VP0U/K/aFxzHzQWHWURL+CtHMSbex1lCdpXD1SoR2sYuxDu5aNI9lPoXpKTCggFZiDJbwylU0LEQ==}
-    engines: {node: '>=18'}
+  postcss-nesting@14.0.0:
+    resolution: {integrity: sha512-YGFOfVrjxYfeGTS5XctP1WCI5hu8Lr9SmntjfRC+iX5hCihEO+QZl9Ra+pkjqkgoVdDKvb2JccpElcowhZtzpw==}
+    engines: {node: '>=20.19.0'}
     peerDependencies:
       postcss: ^8.4
 
@@ -2885,6 +2885,10 @@ packages:
 
   postcss-selector-parser@7.1.0:
     resolution: {integrity: sha512-8sLjZwK0R+JlxlYcTuVnyT2v+htpdrjDOKuMcOVdYjt52Lh8hWRYpxBPoKx/Zg+bcjc3wx6fmQevMmUztS/ccA==}
+    engines: {node: '>=4'}
+
+  postcss-selector-parser@7.1.1:
+    resolution: {integrity: sha512-orRsuYpJVw8LdAwqqLykBj9ecS5/cRHlI5+nvTo8LcCKmzDmqVORXtOIYEEQuL9D4BxtA1lm5isAqzQZCoQ6Eg==}
     engines: {node: '>=4'}
 
   postcss-value-parser@4.2.0:
@@ -4006,13 +4010,13 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@csstools/selector-resolve-nested@3.1.0(postcss-selector-parser@7.1.0)':
+  '@csstools/selector-resolve-nested@4.0.0(postcss-selector-parser@7.1.1)':
     dependencies:
-      postcss-selector-parser: 7.1.0
+      postcss-selector-parser: 7.1.1
 
-  '@csstools/selector-specificity@5.0.0(postcss-selector-parser@7.1.0)':
+  '@csstools/selector-specificity@6.0.0(postcss-selector-parser@7.1.1)':
     dependencies:
-      postcss-selector-parser: 7.1.0
+      postcss-selector-parser: 7.1.1
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:
@@ -6957,12 +6961,12 @@ snapshots:
 
   possible-typed-array-names@1.1.0: {}
 
-  postcss-nesting@13.0.2(postcss@8.5.6):
+  postcss-nesting@14.0.0(postcss@8.5.6):
     dependencies:
-      '@csstools/selector-resolve-nested': 3.1.0(postcss-selector-parser@7.1.0)
-      '@csstools/selector-specificity': 5.0.0(postcss-selector-parser@7.1.0)
+      '@csstools/selector-resolve-nested': 4.0.0(postcss-selector-parser@7.1.1)
+      '@csstools/selector-specificity': 6.0.0(postcss-selector-parser@7.1.1)
       postcss: 8.5.6
-      postcss-selector-parser: 7.1.0
+      postcss-selector-parser: 7.1.1
 
   postcss-selector-parser@6.0.10:
     dependencies:
@@ -6970,6 +6974,11 @@ snapshots:
       util-deprecate: 1.0.2
 
   postcss-selector-parser@7.1.0:
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
+
+  postcss-selector-parser@7.1.1:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
