@@ -1,10 +1,20 @@
+// @ts-check
 import js from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import { fileURLToPath } from 'node:url';
+import { includeIgnoreFile } from '@eslint/compat';
 
-export default tseslint.config(
+const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url));
+
+export default defineConfig(
+  {
+    ignores: ['src/pages/posts/.obsidian/**'],
+  },
+  includeIgnoreFile(gitignorePath, 'Imported .gitignore patterns'),
   js.configs.recommended,
   tseslint.configs.strict,
   tseslint.configs.stylistic,
