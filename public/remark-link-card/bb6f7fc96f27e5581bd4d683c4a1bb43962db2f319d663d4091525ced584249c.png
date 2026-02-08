@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="icon" type="image/svg+xml" href="/favicon.ico"/><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml"/><meta name="generator" content="Hono"/><link rel="canonical" href="https://futabooo.com/"/><title>futabooo.com</title><meta name="title" content="futabooo.com"/><meta name="description" content="Home - futabooo.com"/><meta property="og:type" content="website"/><meta property="og:url" content="https://futabooo.com/"/><meta property="og:title" content="futabooo.com"/><meta property="og:description" content="Home - futabooo.com"/><meta property="og:image" content="https://futabooo.com/ogp.png"/><meta property="twitter:card" content="summary_large_image"/><meta property="twitter:url" content="https://futabooo.com/"/><meta property="twitter:title" content="futabooo.com"/><meta property="twitter:description" content="Home - futabooo.com"/><meta property="twitter:image" content="https://futabooo.com/ogp.png"/><link rel="author" href="https://www.hatena.ne.jp/futabooo/" /><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NCE9S2S68M"></script><script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-NCE9S2S68M');
+              </script><link href="/static/style-C4yHqk3k.css" rel="stylesheet"/><link href="/pagefind/pagefind-ui.css" rel="stylesheet"/><script src="/pagefind/pagefind-ui.js" async=""></script></head><body class="flex flex-col items-center h-screen"><div class="w-full max-w-3xl flex-grow px-6"><div class="navbar"><div class="flex-1"><a href="/" class="p-2 hover:underline md:text-2xl font-bold flex gap-4 items-center"><img src="/ic_futabooo_orenge.jpg" width="48" height="48" alt="futabooo" class="rounded-full bg-base-200 md:w-12 md:h-12 w-9 h-9"/>futabooo</a></div><div class="flex-none flex"><ul class="menu menu-horizontal hidden md:flex"><li class="border-b-2 border-transparent"><a href="/blog">Blog</a></li><li class="border-b-2 border-transparent"><a href="/about">About</a></li></ul><button id="search" class="btn btn-square btn-ghost swap" type="button"><svg class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20" title="Search" role="img" aria-label="Search"><path d="M 10 2 C 5.5965257 2 2 5.5965291 2 10 C 2 14.403471 5.5965257 18 10 18 C 11.752132 18 13.370523 17.422074 14.691406 16.458984 L 19.845703 21.613281 A 1.250125 1.250125 0 1 0 21.613281 19.845703 L 16.458984 14.691406 C 17.422074 13.370523 18 11.75213 18 10 C 18 5.5965291 14.403474 2 10 2 z M 10 4.5 C 13.052375 4.5 15.5 6.947627 15.5 10 C 15.5 13.052373 13.052375 15.5 10 15.5 C 6.9476251 15.5 4.5 13.052373 4.5 10 C 4.5 6.947627 6.9476251 4.5 10 4.5 z"></path></svg></button><dialog id="searchModal" class="modal"><div class="modal-box"><form method="dialog"><button type="submit" class="btn btn-circle btn-ghost btn-xs absolute right-2 top-2"><svg xmlns="http://www.w3.org/2000/svg" class="fill-current h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" title="Close" role="img" aria-label="Close"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></form><div id="search-box" class="mt-4 mb-2"></div></div><form method="dialog" class="modal-backdrop"><button type="submit">close</button></form></dialog><script>
+  (function() {
+    let pagefindInitialized = false;
+
+    function initSearch() {
+      const searchBtn = document.getElementById("search");
+      const searchModal = document.getElementById("searchModal");
+
+      if (!searchBtn || !searchModal) return;
+
+      searchBtn.addEventListener("click", () => {
+        searchModal.showModal();
+        if (!pagefindInitialized && typeof PagefindUI !== 'undefined') {
+          new PagefindUI({
+            element: "#search-box",
+            processResult: (result) => {
+              // .html拡張子を除去
+              result.url = result.url.replace(/\.html$/, '');
+              return result;
+            }
+          });
+          pagefindInitialized = true;
+        }
+      });
+    }
+
+    // DOMが既にロード済みか確認
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSearch);
+    } else {
+      initSearch();
+    }
+  })();
+</script><button id="themeChange" class="btn btn-square btn-ghost swap swap-rotate" type="button" aria-label="テーマを切り替え"><svg class="swap-off fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" title="Sun" role="img" aria-label="Sun"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"></path></svg><svg class="swap-on fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" title="Moon" role="img" aria-label="Moon"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"></path></svg></button><script>
+(function() {
+  // 初期テーマの設定
+  var theme = localStorage.getItem('theme');
+  if (!theme) {
+    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'winter';
+  }
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+
+  // DOMContentLoadedでボタンの初期化
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('themeChange');
+    if (!btn) return;
+
+    // 初期状態の設定
+    if (theme === 'night') {
+      btn.classList.add('swap-active');
+    }
+
+    // クリックイベント
+    btn.addEventListener('click', function() {
+      var currentTheme = document.documentElement.getAttribute('data-theme');
+      var newTheme = currentTheme === 'winter' ? 'night' : 'winter';
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      btn.classList.toggle('swap-active');
+    });
+  });
+})();
+</script><div class="dropdown dropdown-end md:hidden"><button tabindex="0" class="btn btn-ghost btn-square" type="button"><svg class="w-6 h-6 stroke-current feather feather-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" title="Menu" role="img" aria-label="Menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button><ul tabindex="0" class="dropdown-content menu bg-base-200 w-52 menu-compact"><li class="border-l-2 border-transparent"><a href="/blog">Blog</a></li><li class="border-l-2 border-transparent"><a href="/about">About</a></li></ul></div></div></div><div class="mb-16"><h1 class="text-3xl font-bold mb-4">Hi, I&#39;m futabooo!!</h1><p>Welcome to my personal site.🏡<br/><br/>株式会社10Xで働くソフトウェアエンジニアです。仕事ではコードを書くことを中心としてチームビルディングやプロセスの効率化を行っています。休日は家族と遊んだり、コードを書いたり、フットサルをしたりしています。</p></div><div><div class="flex justify-between"><h2 class="text-3xl font-bold mb-4">最新の投稿</h2><a href="/blog"><button class="btn btn-outline btn-sm" type="button">もっとみる</button></a></div><div><div class=""><div><a class="flex justify-between group" href="/blog/2026-01-11-scrum-masters-and-engineering-managers"><h2 class="text-xl font-bold group-hover:underline">俯瞰して支援し、いざとなれば先陣を切ってチームを機能させる ~スクラムマスター出身EM1年生の苦悩と学び~</h2><p class="min-w-fit ps-4 text-sm invisible md:visible"><time datetime="2026-01-11T00:00:00.000Z">2026年1月11日</time></p></a></div><div class="divider m-0"></div></div><div class=""><div><a class="flex justify-between group" href="/blog/2025-12-31-review-2025"><h2 class="text-xl font-bold group-hover:underline">2025年のふりかえり</h2><p class="min-w-fit ps-4 text-sm invisible md:visible"><time datetime="2025-12-31T00:00:00.000Z">2025年12月31日</time></p></a></div><div class="divider m-0"></div></div><div class=""><div><a class="flex justify-between group" href="/blog/2025-03-19-electricity-usage-2024"><h2 class="text-xl font-bold group-hover:underline">電気代の見直し 2024</h2><p class="min-w-fit ps-4 text-sm invisible md:visible"><time datetime="2025-03-19T00:00:00.000Z">2025年3月19日</time></p></a></div></div></div><h2 class="text-3xl font-bold mb-4 mt-14">Tag一覧</h2><div class="flex flex-row flex-wrap gap-1"><a class="badge badge-outline p-3" href="/tag/diary">#diary (7)</a><a class="badge badge-outline p-3" href="/tag/Astro">#Astro (4)</a><a class="badge badge-outline p-3" href="/tag/Pagefind">#Pagefind (1)</a><a class="badge badge-outline p-3" href="/tag/Tailwind CSS">#Tailwind CSS (1)</a><a class="badge badge-outline p-3" href="/tag/開発環境">#開発環境 (1)</a><a class="badge badge-outline p-3" href="/tag/GitHub Actions">#GitHub Actions (1)</a><a class="badge badge-outline p-3" href="/tag/CICD">#CICD (1)</a><a class="badge badge-outline p-3" href="/tag/Book Review">#Book Review (2)</a><a class="badge badge-outline p-3" href="/tag/VSCode">#VSCode (1)</a><a class="badge badge-outline p-3" href="/tag/Renovate">#Renovate (1)</a><a class="badge badge-outline p-3" href="/tag/Prettier">#Prettier (1)</a><a class="badge badge-outline p-3" href="/tag/Chrome Extension">#Chrome Extension (2)</a><a class="badge badge-outline p-3" href="/tag/TypeScript">#TypeScript (1)</a><a class="badge badge-outline p-3" href="/tag/Vite">#Vite (1)</a><a class="badge badge-outline p-3" href="/tag/Notion">#Notion (1)</a><a class="badge badge-outline p-3" href="/tag/プロセス">#プロセス (1)</a><a class="badge badge-outline p-3" href="/tag/keyboard">#keyboard (2)</a><a class="badge badge-outline p-3" href="/tag/Buf">#Buf (1)</a><a class="badge badge-outline p-3" href="/tag/Dart">#Dart (2)</a><a class="badge badge-outline p-3" href="/tag/protobuf">#protobuf (1)</a><a class="badge badge-outline p-3" href="/tag/gRPC">#gRPC (1)</a><a class="badge badge-outline p-3" href="/tag/remark">#remark (1)</a><a class="badge badge-outline p-3" href="/tag/shell">#shell (1)</a><a class="badge badge-outline p-3" href="/tag/Pixela">#Pixela (1)</a><a class="badge badge-outline p-3" href="/tag/Cloud Run">#Cloud Run (1)</a></div></div></div></body><footer class="footer footer-center bg-base-200 p-10"><div class="w-full max-w-3xl"><nav class="grid grid-flow-col gap-4"><div class="w-7"><a href="https://www.twitter.com/futabooo"><img class="w-8 h-8" src="/ic_twitter.svg" alt="twitter"/></a></div><a href="https://www.github.com/futabooo"><img class="w-8 h-8" src="/ic_github.svg" alt="github"/></a></nav><aside><p class="text-xs">©2026 <a class="link" href="https://twitter.com/futabooo" target="_blank">futabooo</a> All rights reserved. Powered by<a class="link" href="https://hono.dev/" target="_blank" rel="noopener noreferrer"> Hono</a></p></aside></div></footer></html>
