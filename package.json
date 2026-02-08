@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "dev:host": "astro dev --host",
-    "build": "astro check && astro build",
+    "prebuild": "pnpm lint",
+    "build": "astro build",
     "preview": "astro preview",
     "preview:workers": "wrangler dev",
     "deploy": "wrangler deploy",
