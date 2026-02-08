@@ -11,7 +11,7 @@
     "deploy": "wrangler deploy",
     "deploy:dry-run": "wrangler deploy --dry-run",
     "format": "prettier --write .",
-    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,astro}\" --ignore-pattern \"**/.obsidian/**\""
+    "lint": "eslint"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -36,6 +36,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@eslint/compat": "^2.0.2",
     "@eslint/js": "^9.39.2",
     "@typescript-eslint/parser": "^8.54.0",
     "eslint": "^9.39.2",
@@ -49,5 +50,5 @@
     "typescript-eslint": "^8.54.0",
     "wrangler": "^4.61.0"
   },
-  "packageManager": "pnpm@10.17.0+sha512.fce8a3dd29a4ed2ec566fb53efbb04d8c44a0f05bc6f24a73046910fb9c3ce7afa35a0980500668fa3573345bd644644fa98338fa168235c80f4aa17aa17fbef"
+  "packageManager": "pnpm@10.29.1+sha512.48dae233635a645768a3028d19545cacc1688639eeb1f3734e42d6d6b971afbf22aa1ac9af52a173d9c3a20c15857cfa400f19994d79a2f626fcc73fccda9bbc"
 }
