@@ -5,7 +5,7 @@ import icon from 'astro-icon';
 import { defineConfig } from 'astro/config';
 import rehypeCallouts from 'rehype-callouts';
 import remarkCodeTitles from 'remark-flexible-code-titles';
-import remarkLinkCard from 'remark-link-card';
+import remarkLinkCard from 'remark-link-card-plus';
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +20,6 @@ export default defineConfig({
         remarkLinkCard,
         {
           cache: true,
-          shortenUrl: true,
         },
       ],
     ],
