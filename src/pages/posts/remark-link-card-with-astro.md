@@ -2,6 +2,7 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: Astroにおけるremark-link-cardを使ったリンクカード
 pubDate: 2024-04-05
+updatedDate: 2026-02-12
 tags:
   - ウェブ開発
   - Astro
@@ -10,11 +11,17 @@ description: Astroで、remarkプラグインであるremark-link-cardを使い�
 ogimage: '/ogimage/remark-link-card-with-astro.og.png'
 ---
 
+## 更新（2026/02/12）
+
+remark-link-card-plus に移行しました。
+
+<https://sur33.com/posts/remark-link-card-plus/>
+
 ## remark-link-card
 
 remark-link-card は、remarkプラグインで、リンクをカード形式で表示するためのプラグインです。カード形式のリンクとは、以下のようなものです。
 
-https://github.com/gladevise/remark-link-card
+<https://github.com/gladevise/remark-link-card>
 
 [Astroはデフォルトでremarkプラグインをサポートしている](https://docs.astro.build/ja/guides/markdown-content/#markdown%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3)ため、この `remark-link-card` を使ってリンクをカード形式で表示することができます。
 
@@ -174,7 +181,7 @@ CSSは以下のようにしました。
 https://github.com/gladevise/remark-link-card
 ```
 
-https://github.com/gladevise/remark-link-card
+<https://github.com/gladevise/remark-link-card>
 
 <>で囲っても適用されます。
 
@@ -194,10 +201,10 @@ https://github.com/gladevise/remark-link-card
 
 ## 参考
 
-https://docs.astro.build/ja/guides/markdown-content/#markdown%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3
+<https://docs.astro.build/ja/guides/markdown-content/#markdown%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3>
 
-https://github.com/gladevise/remark-link-card
+<https://github.com/gladevise/remark-link-card>
 
-https://roboin.io/article/2024/02/09/how-to-use-remark-link-card/
+<https://roboin.io/article/2024/02/09/how-to-use-remark-link-card/>
 
-https://futabooo.com/blog/2023/link-card/
+<https://futabooo.com/blog/2023/link-card/>
