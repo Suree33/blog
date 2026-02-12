@@ -55,10 +55,10 @@ export default defineConfig({
 
 #### 3. CSS追加
 
-基本的に[remark-link-cardの時のCSS](https://sur33.com/posts/remark-link-card-with-astro)をremark-link-card-plus用に書き換えただけ。ただ、TailwindCSS化がされているため、 `@apply` を多用しており、純粋なCSSはほぼありません。TailwindCSSを使っていないプロジェクトでは、AIなどで頑張って生CSS化して使ってください。
+基本的に[remark-link-cardの時のCSS](https://sur33.com/posts/remark-link-card-with-astro)をremark-link-card-plus用に書き換えただけ。ただ、Tailwind CSS化してあるため、 `@apply` を多用しており、純粋なCSSはほぼありません。Tailwind CSSを使っていないプロジェクトでは、AIなどで頑張って生CSS化して使ってください。
 
 ```css:remark-link-card.css
-/* ブレークポイント: 60ch（Tailwindcss/Typographyのproseのmax-widthを参考に） */
+/* ブレークポイント: 60ch（Tailwind CSS/Typographyのproseのmax-widthを参考に） */
 .remark-link-card-plus__container {
   --padding-x: 1rem;
   --padding-y: 0.7rem;
