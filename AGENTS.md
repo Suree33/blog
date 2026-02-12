@@ -2,7 +2,7 @@
 
 ## プロジェクト概要
 
-Astro + TypeScript + TailwindCSSで構築されたDaiki Satoの個人ブログ (sur33.com)。pnpmをパッケージマネージャーとして使用し、Cloudflare Workersでホスティング。
+Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ (sur33.com)。pnpmをパッケージマネージャーとして使用し、Cloudflare Workersでホスティング。
 
 ## 開発コマンド
 
@@ -38,7 +38,7 @@ Astro + TypeScript + TailwindCSSで構築されたDaiki Satoの個人ブログ (
 
 ### スタイリング
 
-- TailwindCSS + PostCSS + autoprefixer
+- Tailwind CSS + PostCSS + autoprefixer
 - カスタムCSS: remark-code.css (コードブロック), remark-link-card.css (リンクカード)
 
 ### 設定ファイル
