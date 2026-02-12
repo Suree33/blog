@@ -5,7 +5,7 @@
   --border-radius: calc(0.5rem - 1px);
   @apply rounded-[calc(var(--border-radius)+1px)];
   @apply border border-(--tw-prose-hr);
-  @apply transition-[background-color] hover:bg-gray-50 dark:hover:bg-gray-800;
+  @apply transition-colors hover:bg-gray-50 dark:hover:bg-gray-800;
   @apply mb-5 w-full;
 }
 
@@ -36,8 +36,8 @@
 }
 
 .remark-link-card-plus__description {
-  @apply text-sm text-gray-500 dark:text-gray-400;
-  @apply mb-3;
+  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply mt-1 mb-3;
 
   @apply line-clamp-1 text-ellipsis;
 }
