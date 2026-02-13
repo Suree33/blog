@@ -1,0 +1,78 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.2.9">
+  <diagram name="ページ1" id="f9iEhGPg77ipeYe5iJ6O">
+    <mxGraphModel dx="567" dy="603" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-3" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" />
+              <mxPoint x="320" y="390" />
+              <mxPoint x="250" y="390" />
+              <mxPoint x="250" y="570" />
+              <mxPoint x="170" y="570" />
+              <mxPoint x="170" y="430" />
+              <mxPoint y="430" />
+              <mxPoint y="20" />
+              <mxPoint x="50" y="20" />
+            </Array>
+            <mxPoint x="50" as="sourcePoint" />
+            <mxPoint x="50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-12" connectable="0" parent="1" style="group;opacity=30;" value="" vertex="1">
+          <mxGeometry height="60" width="60" x="180" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-10" edge="1" parent="kaC8zCBX8E9DQ-l8Qynd-12" style="endArrow=none;html=1;rounded=0;curved=1;opacity=30;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint />
+            </Array>
+            <mxPoint y="60" as="sourcePoint" />
+            <mxPoint x="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-11" edge="1" parent="kaC8zCBX8E9DQ-l8Qynd-12" style="endArrow=none;html=1;rounded=0;opacity=30;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="60" y="60" as="sourcePoint" />
+            <mxPoint x="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="棚" vertex="1">
+          <mxGeometry height="35" width="60" x="5" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="120" width="60" x="5" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="55" width="6" x="22" y="97.5" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-19" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="引き出し" vertex="1">
+          <mxGeometry height="35" width="60" x="5" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=32;" value="椅子" vertex="1">
+          <mxGeometry height="50" width="50" x="70" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;" value="ソファ" vertex="1">
+          <mxGeometry height="140" width="75" x="5" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-24" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" value="新デスク" vertex="1">
+          <mxGeometry height="120" width="60" x="255" y="5" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-26" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="45.5" width="15" x="41" y="102.25" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-16" parent="kaC8zCBX8E9DQ-l8Qynd-26" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=light-dark(#000000, #bfd3ff);shape=mxgraph.mscae.enterprise.keyboard;rotation=-90;" value="" vertex="1">
+          <mxGeometry height="15" width="25" x="-5" y="25.5" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-17" parent="kaC8zCBX8E9DQ-l8Qynd-26" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=light-dark(#000000, #bfd3ff);shape=mxgraph.mscae.enterprise.mouse;rotation=-90;" value="" vertex="1">
+          <mxGeometry height="10" width="6" x="4.5" y="-2" as="geometry" />
+        </mxCell>
+        <mxCell id="kaC8zCBX8E9DQ-l8Qynd-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=7;" value="テーブル" vertex="1">
+          <mxGeometry height="90" width="45" x="100" y="265" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
