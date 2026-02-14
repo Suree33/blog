@@ -49,7 +49,7 @@ pnpm run preview
 
 ### Remarkプラグイン
 
-- [remark-link-card](https://github.com/gladevise/remark-link-card)
+- [remark-link-card-plus](https://github.com/okaryo/remark-link-card-plus)
 - [remark-flexible-code-titles](https://github.com/ipikuka/remark-flexible-code-titles)
 
 ### アセット
