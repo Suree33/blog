@@ -1,0 +1,4 @@
+interface:
+  display_name: "Init Blog Post"
+  short_description: "Create markdown drafts from blog template"
+  default_prompt: "Initialize a post file from template with slug, date, and frontmatter."
