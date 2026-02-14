@@ -7,7 +7,7 @@
 ## 生成スクリプト
 
 ```bash
-python3 .codex/skills/init-post/scripts/init_post.py --slug my-new-post
+python3 .agents/skills/init-post/scripts/init_post.py --slug my-new-post
 ```
 
 主なオプション:

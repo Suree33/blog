@@ -19,7 +19,7 @@ description: src/pages/posts/template/_blog-post.md を使って新規ブログ�
 3. 生成スクリプトを実行する。
 
 ```bash
-python3 .codex/skills/init-post/scripts/init_post.py \
+python3 .agents/skills/init-post/scripts/init_post.py \
   --slug my-new-post \
   --title "記事タイトル" \
   --description "記事の概要" \
