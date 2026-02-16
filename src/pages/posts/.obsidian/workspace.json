@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "template/_blog-post.md",
+                "file": "resolve-sidekick-nvim-codex-search-error.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_blog-post"
+              "title": "resolve-sidekick-nvim-codex-search-error"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "byModifiedTime",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "ファイルエクスプローラ"
@@ -168,10 +169,9 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:クイックスイッチャーを開く": false,
       "graph:グラフビューを開く": false,
-      "canvas:新規キャンバスを作成": false,
-      "daily-notes:今日のデイリーノートを開く": false,
       "templates:テンプレートを挿入": false,
       "command-palette:コマンドパレットを開く": false,
       "markdown-importer:Markdownインポーターを開く": false,
@@ -181,8 +181,11 @@
   },
   "active": "e7398d094d5274ee",
   "lastOpenFiles": [
-    "無題のファイル.md",
+    "resolve-sidekick-nvim-codex-search-error.md~",
+    "images/resolve-sidekick-nvim-codex-search-error-error.png",
+    "resolve-sidekick-nvim-codex-search-error.md",
     "template/_blog-post.md",
+    "無題のファイル.md",
     "intel-core-i5-13600kf-game-crash.md",
     "logi-mx-master-is-better-than-lift.md",
     "template/blog-post.md",
