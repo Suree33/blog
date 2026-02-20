@@ -1,13 +1,13 @@
 ---
+import type { MarkdownLayoutProps } from 'astro';
 import type { PostFrontmatter } from '../types/Post';
 import PostMetadata from '../components/PostMetadata.astro';
 import ProseArticleLayout from './ProseArticleLayout.astro';
 
-export interface Props {
-  frontmatter: PostFrontmatter;
-}
+type Props = MarkdownLayoutProps<PostFrontmatter>;
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
+const tocHeadings = headings.filter(({ depth }) => depth === 2 || depth === 3);
 ---
 
 <ProseArticleLayout
@@ -37,6 +37,30 @@ const { frontmatter } = Astro.props;
       <p class="rounded bg-neutral-100 px-4 py-3 text-left dark:bg-neutral-800">
         {frontmatter.description}
       </p>
+    )
+  }
+  {
+    tocHeadings.length > 0 && (
+      <nav
+        aria-label="目次"
+        class="rounded border border-neutral-200 bg-neutral-50 px-4 py-4 dark:border-neutral-700 dark:bg-neutral-900"
+      >
+        <p class="mt-0 mb-3 text-sm font-bold text-neutral-700 dark:text-neutral-200">
+          目次
+        </p>
+        <ul class="m-0 mb-0 list-none p-0">
+          {tocHeadings.map((heading) => (
+            <li class:list={{ 'mt-1': true, 'pl-6': heading.depth === 3 }}>
+              <a
+                href={`#${heading.slug}`}
+                class="text-sm text-neutral-700 no-underline hover:text-neutral-900 hover:underline dark:text-neutral-300 dark:hover:text-neutral-100"
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     )
   }
   <slot />

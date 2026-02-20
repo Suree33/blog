@@ -90,6 +90,7 @@ Markdownブログ記事専用のレイアウトです。ProseArticleLayoutを拡
 ### 主な機能
 
 - **Frontmatter対応**: Markdownのメタデータを自動表示
+- **見出し目次（TOC）**: Markdown見出しから自動で目次を生成（h2/h3）
 - **タグ表示**: 記事タグのリンク生成
 - **日付表示**: 公開日・更新日の表示（アイコン付き）
 - **画像対応**: Frontmatterで指定した画像の表示
@@ -123,6 +124,7 @@ interface Frontmatter {
 4. **記事タイトル**: H1として表示
 5. **アイキャッチ画像**: 指定時のみ表示
 6. **記事説明**: グレー背景のボックスで表示
+7. **目次（TOC）**: タイトル直下にh2/h3見出しへのリンクを表示（見出しがある場合のみ）
 
 ### カスタムスタイル
 
@@ -169,4 +171,3 @@ pubDate: "2024-01-01"
 - **astro-icon**: アイコン表示
 - **rehype-callouts**: Callout機能
 - **@tailwindcss/typography**: Proseスタイリング
-
