@@ -1,5 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "minimumReleaseAge": "7 days"
+  "minimumReleaseAge": "7 days",
+  "enabledManagers": ["github-actions", "nodenv", "npm"],
+  "packageRules": [
+    {
+      "description": "npm依存パッケージはDependabotに委譲する",
+      "matchManagers": ["npm"],
+      "matchDepTypes": [
+        "dependencies",
+        "devDependencies",
+        "optionalDependencies",
+        "peerDependencies",
+        "overrides",
+        "resolutions",
+        "pnpm.overrides"
+      ],
+      "enabled": false
+    }
+  ]
 }
