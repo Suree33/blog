@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "resolve-sidekick-nvim-codex-search-error.md",
+                "file": "zshrc-startup-slow-cause-and-fix.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "resolve-sidekick-nvim-codex-search-error"
+              "title": "zshrc-startup-slow-cause-and-fix"
             }
           }
         ]
@@ -181,9 +181,10 @@
   },
   "active": "e7398d094d5274ee",
   "lastOpenFiles": [
+    "resolve-sidekick-nvim-codex-search-error.md",
+    "zshrc-startup-slow-cause-and-fix.md",
     "resolve-sidekick-nvim-codex-search-error.md~",
     "images/resolve-sidekick-nvim-codex-search-error-error.png",
-    "resolve-sidekick-nvim-codex-search-error.md",
     "template/_blog-post.md",
     "無題のファイル.md",
     "intel-core-i5-13600kf-game-crash.md",

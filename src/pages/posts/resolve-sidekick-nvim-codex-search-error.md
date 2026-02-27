@@ -2,10 +2,12 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: sidekick.nvimでCodexを使うと表示される [features].web_search_request is deprecated を解消する
 pubDate: 2026-02-16
+updatedDate: 2026-02-27
 tags:
   - AI
   - Neovim
-description: "sidekick.nvimでCodexを使うと毎回エラーが表示されてしまうので、PRを作成しつつ、一時的な回避策を講じることにしました。"
+  - Codex
+description: sidekick.nvimでCodexを使うと毎回エラーが表示されてしまうので、PRを作成しつつ、一時的な回避策を講じることにしました。
 ---
 NeovimでClaude CodeやCodexなどを使うために [sidekick.nvim](https://github.com/folke/sidekick.nvim/) を使っているのですが、Codexを使った際に
 

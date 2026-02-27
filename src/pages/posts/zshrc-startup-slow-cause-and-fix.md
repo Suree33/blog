@@ -1,30 +1,47 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: ".zshrc が遅い原因を特定して、起動時間を 1.1 秒台から 0.2 秒台まで短縮した"
-pubDate: 2026-02-26
+title: .zshrc の起動が遅い原因を Codex に調査させたら、10倍速くなった
+pubDate: 2026-02-27
 tags:
   - Zsh
-  - CLI
-  - Performance
-description: "zsh の起動が遅い問題を計測ベースで切り分け、compinit の二重実行を解消して改善した手順をまとめます。"
+  - 最適化
+  - AI
 ---
-最近 `.zshrc` の起動が体感で遅くなっていたので、原因調査から修正までを一気にやった記録です。
+最近 `.zshrc` の起動が体感で遅くなっていたので、原因調査から修正まで Codex に丸投げしてみた。
 
-先に結論を書くと、主因は `compinit` の重さに加えて、`compinit` が実質 2 回走る構成になっていたことでした。
+作業後、この記事もCodexに下書きしてもらった。ほぼ全部手直ししたけど。
 
 ## 症状
 
-まずは素の計測。
+まず Codex に現状の計測から始めてもらった。
+
+> .zshrc で時間がかかっています。何が原因か調べたい。どうしたらいい？
 
 ```bash
 for i in {1..5}; do /usr/bin/time zsh -i -c exit >/dev/null; done
 ```
 
-この時点ではだいたい `1.0s〜1.3s`（最大で 2 秒台）でした。
+実行結果（実測）:
 
-## 調査手順
+```plaintext
+1.33 real
+1.17 real
+1.01 real
+1.04 real
+1.18 real
+```
+
+平均して 1 秒台前半かかっていたっぽい。実際 `time zsh -i -c exit` を手動で何度か実行してみたら、2秒を超える時もあった。遅すぎ。
+
+## 改善策を練る
+
+CodexのPlanモードで、具体的な改善策を練ってもらった。
+
+> 具体的にどうすべきか、詳細をまずは検討してください
 
 ### 1. zprof で内訳を見る
+
+Codex が `zprof` を使って処理時間の内訳を可視化してくれた。
 
 ```bash
 tmp=$(mktemp -d)
@@ -36,11 +53,27 @@ ZPROF_EOF
 ZDOTDIR="$tmp" zsh -i -c exit
 ```
 
-`compinit` / `compdump` が大半を占めていることを確認。
+実際の `zprof` 出力（抜粋）:
+
+```plaintext
+num  calls                time                       self            name
+-----------------------------------------------------------------------------------
+ 1)    2         470.73   235.36   47.02%    470.73   235.36   47.02%  compdump
+ 2)    2         968.56   484.28   96.74%    354.90   177.45   35.45%  compinit
+ 3) 1963         124.10     0.06   12.40%    124.10     0.06   12.40%  compdef
+```
+
+Codex によると `compinit` / `compdump` が時間の大半を占めており、しかも `calls=2` と 2 回呼ばれていることが問題らしい。
 
 ### 2. compinit の呼び出し元を特定
 
-`compdump` をラップして呼び出し元を見たところ、`~/.bun/_bun` 内で `compinit` が呼ばれていました。
+Codex が `compdump` をラップして呼び出し元をトレースし、`~/.bun/_bun` 内で `compinit` が呼ばれていることを突き止めてくれた。
+
+呼び出し元トレースの実際の出力:
+
+```plaintext
+COMPDUMP caller=/usr/share/zsh/5.9/functions/compinit:549 | /Users/sur33/.bun/_bun:964 | /Users/sur33/.zshrc:66 | ...
+```
 
 該当箇所（`~/.bun/_bun`）:
 
@@ -50,33 +83,35 @@ if ! command -v compinit >/dev/null; then
 fi
 ```
 
-自分の `.zshrc` 側でも後段で `compinit` を呼んでいたため、二重実行に近い構成になっていました。
+`.zshrc` 側でも後段で `compinit` を呼んでいたため、二重実行に近い構成になっていたみたい。
 
-## 実施した修正
+## 修正
 
-`.zshrc` を次の方針に変更しました。
+Codex が提案してきた計画は概ねこれだけ:
 
-1. `fpath` 設定の直後に `compinit -C` を実行する
-2. `source ~/.bun/_bun` を `compinit` の後ろに移動する
+1. `source ~/.bun/_bun` を `compinit` の後ろに移動する
 
-要点は「`compinit` を先に 1 回だけ明示実行して、`_bun` 側での `compinit` 発火条件を満たさないようにする」ことです。
+とにかく「`compinit` を先に 1 回実行して、`_bun` 側での `compinit` 発火条件を満たさないようにする」ことが重要らしい。
 
 ## 結果
 
 修正後の計測:
 
-- 起動時間: `0.17s〜0.39s`
+- 起動時間: `0.17s〜0.6s`
 - `zprof` 上の `compinit` 呼び出し回数: `1`
 - `~/.zcompdump` の mtime: 連続起動で変化なし（毎回再生成しない）
 - `bun` 補完: `_comps[bun]=_bun` で有効を確認
 
-## 再現しやすいチェックリスト
+大体0.1〜0.2秒で、たまに0.6秒くらいかかる感じ。特に手戻りなく**一発で10倍速くなって神**。
 
-- `zsh -i -c exit` を 5 回以上回して、ばらつきを見る
-- `zprof` で重い関数を可視化
-- 補完スクリプト（`sheldon`, `asdf`, `bun`, `fnm` など）が `compinit` を内包していないか確認
-- `compinit` の位置と回数を 1 回に固定
+## `compinit -C` について
 
-## 補足
+`compinit -C` するとキャッシュを利用してくれるけど、これだけだとキャッシュを生成してくれないので、結局たまにキャッシュを再生成しないといけなくなるっぽい。
 
-`compinit -C` は高速化に効きますが、補完周りで大きく構成変更したときは一度 `~/.zcompdump*` を再生成して整合性を取り直すのが安全です。
+`compinit` はデフォルトでキャッシュを使うかどうかも判断してくれるので、それがベストプラクティスなんだって。とはいえ参考にした記事も一つ目はAI臭い感じの文章だったので、どれくらい正しいかは不明。
+
+## 参考
+
+https://zenn.dev/i9wa4/articles/2026-01-01-zsh-startup-optimization-compinit
+
+https://qiita.com/vintersnow/items/c29086790222608b28cf
