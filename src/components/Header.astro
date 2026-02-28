@@ -4,34 +4,23 @@ import Hamburger from './Hamburger.astro';
 import SocialIcons from './SocialIcons.astro';
 import HeaderNav from './HeaderNav.astro';
 import headerIcon from '../assets/images/profile-icon.jpg';
+import { cn } from '../lib/utils';
 ---
 
-<style>
-  header {
-    background-color: rgba(255, 255, 255, 0.8);
-    @media (prefers-color-scheme: dark) {
-      background-color: rgba(23, 23, 23, 0.8);
-    }
-  }
-  header.active {
-    backdrop-filter: none !important;
-    background-color: #fff;
-    @media (prefers-color-scheme: dark) {
-      background-color: rgb(23 23 23 / var(--tw-bg-opacity));
-    }
-  }
-</style>
 <header
-  class="hamburger-toggle backdrop-brightness-sm sticky top-0 z-50 flex justify-center px-0 py-0 backdrop-blur-[20px] backdrop-saturate-150 transition-all duration-500 sm:px-4 sm:py-4 dark:text-white"
+  class={cn(
+    'hamburger-toggle sticky top-0 z-50 flex justify-center',
+    'px-0 py-0 sm:px-4 sm:py-4',
+    'bg-white/80 dark:bg-neutral-950/80',
+    'data-active:bg-white dark:data-active:bg-neutral-950',
+    'backdrop-brightness-sm backdrop-blur-[20px] backdrop-saturate-150',
+    'transition-all duration-500',
+    'dark:text-white',
+  )}
 >
   <div class="container flex items-center justify-between">
     <div class="flex items-center justify-between gap-8">
-      <style>
-        h1.active {
-          opacity: 0;
-        }
-      </style>
-      <h1 class="hamburger-toggle transition">
+      <h1 class="hamburger-toggle transition data-active:opacity-0">
         <a class="block px-4 py-3 sm:p-0" href="/">
           <Image
             class="aspect-square w-8 rounded-full border sm:w-10"
@@ -59,7 +48,7 @@ import headerIcon from '../assets/images/profile-icon.jpg';
         opacity: 0;
         visibility: hidden;
         z-index: -1;
-        &.active {
+        &[data-active] {
           height: calc(100dvh - (14 * 0.25rem));
           visibility: visible;
           opacity: 1;
@@ -76,7 +65,7 @@ import headerIcon from '../assets/images/profile-icon.jpg';
       }
     </style>
     <div
-      class="hamburger-toggle sm-menu fixed top-14 z-40 flex w-full flex-col justify-between gap-y-6 bg-white transition-all duration-500 sm:hidden dark:bg-neutral-900"
+      class="hamburger-toggle sm-menu fixed top-14 z-40 flex w-full flex-col justify-between gap-y-6 bg-white transition-all duration-500 sm:hidden dark:bg-neutral-950"
     >
       <HeaderNav
         class="flex w-full basis-full flex-col items-center justify-center gap-y-8 text-2xl sm:flex sm:gap-x-6"
@@ -91,10 +80,9 @@ import headerIcon from '../assets/images/profile-icon.jpg';
   import { toggleHamburgerMenu, toggleHeaderOnScroll } from '../lib/menu';
   document.addEventListener('DOMContentLoaded', () => {
     toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
-    toggleHeaderOnScroll(
-      'header',
-      { upThreshold: 1500, downThreshold: 1000 },
-      '.hamburger',
-    );
+    toggleHeaderOnScroll('header', '.hamburger', {
+      upThreshold: 1500,
+      downThreshold: 1000,
+    });
   });
 </script>

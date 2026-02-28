@@ -20,6 +20,7 @@
     "@astrojs/partytown": "2.1.4",
     "@astrojs/rss": "4.0.15",
     "@astrojs/sitemap": "3.7.0",
+    "@astrojs/ts-plugin": "^1.10.6",
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/fa6-solid": "^1.2.4",
     "@tailwindcss/postcss": "^4.1.18",

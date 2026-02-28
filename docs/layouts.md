@@ -91,6 +91,7 @@ Markdownブログ記事専用のレイアウトです。ProseArticleLayoutを拡
 
 - **Frontmatter対応**: Markdownのメタデータを自動表示
 - **見出し目次（TOC）**: Markdown見出しから自動で目次を生成（h2/h3）
+- **TOC状態同期**: スクロール位置に応じて`before/current/after`状態をJSで付与
 - **タグ表示**: 記事タグのリンク生成
 - **日付表示**: 公開日・更新日の表示（アイコン付き）
 - **画像対応**: Frontmatterで指定した画像の表示
@@ -125,6 +126,13 @@ interface Frontmatter {
 5. **アイキャッチ画像**: 指定時のみ表示
 6. **記事説明**: グレー背景のボックスで表示
 7. **目次（TOC）**: タイトル直下にh2/h3見出しへのリンクを表示（見出しがある場合のみ）
+
+### TOC状態同期ロジック
+
+- `TableOfContents.astro` は `data-toc-root`, `data-toc-item`, `data-toc-link` を出力する
+- `src/lib/toc.ts` の `initTableOfContentsState()` がスクロール・リサイズ・ハッシュ変化に追従して、各目次項目に `data-target-state="before|current|after"` を付与する
+- `current` のリンクには `aria-current="location"` を付与する
+- `:target-before`, `:target-after`, `:target-current` 相当のロジックのみ実装し、見た目のスタイリングは別タスクで追加する
 
 ### カスタムスタイル
 

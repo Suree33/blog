@@ -1,0 +1,64 @@
+---
+import type { MarkdownHeading } from 'astro';
+import { cn } from '../lib/utils';
+
+interface Props {
+  headings: MarkdownHeading[];
+  options?: {
+    enableIndicator?: boolean;
+  };
+  class?: string;
+}
+
+const { headings, options, class: classList } = Astro.props;
+---
+
+{
+  headings.length > 0 && (
+    <nav
+      aria-label="目次"
+      data-toc-root
+      class={cn(
+        'not-prose h-fit rounded-md px-4 py-4',
+        'bg-neutral-50 dark:bg-neutral-900',
+        'border border-neutral-200 dark:border-neutral-700',
+        'text-md text-neutral-700 dark:text-neutral-300',
+        classList,
+      )}
+    >
+      <div class="text-md mb-2 font-bold">目次</div>
+      <ol class="list-none pl-0.5 text-sm">
+        {headings.map((heading) => (
+          <li
+            data-toc-item
+            data-toc-id={heading.slug}
+            class={cn(
+              'leading-8',
+              options?.enableIndicator && 'transition-colors',
+              options?.enableIndicator &&
+                'border-l-2 pl-3 dark:border-neutral-400 dark:data-[target-state="before"]:border-neutral-600 dark:data-[target-state="current"]:border-neutral-200',
+              options?.enableIndicator &&
+                'dark:data-[target-state="before"]:text-neutral-500 dark:data-[target-state="current"]:text-neutral-100',
+              heading.depth === 3 && 'pl-6',
+            )}
+          >
+            <a
+              data-toc-link
+              data-toc-id={heading.slug}
+              href={`#${heading.slug}`}
+              class="no-underline"
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<script>
+  import { initTableOfContentsState } from '../lib/toc';
+
+  initTableOfContentsState();
+</script>
