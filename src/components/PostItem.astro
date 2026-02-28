@@ -1,5 +1,5 @@
 ---
-import { formatDate } from '../scripts/date';
+import { formatDate } from '../lib/date';
 const { post } = Astro.props;
 const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
 ---
