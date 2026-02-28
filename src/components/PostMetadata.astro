@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { formatDate } from '../lib/date';
+import { formatDate } from '../scripts/date';
 
 export interface Props {
   tags?: string[];
@@ -43,4 +43,3 @@ const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
     )
   }
 </div>
-

@@ -26,6 +26,7 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 - `src/types/` - TypeScript型定義 (Post.ts等)
 - `src/scripts/` - クライアントサイドJavaScript
 - `src/styles/` - グローバルCSS、カスタムスタイル
+- `src/lib/` - 共通ユーティリティ関数
 - `src/config.json` - サイト設定 (siteName, author等)
 - `docs/` - 実装ドキュメント (機能説明、カスタムコマンド等)
 
@@ -65,7 +66,7 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 
 ## 注意事項
 
-- コード変更後は `pnpm run lint` でESLint検証を実行してください。
+- コード変更後は `pnpm run lint` でESLintを実行してください。
 
 ## Skills運用ルール
 

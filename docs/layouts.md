@@ -130,7 +130,7 @@ interface Frontmatter {
 ### TOC状態同期ロジック
 
 - `TableOfContents.astro` は `data-toc-root`, `data-toc-item`, `data-toc-link` を出力する
-- `src/lib/toc.ts` の `initTableOfContentsState()` がスクロール・リサイズ・ハッシュ変化に追従して、各目次項目に `data-target-state="before|current|after"` を付与する
+- `src/scripts/toc.ts` の `initTableOfContentsState()` がスクロール・リサイズ・ハッシュ変化に追従して、各目次項目に `data-target-state="before|current|after"` を付与する
 - TOCリンクのクリック時に `current` を即時固定せず、スクロール位置だけを基準に状態更新する（スムーススクロール中のフラッシュ防止）
 - `current` のリンクには `aria-current="location"` を付与する
 - `:target-before`, `:target-after`, `:target-current` 相当のロジックのみ実装し、見た目のスタイリングは別タスクで追加する
