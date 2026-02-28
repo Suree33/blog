@@ -22,7 +22,7 @@ const { headings, options, class: classList } = Astro.props;
         'not-prose h-fit rounded-md px-4 py-4',
         'bg-neutral-50 dark:bg-neutral-900',
         'border border-neutral-200 dark:border-neutral-700',
-        'text-md text-neutral-700 dark:text-neutral-300',
+        'text-md text-neutral-800 dark:text-neutral-200',
         classList,
       )}
     >
@@ -36,9 +36,9 @@ const { headings, options, class: classList } = Astro.props;
               'leading-8',
               options?.enableIndicator && 'transition-colors',
               options?.enableIndicator &&
-                'border-l-2 pl-3 dark:border-neutral-400 dark:data-[target-state="before"]:border-neutral-600 dark:data-[target-state="current"]:border-neutral-200',
+                'border-l-2 border-neutral-700 pl-3 data-[target-state="before"]:border-neutral-400 data-[target-state="current"]:border-neutral-900 dark:border-neutral-300 dark:data-[target-state="before"]:border-neutral-500 dark:data-[target-state="current"]:border-neutral-100',
               options?.enableIndicator &&
-                'dark:data-[target-state="before"]:text-neutral-500 dark:data-[target-state="current"]:text-neutral-100',
+                'data-[target-state="before"]:text-neutral-600 data-[target-state="current"]:text-neutral-950 dark:data-[target-state="before"]:text-neutral-300 dark:data-[target-state="current"]:text-neutral-50',
               heading.depth === 3 && 'pl-6',
             )}
           >
