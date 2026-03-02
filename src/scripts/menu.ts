@@ -1,16 +1,14 @@
 /**
  * ハンバーガーメニューによるトグル機能をを提供する
  *
- * @function
- * @name toggleHamburgerMenu
- * @param {string} hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
- * @param {string} toggleTargetSelector - トグルする要素を指定するCSSセレクタ
- * @description
- * 指定されたハンバーガーメニューをクリックすると、ハンバーガーメニューとトグル対象の要素にactiveクラスを付与したり削除したりすることで、
- * メニューの開閉を行う。初回クリック時には'start'クラスを削除し、'active'クラスを追加する。
- * それ以降のクリックでは'active'クラスのトグルを行う。
- * 'active'クラスが付与されている場合、トグル対象の要素にも'active'クラスを付与し、
- * 'active'クラスが削除された場合はトグル対象の要素からも'active'クラスを削除する。
+ * 指定されたハンバーガーメニューをクリックすると、ハンバーガーメニューとトグル対象の要素にdata-active属性を付与したり削除したりすることで、
+ * メニューの開閉を行う。初回クリック時には'start'クラスを削除し、data-active属性を追加する。
+ * それ以降のクリックではdata-active属性のトグルを行う。
+ * data-active属性が付与されている場合、トグル対象の要素にもdata-active属性を付与し、
+ * data-active属性が削除された場合はトグル対象の要素からもdata-active属性を削除する。
+ *
+ * @param hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
+ * @param toggleTargetSelector - トグルする要素を指定するCSSセレクタ
  *
  * @example
  * // HTMLでハンバーガーメニューとトグル対象の要素を定義
@@ -30,24 +28,25 @@
  * toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
  */
 export const toggleHamburgerMenu = (
-  hamburgerSelector,
-  toggleTargetSelector,
+  hamburgerSelector: string,
+  toggleTargetSelector: string,
 ) => {
-  const hamburger = document.querySelector(hamburgerSelector);
+  const hamburger = document.querySelector<HTMLElement>(hamburgerSelector);
   const menu = document.querySelectorAll(toggleTargetSelector);
   if (hamburger) {
     hamburger.addEventListener('click', () => {
       if (hamburger.classList.contains('start')) {
         hamburger.classList.remove('start');
-        hamburger.classList.add('active');
+        hamburger.setAttribute('data-active', '');
       } else {
-        hamburger.classList.toggle('active');
+        hamburger.toggleAttribute('data-active');
       }
-      if (hamburger.classList.contains('active')) {
-        menu.forEach((item) => item.classList.add('active'));
+
+      if (hamburger.hasAttribute('data-active')) {
+        menu.forEach((item) => item.setAttribute('data-active', ''));
         disableScroll();
       } else {
-        menu.forEach((item) => item.classList.remove('active'));
+        menu.forEach((item) => item.removeAttribute('data-active'));
         enableScroll();
       }
     });
@@ -63,30 +62,30 @@ export const toggleHamburgerMenu = (
 /**
  * スクロールに応じてヘッダーを隠したり表示したりする
  *
- * @function
- * @name toggleHeaderOnScroll
- * @param {string} headerSelector - ヘッダーの要素を指定するCSSセレクタ
- * @param {Object} [options={}] - オプション設定
- * @param {number} [options.upThreshold=1500] - 上スクロールの速度しきい値（ピクセル/秒）
- * @param {number} [options.downThreshold=1000] - 下スクロールの速度しきい値（ピクセル/秒）
- * @param {string} hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
- * @description スクロールイベントを監視し、スクロール速度に応じてヘッダーを隠したり表示したりする。
+ * スクロールイベントを監視し、スクロール速度に応じてヘッダーを隠したり表示したりする。
  * 上にスクロールした場合、スクロール速度が上スクロールのしきい値を超えるとヘッダーを表示する。
  * 下にスクロールした場合、スクロール速度が下スクロールのしきい値を超えるとヘッダーを隠す。
+ *
+ * @param headerSelector - ヘッダーの要素を指定するCSSセレクタ
+ * @param hamburgerSelector - ハンバーガーメニューの要素を指定するCSSセレクタ
+ * @param options - オプション設定
+ * @param options.upThreshold - 上スクロールの速度しきい値（ピクセル/秒）
+ * @param options.downThreshold - 下スクロールの速度しきい値（ピクセル/秒）
  */
 export const toggleHeaderOnScroll = (
-  headerSelector,
-  options = { upThreshold: 1500, downThreshold: 1000 },
-  hamburgerSelector = null,
+  headerSelector: string,
+  hamburgerSelector: string,
+  options: { upThreshold?: number; downThreshold?: number } = {},
 ) => {
-  const { upThreshold = 50, downThreshold = 50 } = options;
+  const { upThreshold = 1500, downThreshold = 1000 } = options;
   let prevScrollpos = window.pageYOffset;
   let prevTime = Date.now();
-  const header = document.querySelector(headerSelector);
-  const hamburger = document.querySelector(hamburgerSelector);
+  const header = document.querySelector<HTMLElement>(headerSelector);
+  const hamburger = document.querySelector<HTMLElement>(hamburgerSelector);
+  if (!header) return;
 
   window.addEventListener('scroll', () => {
-    if (!(hamburger && hamburger.classList.contains('active'))) {
+    if (!(hamburger && hamburger.hasAttribute('data-active'))) {
       const currentScrollPos = window.pageYOffset;
       const currentTime = Date.now();
       const elapsedTime = currentTime - prevTime;

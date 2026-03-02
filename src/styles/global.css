@@ -3,9 +3,9 @@
 @import './remark-link-card.css';
 @import './remark-code.css';
 
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 @theme {
-  --breakpoint-xl: initial;
+  /* --breakpoint-xl: initial; */
   --breakpoint-2xl: initial;
 }
 

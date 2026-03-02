@@ -26,6 +26,7 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 - `src/types/` - TypeScript型定義 (Post.ts等)
 - `src/scripts/` - クライアントサイドJavaScript
 - `src/styles/` - グローバルCSS、カスタムスタイル
+- `src/lib/` - 共通ユーティリティ関数
 - `src/config.json` - サイト設定 (siteName, author等)
 - `docs/` - 実装ドキュメント (機能説明、カスタムコマンド等)
 
@@ -51,6 +52,11 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 
 ## 実装ガイドライン
 
+### CSSクラス結合
+
+- 複数のCSSクラスを結合する場合は、`src/lib/utils.ts` の `cn()` を使用する
+- テンプレート文字列によるクラスの手動連結は避け、条件付きクラスも `cn()` で表現する
+
 ### ドキュメント管理
 
 - 実装や修正を始める前に、関連する `docs/` のドキュメントを能動的に参照し、既存仕様・設計方針・運用手順を確認する
@@ -60,7 +66,7 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 
 ## 注意事項
 
-- コード変更後は `pnpm run lint` でESLint検証を実行してください。
+- コード変更後は `pnpm run lint` でESLintを実行してください。
 
 ## Skills運用ルール
 
