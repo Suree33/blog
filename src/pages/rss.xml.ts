@@ -10,7 +10,10 @@ interface RssFrontmatter {
 }
 
 /**
- * RSS item の生成に必要な frontmatter が揃っている記事だけを通す型ガード。
+ * Determines whether a Markdown post contains both `title` and `pubDate` frontmatter required for RSS items.
+ *
+ * @param post - The Markdown instance to check
+ * @returns `true` if the post's frontmatter contains both `title` and `pubDate`, `false` otherwise.
  */
 function hasRequiredFrontmatter(
   post: MarkdownInstance<RssFrontmatter>,
