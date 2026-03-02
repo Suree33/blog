@@ -9,12 +9,18 @@ interface RssFrontmatter {
   description?: string;
 }
 
+/**
+ * RSS item の生成に必要な frontmatter が揃っている記事だけを通す型ガード。
+ */
 function hasRequiredFrontmatter(
   post: MarkdownInstance<RssFrontmatter>,
 ): post is MarkdownInstance<RssFrontmatter & { title: string; pubDate: string }> {
   return Boolean(post.frontmatter.title && post.frontmatter.pubDate);
 }
 
+/**
+ * Markdown 記事一覧から RSS フィードを生成する `/rss.xml` エンドポイント。
+ */
 export const GET = (async () => {
   const posts = await Promise.all(
     Object.values(
