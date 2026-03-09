@@ -39,7 +39,7 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 
 ### スタイリング
 
-- Tailwind CSS + PostCSS + autoprefixer
+- Tailwind CSS
 - カスタムCSS: remark-code.css (コードブロック), remark-link-card.css (リンクカード)
 
 ### 設定ファイル
