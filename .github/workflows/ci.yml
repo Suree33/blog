@@ -18,7 +18,7 @@ defaults:
 
 jobs:
   lint:
-    name: CI
+    name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
