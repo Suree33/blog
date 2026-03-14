@@ -17,22 +17,26 @@ defaults:
     shell: bash
 
 jobs:
-  ci:
+  lint:
     name: CI
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v6
+      - &checkout
+        uses: actions/checkout@v6
 
-      - uses: pnpm/action-setup@v4
+      - &setup-pnpm
+        uses: pnpm/action-setup@v4
 
-      - uses: actions/setup-node@v6
+      - &setup-node
+        uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
           cache: pnpm
 
-      - name: Install dependencies
+      - &install-deps
+        name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Check formatting
@@ -40,6 +44,17 @@ jobs:
 
       - name: Lint
         run: pnpm run lint
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - *checkout
+      - *setup-pnpm
+      - *setup-node
+      - *install-deps
 
       - name: Build
         run: pnpm run build:ci
