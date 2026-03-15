@@ -4,4 +4,5 @@ onlyBuiltDependencies:
   - sharp
   - workerd
 enablePrePostScripts: true
-minimumReleaseAge: 10080
+# 3 days
+minimumReleaseAge: 4320
