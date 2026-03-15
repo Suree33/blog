@@ -10,6 +10,18 @@
   },
   "packageRules": [
     {
+      "matchUpdateTypes": ["patch"],
+      "minimumReleaseAge": "1 day"
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "minimumReleaseAge": "2 days"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
       "description": "Astro関連の minor/patch をまとめる",
       "matchManagers": ["npm"],
       "matchPackageNames": ["@astrojs/**", "astro", "astro-**"],
