@@ -43,7 +43,7 @@ const tocHeadings = headings.filter(({ depth }) => depth === 2 || depth === 3);
   }
   {
     tocHeadings.length > 0 && (
-      <TableOfContents headings={tocHeadings} class="block xl:hidden" />
+      <TableOfContents headings={tocHeadings} class="my-5 block xl:hidden" />
     )
   }
   <slot />
