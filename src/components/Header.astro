@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Hamburger from './Hamburger.astro';
-import SocialIcons from './SocialIcons.astro';
+import HeaderIcons from './HeaderIcons.astro';
 import HeaderNav from './HeaderNav.astro';
 import headerIcon from '../assets/images/profile-icon.jpg';
 import { cn } from '../lib/utils';
@@ -33,7 +33,7 @@ import { cn } from '../lib/utils';
       </h1>
       <HeaderNav class="hidden gap-6 text-base sm:flex" />
     </div>
-    <SocialIcons class="hidden items-center gap-x-6 text-xl sm:flex" />
+    <HeaderIcons class="hidden items-center gap-x-6 text-xl sm:flex" />
     <div class="flex h-full items-center sm:hidden">
       <Hamburger
         width="1.7rem"
@@ -70,7 +70,7 @@ import { cn } from '../lib/utils';
       <HeaderNav
         class="flex w-full basis-full flex-col items-center justify-center gap-y-8 text-2xl sm:flex sm:gap-x-6"
       />
-      <SocialIcons
+      <HeaderIcons
         class="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 text-xl"
       />
     </div>

@@ -1,0 +1,31 @@
+---
+import { cn } from '../lib/utils';
+
+interface Props {
+  class?: string;
+  href?: string;
+  id?: string;
+  ariaLabel?: string;
+}
+
+const { class: classList, href, id, ariaLabel } = Astro.props;
+---
+
+{
+  href ? (
+    <a
+      class={cn(classList)}
+      href={href}
+      aria-label={ariaLabel}
+      target="_blank"
+      rel="noopener noreferrer"
+      id={id}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button class={cn(classList)} id={id} aria-label={ariaLabel}>
+      <slot />
+    </button>
+  )
+}

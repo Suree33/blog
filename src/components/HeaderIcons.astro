@@ -1,28 +1,26 @@
 ---
 import { Icon } from 'astro-icon/components';
+import HeaderIcon from './HeaderIcon.astro';
 const { class: classList } = Astro.props;
 ---
 
 <div class={classList}>
-  <a
+  <HeaderIcon
     href="https://twitter.com/thisissuree"
-    aria-label="Twitter profile page (@thisissuree)"
-    target="_blank"
+    ariaLabel="Twitter profile page (@thisissuree)"
   >
     <Icon name="fa6-brands:x-twitter" />
-  </a>
-  <a
+  </HeaderIcon>
+  <HeaderIcon
     href="https://www.instagram.com/thisissuree/"
-    aria-label="Instagram profile page (@thisissuree)"
-    target="_blank"
+    ariaLabel="Instagram profile page (@thisissuree)"
   >
     <Icon name="fa6-brands:instagram" />
-  </a>
-  <a
+  </HeaderIcon>
+  <HeaderIcon
     href="https://github.com/Suree33"
-    aria-label="GitHub profile page (@Suree33)"
-    target="_blank"
+    ariaLabel="GitHub profile page (@Suree33)"
   >
     <Icon name="fa6-brands:github" />
-  </a>
+  </HeaderIcon>
 </div>
