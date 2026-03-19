@@ -10,6 +10,20 @@ const { pageTitle, ogimage, description } = Astro.props;
   <head
     prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/ fb# article: http://ogp.me/ns/article#"
   >
+    <!-- テーマちらつき防止: 描画前にlocalStorageからテーマを適用する -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme-preference');
+        const prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches;
+        const isDark =
+          stored === 'dark' || (stored !== 'light' && prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

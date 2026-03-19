@@ -1,0 +1,116 @@
+---
+import { cn } from '../lib/utils';
+---
+
+<button
+  type="button"
+  aria-label="テーマを切り替える（現在: system）"
+  title="テーマを切り替える"
+  class={cn(
+    'theme-toggle-btn flex items-center justify-center',
+    'rounded-md p-1.5',
+    'text-neutral-600 hover:text-neutral-900',
+    'dark:text-neutral-400 dark:hover:text-neutral-100',
+    'transition-colors duration-200',
+    'cursor-pointer',
+  )}
+>
+  <!-- system icon (computer monitor) -->
+  <svg
+    class="theme-icon theme-icon--system h-5 w-5"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+    <line x1="8" y1="21" x2="16" y2="21"></line>
+    <line x1="12" y1="17" x2="12" y2="21"></line>
+  </svg>
+  <!-- light icon (sun) -->
+  <svg
+    class="theme-icon theme-icon--light hidden h-5 w-5"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <line x1="12" y1="2" x2="12" y2="4"></line>
+    <line x1="12" y1="20" x2="12" y2="22"></line>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+    <line x1="2" y1="12" x2="4" y2="12"></line>
+    <line x1="20" y1="12" x2="22" y2="12"></line>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+  </svg>
+  <!-- dark icon (moon) -->
+  <svg
+    class="theme-icon theme-icon--dark hidden h-5 w-5"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<script>
+  import {
+    getStoredTheme,
+    setStoredTheme,
+    applyTheme,
+    nextTheme,
+    initTheme,
+  } from '../scripts/theme';
+  import type { Theme } from '../scripts/theme';
+
+  const THEME_LABELS: Record<Theme, string> = {
+    system: 'テーマを切り替える（現在: system）',
+    light: 'テーマを切り替える（現在: light）',
+    dark: 'テーマを切り替える（現在: dark）',
+  };
+
+  const updateButtons = (theme: Theme) => {
+    document.querySelectorAll<HTMLButtonElement>('.theme-toggle-btn').forEach((btn) => {
+      btn.setAttribute('aria-label', THEME_LABELS[theme]);
+      btn.querySelectorAll<SVGElement>('.theme-icon').forEach((icon) => {
+        icon.classList.add('hidden');
+      });
+      const active = btn.querySelector<SVGElement>(`.theme-icon--${theme}`);
+      active?.classList.remove('hidden');
+    });
+  };
+
+  const handleToggle = () => {
+    const current = getStoredTheme();
+    const next = nextTheme(current);
+    setStoredTheme(next);
+    applyTheme(next);
+    updateButtons(next);
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    const theme = getStoredTheme();
+    updateButtons(theme);
+
+    document.querySelectorAll<HTMLButtonElement>('.theme-toggle-btn').forEach((btn) => {
+      btn.addEventListener('click', handleToggle);
+    });
+  });
+</script>
