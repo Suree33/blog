@@ -22,7 +22,7 @@ BaseLayout.astro (基本レイアウト)
 - **メタタグ管理**: SEO、OGP、ビューポート設定
 - **サイト設定統合**: `config.json` からサイト名、説明、OGイメージを読み込み
 - **Google Analytics**: Partytown を使用したアナリティクス統合
-- **ダークモード対応**: TailwindCSSのダークモードクラス
+- **テーマ管理**: OS設定を初期値にしたライト/ダーク切替と、ヘッダーにあるトグルボタンによる System → Light → Dark の循環切替（localStorageに保存、System時はOS変更にも追従）
 - **共通コンポーネント**: Header、Footer の配置
 
 ### Props

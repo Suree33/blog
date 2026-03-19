@@ -40,6 +40,35 @@ const { pageTitle, ogimage, description } = Astro.props;
       content={ogimage ? config.url + ogimage : config.url + config.ogImage}
     />
     <meta property="og:locale" content="ja-JP" />
+    <script is:inline>
+      const storageKey = 'theme-preference';
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const getStoredPreference = () => {
+        try {
+          return localStorage.getItem(storageKey);
+        } catch {
+          return null;
+        }
+      };
+      const storedPreference = getStoredPreference();
+      const preference =
+        storedPreference === 'light' ||
+        storedPreference === 'dark' ||
+        storedPreference === 'system'
+          ? storedPreference
+          : 'system';
+      const theme =
+        preference === 'system'
+          ? mediaQuery.matches
+            ? 'dark'
+            : 'light'
+          : preference;
+      const root = document.documentElement;
+      root.classList.toggle('dark', theme === 'dark');
+      root.dataset.themePreference = preference;
+      root.dataset.theme = theme;
+      root.style.colorScheme = theme;
+    </script>
     <!-- Google Analytics -->
     <!-- Google tag (gtag.js) -->
     <script

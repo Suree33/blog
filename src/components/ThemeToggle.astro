@@ -1,0 +1,50 @@
+---
+import { Icon } from 'astro-icon/components';
+import { cn } from '../lib/utils';
+const { class: classList } = Astro.props;
+---
+
+<button
+  type="button"
+  class={cn(
+    'inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-2 text-sm font-medium text-neutral-700 shadow-sm transition hover:border-neutral-300 hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-neutral-600 dark:focus-visible:outline-neutral-400',
+    classList,
+  )}
+  data-theme-toggle
+  data-theme-preference="system"
+  data-theme="light"
+  aria-label="テーマを切り替え"
+>
+  <span class="flex items-center gap-2">
+    <Icon
+      name="fa6-solid:circle-half-stroke"
+      class="h-4 w-4"
+      data-theme-icon="system"
+      aria-hidden="true"
+    />
+    <Icon
+      name="fa6-solid:sun"
+      class="h-4 w-4"
+      data-theme-icon="light"
+      aria-hidden="true"
+    />
+    <Icon
+      name="fa6-solid:moon"
+      class="h-4 w-4"
+      data-theme-icon="dark"
+      aria-hidden="true"
+    />
+    <span class="whitespace-nowrap" data-theme-label>自動</span>
+  </span>
+</button>
+
+<style>
+  [data-theme-toggle] [data-theme-icon] {
+    display: none;
+  }
+  [data-theme-toggle][data-theme-preference='system'] [data-theme-icon='system'],
+  [data-theme-toggle][data-theme-preference='light'] [data-theme-icon='light'],
+  [data-theme-toggle][data-theme-preference='dark'] [data-theme-icon='dark'] {
+    display: inline-flex;
+  }
+</style>
