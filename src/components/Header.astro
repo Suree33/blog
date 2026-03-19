@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Hamburger from './Hamburger.astro';
 import SocialIcons from './SocialIcons.astro';
 import HeaderNav from './HeaderNav.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import headerIcon from '../assets/images/profile-icon.jpg';
 import { cn } from '../lib/utils';
 ---
@@ -33,8 +34,13 @@ import { cn } from '../lib/utils';
       </h1>
       <HeaderNav class="hidden gap-6 text-base sm:flex" />
     </div>
-    <SocialIcons class="hidden items-center gap-x-6 text-xl sm:flex" />
-    <div class="flex h-full items-center sm:hidden">
+    <div class="hidden items-center gap-x-4 sm:flex">
+      <ThemeToggle />
+      <SocialIcons class="flex items-center gap-x-6 text-xl" />
+    </div>
+    <div class="flex h-full items-center gap-x-2 sm:hidden">
+      <ThemeToggle />
+
       <Hamburger
         width="1.7rem"
         classList="px-4 py-4"
@@ -78,11 +84,13 @@ import { cn } from '../lib/utils';
 </header>
 <script>
   import { toggleHamburgerMenu, toggleHeaderOnScroll } from '../scripts/menu';
+  import { initThemeToggle } from '../scripts/theme';
   document.addEventListener('DOMContentLoaded', () => {
     toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
     toggleHeaderOnScroll('header', '.hamburger', {
       upThreshold: 1500,
       downThreshold: 1000,
     });
+    initThemeToggle('#theme-toggle');
   });
 </script>

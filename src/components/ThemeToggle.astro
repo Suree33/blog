@@ -1,0 +1,24 @@
+---
+import { Icon } from 'astro-icon/components';
+import { cn } from '../lib/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="テーマを切り替える"
+  class={cn(
+    'theme-toggle rounded-lg p-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-neutral-800',
+    'transition-colors duration-200',
+    className,
+  )}
+>
+  <Icon name="fa6-solid:sun" class="size-5 dark:hidden" />
+  <Icon name="fa6-solid:moon" class="hidden size-5 dark:block" />
+</button>
