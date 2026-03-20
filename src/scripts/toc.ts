@@ -50,8 +50,9 @@ const getHeadingElements = (ids: string[]) =>
       index,
       element: document.getElementById(id),
     }))
-    .filter((item): item is { id: string; index: number; element: HTMLElement } =>
-      Boolean(item.element),
+    .filter(
+      (item): item is { id: string; index: number; element: HTMLElement } =>
+        Boolean(item.element),
     );
 
 /**
@@ -113,12 +114,20 @@ const getCurrentHeadingIndex = (
  */
 const applyStateByIndex = (roots: HTMLElement[], currentIndex: number) => {
   roots.forEach((root) => {
-    const items = Array.from(root.querySelectorAll<HTMLElement>(TOC_ITEM_SELECTOR));
-    const links = Array.from(root.querySelectorAll<HTMLAnchorElement>(TOC_LINK_SELECTOR));
+    const items = Array.from(
+      root.querySelectorAll<HTMLElement>(TOC_ITEM_SELECTOR),
+    );
+    const links = Array.from(
+      root.querySelectorAll<HTMLAnchorElement>(TOC_LINK_SELECTOR),
+    );
 
     items.forEach((item, index) => {
       const state =
-        index < currentIndex ? 'before' : index === currentIndex ? 'current' : 'after';
+        index < currentIndex
+          ? 'before'
+          : index === currentIndex
+            ? 'current'
+            : 'after';
       item.dataset.targetState = state;
     });
 

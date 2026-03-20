@@ -17,7 +17,9 @@ interface RssFrontmatter {
  */
 function hasRequiredFrontmatter(
   post: MarkdownInstance<RssFrontmatter>,
-): post is MarkdownInstance<RssFrontmatter & { title: string; pubDate: string }> {
+): post is MarkdownInstance<
+  RssFrontmatter & { title: string; pubDate: string }
+> {
   return Boolean(post.frontmatter.title && post.frontmatter.pubDate);
 }
 

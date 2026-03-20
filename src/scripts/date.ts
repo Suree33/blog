@@ -8,7 +8,7 @@
  * @returns The date formatted in ja-JP long form (e.g., "2026年3月2日") if valid, `false` otherwise.
  */
 export function formatDate(
-  dateInput: string | number | Date | null | undefined
+  dateInput: string | number | Date | null | undefined,
 ): string | false {
   if (
     dateInput === null ||
