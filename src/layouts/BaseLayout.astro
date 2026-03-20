@@ -11,6 +11,23 @@ const { pageTitle, ogimage, description } = Astro.props;
     prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/ fb# article: http://ogp.me/ns/article#"
   >
     <meta charset="utf-8" />
+    <script is:inline>
+      // FOUC抑止のためにテーマ初期化
+      (() => {
+        const storedTheme = window.localStorage.getItem('theme');
+        const html = document.documentElement;
+
+        html.classList.remove('light', 'dark');
+
+        if (storedTheme === 'light' || storedTheme === 'dark') {
+          html.classList.add(storedTheme);
+          html.style.colorScheme = storedTheme;
+          return;
+        }
+
+        html.style.colorScheme = 'light dark';
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />

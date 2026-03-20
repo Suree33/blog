@@ -8,6 +8,18 @@
   /* --breakpoint-xl: initial; */
   --breakpoint-2xl: initial;
 }
+/* .dark も .light もない場合はOSの設定に従う */
+@custom-variant dark {
+  .dark & {
+    @slot;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not(.light):not(.dark) & {
+      @slot;
+    }
+  }
+}
 
 /* アイテム1・アイテム2・アイテム3 みたいな中黒で分割したリスト */
 .dot-separated {

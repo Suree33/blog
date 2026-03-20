@@ -23,6 +23,7 @@ BaseLayout.astro (基本レイアウト)
 - **サイト設定統合**: `config.json` からサイト名、説明、OGイメージを読み込み
 - **Google Analytics**: Partytown を使用したアナリティクス統合
 - **ダークモード対応**: TailwindCSSのダークモードクラス
+- **初期テーマ同期**: `<head>` のインラインスクリプトで localStorage のテーマを初回描画前に `<html>` へ反映し、OS テーマとの差分によるちらつきを防止
 - **共通コンポーネント**: Header、Footer の配置
 
 ### Props

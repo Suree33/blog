@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import ThemeToggle from './ThemeToggle.astro';
 import HeaderIcon from './HeaderIcon.astro';
 const { class: classList } = Astro.props;
 ---
@@ -23,4 +24,5 @@ const { class: classList } = Astro.props;
   >
     <Icon name="fa6-brands:github" />
   </HeaderIcon>
+  <ThemeToggle />
 </div>
