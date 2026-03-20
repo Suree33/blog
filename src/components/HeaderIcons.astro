@@ -2,10 +2,16 @@
 import { Icon } from 'astro-icon/components';
 import ThemeToggle from './ThemeToggle.astro';
 import HeaderIcon from './HeaderIcon.astro';
+import { cn } from '../lib/utils';
+
+interface Props {
+  class?: string;
+}
+
 const { class: classList } = Astro.props;
 ---
 
-<div class={classList}>
+<div class={cn('dark:text-white text-black', classList)}>
   <HeaderIcon
     href="https://twitter.com/thisissuree"
     ariaLabel="Twitter profile page (@thisissuree)"

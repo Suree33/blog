@@ -6,9 +6,10 @@ interface Props {
   href?: string;
   id?: string;
   ariaLabel?: string;
+  [key: `data-${string}`]: unknown;
 }
 
-const { class: classList, href, id, ariaLabel } = Astro.props;
+const { class: classList, href, id, ariaLabel, ...dataProps } = Astro.props;
 ---
 
 {
@@ -23,6 +24,7 @@ const { class: classList, href, id, ariaLabel } = Astro.props;
       target="_blank"
       rel="noopener noreferrer"
       id={id}
+      {...dataProps}
     >
       <slot />
     </a>
@@ -34,6 +36,7 @@ const { class: classList, href, id, ariaLabel } = Astro.props;
       )}
       id={id}
       aria-label={ariaLabel}
+      {...dataProps}
     >
       <slot />
     </button>

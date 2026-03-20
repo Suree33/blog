@@ -13,7 +13,7 @@ const { class: classList } = Astro.props;
 <HeaderIcon
   class={cn(classList)}
   ariaLabel="テーマを切り替える"
-  id="theme-toggle-button"
+  data-theme-toggle
 >
   <Icon
     name="lucide:sun-moon"
@@ -45,12 +45,12 @@ const { class: classList } = Astro.props;
   /**
    * OS のテーマ設定を取得する
    */
-  // const getSystemTheme = (): Theme => {
-  //   const isDarkPreferred = window.matchMedia(
-  //     '(prefers-color-scheme: dark)',
-  //   ).matches;
-  //   return isDarkPreferred ? 'dark' : 'light';
-  // };
+  const getSystemTheme = (): Theme => {
+    const isDarkPreferred = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
+    return isDarkPreferred ? 'dark' : 'light';
+  };
 
   /**
    * 指定されたテーマを適用する
@@ -101,20 +101,24 @@ const { class: classList } = Astro.props;
 
   const handleToggleClick = () => {
     const currentTheme = getCurrentTheme();
+    const systemTheme = getSystemTheme();
 
-    switch (currentTheme) {
-      case 'dark':
-        applyTheme('light');
-        return;
-      case 'light':
-        applyTheme(null);
-        return;
-      default:
-        applyTheme('dark');
-        return;
+    if (currentTheme === null) {
+      applyTheme(systemTheme === 'dark' ? 'light' : 'dark');
+      return;
     }
+
+    if (currentTheme !== systemTheme) {
+      applyTheme(systemTheme);
+      return;
+    }
+
+    applyTheme(null);
   };
+
   document
-    .getElementById('theme-toggle-button')
-    ?.addEventListener('click', handleToggleClick);
+    .querySelectorAll<HTMLElement>('[data-theme-toggle]')
+    .forEach((toggleButton) => {
+      toggleButton.addEventListener('click', handleToggleClick);
+    });
 </script>
