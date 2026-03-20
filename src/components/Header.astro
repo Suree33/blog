@@ -1,10 +1,10 @@
 ---
 import { Image } from 'astro:assets';
-import Hamburger from './Hamburger.astro';
-import HeaderIcons from './HeaderIcons.astro';
-import HeaderNav from './HeaderNav.astro';
-import headerIcon from '../assets/images/profile-icon.jpg';
-import { cn } from '../lib/utils';
+import Hamburger from '@components/Hamburger.astro';
+import HeaderIcons from '@components/HeaderIcons.astro';
+import HeaderNav from '@components/HeaderNav.astro';
+import headerIcon from '@assets/images/profile-icon.jpg';
+import { cn } from '@lib/utils';
 ---
 
 <header
@@ -79,7 +79,7 @@ import { cn } from '../lib/utils';
   </div>
 </header>
 <script>
-  import { toggleHamburgerMenu, toggleHeaderOnScroll } from '../scripts/menu';
+  import { toggleHamburgerMenu, toggleHeaderOnScroll } from '@scripts/menu';
   document.addEventListener('DOMContentLoaded', () => {
     toggleHamburgerMenu('.hamburger', '.hamburger-toggle');
     toggleHeaderOnScroll('header', '.hamburger', {

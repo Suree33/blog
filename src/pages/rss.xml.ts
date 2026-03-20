@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 import type { APIRoute, MarkdownInstance } from 'astro';
-import config from '../config.json';
+import config from '@/config.json';
 import sanitizeHtml from 'sanitize-html';
 
 interface RssFrontmatter {
