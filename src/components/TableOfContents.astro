@@ -1,6 +1,6 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import { cn } from '../lib/utils';
+import { cn } from '@lib/utils';
 
 interface Props {
   headings: MarkdownHeading[];
@@ -58,7 +58,7 @@ const { headings, options, class: classList } = Astro.props;
 }
 
 <script>
-  import { initTableOfContentsState } from '../scripts/toc';
+  import { initTableOfContentsState } from '@scripts/toc';
 
   initTableOfContentsState();
 </script>

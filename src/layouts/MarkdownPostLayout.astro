@@ -1,9 +1,9 @@
 ---
 import type { MarkdownLayoutProps } from 'astro';
-import type { PostFrontmatter } from '../types/Post';
-import PostMetadata from '../components/PostMetadata.astro';
-import ProseArticleLayout from './ProseArticleLayout.astro';
-import TableOfContents from '../components/TableOfContents.astro';
+import type { PostFrontmatter } from '@/types/Post';
+import PostMetadata from '@components/PostMetadata.astro';
+import ProseArticleLayout from '@layouts/ProseArticleLayout.astro';
+import TableOfContents from '@components/TableOfContents.astro';
 
 type Props = MarkdownLayoutProps<PostFrontmatter>;
 

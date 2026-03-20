@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { cn } from '../lib/utils';
-import HeaderIcon from './HeaderIcon.astro';
+import { cn } from '@lib/utils';
+import HeaderIcon from '@components/HeaderIcon.astro';
 
 interface Props {
   class?: string;
@@ -24,7 +24,7 @@ const { class: classList } = Astro.props;
 </HeaderIcon>
 
 <script>
-  import { isTheme, type Theme } from '../types/Theme';
+  import { isTheme, type Theme } from '@/types/Theme';
   type ThemeState = Theme | null;
 
   const html = document.documentElement;
