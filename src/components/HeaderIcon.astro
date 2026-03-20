@@ -1,0 +1,44 @@
+---
+import { cn } from '../lib/utils';
+
+interface Props {
+  class?: string;
+  href?: string;
+  id?: string;
+  ariaLabel?: string;
+  [key: `data-${string}`]: unknown;
+}
+
+const { class: classList, href, id, ariaLabel, ...dataProps } = Astro.props;
+---
+
+{
+  href ? (
+    <a
+      class={cn(
+        'rounded p-2 transition-colors hover:bg-neutral-200 active:bg-neutral-300 dark:hover:bg-neutral-800 dark:active:bg-neutral-700',
+        classList,
+      )}
+      href={href}
+      aria-label={ariaLabel}
+      target="_blank"
+      rel="noopener noreferrer"
+      id={id}
+      {...dataProps}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      class={cn(
+        'rounded p-2 transition-colors hover:bg-neutral-200 active:bg-neutral-300 dark:hover:bg-neutral-800 dark:active:bg-neutral-700',
+        classList,
+      )}
+      id={id}
+      aria-label={ariaLabel}
+      {...dataProps}
+    >
+      <slot />
+    </button>
+  )
+}

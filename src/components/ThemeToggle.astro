@@ -1,0 +1,124 @@
+---
+import { Icon } from 'astro-icon/components';
+import { cn } from '../lib/utils';
+import HeaderIcon from './HeaderIcon.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: classList } = Astro.props;
+---
+
+<HeaderIcon
+  class={cn(classList)}
+  ariaLabel="テーマを切り替える"
+  data-theme-toggle
+>
+  <Icon
+    name="lucide:sun-moon"
+    class="hidden [html:not(.light):not(.dark)_&]:block"
+  />
+  <Icon name="lucide:moon" class="hidden in-[html.dark]:block" />
+  <Icon name="lucide:sun" class="hidden in-[html.light]:block" />
+</HeaderIcon>
+
+<script>
+  import { isTheme, type Theme } from '../types/Theme';
+  type ThemeState = Theme | null;
+
+  const html = document.documentElement;
+
+  /**
+   * localStorage からテーマを取得する
+   *
+   * 'light' でも 'dark' でもない場合は null を返す
+   */
+  const getStoredTheme = (): ThemeState => {
+    const storedTheme = localStorage.getItem('theme') ?? '';
+    if (isTheme(storedTheme)) {
+      return storedTheme;
+    }
+    return null;
+  };
+
+  /**
+   * OS のテーマ設定を取得する
+   */
+  const getSystemTheme = (): Theme => {
+    const isDarkPreferred = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
+    return isDarkPreferred ? 'dark' : 'light';
+  };
+
+  /**
+   * 指定されたテーマを適用する
+   *
+   * 指定されたテーマを `<html>` のクラスに追加し、 localStorage に保存する
+   *
+   * @param theme
+   */
+  const applyTheme = (theme: ThemeState) => {
+    html.classList.remove('dark', 'light', 'theme-system');
+
+    if (theme === 'dark') {
+      html.classList.add('dark');
+      html.style.colorScheme = 'dark';
+      window.localStorage.setItem('theme', 'dark');
+      return;
+    }
+
+    if (theme === 'light') {
+      html.classList.add('light');
+      html.style.colorScheme = 'light';
+      window.localStorage.setItem('theme', 'light');
+      return;
+    }
+
+    html.style.colorScheme = 'light dark';
+    window.localStorage.removeItem('theme');
+  };
+
+  /**
+   * 現在適用されているテーマを <html> のクラスから取得する
+   *
+   * 'light' も 'dark' もどちらも適用されていない場合は null を返す
+   */
+  const getCurrentTheme = (): ThemeState => {
+    if (html.classList.contains('dark')) {
+      return 'dark';
+    }
+
+    if (html.classList.contains('light')) {
+      return 'light';
+    }
+
+    return null;
+  };
+
+  applyTheme(getStoredTheme());
+
+  const handleToggleClick = () => {
+    const currentTheme = getCurrentTheme();
+    const systemTheme = getSystemTheme();
+
+    if (currentTheme === null) {
+      applyTheme(systemTheme === 'dark' ? 'light' : 'dark');
+      return;
+    }
+
+    if (currentTheme !== systemTheme) {
+      applyTheme(systemTheme);
+      return;
+    }
+
+    applyTheme(null);
+  };
+
+  document
+    .querySelectorAll<HTMLElement>('[data-theme-toggle]')
+    .forEach((toggleButton) => {
+      toggleButton.addEventListener('click', handleToggleClick);
+    });
+</script>

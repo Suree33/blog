@@ -1,0 +1,34 @@
+---
+import { Icon } from 'astro-icon/components';
+import ThemeToggle from './ThemeToggle.astro';
+import HeaderIcon from './HeaderIcon.astro';
+import { cn } from '../lib/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: classList } = Astro.props;
+---
+
+<div class={cn('dark:text-white text-black', classList)}>
+  <HeaderIcon
+    href="https://twitter.com/thisissuree"
+    ariaLabel="Twitter profile page (@thisissuree)"
+  >
+    <Icon name="fa6-brands:x-twitter" />
+  </HeaderIcon>
+  <HeaderIcon
+    href="https://www.instagram.com/thisissuree/"
+    ariaLabel="Instagram profile page (@thisissuree)"
+  >
+    <Icon name="fa6-brands:instagram" />
+  </HeaderIcon>
+  <HeaderIcon
+    href="https://github.com/Suree33"
+    ariaLabel="GitHub profile page (@Suree33)"
+  >
+    <Icon name="fa6-brands:github" />
+  </HeaderIcon>
+  <ThemeToggle />
+</div>
