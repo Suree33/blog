@@ -26,7 +26,7 @@ fi
 
 target_path="$(echo "$tool_args_raw" | jq -r '.path // .filePath // .filepath // .target_file // empty')"
 
-if [[ -z "$target_path" || -z "$event_cwd" ]]; then
+if [[ -z "$target_path" ]]; then
   exit 0
 fi
 
@@ -35,9 +35,10 @@ target_file="$(
 from pathlib import Path
 import sys
 
-cwd = Path(sys.argv[1])
+cwd_arg = sys.argv[1]
 target = Path(sys.argv[2])
 
+cwd = Path(cwd_arg).resolve() if cwd_arg else Path.cwd().resolve()
 print((target if target.is_absolute() else cwd / target).resolve())
 PY
 )"
