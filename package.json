@@ -17,18 +17,18 @@
     "lint": "eslint && astro check"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@astrojs/partytown": "2.1.4",
-    "@astrojs/rss": "4.0.15",
-    "@astrojs/sitemap": "3.7.0",
-    "@astrojs/ts-plugin": "^1.10.6",
+    "@astrojs/check": "0.9.8",
+    "@astrojs/partytown": "2.1.5",
+    "@astrojs/rss": "4.0.17",
+    "@astrojs/sitemap": "3.7.1",
+    "@astrojs/ts-plugin": "1.10.7",
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/lucide": "^1.2.98",
     "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
-    "astro": "^5.18.0",
+    "astro": "^6.0.8",
     "astro-icon": "^1.1.5",
     "clsx": "^2.1.1",
     "postcss-nesting": "^14.0.0",
@@ -42,6 +42,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@astrojs/language-server": "^2.16.6",
     "@eslint/compat": "^2.0.2",
     "@eslint/js": "^10.0.0",
     "@types/sanitize-html": "^2.16.0",
@@ -55,6 +56,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript-eslint": "^8.56.1",
+    "typescript-language-server": "^5.1.3",
     "wrangler": "^4.69.0"
   },
   "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"

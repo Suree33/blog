@@ -68,6 +68,10 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 
 - コード変更後は `pnpm run lint` でESLintを実行してください。
 
+## その他
+
+- ユーザーとの会話には常に日本語を使用すること
+
 ## Skills運用ルール
 
 - 新規ブログ記事を追加する必要がある場合、またはユーザーから新規記事追加を依頼された場合は、必ず `init-post` スキルを使用する。
