@@ -6,7 +6,7 @@
   .remark-code-title {
     @apply font-mono text-sm;
     @apply w-fit max-w-full px-4 py-1;
-    @apply bg-gray-100 text-black dark:bg-gray-800 dark:text-white;
+    @apply bg-gray-200 text-black dark:bg-gray-800 dark:text-white;
     @apply rounded-md rounded-br-none rounded-bl-none;
   }
 
@@ -14,19 +14,10 @@
     @apply mt-0 rounded-tl-none;
   }
 
-  .astro-code {
-    @media (prefers-color-scheme: light) {
-      @apply bg-gray-50!;
-    }
-  }
-}
-
-@media (prefers-color-scheme: dark) {
   .astro-code,
   .astro-code span {
-    @apply bg-(--shiki-dark-bg)! font-(--shiki-dark-font-weight)! text-(--shiki-dark)!;
-    font-style: var(--shiki-dark-font-style) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
+    @apply bg-gray-100!;
+    @apply dark:bg-(--shiki-dark-bg)!;
   }
 }
 

@@ -29,6 +29,7 @@ export default defineConfig({
         dark: 'github-dark',
         light: 'github-light',
       },
+      defaultColor: 'light-dark()',
     },
   },
   vite: {
