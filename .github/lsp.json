@@ -2,7 +2,7 @@
   "lspServers": {
     "astro": {
       "command": "pnpm",
-      "args": ["exec", "astro-language-server", "--stdio"],
+      "args": ["exec", "astro-ls", "--stdio"],
       "fileExtensions": {
         ".astro": "astro"
       }
