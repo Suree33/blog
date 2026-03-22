@@ -21,10 +21,6 @@
   }
 }
 
-.astro-code,
-.astro-code span {
-}
-
 /* Code span */
 :not(.astro-code) > code {
   &::before,
