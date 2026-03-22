@@ -19,25 +19,34 @@ description: 'ライト・ダーク・OS設定の3ステートを切り替えら
 よくある2ステート（ライト / ダーク）ではなく、OS設定に戻せる3ステートにした。
 
 | ステート | `<html>` クラス | アイコン |
-|---|---| --- |
+| --- | --- | --- |
 | OS設定に従う（デフォルト） | なし | `lucide:sun-moon` |
 | ダーク固定 | `dark` | `lucide:moon` |
 | ライト固定 | `light` | `lucide:sun` |
 
-状態は `localStorage["theme"]` に保存される。OS設定に戻したときは `localStorage` のエントリを削除して、`@media (prefers-color-scheme)` に完全に委ねる。
+状態は `localStorage["theme"]` に保存される。
+OS設定に戻したときは `localStorage` のエントリを削除して、`@media (prefers-color-scheme)` に完全に委ねる。
 
 ### 切り替えの順序
 
 OS設定を起点に、逆方向を経由して戻ってくる順番になっている。
 
-```
-OSがダークの場合: OS設定 → ライト → ダーク → OS設定
-OSがライトの場合: OS設定 → ダーク → ライト → OS設定
-```
+- OSがダークの場合: OS設定 → ライト → ダーク → OS設定
+- OSがライトの場合: OS設定 → ダーク → ライト → OS設定
 
 ## 実装のポイント
 
 ### `@custom-variant dark` で OS設定と手動設定を両立
+
+Tailwind CSS 公式では、 `prefers-color-scheme` を基にした自動テーマ切り替えから、以下のように `dark` クラスを基にしたテーマ切り替えに変更する方法が紹介されている。
+
+```css
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+<https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually>
 
 Tailwind CSS v4 の `@custom-variant` を使って、`dark:` が効く条件を調整した。
 
