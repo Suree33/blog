@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "./scripts/format-lint-edited-file.sh",
+        "cwd": ".github/hooks",
+        "timeoutSec": 120
+      }
+    ]
+  }
+}
