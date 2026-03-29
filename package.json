@@ -39,7 +39,7 @@
     "sharp": "^0.34.5",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.0"
   },
   "devDependencies": {
     "@astrojs/language-server": "^2.16.6",
