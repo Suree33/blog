@@ -1,0 +1,38 @@
+import type { APIRoute, GetStaticPaths } from 'astro';
+
+const rawPostModules = import.meta.glob<string>('./*.md', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+});
+
+interface RawMarkdownPost {
+  slug: string;
+  body: string;
+}
+
+const rawPosts: RawMarkdownPost[] = Object.entries(rawPostModules).map(
+  ([path, body]) => ({
+    slug: path.replace('./', '').replace(/\.md$/, ''),
+    body,
+  }),
+);
+
+/**
+ * Markdown 記事ごとの raw Markdown を返す `/posts/[slug].md` エンドポイントを静的生成する。
+ */
+export const getStaticPaths = (() =>
+  rawPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { body: post.body },
+  }))) satisfies GetStaticPaths;
+
+export const GET = (({ props }) => {
+  const { body } = props as { body: string };
+
+  return new Response(body, {
+    headers: {
+      'Content-Type': 'text/markdown; charset=utf-8',
+    },
+  });
+}) satisfies APIRoute;
