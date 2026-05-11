@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: CotEditor向けCatppuccinテーマを作った
 pubDate: 2025-07-27
 tags:

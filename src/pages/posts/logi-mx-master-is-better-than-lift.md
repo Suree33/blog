@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Logicool MX Liftを買ってみて、MX Masterの良さを再認識した'
 pubDate: 2024-03-25
 tags:

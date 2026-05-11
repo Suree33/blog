@@ -8,10 +8,7 @@ export interface Image {
 }
 
 export interface PostFrontmatter {
-  /**
-   * Astroレイアウト
-   */
-  layout: string;
+  layout?: string;
   title: string;
   pubDate: string;
   updatedDate?: string;

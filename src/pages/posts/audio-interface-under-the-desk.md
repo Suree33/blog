@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: オーディオインターフェースを机の裏に設置した
 pubDate: 2024-05-16
 tags:

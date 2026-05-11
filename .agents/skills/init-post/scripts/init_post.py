@@ -55,10 +55,6 @@ def format_tags(raw_tags: str) -> str:
 
 def render_frontmatter(template: str, pub_date: str, title: str, description: str, tags: str) -> str:
     rendered = template.replace("pubDate: {{date}}", f"pubDate: {pub_date}")
-    rendered = rendered.replace(
-        "layout: ../../../layouts/MarkdownPostLayout.astro",
-        "layout: ../../layouts/MarkdownPostLayout.astro",
-    )
     rendered = re.sub(r"^title:\s*$", f"title: {yaml_single_quote(title)}", rendered, flags=re.MULTILINE)
     rendered = re.sub(
         r"^description:\s*$",
