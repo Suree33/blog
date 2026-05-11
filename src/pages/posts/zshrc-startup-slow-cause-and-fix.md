@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: .zshrc の起動が遅い原因を Codex に調査させたら、10倍速くなった
 pubDate: 2026-02-27
 tags:

@@ -11,10 +11,31 @@ interface RawMarkdownPost {
   body: string;
 }
 
+const removeLayoutFrontmatter = (body: string) => {
+  if (!body.startsWith('---\n')) {
+    return body;
+  }
+
+  const frontmatterEndIndex = body.indexOf('\n---', 4);
+
+  if (frontmatterEndIndex === -1) {
+    return body;
+  }
+
+  const frontmatter = body.slice(4, frontmatterEndIndex);
+  const rest = body.slice(frontmatterEndIndex);
+  const frontmatterWithoutLayout = frontmatter.replace(
+    /^layout:\s*[^\n]*\n?/m,
+    '',
+  );
+
+  return `---\n${frontmatterWithoutLayout}${rest}`;
+};
+
 const rawPosts: RawMarkdownPost[] = Object.entries(rawPostModules).map(
   ([path, body]) => ({
     slug: path.replace('./', '').replace(/\.md$/, ''),
-    body,
+    body: removeLayoutFrontmatter(body),
   }),
 );
 

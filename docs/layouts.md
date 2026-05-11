@@ -144,19 +144,16 @@ interface Frontmatter {
 
 ### 使用例
 
+`src/pages/posts/` 配下の Markdown では `astro.config.mjs` の remark プラグインにより `MarkdownPostLayout` が自動適用されるため、frontmatter に `layout` を書く必要はありません。個別記事で別レイアウトを使いたい場合は、従来どおり `layout` を明示するとその指定が優先されます。
+
 ```astro
 ---
-// Markdownファイルで自動的に使用される
-// frontmatter部分でlayoutを指定
-layout: ../../layouts/MarkdownPostLayout.astro
-title: "ブログ記事タイトル"
-tags: ["tech", "blog"]
-pubDate: "2024-01-01"
+title: 'ブログ記事タイトル';
+tags: ['tech', 'blog'];
+pubDate: '2024-01-01';
 ---
 
-# 記事内容
-
-記事本文がここに来ます。
+# 記事内容 記事本文がここに来ます。
 ```
 
 ## 開発時の注意点
@@ -165,7 +162,7 @@ pubDate: "2024-01-01"
 
 - **一般的なページ**: `BaseLayout` を使用
 - **文章中心のページ**: `ProseArticleLayout` を使用
-- **ブログ記事**: `MarkdownPostLayout` を使用（Markdownファイルで自動適用）
+- **ブログ記事**: `MarkdownPostLayout` を使用（`src/pages/posts/` 配下の Markdown には自動適用）
 
 ### カスタマイズ
 

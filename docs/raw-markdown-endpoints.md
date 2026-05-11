@@ -1,6 +1,6 @@
 # Raw Markdown エンドポイント
 
-ブログ記事の HTML ページに加えて、frontmatter を含む raw Markdown を取得できる `.md` エンドポイントを提供しています。
+ブログ記事の HTML ページに加えて、frontmatter を含む raw Markdown を取得できる `.md` エンドポイントを提供しています。Astro の表示制御用 `layout` frontmatter は出力しません。
 
 ## URL
 
@@ -12,7 +12,7 @@
 ```
 
 - `/posts/foo`: 通常の HTML 記事ページ
-- `/posts/foo.md`: frontmatter 込みの raw Markdown
+- `/posts/foo.md`: frontmatter 込みの raw Markdown（`layout` は除外）
 
 ## 実装
 
@@ -20,6 +20,7 @@ Endpoint は `src/pages/posts/[slug].md.ts` で実装しています。
 
 - `import.meta.glob('./*.md', { query: '?raw', import: 'default', eager: true })` で `src/pages/posts/` 直下の記事 Markdown を文字列として読み込む
 - `getStaticPaths()` で記事ごとの `slug` を列挙し、静的ビルド時に `/posts/[slug].md` を生成する
+- 読み込んだ Markdown の frontmatter から `layout` 行を除去する
 - `GET` は raw Markdown を `Content-Type: text/markdown; charset=utf-8` で返す
 
 `template/_blog-post.md` や画像ディレクトリ配下のファイルは、`./*.md` の対象外です。
