@@ -6,15 +6,86 @@ interface Env {
 
 const POSTS_PATH_PATTERN = /^\/posts\/[^/.]+\/?$/;
 
-const acceptsMarkdown = (acceptHeader: string | null) =>
-  acceptHeader?.split(',').some((mediaRange) => {
-    const [mediaType, ...parameters] = mediaRange
-      .split(';')
-      .map((part) => part.trim().toLowerCase());
-    const quality = parameters.find((parameter) => parameter.startsWith('q='));
+interface AcceptPreference {
+  mediaType: string;
+  q: number;
+  order: number;
+}
 
-    return mediaType === 'text/markdown' && quality !== 'q=0';
-  }) ?? false;
+const parseQValue = (parameters: string[]) => {
+  const quality = parameters.find((parameter) => parameter.startsWith('q='));
+
+  if (!quality) {
+    return 1;
+  }
+
+  const q = Number.parseFloat(quality.slice(2));
+
+  if (Number.isNaN(q)) {
+    return 0;
+  }
+
+  return Math.min(Math.max(q, 0), 1);
+};
+
+const parseAcceptHeader = (acceptHeader: string | null): AcceptPreference[] =>
+  acceptHeader
+    ?.split(',')
+    .map((mediaRange, order) => {
+      const [mediaType, ...parameters] = mediaRange
+        .split(';')
+        .map((part) => part.trim().toLowerCase());
+
+      return {
+        mediaType,
+        q: parseQValue(parameters),
+        order,
+      };
+    })
+    .filter(({ mediaType, q }) => mediaType.length > 0 && q > 0) ?? [];
+
+const matchesMediaType = (preference: AcceptPreference, mediaType: string) => {
+  const [preferenceType, preferenceSubtype] = preference.mediaType.split('/');
+  const [type, subtype] = mediaType.split('/');
+
+  return (
+    (preferenceType === '*' || preferenceType === type) &&
+    (preferenceSubtype === '*' || preferenceSubtype === subtype)
+  );
+};
+
+const specificity = (mediaType: string) =>
+  mediaType.split('/').filter((part) => part.length > 0 && part !== '*').length;
+
+const bestPreferenceFor = (
+  preferences: AcceptPreference[],
+  mediaType: string,
+) =>
+  preferences
+    .filter((preference) => matchesMediaType(preference, mediaType))
+    .sort(
+      (a, b) =>
+        b.q - a.q ||
+        specificity(b.mediaType) - specificity(a.mediaType) ||
+        a.order - b.order,
+    )[0];
+
+const prefersMarkdown = (acceptHeader: string | null) => {
+  const preferences = parseAcceptHeader(acceptHeader);
+  const markdown = bestPreferenceFor(preferences, 'text/markdown');
+
+  if (!markdown || markdown.mediaType !== 'text/markdown') {
+    return false;
+  }
+
+  const html = bestPreferenceFor(preferences, 'text/html');
+
+  return (
+    !html ||
+    markdown.q > html.q ||
+    (markdown.q === html.q && markdown.order <= html.order)
+  );
+};
 
 const addVaryAccept = (response: Response) => {
   const headers = new Headers(response.headers);
@@ -41,7 +112,7 @@ export default {
     const shouldReturnMarkdown =
       (request.method === 'GET' || request.method === 'HEAD') &&
       POSTS_PATH_PATTERN.test(url.pathname) &&
-      acceptsMarkdown(request.headers.get('Accept'));
+      prefersMarkdown(request.headers.get('Accept'));
 
     if (shouldReturnMarkdown) {
       const markdownUrl = new URL(request.url);
