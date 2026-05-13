@@ -19,3 +19,12 @@ CIでビルドだけを実行するためのスクリプトです。
   - `prebuild` が有効で、`pnpm lint` を先に実行します。
 - CI: `pnpm run build:ci`
   - `prebuild` をスキップし、ビルドのみ実行します。
+
+## pnpm 11設定
+
+CIでは `package.json` の `packageManager` に従ってpnpm 11を使用します。
+
+- pnpm 11では `.npmrc` からauth/registry以外の設定を読みません。
+- プロジェクトのpnpm設定は `pnpm-workspace.yaml` に集約します。
+- 依存パッケージのビルドスクリプト許可は `allowBuilds` で明示します。
+- `strictDepBuilds` の既定値が有効なため、未レビューのビルドスクリプトがあると `pnpm install` は失敗します。
