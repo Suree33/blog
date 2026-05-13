@@ -1,6 +1,13 @@
-onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - esbuild
-  - sharp
-  - workerd
+allowBuilds:
+  '@tailwindcss/oxide': true
+  esbuild: true
+  sharp: true
+  workerd: true
+autoInstallPeers: true
 enablePrePostScripts: true
+nodeLinker: isolated
+publicHoistPattern:
+  - '*eslint*'
+  - '*prettier*'
+shamefullyHoist: false
+strictPeerDependencies: false
