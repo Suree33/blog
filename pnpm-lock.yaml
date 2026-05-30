@@ -58,7 +58,7 @@ importers:
         version: 2.1.2
       remark-flexible-code-titles:
         specifier: ^1.3.3
-        version: 1.3.3(unified@11.0.5)
+        version: 1.3.4(unified@11.0.5)
       remark-link-card-plus:
         specifier: ^0.7.3
         version: 0.7.4
@@ -2930,8 +2930,8 @@ packages:
   rehype@13.0.2:
     resolution: {integrity: sha512-j31mdaRFrwFRUIlxGeuPXXKWQxet52RBQRvCmzl5eCefn/KGbomK5GMHNMsOJf55fgo3qw5tST5neDuarDYR2A==}
 
-  remark-flexible-code-titles@1.3.3:
-    resolution: {integrity: sha512-eOSw4C4hjRIkEiLlo0r1gx9nbb8ie/4lRj3sy0dadsS6dLGrWk41VdjArfU28QI3PgDyc0vCI2VbixbX0eBaLg==}
+  remark-flexible-code-titles@1.3.4:
+    resolution: {integrity: sha512-2RkUgXEvOcvyLgbMEQ/XgDlIvoZLZuQEMa5ePrgWKKf+YPAKl4Tg+ytMhs+oJXss/7MfJfVF8LSvfWrdsqDtRg==}
     peerDependencies:
       unified: ^11
 
@@ -6761,7 +6761,7 @@ snapshots:
       rehype-stringify: 10.0.1
       unified: 11.0.5
 
-  remark-flexible-code-titles@1.3.3(unified@11.0.5):
+  remark-flexible-code-titles@1.3.4(unified@11.0.5):
     dependencies:
       '@types/mdast': 4.0.4
       unified: 11.0.5
