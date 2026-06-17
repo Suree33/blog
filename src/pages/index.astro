@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PostItem from '@components/PostItem.astro';
+import type { MarkdownInstance } from 'astro';
+
+interface Frontmatter {
+  title: string;
+  pubDate: string;
+  draft?: boolean;
+}
+
+const posts = await Promise.all(
+  Object.values(
+    import.meta.glob<MarkdownInstance<Frontmatter>>('./posts/*.{md,mdx}', {
+      eager: true,
+    }),
+  ),
+);
+const pageTitle = 'Home';
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="mt-10 flex w-full justify-center sm:px-4">
+    <div class="container">
+      <ul class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4">
+        <h2 class="mx-4 border-b pb-4 text-4xl font-bold">Posts</h2>
+        {
+          posts
+            .filter((post) => !post.frontmatter.draft)
+            .sort((a, b) => {
+              return (
+                new Date(b.frontmatter.pubDate).getTime() -
+                new Date(a.frontmatter.pubDate).getTime()
+              );
+            })
+            .slice(0, 5)
+            .map((post) => <PostItem post={post} />)
+        }
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
