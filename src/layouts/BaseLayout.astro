@@ -37,7 +37,7 @@ const { pageTitle, ogimage, description } = Astro.props;
       name="description"
       content={description ? description : config.description}
     />
-    <title>{pageTitle} — {config.siteName}</title>
+    <title>{pageTitle && pageTitle + ' — '}{config.siteName}</title>
     <!-- og -->
     <meta property="og:site_name" content={config.siteName} />
     <meta
