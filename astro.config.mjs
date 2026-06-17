@@ -54,6 +54,9 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['quokka', 'quokka.local'],
+    },
   },
   integrations: [
     sitemap(),
