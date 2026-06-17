@@ -12,7 +12,7 @@ interface Frontmatter {
 
 const posts = await Promise.all(
   Object.values(
-    import.meta.glob<MarkdownInstance<Frontmatter>>('./posts/*.{md,mdx}', {
+    import.meta.glob<MarkdownInstance<Frontmatter>>('./*.{md,mdx}', {
       eager: true,
     }),
   ),

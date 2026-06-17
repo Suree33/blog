@@ -29,9 +29,6 @@ function postsDefaultLayout() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sur33.com/',
-  redirects: {
-    '/posts': '/',
-  },
   markdown: {
     remarkPlugins: [
       postsDefaultLayout,
