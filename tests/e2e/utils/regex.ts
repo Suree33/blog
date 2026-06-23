@@ -9,3 +9,11 @@
 export function escapeRegExp(input: string): string {
   return input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
+/**
+ * Matches the site home URL (`/`), host-agnostic and scheme-agnostic.
+ *
+ * Used by navigation specs to assert that a link landed on the home page
+ * regardless of the preview server host.
+ */
+export const HOME_URL_REGEX = /^https?:\/\/[^/]+\/$/;

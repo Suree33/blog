@@ -1,38 +1,31 @@
 import { expect, test } from '../fixtures/test';
 import { escapeRegExp } from '../utils/regex';
-import { routes, sampleArticleTitle } from '../utils/routes';
+import { sampleArticleTitle } from '../utils/routes';
 
 test.describe('smoke', () => {
   test('home page renders the blog title and article list', async ({
-    page,
+    homePage,
   }) => {
-    await page.goto(routes.home);
+    await homePage.goto();
 
-    await expect(page).toHaveTitle(/Blog.*Daiki Sato/);
+    await expect(homePage.page).toHaveTitle(/Blog.*Daiki Sato/);
 
-    const sampleArticleLink = page.getByRole('link', {
-      name: sampleArticleTitle,
-    });
-    await expect(sampleArticleLink).toBeVisible();
+    await expect(homePage.postList.sampleArticleLink).toBeVisible();
   });
 
-  test('about page loads', async ({ page }) => {
-    await page.goto(routes.about);
+  test('about page loads', async ({ aboutPage }) => {
+    await aboutPage.goto();
 
-    await expect(page).toHaveTitle(/About.*Daiki Sato/);
-    await expect(
-      page.getByRole('heading', { level: 1, name: 'Daiki Sato' }),
-    ).toBeVisible();
+    await expect(aboutPage.page).toHaveTitle(/About.*Daiki Sato/);
+    await expect(aboutPage.heading).toBeVisible();
   });
 
-  test('sample article loads', async ({ page }) => {
-    await page.goto(routes.sampleArticle);
+  test('sample article loads', async ({ articlePage }) => {
+    await articlePage.goto();
 
-    await expect(page).toHaveTitle(
+    await expect(articlePage.page).toHaveTitle(
       new RegExp(`${escapeRegExp(sampleArticleTitle)}.*Daiki Sato`),
     );
-    await expect(
-      page.getByRole('heading', { level: 1, name: sampleArticleTitle }),
-    ).toBeVisible();
+    await expect(articlePage.heading).toBeVisible();
   });
 });
