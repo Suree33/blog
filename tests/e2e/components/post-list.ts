@@ -16,9 +16,14 @@ export class PostList {
     this.page = page;
   }
 
-  /** The article list container (`<ul>` within `<main>`). */
+  /**
+   * The article list container (`<ul>` within `<main>`).
+   *
+   * `.first()` pins the locator to the first list even if a future page adds
+   * extra `<ul>` elements inside `<main>`, keeping visual snapshots deterministic.
+   */
   get root(): Locator {
-    return this.page.getByRole('main').locator('ul');
+    return this.page.getByRole('main').locator('ul').first();
   }
 
   /**
