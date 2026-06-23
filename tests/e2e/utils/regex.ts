@@ -1,8 +1,8 @@
 /**
- * Escape a string for safe literal use inside a RegExp.
+ * 文字列を RegExp 内で安全なリテラルとして使用できるようにエスケープする。
  *
- * Use this when constructing a RegExp from a dynamic value (e.g. an article
- * title) so regex metacharacters in the value are treated as literals.
+ * 動的な値（例: 記事タイトル）から RegExp を構築する際に使用し、
+ * 値に含まれる正規表現メタ文字がリテラルとして扱われるようにする。
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#escaping
  */
@@ -11,9 +11,9 @@ export function escapeRegExp(input: string): string {
 }
 
 /**
- * Matches the site home URL (`/`), host-agnostic and scheme-agnostic.
+ * サイトのホーム URL（`/`）にマッチする。ホスト/スキームに依存しない。
  *
- * Used by navigation specs to assert that a link landed on the home page
- * regardless of the preview server host.
+ * ナビゲーションの spec で、プレビューサーバーのホストに関わらず
+ * リンクがホームページに遷移したことを検証するために使用する。
  */
 export const HOME_URL_REGEX = /^https?:\/\/[^/]+\/$/;

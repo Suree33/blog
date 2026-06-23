@@ -1,8 +1,8 @@
 /**
- * Centralised route paths used across the E2E suite.
+ * E2E スイート全体で使用するルートパスを集約したもの。
  *
- * Keeping routes in one place lets specs stay resilient to URL changes and
- * makes it obvious which pages are covered by the test matrix.
+ * ルートを一箇所にまとめることで、URL 変更への耐性を高め、
+ * テスト行列でカバーしているページを明確にする。
  */
 export const routes = {
   home: '/',
@@ -11,10 +11,10 @@ export const routes = {
 } as const;
 
 /**
- * Title of the sample article referenced by `routes.sampleArticle`.
+ * `routes.sampleArticle` が参照するサンプル記事のタイトル。
  *
- * Used as a semantic locator (`getByRole('link', { name: ... })`) and for title
- * assertions, so specs stay decoupled from DOM structure.
+ * セマンティックロケーター（`getByRole('link', { name: ... })`）や
+ * タイトルアサーションに使用し、spec が DOM 構造に依存しないようにする。
  */
 export const sampleArticleTitle =
   'オーディオインターフェースを机の裏に設置した';

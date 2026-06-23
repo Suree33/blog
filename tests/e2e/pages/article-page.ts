@@ -5,12 +5,11 @@ import { PostMetadata } from '../components/post-metadata';
 import { routes, sampleArticleTitle } from '../utils/routes';
 
 /**
- * Page object for a blog article page.
+ * ブログ記事ページのページオブジェクト。
  *
- * `goto()` defaults to the sample article route/title; specs can pass another
- * route (with its title) to test a different article. The expected title is
- * tracked internally so `heading` stays in sync with the route that was
- * navigated to.
+ * `goto()` のデフォルトはサンプル記事のルート/タイトル。spec から別のルート
+ * （とそのタイトル）を渡すことで、他の記事もテストできる。
+ * 期待タイトルは内部で保持し、`heading` が遷移先のルートと同期するようにする。
  */
 export class ArticlePage {
   readonly page: Page;
@@ -28,11 +27,11 @@ export class ArticlePage {
   }
 
   /**
-   * Navigate to an article route.
+   * 記事のルートへ遷移する。
    *
-   * @param route Article URL, defaults to the sample article route.
-   * @param title Expected `<h1>` text for the route, used by `heading`. Must
-   *   match the article rendered at `route`.
+   * @param route 記事の URL。デフォルトはサンプル記事のルート。
+   * @param title ルートに対応する `<h1>` の期待テキスト。`heading` で使用。
+   *   `route` でレンダリングされる記事と一致させる必要がある。
    */
   async goto(
     route: string = routes.sampleArticle,
@@ -42,7 +41,7 @@ export class ArticlePage {
     await this.page.goto(route);
   }
 
-  /** The article title heading (`<h1>`), located by the expected title. */
+  /** 記事タイトルの見出し（`<h1>`）。期待タイトルで特定する。 */
   get heading(): Locator {
     return this.page.getByRole('heading', {
       level: 1,

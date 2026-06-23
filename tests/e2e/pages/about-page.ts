@@ -4,7 +4,7 @@ import { Footer } from '../components/footer';
 import { routes } from '../utils/routes';
 
 /**
- * Page object for the about page (`/about`).
+ * About ページ（`/about`）のページオブジェクト。
  */
 export class AboutPage {
   readonly page: Page;
@@ -21,7 +21,7 @@ export class AboutPage {
     await this.page.goto(routes.about);
   }
 
-  /** The page heading (`<h1>Daiki Sato</h1>`). */
+  /** ページの見出し（`<h1>Daiki Sato</h1>`）。 */
   get heading(): Locator {
     return this.page.getByRole('heading', { level: 1, name: 'Daiki Sato' });
   }

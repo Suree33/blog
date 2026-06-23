@@ -1,7 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 
 /**
- * Thin component wrapper for the site `<footer>` (implicit `contentinfo` role).
+ * サイトの `<footer>`（暗黙的な `contentinfo` role）を薄くラップしたコンポーネント。
  */
 export class Footer {
   readonly page: Page;
@@ -10,7 +10,7 @@ export class Footer {
     this.page = page;
   }
 
-  /** The contentinfo landmark (`<footer>`). */
+  /** contentinfo ランドマーク（`<footer>`）。 */
   get root(): Locator {
     return this.page.getByRole('contentinfo');
   }
@@ -23,7 +23,7 @@ export class Footer {
     return this.root.getByRole('link', { name: 'About' });
   }
 
-  /** RSS feed link (`aria-label="RSS feed"`). */
+  /** RSS フィードリンク（`aria-label="RSS feed"`）。 */
   get rssLink(): Locator {
     return this.root.getByRole('link', { name: 'RSS feed' });
   }

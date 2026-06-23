@@ -4,12 +4,12 @@ import { AboutPage } from '../pages/about-page';
 import { ArticlePage } from '../pages/article-page';
 
 /**
- * Shared Playwright test fixture for the blog E2E suite.
+ * ブログ E2E スイートで共有する Playwright テスト fixture。
  *
- * Extends `base` with Page Object Model fixtures so specs can depend on
- * `homePage`, `aboutPage` and `articlePage` instead of constructing them.
- * `isDesktop` lets specs scope behaviour to the desktop project without
- * hard-coding viewport numbers in each spec.
+ * `base` をページオブジェクトモデルの fixture で拡張し、spec 側が
+ * `homePage` / `aboutPage` / `articlePage` を自前で構築しなくても依存できるようにする。
+ * `isDesktop` は、各 spec でビューポート数値をハードコードすることなく、
+ * デスクトッププロジェクトに限定した挙動を記述できるようにする。
  */
 export const test = base.extend<{
   homePage: HomePage;

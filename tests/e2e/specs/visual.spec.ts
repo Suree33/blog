@@ -9,32 +9,31 @@ const screenshotOptions = {
 } as const;
 
 /**
- * Visual regression snapshots.
+ * ビジュアルリグレッションのスナップショット。
  *
- * Scoped to the desktop project to keep the snapshot matrix small and stable
- * in this phase; mobile visual snapshots are intentionally omitted. Component /
- * locator-level screenshots are preferred over full-page captures so the
- * baselines stay small and less sensitive to unrelated content changes.
+ * このフェーズではスナップショット行列を小さく安定させるため、デスクトッププロジェクトに
+ * 限定している。モバイルのビジュアルスナップショットは意図的に除外している。
+ * フルページキャプチャよりもコンポーネント/ロケーター単位のスクリーンショットを優先し、
+ * ベースラインを小さく、かつ無関係なコンテンツ変更に影響されにくくしている。
  *
- * The article metadata snapshot is the highest-value target: it catches
- * whitespace / layout regressions such as the Astro `compressHTML` issue that
- * collapsed spacing inside the metadata block.
+ * 記事メタデータのスナップショットは最も価値が高い対象: Astro の `compressHTML` によって
+ * メタデータブロック内の余白が潰されたような、空白/レイアウトのリグレッションを検出する。
  *
- * Snapshots are committed under `tests/e2e/specs/visual.spec.ts-snapshots/`.
- * Regenerate them with `pnpm run test:e2e:update` (or
- * `pnpm run test:e2e -- --update-snapshots`) after intentional UI changes.
+ * スナップショットは `tests/e2e/specs/visual.spec.ts-snapshots/` にコミットする。
+ * 意図的な UI 変更後は `pnpm run test:e2e:update`（または
+ * `pnpm run test:e2e -- --update-snapshots`）で再生成する。
  */
-test.describe('visual regression', () => {
-  test.skip(({ isDesktop }) => !isDesktop, 'desktop only');
+test.describe('ビジュアルリグレッション', () => {
+  test.skip(({ isDesktop }) => !isDesktop, 'デスクトップのみ');
 
   test.beforeEach(async ({ page }) => {
-    // Fix the system colour scheme so the theme-toggle icon
-    // (sun-moon / moon / sun) and any prefers-color-scheme styles are
-    // deterministic across runs.
+    // システム配色を固定し、テーマトグルアイコン
+    // （sun-moon / moon / sun）や prefers-color-scheme スタイルが
+    // 実行間で決定的になるようにする。
     await page.emulateMedia({ colorScheme: 'light' });
   });
 
-  test('article metadata block', async ({ articlePage }) => {
+  test('記事メタデータブロック', async ({ articlePage }) => {
     await articlePage.goto();
 
     await expect(articlePage.metadata.root).toHaveScreenshot(
@@ -43,7 +42,7 @@ test.describe('visual regression', () => {
     );
   });
 
-  test('site header', async ({ homePage }) => {
+  test('サイトヘッダー', async ({ homePage }) => {
     await homePage.goto();
 
     await expect(homePage.header.root).toHaveScreenshot(
@@ -52,7 +51,7 @@ test.describe('visual regression', () => {
     );
   });
 
-  test('home sample article list item', async ({ homePage }) => {
+  test('ホームのサンプル記事リスト項目', async ({ homePage }) => {
     await homePage.goto();
 
     await expect(homePage.postList.sampleArticleLink).toHaveScreenshot(

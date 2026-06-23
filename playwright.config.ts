@@ -1,11 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Playwright E2E configuration for the Astro blog.
+ * Astro ブログの Playwright E2E 設定。
  *
- * Phase 1 scope: Chromium-only smoke tests against the Astro preview server.
- * The fixture/route foundation here is intended to be gradually expanded into
- * Page Object Models and visual regression tests in later phases.
+ * フェーズ1のスコープ: Astro preview サーバーに対する Chromium のみのスモークテスト。
+ * ここで用意した fixture/route の基盤は、後続のフェーズで順次
+ * ページオブジェクトモデル（POM）やビジュアルリグレッションテストへ拡張することを想定している。
  *
  * @see https://playwright.dev/docs/test-configuration
  */

@@ -1,11 +1,11 @@
 import { type Locator, type Page } from '@playwright/test';
 
 /**
- * Thin component wrapper for the site `<header>` (implicit `banner` role).
+ * サイトの `<header>`（暗黙的な `banner` role）を薄くラップしたコンポーネント。
  *
- * The POM stays thin: it exposes stable semantic locators and a couple of tiny
- * navigation/action helpers. Assertions deliberately live in the specs rather
- * than being hidden behind this class.
+ * POM は薄く保つ: 安定したセマンティックロケーターと、小さなナビゲーション/
+ * アクションヘルパーのみを公開する。アサーションは意図的に spec 側に置き、
+ * このクラスの背後に隠さない。
  */
 export class Header {
   readonly page: Page;
@@ -14,28 +14,28 @@ export class Header {
     this.page = page;
   }
 
-  /** The banner landmark (`<header>`). */
+  /** banner ランドマーク（`<header>`）。 */
   get root(): Locator {
     return this.page.getByRole('banner');
   }
 
   /**
-   * Desktop "Blog" navigation link.
+   * デスクトップの「Blog」ナビゲーションリンク。
    *
-   * The header renders two Blog links (desktop nav + mobile slide-down menu);
-   * the desktop one appears first in the DOM and is the visible one on desktop
-   * viewports, so `.first()` selects it deterministically.
+   * ヘッダーは2つの Blog リンク（デスクトップナビ + モバイルスライドダウンメニュー）を
+   * レンダリングする。デスクトップ側が DOM 上で先に現れ、デスクトップビューポートで
+   * 表示されるものなので、`.first()` で決定的に選択する。
    */
   get blogLink(): Locator {
     return this.root.getByRole('link', { name: 'Blog' }).first();
   }
 
-  /** Desktop "About" navigation link (see `blogLink` for `.first()` rationale). */
+  /** デスクトップの「About」ナビゲーションリンク（`.first()` の理由は `blogLink` を参照）。 */
   get aboutLink(): Locator {
     return this.root.getByRole('link', { name: 'About' }).first();
   }
 
-  /** Theme toggle button (`aria-label="テーマを切り替える"`), desktop instance. */
+  /** テーマトグルボタン（`aria-label="テーマを切り替える"`）のデスクトップ側インスタンス。 */
   get themeToggle(): Locator {
     return this.root
       .getByRole('button', { name: 'テーマを切り替える' })
@@ -43,21 +43,21 @@ export class Header {
   }
 
   /**
-   * Mobile menu support is intentionally omitted in Phase 2.
+   * フェーズ2ではモバイルメニューは意図的に未対応。
    *
-   * The hamburger trigger is a styled `<div class="hamburger">` rather than a
-   * real `<button>`, so it has no semantic role or accessible name and cannot
-   * be located via `getByRole`. Phase 3 will need app-side accessibility work
-   * (e.g. converting it to a `<button>` with an `aria-label` / `aria-expanded`)
-   * before a stable, semantic locator can be exposed here.
+   * ハンバーガートリガーはスタイル付きの `<div class="hamburger">` であり、
+   * 実際の `<button>` ではない。そのためセマンティック role やアクセシブル名を持たず、
+   * `getByRole` では特定できない。フェーズ3では、安定したセマンティックロケーターを
+   * ここで公開する前に、アプリ側で `<button>` + `aria-label` / `aria-expanded` への
+   * アクセシビリティ対応が必要になる。
    */
 
-  /** Click the desktop About link. */
+  /** デスクトップの About リンクをクリックする。 */
   async gotoAbout(): Promise<void> {
     await this.aboutLink.click();
   }
 
-  /** Click the theme toggle button. */
+  /** テーマトグルボタンをクリックする。 */
   async toggleTheme(): Promise<void> {
     await this.themeToggle.click();
   }

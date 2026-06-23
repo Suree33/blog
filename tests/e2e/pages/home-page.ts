@@ -5,7 +5,7 @@ import { PostList } from '../components/post-list';
 import { routes } from '../utils/routes';
 
 /**
- * Page object for the home page (`/`).
+ * ホームページ（`/`）のページオブジェクト。
  */
 export class HomePage {
   readonly page: Page;

@@ -2,8 +2,8 @@ import { expect, test } from '../fixtures/test';
 import { escapeRegExp } from '../utils/regex';
 import { sampleArticleTitle } from '../utils/routes';
 
-test.describe('smoke', () => {
-  test('home page renders the blog title and article list', async ({
+test.describe('スモークテスト', () => {
+  test('ホームページにブログタイトルと記事一覧が表示される', async ({
     homePage,
   }) => {
     await homePage.goto();
@@ -13,14 +13,14 @@ test.describe('smoke', () => {
     await expect(homePage.postList.sampleArticleLink).toBeVisible();
   });
 
-  test('about page loads', async ({ aboutPage }) => {
+  test('About ページが読み込まれる', async ({ aboutPage }) => {
     await aboutPage.goto();
 
     await expect(aboutPage.page).toHaveTitle(/About.*Daiki Sato/);
     await expect(aboutPage.heading).toBeVisible();
   });
 
-  test('sample article loads', async ({ articlePage }) => {
+  test('サンプル記事が読み込まれる', async ({ articlePage }) => {
     await articlePage.goto();
 
     await expect(articlePage.page).toHaveTitle(

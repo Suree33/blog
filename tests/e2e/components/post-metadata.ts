@@ -1,12 +1,12 @@
 import { type Locator, type Page } from '@playwright/test';
 
 /**
- * Thin component wrapper for the article metadata block (tags + dates).
+ * 記事メタデータブロック（タグ + 日付）を薄くラップしたコンポーネント。
  *
- * The metadata container is a `<div>` without a semantic role or `aria-label`,
- * so it is located via its stable `dot-separated` class, filtered to the
- * instance that contains a `<time>` element. This keeps the locator stable for
- * visual regression snapshots in a later phase.
+ * メタデータのコンテナはセマンティック role や `aria-label` を持たない `<div>` なので、
+ * 安定した `dot-separated` クラスで特定し、さらに `<time>` 要素を含むインスタンスに
+ * 絞り込む。これにより、後続のフェーズでのビジュアルリグレッションスナップショット向けに
+ * ロケーターを安定させる。
  */
 export class PostMetadata {
   readonly page: Page;
@@ -15,24 +15,24 @@ export class PostMetadata {
     this.page = page;
   }
 
-  /** The metadata container (`<div class="dot-separated">` holding tags + time). */
+  /** メタデータコンテナ（タグと日付を含む `<div class="dot-separated">`）。 */
   get root(): Locator {
     return this.page
       .locator('.dot-separated')
       .filter({ has: this.page.locator('time') });
   }
 
-  /** Publication date `<time>` element. */
+  /** 公開日の `<time>` 要素。 */
   get pubDate(): Locator {
     return this.root.locator('time').first();
   }
 
-  /** Tag links rendered in the metadata block. */
+  /** メタデータブロック内にレンダリングされるタグリンク。 */
   get tagLinks(): Locator {
     return this.root.getByRole('link');
   }
 
-  /** Visible text of the metadata block. */
+  /** メタデータブロックの表示テキスト。 */
   async text(): Promise<string> {
     return this.root.innerText();
   }
