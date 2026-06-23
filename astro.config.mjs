@@ -1,6 +1,7 @@
 import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { unified } from '@astrojs/markdown-remark';
 import icon from 'astro-icon';
 import { defineConfig } from 'astro/config';
 import rehypeCallouts from 'rehype-callouts';
@@ -29,21 +30,24 @@ function postsDefaultLayout() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sur33.com/',
+  compressHTML: true,
   redirects: {
     '/posts': '/',
   },
   markdown: {
-    remarkPlugins: [
-      postsDefaultLayout,
-      remarkCodeTitles,
-      [
-        remarkLinkCard,
-        {
-          cache: true,
-        },
+    processor: unified({
+      remarkPlugins: [
+        postsDefaultLayout,
+        remarkCodeTitles,
+        [
+          remarkLinkCard,
+          {
+            cache: true,
+          },
+        ],
       ],
-    ],
-    rehypePlugins: [rehypeCallouts],
+      rehypePlugins: [rehypeCallouts],
+    }),
     shikiConfig: {
       themes: {
         dark: 'github-dark',
