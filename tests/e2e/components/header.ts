@@ -1,11 +1,9 @@
 import { type Locator, type Page } from '@playwright/test';
 
 /**
- * サイトの `<header>`（暗黙的な `banner` role）を薄くラップしたコンポーネント。
+ * サイトの `<header>` に対する主要なロケーターと操作をまとめる。
  *
- * POM は薄く保つ: 安定したセマンティックロケーターと、小さなナビゲーション/
- * アクションヘルパーのみを公開する。アサーションは意図的に spec 側に置き、
- * このクラスの背後に隠さない。
+ * POM はロケーターと小さな操作だけを持ち、検証は spec 側に書く。
  */
 export class Header {
   readonly page: Page;
@@ -22,9 +20,8 @@ export class Header {
   /**
    * デスクトップの「Blog」ナビゲーションリンク。
    *
-   * ヘッダーは2つの Blog リンク（デスクトップナビ + モバイルスライドダウンメニュー）を
-   * レンダリングする。デスクトップ側が DOM 上で先に現れ、デスクトップビューポートで
-   * 表示されるものなので、`.first()` で決定的に選択する。
+   * ヘッダーにはデスクトップ用とモバイル用の Blog リンクがある。
+   * デスクトップで表示されるリンクは DOM 上で先に出るため、`.first()` で選択する。
    */
   get blogLink(): Locator {
     return this.root.getByRole('link', { name: 'Blog' }).first();
@@ -43,13 +40,11 @@ export class Header {
   }
 
   /**
-   * フェーズ2ではモバイルメニューは意図的に未対応。
+   * モバイルメニューはまだ扱わない。
    *
-   * ハンバーガートリガーはスタイル付きの `<div class="hamburger">` であり、
-   * 実際の `<button>` ではない。そのためセマンティック role やアクセシブル名を持たず、
-   * `getByRole` では特定できない。フェーズ3では、安定したセマンティックロケーターを
-   * ここで公開する前に、アプリ側で `<button>` + `aria-label` / `aria-expanded` への
-   * アクセシビリティ対応が必要になる。
+   * ハンバーガートリガーは `<div class="hamburger">` で、`button` role や
+   * アクセシブル名を持たない。テストで扱う前に、アプリ側で `<button>` と
+   * `aria-label` / `aria-expanded` を追加する必要がある。
    */
 
   /** デスクトップの About リンクをクリックする。 */

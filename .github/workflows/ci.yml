@@ -1,4 +1,4 @@
-name: 継続的インテグレーション
+name: CI
 
 on:
   push:
@@ -18,7 +18,7 @@ defaults:
 
 jobs:
   lint:
-    name: 静的検査
+    name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -36,17 +36,17 @@ jobs:
           cache: pnpm
 
       - &install-deps
-        name: 依存関係をインストール
+        name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: フォーマットを確認
+      - name: Check formatting
         run: pnpm run format:check
 
-      - name: 静的検査を実行
+      - name: Run lint
         run: pnpm run lint
 
   build:
-    name: ビルド
+    name: Build
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -56,11 +56,11 @@ jobs:
       - *setup-node
       - *install-deps
 
-      - name: ビルド
+      - name: Build
         run: pnpm run build:ci
 
   e2e:
-    name: E2E テスト
+    name: E2E tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -70,18 +70,18 @@ jobs:
       - *setup-node
       - *install-deps
 
-      - name: 日本語フォントをインストール
+      - name: Install Japanese fonts
         run: |
           sudo apt-get update
           sudo apt-get install -y fonts-noto-cjk
 
-      - name: Playwright Chromium をインストール
+      - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Playwright E2E テストを実行
+      - name: Run Playwright E2E tests
         run: pnpm run test:e2e
 
-      - name: Playwright レポートをアップロード
+      - name: Upload Playwright report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
@@ -90,7 +90,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      - name: Playwright テスト結果をアップロード
+      - name: Upload Playwright test results
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:

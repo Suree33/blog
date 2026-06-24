@@ -1,8 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 
-/**
- * サイトの `<footer>`（暗黙的な `contentinfo` role）を薄くラップしたコンポーネント。
- */
+/** サイトの `<footer>` に対する主要なロケーターをまとめる。 */
 export class Footer {
   readonly page: Page;
 

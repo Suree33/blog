@@ -2,7 +2,7 @@ import { type Locator, type Page } from '@playwright/test';
 import { sampleArticleTitle } from '../utils/routes';
 
 /**
- * ホームページの記事一覧を薄くラップしたコンポーネント。
+ * ホームページの記事一覧に対するロケーターをまとめる。
  *
  * リストは `<main>` ランドマーク内の `<ul>`。Tailwind の preflight が
  * `list-style: none` を設定するため、Chrome は `<ul>` の暗黙的な `list` role を
@@ -19,8 +19,7 @@ export class PostList {
   /**
    * 記事リストのコンテナ（`<main>` 内の `<ul>`）。
    *
-   * `.first()` は、将来のページで `<main>` 内に追加の `<ul>` が追加された場合でも
-   * 先頭のリストにロケーターを固定し、ビジュアルスナップショットを決定的に保つ。
+   * 将来 `<main>` 内に別の `<ul>` が増えても対象がぶれないよう、先頭のリストに固定する。
    */
   get root(): Locator {
     return this.page.getByRole('main').locator('ul').first();

@@ -3,9 +3,8 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * Astro ブログの Playwright E2E 設定。
  *
- * フェーズ1のスコープ: Astro preview サーバーに対する Chromium のみのスモークテスト。
- * ここで用意した fixture/route の基盤は、後続のフェーズで順次
- * ページオブジェクトモデル（POM）やビジュアルリグレッションテストへ拡張することを想定している。
+ * `astro preview` を起動し、Chromium でスモークテスト、ナビゲーション、
+ * テーマ切り替え、ビジュアルリグレッションを検証する。
  *
  * @see https://playwright.dev/docs/test-configuration
  */
