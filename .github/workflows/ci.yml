@@ -72,7 +72,7 @@ jobs:
       - *setup-node
       - *install-deps
 
-      - name: Install Japanese fonts
+      - name: Install fonts
         run: |
           sudo apt-get update
           sudo apt-get install -y fonts-noto-cjk
