@@ -16,7 +16,9 @@ test.describe('404 ページ', () => {
     expect(response?.status()).toBe(404);
 
     // ページタイトルと主要な見出しが期待どおりであることを確認する。
-    await expect(notFoundPage.page).toHaveTitle(/404.*Daiki Sato/);
+    await expect(notFoundPage.page).toHaveTitle(
+      /404: Page Not Found.*Daiki Sato/,
+    );
     await expect(notFoundPage.heading).toBeVisible();
   });
 

@@ -89,6 +89,7 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  notFound: '/this-route-does-not-exist',
 } as const;
 
 export const sampleArticleTitle = 'オーディオインターフェースを机の裏に設置した';
