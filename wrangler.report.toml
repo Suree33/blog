@@ -1,0 +1,20 @@
+# Playwright E2E レポート配信専用の Worker 設定。
+#
+# 本番ブログ (wrangler.toml / name="blog") とは別の Worker として、
+# E2E テストの HTML レポート (playwright-report/) を静的アセットとして配信する。
+# CI からは `wrangler versions upload` でアップロードし、バージョンごとの
+# プレビュー URL（および --preview-alias で付ける固定エイリアス URL）で閲覧する。
+# 本番トラフィックには載せないため main やルートは設定しない。
+#
+# 初回のみ、Worker をブートストラップする必要がある（versions upload は
+# 既存 Worker にしか使えないため）。詳細は docs/e2e-testing.md を参照。
+name = "blog-e2e-report"
+compatibility_date = "2025-07-26"
+
+# 本番 workers.dev ルートは公開しない。プレビュー URL のみ有効にする。
+workers_dev = false
+preview_urls = true
+
+[assets]
+directory = "./playwright-report"
+not_found_handling = "404-page"
