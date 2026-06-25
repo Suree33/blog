@@ -1,7 +1,10 @@
+import { fileURLToPath } from 'node:url';
+
 import { expect, test } from '../fixtures/test';
 
-const screenshotStylePath = new URL('../styles/screenshot.css', import.meta.url)
-  .pathname;
+const screenshotStylePath = fileURLToPath(
+  new URL('../styles/screenshot.css', import.meta.url),
+);
 
 const screenshotOptions = {
   animations: 'disabled',

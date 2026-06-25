@@ -25,6 +25,8 @@ jobs:
     steps:
       - &checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - &setup-pnpm
         uses: pnpm/action-setup@v6
