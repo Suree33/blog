@@ -21,9 +21,7 @@ test.describe('目次 (TOC)', () => {
     await expect(articlePage.toc.links).toHaveCount(2);
   });
 
-  test('初期状態では最初の見出しが current になる', async ({
-    articlePage,
-  }) => {
+  test('初期状態では最初の見出しが current になる', async ({ articlePage }) => {
     await articlePage.goto();
 
     await expect(articlePage.toc.links.first()).toHaveAttribute(
