@@ -30,7 +30,6 @@ function postsDefaultLayout() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sur33.com/',
-  compressHTML: true,
   redirects: {
     '/posts': '/',
   },
