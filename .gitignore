@@ -113,3 +113,9 @@ pnpm-debug.log*
 
 .wrangler/
 public/remark-link-card-plus/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+blob-report/

@@ -1,5 +1,13 @@
 ---
-const { state = 'start', textColor, width = '2rem', classList } = Astro.props;
+import { cn } from '@lib/utils';
+
+const {
+  state = 'start',
+  textColor,
+  width = '2rem',
+  classList,
+  ariaLabel = 'メニューを開閉する',
+} = Astro.props;
 const height = 'calc(' + width + ' * 0.45)';
 ---
 
@@ -101,7 +109,12 @@ const height = 'calc(' + width + ' * 0.45)';
     }
   }
 </style>
-<div class={`hamburger ${state} ${textColor} ${classList}`}>
+<button
+  type="button"
+  class={cn('hamburger', state, textColor, classList)}
+  aria-label={ariaLabel}
+  aria-expanded="false"
+>
   <div class="line"></div>
   <div class="line"></div>
-</div>
+</button>

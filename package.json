@@ -14,7 +14,11 @@
     "deploy:dry-run": "wrangler deploy --dry-run",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint && astro check"
+    "lint": "eslint && astro check && tsc --noEmit",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:update": "playwright test tests/e2e/specs/visual.spec.ts --update-snapshots"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
@@ -45,6 +49,7 @@
     "@astrojs/language-server": "^2.16.6",
     "@eslint/compat": "^2.0.2",
     "@eslint/js": "^10.0.0",
+    "@playwright/test": "^1.61.0",
     "@types/sanitize-html": "^2.16.0",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^10.0.0",
