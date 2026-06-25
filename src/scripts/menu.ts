@@ -43,9 +43,11 @@ export const toggleHamburgerMenu = (
       }
 
       if (hamburger.hasAttribute('data-active')) {
+        hamburger.setAttribute('aria-expanded', 'true');
         menu.forEach((item) => item.setAttribute('data-active', ''));
         disableScroll();
       } else {
+        hamburger.setAttribute('aria-expanded', 'false');
         menu.forEach((item) => item.removeAttribute('data-active'));
         enableScroll();
       }

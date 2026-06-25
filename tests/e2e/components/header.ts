@@ -1,4 +1,4 @@
-import { type Locator, type Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 
 /**
  * サイトの `<header>` に対する主要なロケーターと操作をまとめる。
@@ -18,18 +18,24 @@ export class Header {
   }
 
   /**
-   * デスクトップの「Blog」ナビゲーションリンク。
+   * 「Blog」ナビゲーションリンク。
    *
-   * ヘッダーにはデスクトップ用とモバイル用の Blog リンクがある。
-   * デスクトップで表示されるリンクは DOM 上で先に出るため、`.first()` で選択する。
+   * ヘッダーにはデスクトップ用とモバイル用の Blog リンクが両方 DOM に存在する。
+   * デスクトップでは前者、モバイル（メニュー展開後）では後者だけが可視になるため、
+   * `filter({ visible: true })` で「いま見えている」リンクを選択し、
+   * デスクトップ・モバイル両方の spec で同じ POM を使えるようにする。
    */
   get blogLink(): Locator {
-    return this.root.getByRole('link', { name: 'Blog' }).first();
+    return this.root
+      .getByRole('link', { name: 'Blog' })
+      .filter({ visible: true });
   }
 
-  /** デスクトップの「About」ナビゲーションリンク（`.first()` の理由は `blogLink` を参照）。 */
+  /** 「About」ナビゲーションリンク（可視判定の理由は `blogLink` を参照）。 */
   get aboutLink(): Locator {
-    return this.root.getByRole('link', { name: 'About' }).first();
+    return this.root
+      .getByRole('link', { name: 'About' })
+      .filter({ visible: true });
   }
 
   /** テーマトグルボタン（`aria-label="テーマを切り替える"`）のデスクトップ側インスタンス。 */
@@ -40,14 +46,28 @@ export class Header {
   }
 
   /**
-   * モバイルメニューはまだ扱わない。
+   * モバイルのハンバーガーボタン（`aria-label="メニューを開閉する"`）。
    *
-   * ハンバーガートリガーは `<div class="hamburger">` で、`button` role や
-   * アクセシブル名を持たない。テストで扱う前に、アプリ側で `<button>` と
-   * `aria-label` / `aria-expanded` を追加する必要がある。
+   * 小さいビューポートでのみ表示され、`aria-expanded` で開閉状態を表す。
    */
+  get hamburger(): Locator {
+    return this.root.getByRole('button', { name: 'メニューを開閉する' });
+  }
 
-  /** デスクトップの About リンクをクリックする。 */
+  /**
+   * モバイルメニューを開く。
+   *
+   * 既に開いている場合は何もしない。`aria-expanded` が `true` になるまで待つ。
+   */
+  async openMobileMenu(): Promise<void> {
+    if ((await this.hamburger.getAttribute('aria-expanded')) === 'true') {
+      return;
+    }
+    await this.hamburger.click();
+    await expect(this.hamburger).toHaveAttribute('aria-expanded', 'true');
+  }
+
+  /** About リンクをクリックする。 */
   async gotoAbout(): Promise<void> {
     await this.aboutLink.click();
   }

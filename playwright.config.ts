@@ -24,13 +24,32 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
   projects: [
+    // Desktop
     {
-      name: 'chromium-desktop',
+      name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
     {
-      name: 'chromium-mobile',
-      use: { ...devices['Pixel 5'] },
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+
+    // Mobile
+    {
+      name: 'Mobile Chrome',
+      use: { ...devices['Pixel 10'] },
+    },
+    {
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 17'] },
+    },
+    {
+      name: 'Mobile Safari (Small screen)',
+      use: { ...devices['iPhone SE (3rd gen)'] },
     },
   ],
   webServer: {

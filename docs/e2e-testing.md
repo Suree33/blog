@@ -106,7 +106,7 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 
 ### コンポーネント (`tests/e2e/components/`)
 
-- `header.ts`: `root`、`blogLink`、`aboutLink`、`themeToggle` を提供します。ヘッダーにはデスクトップ用とモバイル用のリンクが両方あるため、デスクトップで表示される先頭の要素を `.first()` で選択します。
+- `header.ts`: `root`、`blogLink`、`aboutLink`、`themeToggle`、`hamburger`、`openMobileMenu()` を提供します。ヘッダーにはデスクトップ用とモバイル用のリンクが両方 DOM に存在するため、`blogLink` / `aboutLink` は `filter({ visible: true })` で「いま見えている」リンクを選択します（デスクトップは常時表示、モバイルはメニュー展開後に表示）。`openMobileMenu()` はハンバーガーボタン（`aria-label="メニューを開閉する"`）をクリックし、`aria-expanded="true"` になるまで待ちます。
 - `footer.ts`: `root`、`blogLink`、`aboutLink`、`rssLink` を提供します。
 - `post-list.ts`: `<main>` 内の先頭の `<ul>` を記事一覧として扱います。Tailwind preflight により Chrome では `list` role が落ちるため、`getByRole('list')` は使いません。
 - `post-metadata.ts`: `dot-separated` クラスのうち `<time>` を含む要素を記事メタデータとして扱います。
@@ -127,7 +127,7 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 
 ### ナビゲーションテスト (`navigation.spec.ts`)
 
-デスクトッププロジェクトのみで実行します。ヘッダーのナビゲーションはモバイルではメニュー内に隠れており、別の操作が必要になるためです。
+デスクトップ・モバイル両方のプロジェクトで実行します。ヘッダーのナビゲーションはモバイルではハンバーガーメニュー内に隠れるため、`isDesktop` が false のときは `header.openMobileMenu()` でメニューを開いてからリンクをクリックします。
 
 - ヘッダーの `Blog` / `About` リンクで正しいページへ遷移することを確認します。
 - フッターの `Blog` / `About` リンクで正しいページへ遷移することを確認します。
@@ -200,7 +200,7 @@ blob-report/
 ## 今後の拡張候補
 
 - モバイルのビジュアルスナップショットを追加する。
-- モバイルメニューの開閉、ナビゲーション、テーマ切り替えを検証する。
+- モバイルメニュー内のテーマ切り替えを検証する（ナビゲーションは `navigation.spec.ts` でモバイル対応済み）。
 - タグページ、404、目次 (TOC) の追従表示などをカバーする。
 - Firefox / WebKit でも実行できるようにする。
 - axe-core などでアクセシビリティチェックを追加する。
