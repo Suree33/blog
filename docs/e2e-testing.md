@@ -184,6 +184,40 @@ pnpm exec playwright test tests/e2e/specs/visual.spec.ts --update-snapshots
 
 artifact の保持期間は 7 日です。テストが失敗した場合も調査できるよう、アップロードステップには `if: ${{ !cancelled() }}` を付けています。
 
+## レポートを URL で閲覧する (Cloudflare Workers プレビュー)
+
+artifact をダウンロードして開く代わりに、CI の実行結果からリンクをクリックするだけで HTML レポートを閲覧できるようにしています。レポートは本番ブログとは別の Cloudflare Worker（静的アセット配信）にアップロードします。
+
+Cloudflare は新規プロジェクトに Pages ではなく Workers (Static Assets) を推奨しているため、本番ブログ (`wrangler.toml`) と同じく Workers を使います。
+
+### 仕組み
+
+- 配信専用の設定 `wrangler.report.toml`（`name = "blog-e2e-report"`、`[assets] directory = "./playwright-report"`）を用意しています。本番トラフィックには載せないため `main` やルートは設定せず、`workers_dev = false` / `preview_urls = true` でプレビュー URL のみ有効にしています。
+- `e2e` ジョブの「Publish Playwright report to Cloudflare Worker preview」ステップで、`wrangler versions upload --config wrangler.report.toml --preview-alias <alias>` を実行します。`deploy` ではなく `versions upload` を使うため本番デプロイは発生せず、バージョンごとのプレビュー URL が払い出されます。
+- `--preview-alias` で読みやすい固定 URL を付けます。エイリアスは PR では `pr-<番号>`、push ではブランチ名を DNS ラベル用に整形（小文字・英数字とハイフン・先頭は英字・47 文字以内）した値です。同じ PR への再 push では同じエイリアスを上書きするため、URL は常に最新のレポートを指します。
+- レポート URL は `wrangler` の NDJSON 出力（`WRANGLER_OUTPUT_FILE_PATH` の `version-upload` エントリの `preview_alias_url` / `preview_url`）から取得し、ジョブの Summary に「レポートを開く」リンクとして出力します。
+- このステップは best-effort です。レポート未生成・アップロード失敗・URL 取得失敗の各ケースでも `exit 0` し、artifact のフォールバックを案内します。フォーク PR ではシークレットが使えないためスキップします。
+
+### 初回のみ必要な準備
+
+1. **workers.dev サブドメインの登録**: プレビュー URL は `*.workers.dev` 上に作られるため、アカウントに workers.dev サブドメインが登録されている必要があります（Cloudflare ダッシュボードで一度だけ設定）。
+2. **Worker のブートストラップ**: `wrangler versions upload` は既存の Worker に対してのみ動作します。新規 Worker は最初に一度だけ `deploy` で作成してください。
+
+   ```sh
+   # playwright-report/ が存在する状態で（なければ pnpm run test:e2e を先に実行）
+   CLOUDFLARE_API_TOKEN=... CLOUDFLARE_ACCOUNT_ID=... \
+     pnpm exec wrangler deploy --config wrangler.report.toml
+   ```
+
+3. **GitHub Actions の認証情報の登録**: リポジトリに以下を設定します。
+   - `CLOUDFLARE_API_TOKEN`: **Secret** に登録（`Workers Scripts:Edit` 権限をアカウント全体スコープで持つトークン。特定ワーカーに絞ると新規ワーカー `blog-e2e-report` を作成できないため注意）
+   - `CLOUDFLARE_ACCOUNT_ID`: **Variable** に登録（認証情報ではなく識別子のため Secret 不要）
+
+### 注意点
+
+- プレビュー URL は公開され、認証はありません。失敗時のトレース・スクリーンショット・動画・DOM スナップショットなどがレポートに含まれるため、機微な情報がテスト対象に含まれないことを前提にしています。
+- Workers Static Assets には 1 ファイル 25 MiB の上限があります。大きな動画やトレースでアップロードが失敗する場合は artifact から確認してください。
+
 ## 型チェック
 
 `pnpm run lint` は `eslint && astro check && tsc --noEmit` を実行します。`astro check` は `.astro` ファイルと `src/` 配下を確認します。`tests/` 配下の TypeScript も型チェックできるように、`tsc --noEmit` を追加しています。

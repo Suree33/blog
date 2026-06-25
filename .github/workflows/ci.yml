@@ -83,6 +83,68 @@ jobs:
       - name: Run Playwright E2E tests
         run: pnpm run test:e2e
 
+      - name: Publish Playwright report to Cloudflare Worker preview
+        # フォーク PR ではシークレットが使えないためスキップする。
+        if: ${{ !cancelled() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false) }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/wrangler-output.ndjson
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          summary() { echo "$1" >> "$GITHUB_STEP_SUMMARY"; }
+
+          summary "## 🎭 Playwright E2E レポート"
+          summary ""
+
+          if [[ ! -f playwright-report/index.html ]]; then
+            summary "レポートが生成されませんでした。artifact のフォールバックを利用してください。"
+            exit 0
+          fi
+
+          # プレビュー URL のエイリアスを決める。
+          # 同一 PR への push では同じエイリアスを上書きし、常に最新レポートを指す。
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            alias="pr-${PR_NUMBER}"
+          else
+            # ブランチ名を DNS ラベルとして使える形に整える
+            # （小文字 / 英数字とハイフンのみ / 先頭は英字 / 47 文字以内）。
+            alias="$(printf '%s' "${GITHUB_REF_NAME:-main}" \
+              | tr '[:upper:]' '[:lower:]' \
+              | sed -E 's/[^a-z0-9-]+/-/g; s/^-+//; s/-+$//')"
+            alias="${alias:0:47}"
+            alias="$(printf '%s' "$alias" | sed -E 's/-+$//')"
+            [[ "$alias" =~ ^[a-z] ]] || alias="b-${alias}"
+            alias="${alias:0:47}"
+            alias="$(printf '%s' "$alias" | sed -E 's/-+$//')"
+            [[ -n "$alias" ]] || alias="b-${GITHUB_RUN_ID}"
+          fi
+
+          if ! pnpm exec wrangler versions upload --config wrangler.report.toml --preview-alias "$alias"; then
+            summary "Cloudflare へのアップロードに失敗しました。artifact のフォールバックを利用してください。"
+            exit 0
+          fi
+
+          if ! report_url="$(node -e '
+            const fs = require("fs");
+            const lines = fs
+              .readFileSync(process.env.WRANGLER_OUTPUT_FILE_PATH, "utf8")
+              .split(/\r?\n/)
+              .filter(Boolean)
+              .map((line) => JSON.parse(line));
+            const entry = lines.reverse().find((x) => x.type === "version-upload");
+            process.stdout.write(entry?.preview_alias_url || entry?.preview_url || "");
+          ')"; then
+            summary "アップロードは成功しましたが、プレビュー URL の解析に失敗しました。artifact のフォールバックを利用してください。"
+            exit 0
+          fi
+
+          if [[ -n "$report_url" ]]; then
+            summary "[レポートを開く]($report_url)"
+          else
+            summary "アップロードは成功しましたが、プレビュー URL を取得できませんでした。artifact のフォールバックを利用してください。"
+          fi
+
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
