@@ -11,16 +11,12 @@ const screenshotOptions = {
 /**
  * ビジュアルリグレッションのスナップショット。
  *
- * スナップショットの対象を小さく安定させるため、デスクトップ Chromium に限定する。
  * フルページではなくコンポーネント/ロケーター単位で撮影し、無関係なコンテンツ変更の
  * 影響を受けにくくする。
  *
- * ビジュアルリグレッションだけはモバイル/他ブラウザへ拡張していない。理由は次のとおり。
- * - ベースラインはブラウザ・端末・OS ごとに必要で、枚数と保守コスト・flake が増える。
- * - ベースラインは CI（Linux）で生成・コミットする前提で、フォント描画差のある
- *   ローカル（macOS 等）では生成できない。
- * モバイルや他ブラウザのビジュアル検証を追加する場合は、CI でベースラインを生成する
- * 別タスクとして扱う。
+ * ビジュアルリグレッションは全 Playwright プロジェクトで実行する。
+ * ベースラインはブラウザ・端末・OS ごとに必要になるため、更新時は CI（Linux）基準で
+ * 生成・コミットする。
  *
  * 記事メタデータは特に重要な対象。Astro の `compressHTML` でメタデータ内の余白が
  * 潰れた過去のような、空白/レイアウトのリグレッションを検出する。
@@ -30,11 +26,6 @@ const screenshotOptions = {
  * `pnpm run test:e2e -- --update-snapshots`）で再生成する。
  */
 test.describe('ビジュアルリグレッション', () => {
-  test.skip(
-    ({ browserName, isDesktop }) => !isDesktop || browserName !== 'chromium',
-    'デスクトップ Chromium のみ（ベースラインは Linux CI 基準）',
-  );
-
   test.beforeEach(async ({ page }) => {
     // システム配色を固定し、テーマトグルアイコン
     // （sun-moon / moon / sun）や prefers-color-scheme スタイルが

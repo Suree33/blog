@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * Astro ブログの Playwright E2E 設定。
  *
- * `astro preview` を起動し、Chromium でスモークテスト、ナビゲーション、
+ * `astro preview` を起動し、各プロジェクトでスモークテスト、ナビゲーション、
  * テーマ切り替え、ビジュアルリグレッションを検証する。
  *
  * @see https://playwright.dev/docs/test-configuration
