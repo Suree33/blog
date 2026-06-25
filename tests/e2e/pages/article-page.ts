@@ -2,6 +2,7 @@ import { type Locator, type Page } from '@playwright/test';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { PostMetadata } from '../components/post-metadata';
+import { TableOfContents } from '../components/toc';
 import { routes, sampleArticleTitle } from '../utils/routes';
 
 /**
@@ -16,6 +17,7 @@ export class ArticlePage {
   readonly header: Header;
   readonly footer: Footer;
   readonly metadata: PostMetadata;
+  readonly toc: TableOfContents;
 
   private currentTitle: string = sampleArticleTitle;
 
@@ -24,6 +26,7 @@ export class ArticlePage {
     this.header = new Header(page);
     this.footer = new Footer(page);
     this.metadata = new PostMetadata(page);
+    this.toc = new TableOfContents(page);
   }
 
   /**
