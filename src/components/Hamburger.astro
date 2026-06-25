@@ -1,4 +1,6 @@
 ---
+import { cn } from '@lib/utils';
+
 const {
   state = 'start',
   textColor,
@@ -109,7 +111,7 @@ const height = 'calc(' + width + ' * 0.45)';
 </style>
 <button
   type="button"
-  class={`hamburger ${state} ${textColor} ${classList}`}
+  class={cn('hamburger', state, textColor, classList)}
   aria-label={ariaLabel}
   aria-expanded="false"
 >
