@@ -4,7 +4,7 @@
 
 ## 概要
 
-Astro のビルド結果を `astro preview` で起動し、Chromium でスモークテスト、ナビゲーション、テーマ切り替え、ビジュアルリグレッションを検証します。
+Astro のビルド結果を `astro preview` で起動し、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari）でスモークテスト、ナビゲーション、テーマ切り替えを検証します。ビジュアルリグレッションのみデスクトップ Chromium に限定します。
 
 テストコードは Playwright の fixture とページオブジェクトモデル (POM) で構成しています。アサーションは spec に置き、POM はページ遷移や安定したロケーターの提供に限定します。
 
@@ -15,16 +15,16 @@ Astro のビルド結果を `astro preview` で起動し、Chromium でスモー
 - `pnpm run test:e2e:ui`: Playwright UI モードで実行
 - `pnpm run test:e2e:update`: ビジュアルスナップショットを更新
 
-初回実行前に Chromium が必要です。未インストールの場合は以下を実行してください。
+初回実行前にブラウザが必要です。未インストールの場合は以下を実行してください（config が Chromium / Firefox / WebKit を使うため 3 種すべて）。
 
 ```sh
-pnpm exec playwright install chromium
+pnpm exec playwright install chromium firefox webkit
 ```
 
 Linux 環境でブラウザのシステム依存パッケージも入れる場合は、次のコマンドを使います。
 
 ```sh
-pnpm exec playwright install --with-deps chromium
+pnpm exec playwright install --with-deps chromium firefox webkit
 ```
 
 ## ディレクトリ構成
@@ -55,7 +55,7 @@ tests/e2e/
     └── visual.spec.ts        # ビジュアルリグレッション
 ```
 
-ビジュアルスナップショットは `tests/e2e/specs/visual.spec.ts-snapshots/` に保存します。`snapshotPathTemplate` で OS サフィックスを外し、プロジェクト名だけを付けます。例: `article-metadata-chromium-desktop.png`
+ビジュアルスナップショットは `tests/e2e/specs/visual.spec.ts-snapshots/` に保存します。`snapshotPathTemplate` で OS サフィックスを外し、プロジェクト名だけを付けます。例: `article-metadata-chromium.png`
 
 ## `playwright.config.ts` の要点
 
@@ -63,7 +63,7 @@ tests/e2e/
 - `webServer`: `pnpm run build:ci && pnpm run preview` でプレビューサーバーを起動し、`http://localhost:4321/` の応答を待ってからテストを開始します。
 - `build:ci`: `prebuild` による `pnpm lint` の再実行を避けるため、E2E では通常の `build` ではなく `build:ci` を使います。
 - `reporter`: `list` で標準出力に進行を出し、`html` で `playwright-report/` を生成します。
-- `projects`: `chromium-desktop` と `chromium-mobile` を定義します。どちらも Chromium を使用します。
+- `projects`: デスクトップ 3 種（`chromium` / `firefox` / `webkit`）とモバイル 3 種（`Mobile Chrome` / `Mobile Safari` / `Mobile Safari (Small screen)`）を定義します。
 - 失敗時の調査用に `trace: 'on-first-retry'`、`screenshot: 'only-on-failure'`、`video: 'retain-on-failure'` を有効にしています。
 - `baseURL`: `http://localhost:4321/` に揃え、spec では `page.goto('/about')` のような相対パスを使います。
 
@@ -74,9 +74,9 @@ tests/e2e/
 `@playwright/test` の `base` を拡張し、spec から以下を利用できるようにしています。
 
 - `homePage` / `aboutPage` / `articlePage`: 対応するページオブジェクト
-- `isDesktop`: viewport 幅からデスクトッププロジェクトかどうかを判定する boolean
+- `isDesktop`: viewport 幅（768px 以上）からデスクトッププロジェクトかどうかを判定する boolean。モバイルでヘッダーメニューを開くかどうかの分岐に使う
 
-デスクトップ限定のテストは `test.skip(({ isDesktop }) => !isDesktop, ...)` で分岐します。
+`isDesktop` が false（モバイル）のときは、ヘッダーのナビ/テーマトグルがハンバーガーメニュー内に隠れるため、`header.openMobileMenu()` でメニューを開いてから操作します。
 
 ### `tests/e2e/utils/routes.ts`
 
@@ -135,7 +135,7 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 
 ### テーマ切り替えテスト (`theme.spec.ts`)
 
-デスクトッププロジェクトのみで実行します。`page.emulateMedia({ colorScheme: 'light' })` でシステム配色を固定し、以下の順に確認します。
+デスクトップ・モバイル両方のプロジェクトで実行します。テーマトグルはモバイルではハンバーガーメニュー内にあるため、`isDesktop` が false のときは各クリック前に `header.openMobileMenu()` でメニューを開きます（`page.reload()` でメニューは閉じるため、リロード後のクリックでも開き直します）。`page.emulateMedia({ colorScheme: 'light' })` でシステム配色を固定し、以下の順に確認します。
 
 1. 初期状態では `localStorage.theme` がなく、`<html>` に `dark` / `light` クラスが付かない。
 2. 1 回目のクリックで `dark` が適用される。
@@ -145,7 +145,9 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 
 ### ビジュアルリグレッション (`visual.spec.ts`)
 
-デスクトッププロジェクトのみで実行します。フルページではなくロケーター単位でスクリーンショットを撮ることで、ベースラインを小さく保ち、無関係なコンテンツ変更の影響を減らします。
+デスクトップ Chromium のみで実行します（`browserName !== 'chromium' || !isDesktop` で skip）。フルページではなくロケーター単位でスクリーンショットを撮ることで、ベースラインを小さく保ち、無関係なコンテンツ変更の影響を減らします。
+
+ベースラインはブラウザ・端末・OS ごとに必要になり枚数と保守コストが増えるため、ビジュアルリグレッションはモバイルや他ブラウザへ拡張していません。ベースラインは CI（Linux）で生成・コミットする前提で、フォント描画差のあるローカル（macOS 等）では一致しないことがあります。モバイル/他ブラウザのビジュアル検証を追加する場合は、CI でベースラインを生成する別タスクとして扱います。
 
 - 記事メタデータ: タグと日付の余白・レイアウト崩れを検出します。
 - ヘッダー: ナビゲーションとテーマトグルの見た目を確認します。
@@ -176,7 +178,7 @@ pnpm exec playwright test tests/e2e/specs/visual.spec.ts --update-snapshots
 `e2e` ジョブでは以下を実行します。
 
 1. `fonts-noto-cjk` をインストールし、スクリーンショット用の日本語フォントを固定する。
-2. `pnpm exec playwright install --with-deps chromium` で Chromium と必要なシステム依存パッケージをインストールする。
+2. `pnpm exec playwright install --with-deps chromium firefox webkit` で全ブラウザと必要なシステム依存パッケージをインストールする（config が 6 プロジェクトを定義するため、Firefox / WebKit も必要）。
 3. `pnpm run test:e2e` を実行する。
 4. `playwright-report/` と `test-results/` を artifact としてアップロードする。
 
@@ -199,8 +201,8 @@ blob-report/
 
 ## 今後の拡張候補
 
-- モバイルのビジュアルスナップショットを追加する。
-- モバイルメニュー内のテーマ切り替えを検証する（ナビゲーションは `navigation.spec.ts` でモバイル対応済み）。
+- モバイル/他ブラウザのビジュアルスナップショットを追加する（CI でベースラインを生成する必要があるため別タスク。現状はデスクトップ Chromium のみ）。
 - タグページ、404、目次 (TOC) の追従表示などをカバーする。
-- Firefox / WebKit でも実行できるようにする。
 - axe-core などでアクセシビリティチェックを追加する。
+
+なお、スモーク・ナビゲーション・テーマ切り替えはデスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari）の全プロジェクトで実行済みです。

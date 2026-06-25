@@ -38,11 +38,17 @@ export class Header {
       .filter({ visible: true });
   }
 
-  /** テーマトグルボタン（`aria-label="テーマを切り替える"`）のデスクトップ側インスタンス。 */
+  /**
+   * テーマトグルボタン（`aria-label="テーマを切り替える"`）。
+   *
+   * ヘッダーアイコン群はデスクトップ用とモバイル用が両方 DOM に存在する。
+   * `blogLink` 等と同様に `filter({ visible: true })` で表示中の方を選び、
+   * デスクトップ・モバイル両方の spec で共用する（モバイルはメニュー展開後に可視）。
+   */
   get themeToggle(): Locator {
     return this.root
       .getByRole('button', { name: 'テーマを切り替える' })
-      .first();
+      .filter({ visible: true });
   }
 
   /**
