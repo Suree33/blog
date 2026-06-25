@@ -52,7 +52,8 @@ tests/e2e/
     ├── smoke.spec.ts         # 基本表示の確認
     ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
     ├── theme.spec.ts         # テーマ切り替えの確認
-    └── visual.spec.ts        # ビジュアルリグレッション
+    ├── visual.spec.ts        # ビジュアルリグレッション
+    └── raw-markdown.spec.ts  # raw Markdown エンドポイント
 ```
 
 ビジュアルスナップショットは `tests/e2e/specs/visual.spec.ts-snapshots/` に保存します。`snapshotPathTemplate` で OS サフィックスを外し、プロジェクト名だけを付けます。例: `article-metadata-chromium.png`
@@ -170,6 +171,18 @@ pnpm run test:e2e:update
 # 個別 spec のみ更新する場合
 pnpm exec playwright test tests/e2e/specs/visual.spec.ts --update-snapshots
 ```
+
+### raw Markdown エンドポイント (`raw-markdown.spec.ts`)
+
+`/posts/[slug].md` の raw Markdown エンドポイントを `astro preview` 経由で検証します（実装: `src/pages/posts/[slug].md.ts`、仕様: `docs/raw-markdown-endpoints.md`）。Playwright の `request` fixture を使い、HTTP ステータス・`Content-Type`・本文を直接アサーションします。
+
+- 代表記事の `.md` URL が `200` を返す
+- `Content-Type` が `text/markdown` で始まる
+  - 本番（Cloudflare Workers Static Assets）では `text/markdown; charset=utf-8` になりますが、`astro preview` は `text/markdown` のみを返すため、spec では `text/markdown` であることだけを検証します。`charset=utf-8` の厳密検証は Workers プレビューが必要なため別途切り出します。
+- frontmatter（`title` / `description`）と本文が含まれる
+- Astro 表示用の `layout` frontmatter は除去されている（`^layout:` 行が存在しない）
+
+通常記事 URL + `Accept: text/markdown` による content negotiation は `src/worker.ts` で実装されており Workers プレビュー側でのみ機能します。`astro preview` では Worker を経由しないため本 spec ではカバーせず、別 Issue で取り扱います。
 
 ## GitHub Actions
 
