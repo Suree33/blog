@@ -18,9 +18,24 @@ const posts = await Promise.all(
     }),
   ),
 );
+const works = await Promise.all(
+  Object.values(
+    import.meta.glob<MarkdownInstance<Frontmatter>>('./works/*.{md,mdx}', {
+      eager: true,
+    }),
+  ),
+);
 const pageTitle = 'Home';
 const sortedPosts = posts
   .filter((post) => !post.frontmatter.draft)
+  .sort((a, b) => {
+    return (
+      new Date(b.frontmatter.pubDate).getTime() -
+      new Date(a.frontmatter.pubDate).getTime()
+    );
+  });
+const sortedWorks = works
+  .filter((work) => !work.frontmatter.draft)
   .sort((a, b) => {
     return (
       new Date(b.frontmatter.pubDate).getTime() -
@@ -55,6 +70,24 @@ const sortedPosts = posts
       </section>
       <section class="container">
         <h2 class="mx-4 mb-8 border-b pb-4 text-3xl font-bold">Works</h2>
+        <ul class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4">
+          {
+            sortedWorks
+              .slice(0, MAX_POSTS)
+              .map((work) => <PostItem post={work} />)
+          }
+        </ul>
+        {
+          sortedWorks.length > MAX_POSTS && (
+            <a
+              href="/works"
+              class="mt-4 mr-4 ml-auto flex w-fit items-center gap-x-2 rounded border py-2 pr-4 pl-5 transition hover:bg-neutral-200 hover:text-neutral-900 sm:mr-0 hover:dark:bg-neutral-800 hover:dark:text-neutral-100"
+            >
+              もっと見る
+              <Icon name="lucide:arrow-right" />
+            </a>
+          )
+        }
       </section>
     </article>
   </div>

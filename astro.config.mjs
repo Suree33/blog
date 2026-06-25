@@ -10,6 +10,8 @@ import remarkLinkCard from 'remark-link-card-plus';
 const POSTS_MARKDOWN_LAYOUT = '@layouts/MarkdownPostLayout.astro';
 const POSTS_MARKDOWN_PAGE_PATTERN =
   /(^|[/\\])src[/\\]pages[/\\]posts[/\\].+\.md$/;
+const WORKS_MARKDOWN_PAGE_PATTERN =
+  /(^|[/\\])src[/\\]pages[/\\]works[/\\].+\.md$/;
 
 function postsDefaultLayout() {
   return (_tree, file) => {
@@ -20,7 +22,11 @@ function postsDefaultLayout() {
       return;
     }
 
-    if (POSTS_MARKDOWN_PAGE_PATTERN.test(filePath) && !frontmatter.layout) {
+    if (
+      (POSTS_MARKDOWN_PAGE_PATTERN.test(filePath) ||
+        WORKS_MARKDOWN_PAGE_PATTERN.test(filePath)) &&
+      !frontmatter.layout
+    ) {
       frontmatter.layout = POSTS_MARKDOWN_LAYOUT;
     }
   };

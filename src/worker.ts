@@ -5,6 +5,7 @@ interface Env {
 }
 
 const POSTS_PATH_PATTERN = /^\/posts\/[^/.]+\/?$/;
+const WORKS_PATH_PATTERN = /^\/works\/[^/.]+\/?$/;
 
 interface AcceptPreference {
   mediaType: string;
@@ -111,7 +112,8 @@ export default {
     const url = new URL(request.url);
     const shouldReturnMarkdown =
       (request.method === 'GET' || request.method === 'HEAD') &&
-      POSTS_PATH_PATTERN.test(url.pathname) &&
+      (POSTS_PATH_PATTERN.test(url.pathname) ||
+        WORKS_PATH_PATTERN.test(url.pathname)) &&
       prefersMarkdown(request.headers.get('Accept'));
 
     if (shouldReturnMarkdown) {

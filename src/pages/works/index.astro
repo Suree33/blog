@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PostItem from '@components/PostItem.astro';
+import type { MarkdownInstance } from 'astro';
+
+interface Frontmatter {
+  title: string;
+  pubDate: string;
+  draft?: boolean;
+  // Add other frontmatter fields you might have
+}
+
+const works = await Promise.all(
+  Object.values(
+    import.meta.glob<MarkdownInstance<Frontmatter>>('./*.{md,mdx}', {
+      eager: true,
+    }),
+  ),
+);
+const pageTitle = 'Works';
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="mt-10 flex w-full justify-center sm:px-4">
+    <div class="container">
+      <ul class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4">
+        {
+          works
+            .filter((work) => !work.frontmatter.draft)
+            .sort((a, b) => {
+              return (
+                new Date(b.frontmatter.pubDate).getTime() -
+                new Date(a.frontmatter.pubDate).getTime()
+              );
+            })
+            .map((work) => <PostItem post={work} />)
+        }
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

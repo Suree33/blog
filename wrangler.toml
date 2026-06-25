@@ -5,4 +5,4 @@ main = "src/worker.ts"
 [assets]
 directory = "./dist"
 binding = "ASSETS"
-run_worker_first = ["/posts/*"]
+run_worker_first = ["/posts/*", "/works/*"]

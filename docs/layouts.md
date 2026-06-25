@@ -163,6 +163,7 @@ pubDate: '2024-01-01';
 - **一般的なページ**: `BaseLayout` を使用
 - **文章中心のページ**: `ProseArticleLayout` を使用
 - **ブログ記事**: `MarkdownPostLayout` を使用（`src/pages/posts/` 配下の Markdown には自動適用）
+- **Works 記事**: `MarkdownPostLayout` を使用（`src/pages/works/` 配下の Markdown には自動適用）
 
 ### カスタマイズ
 
