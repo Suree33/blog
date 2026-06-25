@@ -8,6 +8,7 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  tagsBase: '/tags/',
 } as const;
 
 /**
@@ -18,3 +19,11 @@ export const routes = {
  */
 export const sampleArticleTitle =
   'オーディオインターフェースを机の裏に設置した';
+
+/**
+ * `routes.sampleTag` が参照するサンプル記事の代表タグ。
+ *
+ * `routes.sampleArticle` がこのタグを持つため、サンプル記事リンクの表示確認に
+ * 使える。タグページ spec はこのタグを代表ページとして検証する。
+ */
+export const sampleTag = 'ガジェット';

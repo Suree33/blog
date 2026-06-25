@@ -4,7 +4,7 @@
 
 ## 概要
 
-Astro のビルド結果を `astro preview` で起動し、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）でスモークテスト、ナビゲーション、テーマ切り替え、ビジュアルリグレッションを検証します。
+Astro のビルド結果を `astro preview` で起動し、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）でスモークテスト、ナビゲーション、タグページ、テーマ切り替え、ビジュアルリグレッションを検証します。
 
 テストコードは Playwright の fixture とページオブジェクトモデル (POM) で構成しています。アサーションは spec に置き、POM はページ遷移や安定したロケーターの提供に限定します。
 
@@ -40,7 +40,8 @@ tests/e2e/
 ├── pages/                    # ページオブジェクト
 │   ├── home-page.ts          # ホーム (/)
 │   ├── about-page.ts         # About (/about)
-│   └── article-page.ts       # 記事ページ
+│   ├── article-page.ts       # 記事ページ
+│   └── tag-page.ts           # タグページ (/tags/[tag])
 ├── fixtures/
 │   └── test.ts               # 共通 fixture
 ├── utils/
@@ -51,6 +52,7 @@ tests/e2e/
 └── specs/
     ├── smoke.spec.ts         # 基本表示の確認
     ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
+    ├── tag.spec.ts           # タグページ (/tags/[tag]) の確認
     ├── theme.spec.ts         # テーマ切り替えの確認
     └── visual.spec.ts        # ビジュアルリグレッション
 ```
@@ -73,7 +75,7 @@ tests/e2e/
 
 `@playwright/test` の `base` を拡張し、spec から以下を利用できるようにしています。
 
-- `homePage` / `aboutPage` / `articlePage`: 対応するページオブジェクト
+- `homePage` / `aboutPage` / `articlePage` / `tagPage`: 対応するページオブジェクト
 - `isDesktop`: viewport 幅（768px 以上）からデスクトッププロジェクトかどうかを判定する boolean。モバイルでヘッダーメニューを開くかどうかの分岐に使う
 
 `isDesktop` が false（モバイル）のときは、ヘッダーのナビ/テーマトグルがハンバーガーメニュー内に隠れるため、`header.openMobileMenu()` でメニューを開いてから操作します。
@@ -87,10 +89,14 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  tagsBase: '/tags/',
 } as const;
 
 export const sampleArticleTitle = 'オーディオインターフェースを机の裏に設置した';
+export const sampleTag = 'ガジェット';
 ```
+
+`sampleTag` は `sampleArticle` が持つ代表タグで、タグページの `<h1>` と記事リンクの検証に使います。`tagsBase` と組み合わせて `/tags/{tag}` を組み立てます。
 
 ### `tests/e2e/utils/regex.ts`
 
@@ -116,6 +122,7 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 - `home-page.ts`: `goto()`、`header`、`footer`、`postList`
 - `about-page.ts`: `goto()`、`header`、`footer`、`heading`
 - `article-page.ts`: `goto(route, title)`、`header`、`footer`、`metadata`、`heading`
+- `tag-page.ts`: `goto(tag)`、`header`、`footer`、`postList`、`heading`（`<h1>{tag}のタグが付いた記事`）。`header` / `footer` / `postList` は他ページと同じ POM を再利用する
 
 ## spec の内容
 
@@ -132,6 +139,17 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 - ヘッダーの `Blog` / `About` リンクで正しいページへ遷移することを確認します。
 - フッターの `Blog` / `About` リンクで正しいページへ遷移することを確認します。
 - フッターでは `RSS feed` リンクが表示されることも確認します。
+
+### タグページテスト (`tag.spec.ts`)
+
+タグページ（`/tags/[tag]`、静的生成）の基本表示を確認します。代表タグ（`ガジェット`）はサンプル記事を含む複数記事に付与されており、安定した検証対象として使います。
+
+- 代表タグページにアクセスできること（URL が `/tags/` 配下、ページタイトルが `{tag} — Daiki Sato`）を確認します。
+- 見出し `<h1>` に対象タグ名が含まれることを確認します。
+- リスト内に対象タグを持つ記事（サンプル記事）のリンクが表示されることを確認します。
+- リストのリンクから記事ページに遷移できることを確認します。
+
+`toHaveURL` では URL がパーセントエンコードされるため、タグ名の文字列ではなく `` /tags/ `` パターンで URL を検証します。タグ名が含まれることは見出しとタイトルのアサーションで担保します。
 
 ### テーマ切り替えテスト (`theme.spec.ts`)
 
@@ -235,7 +253,7 @@ blob-report/
 
 ## 今後の拡張候補
 
-- タグページ、404、目次 (TOC) の追従表示などをカバーする。
+- 404、目次 (TOC) の追従表示などをカバーする（タグページは `tag.spec.ts` で対応済み）。
 - axe-core などでアクセシビリティチェックを追加する。
 
 なお、スモーク・ナビゲーション・テーマ切り替え・ビジュアルリグレッションは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全プロジェクトで実行します。
