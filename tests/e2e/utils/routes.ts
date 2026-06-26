@@ -9,6 +9,13 @@ export const routes = {
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
   rss: '/rss.xml',
+  /**
+   * 存在しないルート。404 ページの検証に使用する。
+   *
+   * 固定文字列にしておくことで、ルーティング変更時の影響を避け、
+   * 「存在しない URL」という前提が常に成り立つようにする。
+   */
+  notFound: '/this-route-does-not-exist',
 } as const;
 
 /**
