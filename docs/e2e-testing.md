@@ -4,7 +4,7 @@
 
 ## 概要
 
-Astro のビルド結果を `astro preview` で起動し、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）でスモークテスト、ナビゲーション、テーマ切り替え、ビジュアルリグレッションを検証します。
+Astro のビルド結果を `astro preview` で起動し、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）でスモークテスト、ナビゲーション、テーマ切り替え、404 ページ、ビジュアルリグレッションを検証します。
 
 テストコードは Playwright の fixture とページオブジェクトモデル (POM) で構成しています。アサーションは spec に置き、POM はページ遷移や安定したロケーターの提供に限定します。
 
@@ -40,7 +40,8 @@ tests/e2e/
 ├── pages/                    # ページオブジェクト
 │   ├── home-page.ts          # ホーム (/)
 │   ├── about-page.ts         # About (/about)
-│   └── article-page.ts       # 記事ページ
+│   ├── article-page.ts       # 記事ページ
+│   └── not-found-page.ts     # 404 ページ
 ├── fixtures/
 │   └── test.ts               # 共通 fixture
 ├── utils/
@@ -52,6 +53,7 @@ tests/e2e/
     ├── smoke.spec.ts         # 基本表示の確認
     ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
     ├── theme.spec.ts         # テーマ切り替えの確認
+    ├── not-found.spec.ts     # 404 ページの確認
     └── visual.spec.ts        # ビジュアルリグレッション
 ```
 
@@ -87,6 +89,7 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  notFound: '/this-route-does-not-exist',
 } as const;
 
 export const sampleArticleTitle = 'オーディオインターフェースを机の裏に設置した';
@@ -116,6 +119,7 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 - `home-page.ts`: `goto()`、`header`、`footer`、`postList`
 - `about-page.ts`: `goto()`、`header`、`footer`、`heading`
 - `article-page.ts`: `goto(route, title)`、`header`、`footer`、`metadata`、`heading`
+- `not-found-page.ts`: `goto()`（戻り値 `Response | null`）、`header`、`footer`、`heading`、`homeLink`
 
 ## spec の内容
 
@@ -132,6 +136,12 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 - ヘッダーの `Blog` / `About` リンクで正しいページへ遷移することを確認します。
 - フッターの `Blog` / `About` リンクで正しいページへ遷移することを確認します。
 - フッターでは `RSS feed` リンクが表示されることも確認します。
+
+### 404 ページテスト (`not-found.spec.ts`)
+
+- 存在しない URL（`routes.notFound`）にアクセスしたとき、404 ステータスが返ることを確認する。
+- ページタイトルと主要な見出し（`<h1>404: Page Not Found</h1>`）が期待どおりであることを確認する。
+- 「ホームに戻る」リンクが表示され、クリックでホーム（`/`）に遷移することを確認する。デスクトップ・モバイル両方のプロジェクトで実行する。
 
 ### テーマ切り替えテスト (`theme.spec.ts`)
 
@@ -235,7 +245,7 @@ blob-report/
 
 ## 今後の拡張候補
 
-- タグページ、404、目次 (TOC) の追従表示などをカバーする。
+- タグページ、目次 (TOC) の追従表示などをカバーする。
 - axe-core などでアクセシビリティチェックを追加する。
 
-なお、スモーク・ナビゲーション・テーマ切り替え・ビジュアルリグレッションは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全プロジェクトで実行します。
+なお、スモーク・ナビゲーション・テーマ切り替え・404 ページ・ビジュアルリグレッションは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全プロジェクトで実行します。
