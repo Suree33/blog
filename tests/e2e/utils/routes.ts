@@ -8,6 +8,7 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  tagsBase: '/tags/',
   /** `routes.sampleArticle` の raw Markdown エンドポイント。 */
   sampleArticleMarkdown: '/posts/audio-interface-under-the-desk.md',
   rss: '/rss.xml',
@@ -28,6 +29,14 @@ export const routes = {
  */
 export const sampleArticleTitle =
   'オーディオインターフェースを机の裏に設置した';
+
+/**
+ * `routes.sampleArticle` が参照するサンプル記事の代表タグ。
+ *
+ * `routes.sampleArticle` がこのタグを持つため、サンプル記事リンクの表示確認に
+ * 使える。タグページ spec はこのタグを代表ページとして検証する。
+ */
+export const sampleTag = 'ガジェット';
 
 /**
  * `routes.sampleArticle` の frontmatter `description`。
