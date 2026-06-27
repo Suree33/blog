@@ -36,7 +36,8 @@ tests/e2e/
 │   ├── header.ts             # <header> (banner)
 │   ├── footer.ts             # <footer> (contentinfo)
 │   ├── post-list.ts          # ホームの記事一覧
-│   └── post-metadata.ts      # 記事メタデータ
+│   ├── post-metadata.ts      # 記事メタデータ
+│   └── toc.ts                # 目次 (TOC)
 ├── pages/                    # ページオブジェクト
 │   ├── home-page.ts          # ホーム (/)
 │   ├── about-page.ts         # About (/about)
@@ -54,6 +55,7 @@ tests/e2e/
     ├── smoke.spec.ts         # 基本表示の確認
     ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
     ├── theme.spec.ts         # テーマ切り替えの確認
+    ├── toc.spec.ts           # 目次 (TOC) の表示・追従
     ├── not-found.spec.ts     # 404 ページの確認
     ├── visual.spec.ts        # ビジュアルリグレッション
     ├── rss.spec.ts           # RSS フィードの確認
@@ -92,11 +94,14 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  sampleArticleMarkdown: '/posts/audio-interface-under-the-desk.md',
   rss: '/rss.xml',
   notFound: '/this-route-does-not-exist',
 } as const;
 
 export const sampleArticleTitle = 'オーディオインターフェースを机の裏に設置した';
+export const sampleArticleDescription =
+  'オーディオインターフェースを両面テープで机の下に設置するために、突っ張り棒を使って仮固定しました。';
 ```
 
 ### `tests/e2e/utils/regex.ts`
@@ -117,12 +122,13 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 - `footer.ts`: `root`、`blogLink`、`aboutLink`、`rssLink` を提供します。
 - `post-list.ts`: `<main>` 内の先頭の `<ul>` を記事一覧として扱います。Tailwind preflight により Chrome では `list` role が落ちるため、`getByRole('list')` は使いません。
 - `post-metadata.ts`: `dot-separated` クラスのうち `<time>` を含む要素を記事メタデータとして扱います。
+- `toc.ts`: `aria-label="目次"` の `<nav>` を TOC ルートとします。記事ページにはデスクトップ用（sticky サイドバー）とモバイル用（本文内インライン）の 2 つの TOC が DOM 上に存在し、ビューポート幅に応じて一方だけが可視になるため、`filter({ visible: true })` で表示中の方を選びます。`links` / `link(name)` / `currentLink` を提供します。
 
 ### ページオブジェクト (`tests/e2e/pages/`)
 
 - `home-page.ts`: `goto()`、`header`、`footer`、`postList`
 - `about-page.ts`: `goto()`、`header`、`footer`、`heading`
-- `article-page.ts`: `goto(route, title)`、`header`、`footer`、`metadata`、`heading`
+- `article-page.ts`: `goto(route, title)`、`header`、`footer`、`metadata`、`toc`、`heading`
 - `rss-feed-page.ts`: `goto()`、`response`、`content()`。RSS はブラウザ描画ではなく XML 応答のため `APIRequestContext` で取得し、`DOMParser` でパースする。`response` はステータス・ヘッダー検証用、`content()` はパース済みのチャネル/アイテムを返す
 - `not-found-page.ts`: `goto()`（戻り値 `Response | null`）、`header`、`footer`、`heading`、`homeLink`
 
@@ -157,6 +163,16 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 3. リロード後も `dark` が復元される。
 4. 2 回目のクリックで `light` が適用される。
 5. 3 回目のクリックでシステム設定に戻り、保存値が削除される。
+
+### 目次 (TOC) (`toc.spec.ts`)
+
+デスクトップ・モバイル両方のプロジェクトで実行します。見出しを持つ代表記事（サンプル記事、h2 x 2）を対象に、`src/scripts/toc.ts` によるクライアント側状態更新を含めて検証します。
+
+- 記事ページで `aria-label="目次"` の `<nav>` が表示され、見出し数分のリンクが並ぶことを確認します。
+- 初期状態（ページ先頭）では最初の見出しが `aria-current="location"` になることを確認します。
+- TOC リンクをクリックすると URL ハッシュが更新され、対応見出しがビューポート内にスクロールされ、クリックしたリンクが `aria-current="location"` になることを確認します。
+- ページ末尾へスクロールすると最後の見出しが current になることを確認します（`aria-current` がスクロール位置に追従する）。
+- デスクトップ用（sticky サイドバー）とモバイル用（インライン）の 2 つの `<nav>` が DOM に存在し、ビューポート幅に応じて一方だけが可視になることを確認します。
 
 ### ビジュアルリグレッション (`visual.spec.ts`)
 
@@ -273,7 +289,7 @@ blob-report/
 
 ## 今後の拡張候補
 
-- タグページ、目次 (TOC) の追従表示などをカバーする。
+- タグページなどをカバーする。
 - axe-core などでアクセシビリティチェックを追加する。
 
-なお、スモーク・ナビゲーション・テーマ切り替え・404 ページ・ビジュアルリグレッションは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全プロジェクトで実行します。
+なお、スモーク・ナビゲーション・テーマ切り替え・目次 (TOC)・404 ページ・ビジュアルリグレッションは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全プロジェクトで実行します。
