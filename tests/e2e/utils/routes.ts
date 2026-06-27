@@ -8,6 +8,7 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  rss: '/rss.xml',
   /**
    * 存在しないルート。404 ページの検証に使用する。
    *

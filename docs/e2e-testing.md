@@ -41,6 +41,7 @@ tests/e2e/
 │   ├── home-page.ts          # ホーム (/)
 │   ├── about-page.ts         # About (/about)
 │   ├── article-page.ts       # 記事ページ
+│   ├── rss-feed-page.ts      # RSS フィード (/rss.xml)
 │   └── not-found-page.ts     # 404 ページ
 ├── fixtures/
 │   └── test.ts               # 共通 fixture
@@ -54,7 +55,8 @@ tests/e2e/
     ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
     ├── theme.spec.ts         # テーマ切り替えの確認
     ├── not-found.spec.ts     # 404 ページの確認
-    └── visual.spec.ts        # ビジュアルリグレッション
+    ├── visual.spec.ts        # ビジュアルリグレッション
+    └── rss.spec.ts           # RSS フィードの確認
 ```
 
 ビジュアルスナップショットは `tests/e2e/specs/visual.spec.ts-snapshots/` に保存します。`snapshotPathTemplate` で OS サフィックスを外し、プロジェクト名だけを付けます。例: `article-metadata-chromium.png`
@@ -75,7 +77,7 @@ tests/e2e/
 
 `@playwright/test` の `base` を拡張し、spec から以下を利用できるようにしています。
 
-- `homePage` / `aboutPage` / `articlePage`: 対応するページオブジェクト
+- `homePage` / `aboutPage` / `articlePage` / `rssFeedPage` / `notFoundPage`: 対応するページオブジェクト
 - `isDesktop`: viewport 幅（768px 以上）からデスクトッププロジェクトかどうかを判定する boolean。モバイルでヘッダーメニューを開くかどうかの分岐に使う
 
 `isDesktop` が false（モバイル）のときは、ヘッダーのナビ/テーマトグルがハンバーガーメニュー内に隠れるため、`header.openMobileMenu()` でメニューを開いてから操作します。
@@ -89,6 +91,7 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  rss: '/rss.xml',
   notFound: '/this-route-does-not-exist',
 } as const;
 
@@ -119,6 +122,7 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 - `home-page.ts`: `goto()`、`header`、`footer`、`postList`
 - `about-page.ts`: `goto()`、`header`、`footer`、`heading`
 - `article-page.ts`: `goto(route, title)`、`header`、`footer`、`metadata`、`heading`
+- `rss-feed-page.ts`: `goto()`、`response`、`content()`。RSS はブラウザ描画ではなく XML 応答のため `APIRequestContext` で取得し、`DOMParser` でパースする。`response` はステータス・ヘッダー検証用、`content()` はパース済みのチャネル/アイテムを返す
 - `not-found-page.ts`: `goto()`（戻り値 `Response | null`）、`header`、`footer`、`heading`、`homeLink`
 
 ## spec の内容
@@ -170,6 +174,17 @@ export const sampleArticleTitle = 'オーディオインターフェースを机
 ```sh
 sudo apt-get install fonts-noto-cjk
 ```
+
+### RSS フィードテスト (`rss.spec.ts`)
+
+`/rss.xml` はブログ購読用の配信面。XML 応答を `APIRequestContext` で取得し、`DOMParser` でパースして検証する。ブラウザエンジンやビューポートに依存しないため、Chromium 1 プロジェクトのみで実行する（それ以外は `test.skip` でスキップ）。
+
+検証内容:
+
+- `/rss.xml` が 200 で応答し、`content-type` が XML 系（`application/xml` 等）であること。
+- `<channel>` にサイト名（`config.siteName`）・説明・`<language>ja-jp</language>` が含まれること。
+- 代表記事（`sampleArticleTitle`）のタイトルとリンクが `<item>` に含まれること。リンクはホスト・末尾スラッシュの差異に依存しないようパスで部分一致させる。
+- frontmatter 不足記事の扱い: `src/pages/rss.xml.ts` の `hasRequiredFrontmatter` により、`title` または `pubDate` frontmatter を持たない記事はフィードから除外される。本リポジトリに draft 扱いは存在せず、この frontmatter 条件のみで絞り込む。記事テンプレート (`src/pages/posts/template/_blog-post.md`) は `title` が未設定のため除外され、フィードに出現しないことを検証する（全 `<item>` が空でない `title`・`link` を持つこと、および `/template/` を含むリンクがないこと）。
 
 ### スナップショットの更新
 
