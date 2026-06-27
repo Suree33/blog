@@ -64,12 +64,12 @@ tests/e2e/
 ## `playwright.config.ts` の要点
 
 - `testDir`: `./tests/e2e/specs` を指定し、spec ファイルだけをテスト対象にします。
-- `webServer`: `pnpm run build:ci && pnpm run preview` でプレビューサーバーを起動し、`http://localhost:4321/` の応答を待ってからテストを開始します。
+- `webServer`: `pnpm run build:ci && pnpm run preview --port 4322` でプレビューサーバーを起動し、E2E 専用の `http://localhost:4322/` の応答を待ってからテストを開始します。通常の開発サーバーが使う `4321` とは競合しません。
 - `build:ci`: `prebuild` による `pnpm lint` の再実行を避けるため、E2E では通常の `build` ではなく `build:ci` を使います。
 - `reporter`: `list` で標準出力に進行を出し、`html` で `playwright-report/` を生成します。
 - `projects`: デスクトップ 3 種（`chromium` / `firefox` / `webkit`）とモバイル 3 種（`Mobile Chrome` / `Mobile Safari` / `Mobile Safari (Small screen)`）を定義します。
 - 失敗時の調査用に `trace: 'on-first-retry'`、`screenshot: 'only-on-failure'`、`video: 'retain-on-failure'` を有効にしています。
-- `baseURL`: `http://localhost:4321/` に揃え、spec では `page.goto('/about')` のような相対パスを使います。
+- `baseURL`: E2E 専用の `http://localhost:4322/` に揃え、spec では `page.goto('/about')` のような相対パスを使います。
 
 ## fixture / route / POM
 
