@@ -72,6 +72,7 @@ tests/e2e/
 - `webServer`: `pnpm run build:ci && pnpm run preview --port 4322` でプレビューサーバーを起動し、E2E 専用の `http://localhost:4322/` の応答を待ってからテストを開始します。通常の開発サーバーが使う `4321` とは競合しません。
 - `build:ci`: `prebuild` による `pnpm lint` の再実行を避けるため、E2E では通常の `build` ではなく `build:ci` を使います。
 - `reporter`: `list` で標準出力に進行を出し、`html` で `playwright-report/` を生成します。
+- `fullyParallel`: spec 内のテストも並列化します。CI では `E2E_WORKERS` 環境変数でワーカー数を指定し、未指定・不正値の場合も 2 ワーカーで実行します。
 - `projects`: デスクトップ 3 種（`chromium` / `firefox` / `webkit`）とモバイル 3 種（`Mobile Chrome` / `Mobile Safari` / `Mobile Safari (Small screen)`）を定義します。
 - 失敗時の調査用に `trace: 'on-first-retry'`、`screenshot: 'only-on-failure'`、`video: 'retain-on-failure'` を有効にしています。
 - `baseURL`: E2E 専用の `http://localhost:4322/` に揃え、spec では `page.goto('/about')` のような相対パスを使います。
@@ -251,7 +252,7 @@ pnpm exec playwright test tests/e2e/specs/visual.spec.ts --update-snapshots
 
 1. `fonts-noto-cjk` をインストールし、スクリーンショット用の日本語フォントを固定する。
 2. `pnpm exec playwright install --with-deps chromium firefox webkit` で全ブラウザと必要なシステム依存パッケージをインストールする（config が 6 プロジェクトを定義するため、Firefox / WebKit も必要）。
-3. `pnpm run test:e2e` を実行する。
+3. `E2E_WORKERS=2` を指定した状態で `pnpm run test:e2e` を実行する。`playwright.config.ts` では `fullyParallel: true` と組み合わせ、CI でも複数ワーカーで spec 内テストを並列実行する。
 4. `playwright-report/` と `test-results/` を artifact としてアップロードする。
 
 artifact の保持期間は 7 日です。テストが失敗した場合も調査できるよう、アップロードステップには `if: ${{ !cancelled() }}` を付けています。

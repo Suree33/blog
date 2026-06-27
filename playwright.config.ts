@@ -1,6 +1,17 @@
 import { defineConfig, devices } from '@playwright/test';
 const e2ePort = 4322;
 const e2eBaseURL = `http://localhost:${e2ePort}/`;
+const ciE2EWorkers = (() => {
+  if (!process.env.CI) {
+    return undefined;
+  }
+
+  const parsedWorkers = Number.parseInt(process.env.E2E_WORKERS ?? '2', 10);
+
+  return Number.isFinite(parsedWorkers) && parsedWorkers > 1
+    ? parsedWorkers
+    : 2;
+})();
 
 /**
  * Astro ブログの Playwright E2E 設定。
@@ -17,7 +28,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: ciE2EWorkers,
   reporter: [['list'], ['html']],
   use: {
     baseURL: e2eBaseURL,
