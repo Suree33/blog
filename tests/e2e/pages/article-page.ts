@@ -51,4 +51,9 @@ export class ArticlePage {
       name: this.currentTitle,
     });
   }
+
+  /** TOC の対象になる本文見出し（`<h2 id="...">`）。 */
+  get sectionHeadings(): Locator {
+    return this.page.locator('article h2[id]');
+  }
 }

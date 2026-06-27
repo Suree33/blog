@@ -3,8 +3,7 @@ import { expect, test } from '../fixtures/test';
 /**
  * 記事ページの目次（TOC）。
  *
- * サンプル記事（`/posts/audio-interface-under-the-desk`）は h2 を 2 つ持つため、
- * TOC には 2 つのリンクが表示される。この記事を代表例として TOC の表示、
+ * サンプル記事（`/posts/audio-interface-under-the-desk`）を代表例として TOC の表示、
  * リンククリックによる見出しへの移動、`aria-current="location"` の追従、
  * デスクトップ/モバイルの表示仕様の差異を検証する。
  *
@@ -17,8 +16,12 @@ test.describe('目次 (TOC)', () => {
     await articlePage.goto();
 
     await expect(articlePage.toc.root).toBeVisible();
-    // サンプル記事の TOC 項目数は h2 x 2 と一致する。
-    await expect(articlePage.toc.links).toHaveCount(2);
+    const headingTexts = await articlePage.sectionHeadings.allTextContents();
+    expect(headingTexts.length).toBeGreaterThan(0);
+
+    // TOC 項目はレンダリングされた本文見出しと一致する。
+    await expect(articlePage.toc.links).toHaveCount(headingTexts.length);
+    await expect(articlePage.toc.links).toHaveText(headingTexts);
   });
 
   test('初期状態では最初の見出しが current になる', async ({ articlePage }) => {
@@ -58,6 +61,7 @@ test.describe('目次 (TOC)', () => {
     await expect(heading).toBeInViewport();
 
     // クリック（ハッシュ変更）後に対応リンクが current になる。
+    await expect(articlePage.toc.currentLink).toHaveCount(1);
     await expect(link).toHaveAttribute('aria-current', 'location');
   });
 
@@ -76,6 +80,7 @@ test.describe('目次 (TOC)', () => {
       'aria-current',
       'location',
     );
+    await expect(articlePage.toc.currentLink).toHaveCount(1);
   });
 
   test('デスクトップとモバイルで表示される TOC は1つだけ', async ({
