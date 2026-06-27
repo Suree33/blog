@@ -52,8 +52,8 @@ export class ArticlePage {
     });
   }
 
-  /** TOC の対象になる本文見出し（`<h2 id="...">`）。 */
+  /** TOC の対象になる本文見出し（記事本文内の h2）。 */
   get sectionHeadings(): Locator {
-    return this.page.locator('article h2[id]');
+    return this.page.getByRole('article').getByRole('heading', { level: 2 });
   }
 }
