@@ -4,7 +4,7 @@
 
 ## 概要
 
-Astro のビルド結果を `astro preview` で起動し、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）でスモークテスト、ナビゲーション、タグページ、テーマ切り替え、ビジュアルリグレッションを検証します。
+Astro のビルド結果を `astro preview` で起動し、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）でスモークテスト、ナビゲーション、タグページ、テーマ切り替え、404 ページ、ビジュアルリグレッションを検証します。
 
 テストコードは Playwright の fixture とページオブジェクトモデル (POM) で構成しています。アサーションは spec に置き、POM はページ遷移や安定したロケーターの提供に限定します。
 
@@ -36,12 +36,15 @@ tests/e2e/
 │   ├── header.ts             # <header> (banner)
 │   ├── footer.ts             # <footer> (contentinfo)
 │   ├── post-list.ts          # ホームの記事一覧
-│   └── post-metadata.ts      # 記事メタデータ
+│   ├── post-metadata.ts      # 記事メタデータ
+│   └── toc.ts                # 目次 (TOC)
 ├── pages/                    # ページオブジェクト
 │   ├── home-page.ts          # ホーム (/)
 │   ├── about-page.ts         # About (/about)
 │   ├── article-page.ts       # 記事ページ
-│   └── tag-page.ts           # タグページ (/tags/[tag])
+│   ├── tag-page.ts           # タグページ (/tags/[tag])
+│   ├── rss-feed-page.ts      # RSS フィード (/rss.xml)
+│   └── not-found-page.ts     # 404 ページ
 ├── fixtures/
 │   └── test.ts               # 共通 fixture
 ├── utils/
@@ -54,7 +57,11 @@ tests/e2e/
     ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
     ├── tag.spec.ts           # タグページ (/tags/[tag]) の確認
     ├── theme.spec.ts         # テーマ切り替えの確認
-    └── visual.spec.ts        # ビジュアルリグレッション
+    ├── toc.spec.ts           # 目次 (TOC) の表示・追従
+    ├── not-found.spec.ts     # 404 ページの確認
+    ├── visual.spec.ts        # ビジュアルリグレッション
+    ├── rss.spec.ts           # RSS フィードの確認
+    └── raw-markdown.spec.ts  # raw Markdown エンドポイント
 ```
 
 ビジュアルスナップショットは `tests/e2e/specs/visual.spec.ts-snapshots/` に保存します。`snapshotPathTemplate` で OS サフィックスを外し、プロジェクト名だけを付けます。例: `article-metadata-chromium.png`
@@ -62,12 +69,12 @@ tests/e2e/
 ## `playwright.config.ts` の要点
 
 - `testDir`: `./tests/e2e/specs` を指定し、spec ファイルだけをテスト対象にします。
-- `webServer`: `pnpm run build:ci && pnpm run preview` でプレビューサーバーを起動し、`http://localhost:4321/` の応答を待ってからテストを開始します。
+- `webServer`: `pnpm run build:ci && pnpm run preview --port 4322` でプレビューサーバーを起動し、E2E 専用の `http://localhost:4322/` の応答を待ってからテストを開始します。通常の開発サーバーが使う `4321` とは競合しません。
 - `build:ci`: `prebuild` による `pnpm lint` の再実行を避けるため、E2E では通常の `build` ではなく `build:ci` を使います。
 - `reporter`: `list` で標準出力に進行を出し、`html` で `playwright-report/` を生成します。
 - `projects`: デスクトップ 3 種（`chromium` / `firefox` / `webkit`）とモバイル 3 種（`Mobile Chrome` / `Mobile Safari` / `Mobile Safari (Small screen)`）を定義します。
 - 失敗時の調査用に `trace: 'on-first-retry'`、`screenshot: 'only-on-failure'`、`video: 'retain-on-failure'` を有効にしています。
-- `baseURL`: `http://localhost:4321/` に揃え、spec では `page.goto('/about')` のような相対パスを使います。
+- `baseURL`: E2E 専用の `http://localhost:4322/` に揃え、spec では `page.goto('/about')` のような相対パスを使います。
 
 ## fixture / route / POM
 
@@ -75,7 +82,7 @@ tests/e2e/
 
 `@playwright/test` の `base` を拡張し、spec から以下を利用できるようにしています。
 
-- `homePage` / `aboutPage` / `articlePage` / `tagPage`: 対応するページオブジェクト
+- `homePage` / `aboutPage` / `articlePage` / `tagPage` / `rssFeedPage` / `notFoundPage`: 対応するページオブジェクト
 - `isDesktop`: viewport 幅（768px 以上）からデスクトッププロジェクトかどうかを判定する boolean。モバイルでヘッダーメニューを開くかどうかの分岐に使う
 
 `isDesktop` が false（モバイル）のときは、ヘッダーのナビ/テーマトグルがハンバーガーメニュー内に隠れるため、`header.openMobileMenu()` でメニューを開いてから操作します。
@@ -90,10 +97,15 @@ export const routes = {
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
   tagsBase: '/tags/',
+  sampleArticleMarkdown: '/posts/audio-interface-under-the-desk.md',
+  rss: '/rss.xml',
+  notFound: '/this-route-does-not-exist',
 } as const;
 
 export const sampleArticleTitle = 'オーディオインターフェースを机の裏に設置した';
 export const sampleTag = 'ガジェット';
+export const sampleArticleDescription =
+  'オーディオインターフェースを両面テープで机の下に設置するために、突っ張り棒を使って仮固定しました。';
 ```
 
 `sampleTag` は `sampleArticle` が持つ代表タグで、タグページの `<h1>` と記事リンクの検証に使います。`tagsBase` と組み合わせて `/tags/{tag}` を組み立てます。
@@ -116,13 +128,16 @@ export const sampleTag = 'ガジェット';
 - `footer.ts`: `root`、`blogLink`、`aboutLink`、`rssLink` を提供します。
 - `post-list.ts`: `<main>` 内の先頭の `<ul>` を記事一覧として扱います。Tailwind preflight により Chrome では `list` role が落ちるため、`getByRole('list')` は使いません。
 - `post-metadata.ts`: `dot-separated` クラスのうち `<time>` を含む要素を記事メタデータとして扱います。
+- `toc.ts`: `aria-label="目次"` の `<nav>` を TOC ルートとします。記事ページにはデスクトップ用（sticky サイドバー）とモバイル用（本文内インライン）の 2 つの TOC が DOM 上に存在し、ビューポート幅に応じて一方だけが可視になるため、`filter({ visible: true })` で表示中の方を選びます。`links` / `link(name)` / `currentLink` を提供します。
 
 ### ページオブジェクト (`tests/e2e/pages/`)
 
 - `home-page.ts`: `goto()`、`header`、`footer`、`postList`
 - `about-page.ts`: `goto()`、`header`、`footer`、`heading`
-- `article-page.ts`: `goto(route, title)`、`header`、`footer`、`metadata`、`heading`
+- `article-page.ts`: `goto(route, title)`、`header`、`footer`、`metadata`、`toc`、`heading`
 - `tag-page.ts`: `goto(tag)`、`header`、`footer`、`postList`、`heading`（`<h1>{tag}のタグが付いた記事`）。`header` / `footer` / `postList` は他ページと同じ POM を再利用する
+- `rss-feed-page.ts`: `goto()`、`response`、`content()`。RSS はブラウザ描画ではなく XML 応答のため `APIRequestContext` で取得し、`DOMParser` でパースする。`response` はステータス・ヘッダー検証用、`content()` はパース済みのチャネル/アイテムを返す
+- `not-found-page.ts`: `goto()`（戻り値 `Response | null`）、`header`、`footer`、`heading`、`homeLink`
 
 ## spec の内容
 
@@ -151,6 +166,12 @@ export const sampleTag = 'ガジェット';
 
 `toHaveURL` では URL がパーセントエンコードされるため、タグ名の文字列ではなく `` /tags/ `` パターンで URL を検証します。タグ名が含まれることは見出しとタイトルのアサーションで担保します。
 
+### 404 ページテスト (`not-found.spec.ts`)
+
+- 存在しない URL（`routes.notFound`）にアクセスしたとき、404 ステータスが返ることを確認する。
+- ページタイトルと主要な見出し（`<h1>404: Page Not Found</h1>`）が期待どおりであることを確認する。
+- 「ホームに戻る」リンクが表示され、クリックでホーム（`/`）に遷移することを確認する。デスクトップ・モバイル両方のプロジェクトで実行する。
+
 ### テーマ切り替えテスト (`theme.spec.ts`)
 
 デスクトップ・モバイル両方のプロジェクトで実行します。テーマトグルはモバイルではハンバーガーメニュー内にあるため、`isDesktop` が false のときは各クリック前に `header.openMobileMenu()` でメニューを開きます（`page.reload()` でメニューは閉じるため、リロード後のクリックでも開き直します）。`page.emulateMedia({ colorScheme: 'light' })` でシステム配色を固定し、以下の順に確認します。
@@ -160,6 +181,16 @@ export const sampleTag = 'ガジェット';
 3. リロード後も `dark` が復元される。
 4. 2 回目のクリックで `light` が適用される。
 5. 3 回目のクリックでシステム設定に戻り、保存値が削除される。
+
+### 目次 (TOC) (`toc.spec.ts`)
+
+デスクトップ・モバイル両方のプロジェクトで実行します。見出しを持つ代表記事（サンプル記事、h2 x 2）を対象に、`src/scripts/toc.ts` によるクライアント側状態更新を含めて検証します。
+
+- 記事ページで `aria-label="目次"` の `<nav>` が表示され、見出し数分のリンクが並ぶことを確認します。
+- 初期状態（ページ先頭）では最初の見出しが `aria-current="location"` になることを確認します。
+- TOC リンクをクリックすると URL ハッシュが更新され、対応見出しがビューポート内にスクロールされ、クリックしたリンクが `aria-current="location"` になることを確認します。
+- ページ末尾へスクロールすると最後の見出しが current になることを確認します（`aria-current` がスクロール位置に追従する）。
+- デスクトップ用（sticky サイドバー）とモバイル用（インライン）の 2 つの `<nav>` が DOM に存在し、ビューポート幅に応じて一方だけが可視になることを確認します。
 
 ### ビジュアルリグレッション (`visual.spec.ts`)
 
@@ -179,6 +210,17 @@ export const sampleTag = 'ガジェット';
 sudo apt-get install fonts-noto-cjk
 ```
 
+### RSS フィードテスト (`rss.spec.ts`)
+
+`/rss.xml` はブログ購読用の配信面。XML 応答を `APIRequestContext` で取得し、`DOMParser` でパースして検証する。ブラウザエンジンやビューポートに依存しないため、Chromium 1 プロジェクトのみで実行する（それ以外は `test.skip` でスキップ）。
+
+検証内容:
+
+- `/rss.xml` が 200 で応答し、`content-type` が XML 系（`application/xml` 等）であること。
+- `<channel>` にサイト名（`config.siteName`）・説明・`<language>ja-jp</language>` が含まれること。
+- 代表記事（`sampleArticleTitle`）のタイトルとリンクが `<item>` に含まれること。リンクはホスト・末尾スラッシュの差異に依存しないようパスで部分一致させる。
+- frontmatter 不足記事の扱い: `src/pages/rss.xml.ts` の `hasRequiredFrontmatter` により、`title` または `pubDate` frontmatter を持たない記事はフィードから除外される。本リポジトリに draft 扱いは存在せず、この frontmatter 条件のみで絞り込む。記事テンプレート (`src/pages/posts/template/_blog-post.md`) は `title` が未設定のため除外され、フィードに出現しないことを検証する（全 `<item>` が空でない `title`・`link` を持つこと、および `/template/` を含むリンクがないこと）。
+
 ### スナップショットの更新
 
 意図した UI 変更でベースラインを更新する場合は以下を実行し、差分をコミットしてください。
@@ -188,6 +230,18 @@ pnpm run test:e2e:update
 # 個別 spec のみ更新する場合
 pnpm exec playwright test tests/e2e/specs/visual.spec.ts --update-snapshots
 ```
+
+### raw Markdown エンドポイント (`raw-markdown.spec.ts`)
+
+`/posts/[slug].md` の raw Markdown エンドポイントを `astro preview` 経由で検証します（実装: `src/pages/posts/[slug].md.ts`、仕様: `docs/raw-markdown-endpoints.md`）。Playwright の `request` fixture を使い、HTTP ステータス・`Content-Type`・本文を直接アサーションします。
+
+- 代表記事の `.md` URL が `200` を返す
+- `Content-Type` が `text/markdown` で始まる
+  - 本番（Cloudflare Workers Static Assets）では `text/markdown; charset=utf-8` になりますが、`astro preview` は `text/markdown` のみを返すため、spec では `text/markdown` であることだけを検証します。`charset=utf-8` の厳密検証は Workers プレビューが必要なため別途切り出します。
+- frontmatter（`title` / `description`）と本文が含まれる
+- Astro 表示用の `layout` frontmatter は除去されている（`^layout:` 行が存在しない）
+
+通常記事 URL + `Accept: text/markdown` による content negotiation は `src/worker.ts` で実装されており Workers プレビュー側でのみ機能します。`astro preview` では Worker を経由しないため本 spec ではカバーせず、別 Issue で取り扱います。
 
 ## GitHub Actions
 
@@ -253,7 +307,6 @@ blob-report/
 
 ## 今後の拡張候補
 
-- 404、目次 (TOC) の追従表示などをカバーする（タグページは `tag.spec.ts` で対応済み）。
 - axe-core などでアクセシビリティチェックを追加する。
 
-なお、スモーク・ナビゲーション・テーマ切り替え・ビジュアルリグレッションは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全プロジェクトで実行します。
+なお、スモーク・ナビゲーション・テーマ切り替え・目次 (TOC)・404 ページ・ビジュアルリグレッションは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全プロジェクトで実行します。
