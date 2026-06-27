@@ -14,7 +14,7 @@ const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
 ---
 
 <div
-  class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold text-neutral-500 uppercase"
+  class="dot-separated flex list-none flex-wrap justify-center gap-x-[0.1em] p-0 text-base font-bold text-neutral-500 uppercase"
 >
   {
     tags?.map((tag: string) => (
@@ -29,7 +29,7 @@ const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
   {
     formattedPubDate && (
       <div>
-        <Icon name="fa6-solid:feather" class="mb-[.12em] inline text-sm" />
+        <Icon name="fa6-solid:feather" class="mr-1 mb-[.12em] inline text-sm" />
         <time datetime={formattedPubDate}>{formattedPubDate}</time>
       </div>
     )
@@ -37,7 +37,7 @@ const formattedUpdatedDate = updatedDate ? formatDate(updatedDate) : null;
   {
     formattedUpdatedDate && (
       <div>
-        <Icon name="fa6-solid:rotate" class="mb-[.12em] inline text-sm" />
+        <Icon name="fa6-solid:rotate" class="mr-1 mb-[.12em] inline text-sm" />
         <time datetime={formattedUpdatedDate}>{formattedUpdatedDate}</time>
       </div>
     )

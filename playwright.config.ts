@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+const e2ePort = 4322;
+const e2eBaseURL = `http://localhost:${e2ePort}/`;
 
 /**
  * Astro ブログの Playwright E2E 設定。
@@ -18,7 +20,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html']],
   use: {
-    baseURL: 'http://localhost:4321/',
+    baseURL: e2eBaseURL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -53,8 +55,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'pnpm run build:ci && pnpm run preview',
-    url: 'http://localhost:4321/',
+    command: `pnpm run build:ci && pnpm run preview --port ${e2ePort}`,
+    url: e2eBaseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180 * 1000,
   },
