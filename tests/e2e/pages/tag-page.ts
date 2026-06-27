@@ -34,7 +34,7 @@ export class TagPage {
    */
   async goto(tag: string = sampleTag): Promise<void> {
     this.currentTag = tag;
-    await this.page.goto(`${routes.tagsBase}${tag}`);
+    await this.page.goto(`${routes.tagsBase}${encodeURIComponent(tag)}`);
   }
 
   /**
