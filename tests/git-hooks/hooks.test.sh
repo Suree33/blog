@@ -63,7 +63,8 @@ test_pre_commit_order_and_fail_fast() {
   local pnpm_log="$test_repo/pnpm.log"
   git init -q "$test_repo"
   mkdir -p "$test_repo/scripts/git-hooks" "$test_repo/node_modules" "$fake_bin"
-  cp "$scripts_dir/pre-commit.sh" "$test_repo/scripts/git-hooks/"
+  cp "$scripts_dir"/*.sh "$test_repo/scripts/git-hooks/"
+  (cd "$test_repo" && scripts/git-hooks/install.sh >/dev/null)
 
   cat >"$fake_bin/pnpm" <<'EOF'
 #!/usr/bin/env bash
@@ -74,16 +75,16 @@ fi
 EOF
   chmod +x "$fake_bin/pnpm"
 
-  (cd "$test_repo" && PNPM_LOG="$pnpm_log" PATH="$fake_bin:$PATH" \
-    scripts/git-hooks/pre-commit.sh)
+  PNPM_LOG="$pnpm_log" PATH="$fake_bin:$PATH" \
+    git -C "$test_repo" hook run pre-commit
   assert_equals \
     $'run format:check\nrun lint\nrun build:ci' \
     "$(cat "$pnpm_log")" \
     'pre-commit should run checks in order'
 
   : >"$pnpm_log"
-  if (cd "$test_repo" && PNPM_LOG="$pnpm_log" FAIL_COMMAND='run lint' PATH="$fake_bin:$PATH" \
-    scripts/git-hooks/pre-commit.sh); then
+  if PNPM_LOG="$pnpm_log" FAIL_COMMAND='run lint' PATH="$fake_bin:$PATH" \
+    git -C "$test_repo" hook run pre-commit; then
     fail 'pre-commit should fail when lint fails'
   fi
   assert_equals \
