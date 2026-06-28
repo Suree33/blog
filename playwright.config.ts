@@ -17,8 +17,10 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: [['list'], ['html']],
+  workers: undefined,
+  reporter: process.env.GITHUB_ACTIONS
+    ? [['github'], ['list'], ['html']]
+    : [['list'], ['html']],
   use: {
     baseURL: e2eBaseURL,
     trace: 'on-first-retry',
