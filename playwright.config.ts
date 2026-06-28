@@ -18,7 +18,9 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: undefined,
-  reporter: [['list'], ['html']],
+  reporter: process.env.GITHUB_ACTIONS
+    ? [['github'], ['list'], ['html']]
+    : [['list'], ['html']],
   use: {
     baseURL: e2eBaseURL,
     trace: 'on-first-retry',

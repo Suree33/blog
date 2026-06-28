@@ -71,7 +71,7 @@ tests/e2e/
 - `testDir`: `./tests/e2e/specs` を指定し、spec ファイルだけをテスト対象にします。
 - `webServer`: `pnpm run build:ci && pnpm run preview --port 4322` でプレビューサーバーを起動し、E2E 専用の `http://localhost:4322/` の応答を待ってからテストを開始します。通常の開発サーバーが使う `4321` とは競合しません。
 - `build:ci`: `prebuild` による `pnpm lint` の再実行を避けるため、E2E では通常の `build` ではなく `build:ci` を使います。
-- `reporter`: `list` で標準出力に進行を出し、`html` で `playwright-report/` を生成します。
+- `reporter`: 通常は `list` で標準出力に進行を出し、`html` で `playwright-report/` を生成します。GitHub Actions 上では `github` reporter も追加し、失敗箇所を Actions の annotation として表示します。
 - `fullyParallel`: spec 内のテストも並列化します。`workers` は常に `undefined` とし、Playwright のデフォルト（論理 CPU コア数の半分）に任せます。
 - `projects`: デスクトップ 3 種（`chromium` / `firefox` / `webkit`）とモバイル 3 種（`Mobile Chrome` / `Mobile Safari` / `Mobile Safari (Small screen)`）を定義します。
 - 失敗時の調査用に `trace: 'on-first-retry'`、`screenshot: 'only-on-failure'`、`video: 'retain-on-failure'` を有効にしています。
@@ -252,7 +252,7 @@ pnpm exec playwright test tests/e2e/specs/visual.spec.ts --update-snapshots
 
 1. `fonts-noto-cjk` をインストールし、スクリーンショット用の日本語フォントを固定する。
 2. `pnpm exec playwright install --with-deps chromium firefox webkit` で全ブラウザと必要なシステム依存パッケージをインストールする（config が 6 プロジェクトを定義するため、Firefox / WebKit も必要）。
-3. `pnpm run test:e2e` を実行する。`playwright.config.ts` では `fullyParallel: true` と `workers: undefined` を組み合わせ、Playwright のデフォルト worker 数で spec 内テストを並列実行する。
+3. `pnpm run test:e2e` を実行する。`playwright.config.ts` では `fullyParallel: true` と `workers: undefined` を組み合わせ、Playwright のデフォルト worker 数で spec 内テストを並列実行する。GitHub Actions 上では `github` reporter を `list` / `html` に追加し、失敗時の annotation を有効化する。
 4. `playwright-report/` と `test-results/` を artifact としてアップロードする。
 
 artifact の保持期間は 7 日です。テストが失敗した場合も調査できるよう、アップロードステップには `if: ${{ !cancelled() }}` を付けています。
