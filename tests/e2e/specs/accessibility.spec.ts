@@ -97,4 +97,26 @@ test.describe('axe-coreアクセシビリティ検査', () => {
       openMobileMenu: () => homePage.header.openMobileMenu(),
     });
   });
+
+  test('About', async ({ aboutPage }, testInfo) => {
+    skipUnsupportedProject(testInfo);
+
+    await scanPageForAccessibility({
+      page: aboutPage.page,
+      testInfo,
+      goto: () => aboutPage.goto(),
+      openMobileMenu: () => aboutPage.header.openMobileMenu(),
+    });
+  });
+
+  test('代表記事', async ({ articlePage }, testInfo) => {
+    skipUnsupportedProject(testInfo);
+
+    await scanPageForAccessibility({
+      page: articlePage.page,
+      testInfo,
+      goto: () => articlePage.goto(),
+      openMobileMenu: () => articlePage.header.openMobileMenu(),
+    });
+  });
 });
