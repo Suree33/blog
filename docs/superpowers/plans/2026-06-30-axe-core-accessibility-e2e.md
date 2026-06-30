@@ -270,7 +270,64 @@ git add tests/e2e/specs/accessibility.spec.ts
 git commit -m "test: 主要ページをaxe-coreで検査"
 ```
 
-### Task 4: E2Eドキュメントへ検査範囲と限界を記録する
+### Task 4: ダークテーマの既存コントラスト違反を修正する
+
+**Files:**
+- Modify: `src/pages/about.astro:10`
+- Modify: `src/components/PostMetadata.astro:17`
+
+- [ ] **Step 1: axe検査が既存コントラスト違反を再現することを確認する**
+
+Run:
+
+```bash
+pnpm exec playwright test tests/e2e/specs/accessibility.spec.ts
+```
+
+Expected: 2 passed、4 failed、12 skipped。Aboutと代表記事のダークテーマで `color-contrast` がfailし、対象ノードの文字色は `#737373`、背景色は `#0a0a0a`、コントラスト比は `4.17:1`（必要値 `4.5:1`）。
+
+- [ ] **Step 2: Aboutのダークテーマ文字色を既存パターンへ合わせる**
+
+`src/pages/about.astro` の関心分野コンテナへ `dark:text-neutral-400` を追加する。
+
+```astro
+  <div
+    class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold text-neutral-500 uppercase dark:text-neutral-400"
+  >
+```
+
+- [ ] **Step 3: 記事メタデータのダークテーマ文字色を既存パターンへ合わせる**
+
+`src/components/PostMetadata.astro` のメタデータコンテナへ `dark:text-neutral-400` を追加する。
+
+```astro
+<div
+  class="dot-separated flex list-none flex-wrap justify-center gap-x-[0.1em] p-0 text-base font-bold text-neutral-500 uppercase dark:text-neutral-400"
+>
+```
+
+`PostItem.astro` の同種メタデータと同じ色を使う。`neutral-300` への強調、親色の継承、axeの除外設定は追加しない。
+
+- [ ] **Step 4: 最小修正で重大違反が解消したことを確認する**
+
+Run:
+
+```bash
+pnpm exec playwright test tests/e2e/specs/accessibility.spec.ts
+pnpm exec playwright test tests/e2e/specs/theme.spec.ts tests/e2e/specs/visual.spec.ts
+pnpm run lint
+```
+
+Expected: accessibility specは6 passed、12 skippedで、`serious` / `critical` は0件。ダークテーマの対象文字色は `#a1a1a1`、背景色は `#0a0a0a`、コントラスト比は `7.66:1`。テーマとビジュアルテスト、およびlintも成功する。
+
+- [ ] **Step 5: コントラスト修正をコミットする**
+
+```bash
+git add src/pages/about.astro src/components/PostMetadata.astro
+git commit -m "fix: ダークテーマの文字コントラストを改善"
+```
+
+### Task 5: E2Eドキュメントへ検査範囲と限界を記録する
 
 **Files:**
 - Modify: `docs/e2e-testing.md:1-62`
@@ -345,7 +402,7 @@ git add docs/e2e-testing.md
 git commit -m "docs: axe-coreアクセシビリティ検査を記録"
 ```
 
-### Task 5: lintと全E2Eで完了条件を検証する
+### Task 6: lintと全E2Eで完了条件を検証する
 
 **Files:**
 - Verify: `package.json`
