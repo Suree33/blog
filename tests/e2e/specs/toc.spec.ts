@@ -15,26 +15,38 @@ test.describe('目次 (TOC)', () => {
   }) => {
     await articlePage.goto();
 
-    await expect(articlePage.toc.root).toBeVisible();
+    await expect(
+      articlePage.toc.root,
+      '見出しを持つ記事に目次ナビゲーションが表示される',
+    ).toBeVisible();
     const headingTexts = await articlePage.sectionHeadings.allTextContents();
-    expect(headingTexts.length).toBeGreaterThan(0);
+    expect(
+      headingTexts.length,
+      '記事本文に目次の対象となる見出しが 1 件以上ある',
+    ).toBeGreaterThan(0);
 
     // TOC 項目はレンダリングされた本文見出しと一致する。
-    await expect(articlePage.toc.links).toHaveCount(headingTexts.length);
-    await expect(articlePage.toc.links).toHaveText(headingTexts);
+    await expect(
+      articlePage.toc.links,
+      `目次に記事本文の見出しと同じ ${headingTexts.length} 件のリンクが表示される`,
+    ).toHaveCount(headingTexts.length);
+    await expect(
+      articlePage.toc.links,
+      '目次リンクのテキストが記事本文の見出しと一致する',
+    ).toHaveText(headingTexts);
   });
 
   test('初期状態では最初の見出しが current になる', async ({ articlePage }) => {
     await articlePage.goto();
 
-    await expect(articlePage.toc.links.first()).toHaveAttribute(
-      'aria-current',
-      'location',
-    );
-    await expect(articlePage.toc.links.last()).not.toHaveAttribute(
-      'aria-current',
-      'location',
-    );
+    await expect(
+      articlePage.toc.links.first(),
+      'ページ初期表示では最初の目次リンクが current になる',
+    ).toHaveAttribute('aria-current', 'location');
+    await expect(
+      articlePage.toc.links.last(),
+      'ページ初期表示では最後の目次リンクが current にならない',
+    ).not.toHaveAttribute('aria-current', 'location');
   });
 
   test('TOC リンクをクリックすると該当見出しへ移動し current が更新される', async ({
@@ -46,23 +58,37 @@ test.describe('目次 (TOC)', () => {
     const linkName = '今回やったこと';
     const link = articlePage.toc.link(linkName);
     const href = await link.getAttribute('href');
-    expect(href).toMatch(/^#.+/);
+    expect(
+      href,
+      `目次リンク「${linkName}」の href がページ内ハッシュである`,
+    ).toMatch(/^#.+/);
 
     await link.click();
 
     // ハッシュが URL に反映される（非 ASCII はパーセントエンコードされるので復号して比較）。
     await expect
-      .poll(async () => decodeURIComponent(new URL(page.url()).hash))
+      .poll(async () => decodeURIComponent(new URL(page.url()).hash), {
+        message: `目次リンク「${linkName}」のクリック後は URL ハッシュがリンク先と一致する`,
+      })
       .toBe(href);
 
     // 対象見出しがビューポート内にスクロールされる。
     const id = await link.getAttribute('data-toc-id');
     const heading = page.locator(`[id="${id}"]`);
-    await expect(heading).toBeInViewport();
+    await expect(
+      heading,
+      `目次リンク「${linkName}」のクリック後は対応する見出しがビューポート内に表示される`,
+    ).toBeInViewport();
 
     // クリック（ハッシュ変更）後に対応リンクが current になる。
-    await expect(articlePage.toc.currentLink).toHaveCount(1);
-    await expect(link).toHaveAttribute('aria-current', 'location');
+    await expect(
+      articlePage.toc.currentLink,
+      `目次リンク「${linkName}」のクリック後は current リンクが 1 件になる`,
+    ).toHaveCount(1);
+    await expect(
+      link,
+      `目次リンク「${linkName}」のクリック後はそのリンクが current になる`,
+    ).toHaveAttribute('aria-current', 'location');
   });
 
   test('スクロール位置に応じて current が更新される', async ({
@@ -76,11 +102,14 @@ test.describe('目次 (TOC)', () => {
       window.scrollTo(0, document.documentElement.scrollHeight),
     );
 
-    await expect(articlePage.toc.links.last()).toHaveAttribute(
-      'aria-current',
-      'location',
-    );
-    await expect(articlePage.toc.currentLink).toHaveCount(1);
+    await expect(
+      articlePage.toc.links.last(),
+      'ページ末尾へのスクロール後は最後の目次リンクが current になる',
+    ).toHaveAttribute('aria-current', 'location');
+    await expect(
+      articlePage.toc.currentLink,
+      'ページ末尾へのスクロール後も current リンクが 1 件だけになる',
+    ).toHaveCount(1);
   });
 
   test('デスクトップとモバイルで表示される TOC は1つだけ', async ({
@@ -94,7 +123,13 @@ test.describe('目次 (TOC)', () => {
     // `getByRole('navigation')` は `display:none` の nav をアクセシビリティツリーから
     // 除くため見落とすので、`data-toc-root` 属性で DOM 上の全件を数える。
     const allRoots = page.locator('[data-toc-root]');
-    await expect(allRoots).toHaveCount(2);
-    await expect(allRoots.filter({ visible: true })).toHaveCount(1);
+    await expect(
+      allRoots,
+      'デスクトップ用とモバイル用の目次が DOM に 2 件存在する',
+    ).toHaveCount(2);
+    await expect(
+      allRoots.filter({ visible: true }),
+      '現在のビューポートに対応する目次だけが 1 件表示される',
+    ).toHaveCount(1);
   });
 });

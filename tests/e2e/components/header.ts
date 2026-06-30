@@ -69,7 +69,10 @@ export class Header {
   async openMobileMenu(): Promise<void> {
     if ((await this.hamburger.getAttribute('aria-expanded')) !== 'true') {
       await this.hamburger.click();
-      await expect(this.hamburger).toHaveAttribute('aria-expanded', 'true');
+      await expect(
+        this.hamburger,
+        'モバイルメニューを開くとハンバーガーボタンの aria-expanded が true になる',
+      ).toHaveAttribute('aria-expanded', 'true');
     }
 
     await this.root.evaluate(async (header) => {

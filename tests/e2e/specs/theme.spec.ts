@@ -39,39 +39,70 @@ test.describe('テーマトグル', () => {
     const html = page.locator('html');
 
     // 新規コンテキスト => テーマ未保存 => <html> には明示的なクラスなし。
-    await expect(html).not.toHaveAttribute('class', DARK);
-    await expect(html).not.toHaveAttribute('class', LIGHT);
+    await expect(
+      html,
+      '初期状態では html 要素に dark クラスが付かない',
+    ).not.toHaveAttribute('class', DARK);
+    await expect(
+      html,
+      '初期状態では html 要素に light クラスが付かない',
+    ).not.toHaveAttribute('class', LIGHT);
     await expect
-      .poll(() => page.evaluate(() => localStorage.getItem('theme')))
+      .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
+        message: '初期状態では localStorage にテーマが保存されていない',
+      })
       .toBeNull();
 
     // 1 回目のクリック: 現在は system（null）、システムは light => dark を適用。
     await toggleTheme();
-    await expect(html).toHaveAttribute('class', DARK);
+    await expect(
+      html,
+      '1 回目のテーマ切り替え後は html 要素に dark クラスが付く',
+    ).toHaveAttribute('class', DARK);
     await expect
-      .poll(() => page.evaluate(() => localStorage.getItem('theme')))
+      .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
+        message: '1 回目のテーマ切り替え後は theme に dark が保存される',
+      })
       .toBe('dark');
 
     // 永続化: リロードすると localStorage からテーマを復元する。
     await page.reload();
-    await expect(html).toHaveAttribute('class', DARK);
+    await expect(
+      html,
+      'リロード後は html 要素に dark クラスが復元される',
+    ).toHaveAttribute('class', DARK);
     await expect
-      .poll(() => page.evaluate(() => localStorage.getItem('theme')))
+      .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
+        message: 'リロード後も theme に dark が保存されている',
+      })
       .toBe('dark');
 
     // 2 回目のクリック: 現在は dark、システムは light => light を適用。
     await toggleTheme();
-    await expect(html).toHaveAttribute('class', LIGHT);
+    await expect(
+      html,
+      '2 回目のテーマ切り替え後は html 要素に light クラスが付く',
+    ).toHaveAttribute('class', LIGHT);
     await expect
-      .poll(() => page.evaluate(() => localStorage.getItem('theme')))
+      .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
+        message: '2 回目のテーマ切り替え後は theme に light が保存される',
+      })
       .toBe('light');
 
     // 3 回目のクリック: 現在は light、システムは light => system に戻す。
     await toggleTheme();
-    await expect(html).not.toHaveAttribute('class', DARK);
-    await expect(html).not.toHaveAttribute('class', LIGHT);
+    await expect(
+      html,
+      '3 回目のテーマ切り替え後は html 要素に dark クラスが付かない',
+    ).not.toHaveAttribute('class', DARK);
+    await expect(
+      html,
+      '3 回目のテーマ切り替え後は html 要素に light クラスが付かない',
+    ).not.toHaveAttribute('class', LIGHT);
     await expect
-      .poll(() => page.evaluate(() => localStorage.getItem('theme')))
+      .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
+        message: '3 回目のテーマ切り替え後は保存済みテーマが削除される',
+      })
       .toBeNull();
   });
 });

@@ -123,6 +123,7 @@ export const sampleArticleDescription =
 - POM は薄く保ちます。ロケーターと小さな操作だけを公開し、検証は spec 側に書きます。
 - role、アクセシブル名、表示テキストなど、ユーザーに近いセマンティックロケーターを優先します。
 - `data-testid` は最後の手段です。現時点ではアプリ側にテスト専用属性を追加しません。
+- すべての `expect` に期待する状態・結果を具体的に表す日本語の custom message を付けます。通常は `expect(actual, message)`、`expect.poll` は options の `message` を使います。詳しくは Playwright 公式の [Custom expect message](https://playwright.dev/docs/test-assertions#custom-expect-message) を参照してください。
 
 ### コンポーネント (`tests/e2e/components/`)
 
