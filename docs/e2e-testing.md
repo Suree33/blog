@@ -4,7 +4,7 @@
 
 ## 概要
 
-Astro のビルド結果を `astro preview` で起動し、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）でスモークテスト、ナビゲーション、タグページ、テーマ切り替え、404 ページ、ビジュアルリグレッションを検証します。
+Astro のビルド結果を `astro preview` で起動し、スモークテスト、axe-core アクセシビリティ検査、ナビゲーション、タグページ、テーマ切り替え、404 ページ、ビジュアルリグレッションを検証します。主なブラウザ UI spec はデスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の 6 プロジェクトで実行し、axe-core アクセシビリティ検査と RSS フィードテストは `chromium` / `Mobile Chrome` の 2 プロジェクトで実行します。
 
 テストコードは Playwright の fixture とページオブジェクトモデル (POM) で構成しています。アサーションは spec に置き、POM はページ遷移や安定したロケーターの提供に限定します。
 
@@ -54,6 +54,7 @@ tests/e2e/
 │   └── screenshot.css        # スクリーンショット用の固定スタイル
 └── specs/
     ├── smoke.spec.ts         # 基本表示の確認
+    ├── accessibility.spec.ts # axe-coreアクセシビリティ検査
     ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
     ├── tag.spec.ts           # タグページ (/tags/[tag]) の確認
     ├── theme.spec.ts         # テーマ切り替えの確認
@@ -125,7 +126,7 @@ export const sampleArticleDescription =
 
 ### コンポーネント (`tests/e2e/components/`)
 
-- `header.ts`: `root`、`blogLink`、`aboutLink`、`themeToggle`、`hamburger`、`openMobileMenu()` を提供します。ヘッダーにはデスクトップ用とモバイル用のリンクが両方 DOM に存在するため、`blogLink` / `aboutLink` は `filter({ visible: true })` で「いま見えている」リンクを選択します（デスクトップは常時表示、モバイルはメニュー展開後に表示）。`openMobileMenu()` はハンバーガーボタン（`aria-label="メニューを開閉する"`）をクリックし、`aria-expanded="true"` になるまで待ちます。
+- `header.ts`: `root`、`blogLink`、`aboutLink`、`themeToggle`、`hamburger`、`openMobileMenu()` を提供します。ヘッダーにはデスクトップ用とモバイル用のリンクが両方 DOM に存在するため、`blogLink` / `aboutLink` は `filter({ visible: true })` で「いま見えている」リンクを選択します（デスクトップは常時表示、モバイルはメニュー展開後に表示）。`openMobileMenu()` はハンバーガーボタン（`aria-label="メニューを開閉する"`）をクリックし、`aria-expanded="true"` になるまで待った後、Web Animations API でヘッダー配下の CSS animation / transition が完了するまで待ちます。fixed sleep は使わず、axe 検査やリンク操作がメニューの中間状態を扱わないようにします。
 - `footer.ts`: `root`、`blogLink`、`aboutLink`、`rssLink` を提供します。
 - `post-list.ts`: `<main>` 内の先頭の `<ul>` を記事一覧として扱います。Tailwind preflight により Chrome では `list` role が落ちるため、`getByRole('list')` は使いません。
 - `post-metadata.ts`: `dot-separated` クラスのうち `<time>` を含む要素を記事メタデータとして扱います。
@@ -147,6 +148,26 @@ export const sampleArticleDescription =
 - ホーム: ページタイトルとサンプル記事リンクの表示を確認します。
 - About: ページタイトルと `<h1>Daiki Sato</h1>` の表示を確認します。
 - 記事: ページタイトルと記事見出しの表示を確認します。
+
+### axe-core アクセシビリティ検査 (`accessibility.spec.ts`)
+
+検査対象は以下の 3 ページです。
+
+| 対象     | パス                                    |
+| -------- | --------------------------------------- |
+| ホーム   | `/`                                     |
+| About    | `/about`                                |
+| 代表記事 | `/posts/audio-interface-under-the-desk` |
+
+デスクトップは `chromium`、モバイルは `Mobile Chrome` を対象に、それぞれ light / dark テーマを検査します。3 ページ × 2 project × 2 テーマ = 12 スキャンです。Firefox / WebKit / Mobile Safari / Mobile Safari (Small screen) は `test.skip` で明示的にスキップします。
+
+各ページを 1 test とし、その中で `page.emulateMedia()` を light、dark の順に設定して、テーマごとにページを再読込します。`Mobile Chrome` ではページ読込後にモバイルメニューを開き、展開後のナビゲーションとテーマトグルも検査対象に含めます。
+
+`AxeBuilder` には `tags`、`exclude`、無効化ルールを設定せず、best-practice を含む axe-core の既定ルールをすべて実行します。テスト（したがって CI）を失敗させるのは impact が `serious` または `critical` の違反だけです。`minor` / `moderate` は結果に記録しますが、テスト失敗にはしません。
+
+各スキャンの完全な結果は `axe-results-light.json` / `axe-results-dark.json` として Playwright レポートに添付します。JSON には `violations`、`incomplete`、`passes`、`inapplicable` を含みます。一方、標準出力と GitHub Actions の annotation に出す失敗情報は、theme、rule ID、impact、target だけに絞ります。
+
+axe-core による自動検査だけではアクセシビリティ適合を保証できません。キーボード操作、スクリーンリーダーでの読み上げ、認知的な分かりやすさ、および `incomplete` の項目は手動で確認する必要があります。
 
 ### ナビゲーションテスト (`navigation.spec.ts`)
 
@@ -213,7 +234,7 @@ sudo apt-get install fonts-noto-cjk
 
 ### RSS フィードテスト (`rss.spec.ts`)
 
-`/rss.xml` はブログ購読用の配信面。XML 応答を `APIRequestContext` で取得し、`DOMParser` でパースして検証する。ブラウザエンジンやビューポートに依存しないため、Chromium 1 プロジェクトのみで実行する（それ以外は `test.skip` でスキップ）。
+`/rss.xml` はブログ購読用の配信面。XML 応答を `APIRequestContext` で取得し、`DOMParser` でパースして検証する。`browserName !== 'chromium'` のプロジェクトを `test.skip` でスキップするため、`browserName === 'chromium'` となる `chromium` / `Mobile Chrome` の 2 プロジェクトで実行する。
 
 検証内容:
 
@@ -306,8 +327,4 @@ playwright/.cache/
 blob-report/
 ```
 
-## 今後の拡張候補
-
-- axe-core などでアクセシビリティチェックを追加する。
-
-なお、スモーク・ナビゲーション・テーマ切り替え・目次 (TOC)・404 ページ・ビジュアルリグレッションは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全プロジェクトで実行します。
+なお、スモーク、ナビゲーション、タグ、テーマ、404、目次 (TOC)、ビジュアルリグレッションの各テストは、デスクトップ（Chromium / Firefox / WebKit）とモバイル（Mobile Chrome / Mobile Safari / Mobile Safari (Small screen)）の全 6 プロジェクトで実行します。axe-core アクセシビリティ検査と RSS フィードテストは `chromium` / `Mobile Chrome` の 2 プロジェクトで実行します。
