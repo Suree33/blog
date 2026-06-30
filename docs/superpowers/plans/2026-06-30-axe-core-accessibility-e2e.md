@@ -6,7 +6,7 @@
 
 **Architecture:** `@axe-core/playwright` を明示的な開発依存へ追加し、専用の `accessibility.spec.ts` に対象 project の制御、テーマ別のページ再読込、モバイルメニュー展開、全結果の JSON 添付、重大違反の集約を閉じ込める。既存 POM と fixture をそのまま利用し、Playwright 設定や GitHub Actions のジョブは増やさない。
 
-**Tech Stack:** Astro 7、TypeScript 6、Playwright 1.61、@axe-core/playwright 4.12、pnpm 11
+**Tech Stack:** Astro 7、TypeScript 6、Playwright 1.61、@axe-core/playwright 4.12.1、pnpm 11
 
 ---
 
@@ -41,15 +41,15 @@ Run:
 pnpm add --save-dev @axe-core/playwright
 ```
 
-Expected: exit code `0`。`package.json` の `devDependencies` に `"@axe-core/playwright": "^4.12.1"` が追加され、`pnpm-lock.yaml` に importer と解決済みパッケージが記録される。
+Expected: exit code `0`。`package.json` の `devDependencies` に4.12系の `"@axe-core/playwright": "^4.12.1"` が追加され、`pnpm-lock.yaml` に `4.12.1` の解決済みパッケージが記録される。
 
 - [ ] **Step 3: 直接依存とモジュール解決を確認する**
 
 Run:
 
 ```bash
-node -e "const pkg = require('./package.json'); if (!pkg.devDependencies?.['@axe-core/playwright']) process.exit(1)"
-pnpm exec node --input-type=module -e "import AxeBuilder from '@axe-core/playwright'; if (typeof AxeBuilder !== 'function') process.exit(1)"
+node -e "const pkg = require('./package.json'); if (pkg.devDependencies?.['@axe-core/playwright'] !== '^4.12.1') process.exit(1)"
+node --input-type=module -e "import AxeBuilder from '@axe-core/playwright'; if (typeof AxeBuilder !== 'function') process.exit(1)"
 ```
 
 Expected: 両コマンドが exit code `0`。
@@ -191,10 +191,10 @@ Run:
 
 ```bash
 pnpm exec playwright test tests/e2e/specs/accessibility.spec.ts
-find test-results -type f -name 'axe-results-*.json' | sort
+pnpm exec playwright show-report
 ```
 
-Expected: `chromium` と `Mobile Chrome` の2テストがpassし、他4 projectはskipする。`test-results/` 配下にライト／ダーク × 2 project、計4個の `axe-results-*.json` が表示される。重大違反がある場合は、両テーマの添付完了後にテーマ・ルールID・impact・targetだけを含む差分でfailするため、その違反を修正して再実行する。
+Expected: `chromium` と `Mobile Chrome` の2テストがpassし、他4 projectはskipする。HTMLレポートで各passテストを開くと、ライト／ダーク × 2 project、計4個の `axe-results-*.json` が添付として表示される。重大違反がある場合は、両テーマの添付完了後にテーマ・ルールID・impact・targetだけを含む差分でfailするため、その違反を修正して再実行する。CIでは `test-results/` の単独JSONファイルを検索せず、アップロードされた `playwright-report/` reporter artifactから添付を確認する。
 
 - [ ] **Step 4: ホームページ検査をコミットする**
 
@@ -258,10 +258,10 @@ Run:
 
 ```bash
 pnpm exec playwright test tests/e2e/specs/accessibility.spec.ts
-find test-results -type f -name 'axe-results-*.json' | wc -l
+pnpm exec playwright show-report
 ```
 
-Expected: `chromium` と `Mobile Chrome` で3テストずつ、計6テストがpassし、他4 projectの計12テストは明示的にskipする。各passテストがライト／ダークを1回ずつ解析し、添付JSONの件数は `12`。`minor` / `moderate`、`incomplete`、`passes`、`inapplicable` はJSONに残るが失敗条件にはならない。
+Expected: `chromium` と `Mobile Chrome` で3テストずつ、計6テストがpassし、他4 projectの計12テストは明示的にskipする。HTMLレポートでは、各passテストにライト／ダークのJSONが添付され、合計12件を確認できる。`minor` / `moderate`、`incomplete`、`passes`、`inapplicable` はJSONに残るが失敗条件にはならない。CIでは `playwright-report/` reporter artifactを確認する。
 
 - [ ] **Step 5: 3ページのアクセシビリティ検査をコミットする**
 
@@ -502,10 +502,10 @@ Run:
 
 ```bash
 pnpm exec playwright test tests/e2e/specs/accessibility.spec.ts
-find test-results -type f -name 'axe-results-*.json' | wc -l
+pnpm exec playwright show-report
 ```
 
-Expected: 6 passed、12 skipped。axeスキャン12回が完了し、JSON添付数は `12`。`serious` / `critical` の違反は0件。
+Expected: 6 passed、12 skipped。axeスキャン12回が完了し、HTMLレポートでJSON添付12件を確認できる。`serious` / `critical` の違反は0件。CIでは `test-results/` のファイル検索ではなく、`playwright-report/` reporter artifactから添付を確認する。
 
 - [ ] **Step 4: 既存テストを含む全E2Eを実行する**
 
