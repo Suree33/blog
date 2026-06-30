@@ -119,6 +119,3 @@ test-results/
 playwright-report/
 playwright/.cache/
 blob-report/
-
-# Local Git worktrees
-.worktrees/
