@@ -49,7 +49,7 @@ test.describe('テーマトグル', () => {
     ).not.toHaveAttribute('class', LIGHT);
     await expect
       .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
-        message: '初期状態では localStorage にテーマが保存されていない',
+        message: '初期状態では localStorage の theme に値が保存されていない',
       })
       .toBeNull();
 
@@ -61,7 +61,8 @@ test.describe('テーマトグル', () => {
     ).toHaveAttribute('class', DARK);
     await expect
       .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
-        message: '1 回目のテーマ切り替え後は theme に dark が保存される',
+        message:
+          '1 回目のテーマ切り替え後は localStorage の theme に dark が保存される',
       })
       .toBe('dark');
 
@@ -73,7 +74,7 @@ test.describe('テーマトグル', () => {
     ).toHaveAttribute('class', DARK);
     await expect
       .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
-        message: 'リロード後も theme に dark が保存されている',
+        message: 'リロード後も localStorage の theme に dark が保存されている',
       })
       .toBe('dark');
 
@@ -85,7 +86,8 @@ test.describe('テーマトグル', () => {
     ).toHaveAttribute('class', LIGHT);
     await expect
       .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
-        message: '2 回目のテーマ切り替え後は theme に light が保存される',
+        message:
+          '2 回目のテーマ切り替え後は localStorage の theme に light が保存される',
       })
       .toBe('light');
 
@@ -101,7 +103,8 @@ test.describe('テーマトグル', () => {
     ).not.toHaveAttribute('class', LIGHT);
     await expect
       .poll(() => page.evaluate(() => localStorage.getItem('theme')), {
-        message: '3 回目のテーマ切り替え後は保存済みテーマが削除される',
+        message:
+          '3 回目のテーマ切り替え後は localStorage の theme から保存値が削除される',
       })
       .toBeNull();
   });
