@@ -63,14 +63,21 @@ export class Header {
   /**
    * モバイルメニューを開く。
    *
-   * 既に開いている場合は何もしない。`aria-expanded` が `true` になるまで待つ。
+   * `aria-expanded` の更新後、ヘッダー配下のCSS animation/transitionが完了するまで待つ。
+   * 既に開いている場合も、進行中のanimation/transitionがあれば完了を待つ。
    */
   async openMobileMenu(): Promise<void> {
-    if ((await this.hamburger.getAttribute('aria-expanded')) === 'true') {
-      return;
+    if ((await this.hamburger.getAttribute('aria-expanded')) !== 'true') {
+      await this.hamburger.click();
+      await expect(this.hamburger).toHaveAttribute('aria-expanded', 'true');
     }
-    await this.hamburger.click();
-    await expect(this.hamburger).toHaveAttribute('aria-expanded', 'true');
+
+    await this.root.evaluate(async (header) => {
+      const animations = header.getAnimations({ subtree: true });
+      await Promise.allSettled(
+        animations.map((animation) => animation.finished),
+      );
+    });
   }
 
   /** About リンクをクリックする。 */
