@@ -327,7 +327,69 @@ git add src/pages/about.astro src/components/PostMetadata.astro
 git commit -m "fix: ダークテーマの文字コントラストを改善"
 ```
 
-### Task 5: E2Eドキュメントへ検査範囲と限界を記録する
+### Task 5: モバイルメニューのtransition完了を待つ
+
+**Files:**
+- Modify: `tests/e2e/components/header.ts:55-69`
+
+- [ ] **Step 1: Mobile Chromeでtransition中のaxe解析を再現する**
+
+Run:
+
+```bash
+pnpm exec playwright test tests/e2e/specs/accessibility.spec.ts --project="Mobile Chrome" --repeat-each=3
+```
+
+Expected: ダークテーマのいずれかのページで、ヘッダーナビゲーションが `color-contrast` としてfailする。対象ページは実行ごとに変わる場合があり、中間色は最終的な `dark:text-white` と一致しない。
+
+- [ ] **Step 2: `openMobileMenu()` を視覚的な完了まで待つ操作にする**
+
+`tests/e2e/components/header.ts` の `openMobileMenu()` を次の内容へ変更する。
+
+```ts
+  /**
+   * モバイルメニューを開く。
+   *
+   * `aria-expanded` の更新後、ヘッダー配下のCSS transitionが完了するまで待つ。
+   * 既に開いている場合も、進行中のtransitionがあれば完了を待つ。
+   */
+  async openMobileMenu(): Promise<void> {
+    if ((await this.hamburger.getAttribute('aria-expanded')) !== 'true') {
+      await this.hamburger.click();
+      await expect(this.hamburger).toHaveAttribute('aria-expanded', 'true');
+    }
+
+    await this.root.evaluate(async (header) => {
+      const animations = header.getAnimations({ subtree: true });
+      await Promise.allSettled(
+        animations.map((animation) => animation.finished),
+      );
+    });
+  }
+```
+
+固定の `waitForTimeout()` は追加しない。完了待ちはヘッダーのsubtreeへ限定し、ページ内の無関係なアニメーションを待たない。
+
+- [ ] **Step 3: 繰り返し実行で競合が解消したことを確認する**
+
+Run:
+
+```bash
+pnpm exec playwright test tests/e2e/specs/accessibility.spec.ts --project="Mobile Chrome" --repeat-each=3
+pnpm exec playwright test tests/e2e/specs/navigation.spec.ts tests/e2e/specs/theme.spec.ts
+pnpm run lint
+```
+
+Expected: accessibility specは9 passedで、ヘッダーナビゲーションの中間色違反が再発しない。ナビゲーションとテーマテスト、lintも成功する。
+
+- [ ] **Step 4: transition待機をコミットする**
+
+```bash
+git add tests/e2e/components/header.ts
+git commit -m "test: モバイルメニューの遷移完了を待つ"
+```
+
+### Task 6: E2Eドキュメントへ検査範囲と限界を記録する
 
 **Files:**
 - Modify: `docs/e2e-testing.md:1-62`
@@ -402,7 +464,7 @@ git add docs/e2e-testing.md
 git commit -m "docs: axe-coreアクセシビリティ検査を記録"
 ```
 
-### Task 6: lintと全E2Eで完了条件を検証する
+### Task 7: lintと全E2Eで完了条件を検証する
 
 **Files:**
 - Verify: `package.json`

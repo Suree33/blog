@@ -138,6 +138,12 @@ assertへ渡す値は完全な `violations` 配列ではなく、次の情報に
 
 修正は `src/pages/about.astro` と `src/components/PostMetadata.astro` の対象コンテナへ `dark:text-neutral-400` を追加する。同じ `.dot-separated` メタデータを表示する `PostItem.astro` の既存パターンと統一でき、ライト表示を変えず、ダークテーマで `7.66:1` を確保できる。`exclude()` や `disableRules()` で違反を隠す対応は行わない。
 
+## モバイルメニューのスキャンタイミング
+
+上記コントラスト修正後、Mobile Chromeでページをまたいで不定に発生するヘッダーナビゲーションの `color-contrast` 違反を検出した。`openMobileMenu()` は `aria-expanded="true"` だけを待つ一方、ヘッダーとモバイルメニューには500msのCSS transitionがあるため、axeが中間色を解析していた。独立したダークテーマ起動では再現せず、ライトからダークへ連続して検査した場合だけ再現することから、実際の最終配色ではなくテスト同期の問題と判断する。
+
+`Header.openMobileMenu()` は、`aria-expanded` の更新後にヘッダー配下の `Element.getAnimations({ subtree: true })` が返すアニメーションの `finished` Promiseを待つ。固定時間のsleepは使用せず、メニューが既に開いている場合も進行中のtransitionがあれば待機する。これによりアクセシビリティ検査だけでなく、同じPOMを使うナビゲーションやテーマ操作も「視覚的に開き終わったメニュー」を操作する契約へ揃える。
+
 ## 検証
 
 実装後は次の順で確認する。
