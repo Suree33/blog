@@ -82,7 +82,7 @@ async function scanPageForAccessibility({
 
   expect(
     blockingViolations,
-    'seriousまたはcriticalのアクセシビリティ違反',
+    'serious または critical のアクセシビリティ違反が存在しない',
   ).toEqual([]);
 }
 

@@ -13,22 +13,32 @@ test.describe('404 ページ', () => {
     const response = await notFoundPage.goto();
 
     // 404 ステータスであることを検証する。
-    expect(response?.status()).toBe(404);
+    expect(response?.status(), '存在しない URL は HTTP 404 を返す').toBe(404);
 
     // ページタイトルと主要な見出しが期待どおりであることを確認する。
-    await expect(notFoundPage.page).toHaveTitle(
-      /404: Page Not Found.*Daiki Sato/,
-    );
-    await expect(notFoundPage.heading).toBeVisible();
+    await expect(
+      notFoundPage.page,
+      '404 ページのタイトルに Page Not Found とサイト名が含まれる',
+    ).toHaveTitle(/404: Page Not Found.*Daiki Sato/);
+    await expect(
+      notFoundPage.heading,
+      '404 ページに主要見出しが表示される',
+    ).toBeVisible();
   });
 
   test('ホームに戻るリンクでホームに遷移する', async ({ notFoundPage }) => {
     await notFoundPage.goto();
 
     // 導線が存在することを確認してからクリックで遷移を検証する。
-    await expect(notFoundPage.homeLink).toBeVisible();
+    await expect(
+      notFoundPage.homeLink,
+      '404 ページにホームへ戻るリンクが表示される',
+    ).toBeVisible();
     await notFoundPage.homeLink.click();
 
-    await expect(notFoundPage.page).toHaveURL(HOME_URL_REGEX);
+    await expect(
+      notFoundPage.page,
+      'ホームへ戻るリンクからホームページに遷移する',
+    ).toHaveURL(HOME_URL_REGEX);
   });
 });

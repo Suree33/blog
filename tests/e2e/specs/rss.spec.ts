@@ -29,25 +29,43 @@ test.describe('RSS フィード', () => {
   test('/rss.xml が 200 で XML の content-type を返す', async ({
     rssFeedPage,
   }) => {
-    expect(rssFeedPage.response.status()).toBe(200);
-    expect(rssFeedPage.response.headers()['content-type']).toMatch(/xml/i);
+    expect(
+      rssFeedPage.response.status(),
+      'RSS フィード URL は HTTP 200 を返す',
+    ).toBe(200);
+    expect(
+      rssFeedPage.response.headers()['content-type'],
+      'RSS フィード応答の content-type は XML 形式である',
+    ).toMatch(/xml/i);
   });
 
   test('チャネルにサイト名と説明と言語が含まれる', async ({ rssFeedPage }) => {
     const feed = await rssFeedPage.content();
 
-    expect(feed.siteName).toBe('Daiki Sato');
-    expect(feed.description).toBe('Daiki Satoのブログ');
-    expect(feed.language).toBe('ja-jp');
+    expect(feed.siteName, 'RSS チャネルにサイト名が設定される').toBe(
+      'Daiki Sato',
+    );
+    expect(feed.description, 'RSS チャネルにサイトの説明が設定される').toBe(
+      'Daiki Satoのブログ',
+    );
+    expect(feed.language, 'RSS チャネルの言語が日本語に設定される').toBe(
+      'ja-jp',
+    );
   });
 
   test('代表記事のタイトルとリンクが含まれる', async ({ rssFeedPage }) => {
     const feed = await rssFeedPage.content();
 
     const sample = feed.items.find((item) => item.title === sampleArticleTitle);
-    expect(sample).toBeTruthy();
+    expect(
+      sample,
+      `RSS フィードに代表記事「${sampleArticleTitle}」が含まれる`,
+    ).toBeTruthy();
     // ホスト・末尾スラッシュの差異に依存しないようパスで部分一致させる。
-    expect(sample?.link).toContain(routes.sampleArticle);
+    expect(
+      sample?.link,
+      `RSS フィードの代表記事リンクにパス「${routes.sampleArticle}」が含まれる`,
+    ).toContain(routes.sampleArticle);
   });
 
   test('frontmatter 不足の記事はフィードから除外される', async ({
@@ -55,14 +73,25 @@ test.describe('RSS フィード', () => {
   }) => {
     const { items } = await rssFeedPage.content();
 
-    expect(items.length).toBeGreaterThan(0);
+    expect(
+      items.length,
+      'RSS フィードに記事が 1 件以上含まれる',
+    ).toBeGreaterThan(0);
     // hasRequiredFrontmatter (title + pubDate) を通過した記事だけが並ぶため、
     // 全 item が title・link を持つ。
     for (const item of items) {
-      expect(item.title).not.toBe('');
-      expect(item.link).not.toBe('');
+      expect(
+        item.title,
+        `RSS item (${item.link}) のタイトルが空でない`,
+      ).not.toBe('');
+      expect(item.link, `RSS item「${item.title}」のリンクが空でない`).not.toBe(
+        '',
+      );
     }
     // 記事テンプレート (title 未設定) はフィードに出現しない。
-    expect(items.some((item) => item.link.includes('/template/'))).toBe(false);
+    expect(
+      items.some((item) => item.link.includes('/template/')),
+      '記事テンプレートが RSS フィードから除外される',
+    ).toBe(false);
   });
 });

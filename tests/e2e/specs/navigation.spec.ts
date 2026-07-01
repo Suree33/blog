@@ -21,7 +21,10 @@ test.describe('ナビゲーション', () => {
     }
     await aboutPage.header.blogLink.click();
 
-    await expect(page).toHaveURL(HOME_URL_REGEX);
+    await expect(
+      page,
+      'ヘッダーの Blog リンクからホームページに遷移する',
+    ).toHaveURL(HOME_URL_REGEX);
   });
 
   test('ヘッダーの About リンクで About に遷移する', async ({
@@ -35,7 +38,10 @@ test.describe('ナビゲーション', () => {
     }
     await homePage.header.aboutLink.click();
 
-    await expect(page).toHaveURL(/\/about\/?$/);
+    await expect(
+      page,
+      'ヘッダーの About リンクから About ページに遷移する',
+    ).toHaveURL(/\/about\/?$/);
   });
 
   test('フッターの Blog リンクでホームに遷移する', async ({
@@ -43,10 +49,16 @@ test.describe('ナビゲーション', () => {
     page,
   }) => {
     await aboutPage.goto();
-    await expect(aboutPage.footer.rssLink).toBeVisible();
+    await expect(
+      aboutPage.footer.rssLink,
+      'About ページのフッターに RSS feed リンクが表示される',
+    ).toBeVisible();
     await aboutPage.footer.blogLink.click();
 
-    await expect(page).toHaveURL(HOME_URL_REGEX);
+    await expect(
+      page,
+      'フッターの Blog リンクからホームページに遷移する',
+    ).toHaveURL(HOME_URL_REGEX);
   });
 
   test('フッターの About リンクで About に遷移する', async ({
@@ -56,6 +68,9 @@ test.describe('ナビゲーション', () => {
     await homePage.goto();
     await homePage.footer.aboutLink.click();
 
-    await expect(page).toHaveURL(/\/about\/?$/);
+    await expect(
+      page,
+      'フッターの About リンクから About ページに遷移する',
+    ).toHaveURL(/\/about\/?$/);
   });
 });

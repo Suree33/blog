@@ -26,27 +26,49 @@ test.describe('raw Markdown エンドポイント', () => {
     const response = await request.get(routes.sampleArticleMarkdown);
 
     // 200 OK
-    expect(response.status()).toBe(200);
+    expect(
+      response.status(),
+      '代表記事の raw Markdown URL は HTTP 200 を返す',
+    ).toBe(200);
 
     // Content-Type が Markdown であること
-    expect(response.headers()['content-type'] ?? '').toMatch(
-      /^text\/markdown\b/,
-    );
+    expect(
+      response.headers()['content-type'] ?? '',
+      '代表記事の raw Markdown 応答は text/markdown を返す',
+    ).toMatch(/^text\/markdown\b/);
 
     const body = await response.text();
 
     // frontmatter を含むこと
-    expect(body.startsWith('---\n')).toBe(true);
-    expect(body).toContain(`title: ${sampleArticleTitle}`);
-    expect(body).toContain(`description: ${sampleArticleDescription}`);
+    expect(
+      body.startsWith('---\n'),
+      'raw Markdown は frontmatter で始まる',
+    ).toBe(true);
+    expect(
+      body,
+      `raw Markdown の frontmatter に記事タイトル「${sampleArticleTitle}」が含まれる`,
+    ).toContain(`title: ${sampleArticleTitle}`);
+    expect(
+      body,
+      'raw Markdown の frontmatter に代表記事の description が含まれる',
+    ).toContain(`description: ${sampleArticleDescription}`);
 
     // 本文を含むこと（frontmatter 終端の後に本体がある）
     const closingFrontmatterIndex = body.indexOf('\n---', 4);
-    expect(closingFrontmatterIndex).toBeGreaterThan(-1);
+    expect(
+      closingFrontmatterIndex,
+      'raw Markdown に frontmatter の終端が含まれる',
+    ).toBeGreaterThan(-1);
     const articleBody = body.slice(closingFrontmatterIndex + '\n---'.length);
-    expect(articleBody.trim().length).toBeGreaterThan(0);
+    expect(
+      articleBody.trim().length,
+      'frontmatter の後に記事本文が含まれる',
+    ).toBeGreaterThan(0);
 
     // Astro 表示用の `layout` frontmatter は除去されていること
-    expect(body).not.toMatch(/^layout:/m);
+    expect(
+      body,
+      'raw Markdown の frontmatter から Astro 表示用の layout が除去される',
+    ).not.toMatch(/^layout:/m);
   });
 });

@@ -39,27 +39,27 @@ test.describe('ビジュアルリグレッション', () => {
   test('記事メタデータブロック', async ({ articlePage }) => {
     await articlePage.goto();
 
-    await expect(articlePage.metadata.root).toHaveScreenshot(
-      'article-metadata.png',
-      screenshotOptions,
-    );
+    await expect(
+      articlePage.metadata.root,
+      '記事メタデータブロックがビジュアルスナップショットと一致する',
+    ).toHaveScreenshot('article-metadata.png', screenshotOptions);
   });
 
   test('サイトヘッダー', async ({ homePage }) => {
     await homePage.goto();
 
-    await expect(homePage.header.root).toHaveScreenshot(
-      'header.png',
-      screenshotOptions,
-    );
+    await expect(
+      homePage.header.root,
+      'サイトヘッダーがビジュアルスナップショットと一致する',
+    ).toHaveScreenshot('header.png', screenshotOptions);
   });
 
   test('ホームのサンプル記事リスト項目', async ({ homePage }) => {
     await homePage.goto();
 
-    await expect(homePage.postList.sampleArticleLink).toHaveScreenshot(
-      'home-sample-article-item.png',
-      screenshotOptions,
-    );
+    await expect(
+      homePage.postList.sampleArticleLink,
+      'ホームのサンプル記事リスト項目がビジュアルスナップショットと一致する',
+    ).toHaveScreenshot('home-sample-article-item.png', screenshotOptions);
   });
 });
