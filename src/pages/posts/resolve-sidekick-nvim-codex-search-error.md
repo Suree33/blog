@@ -1,4 +1,5 @@
 ---
+layout: '@layouts/MarkdownPostLayout.astro'
 title: sidekick.nvimでCodexを使うと表示される [features].web_search_request is deprecated を解消する
 pubDate: 2026-02-16
 updatedDate: 2026-03-17
@@ -25,7 +26,7 @@ NeovimでClaude CodeやCodexなどを使うために [sidekick.nvim](https://git
 
 このエラーは sidekick.nvim の `lua/sidekick/config.lua` で `--enable web_search_request` が付加されていることによって起こっています。
 
-```lua:lua/sidekick/config.lua:106
+```lua title=lua/sidekick/config.lua:106
 codex = { cmd = { "codex", "--enable", "web_search_request" } },
 ```
 
@@ -40,7 +41,7 @@ codex = { cmd = { "codex", "--enable", "web_search_request" } },
 
 sidekick.nvim の設定で `cli.tools.codex.cmd` を上書きし、シンプルに `codex` のみにします。
 
-```lua:lua/plugins/sidekick.lua
+```lua title=lua/plugins/sidekick.lua
 return {
   {
     "folke/sidekick.nvim",
