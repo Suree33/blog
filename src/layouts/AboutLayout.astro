@@ -1,0 +1,37 @@
+---
+import type { MarkdownHeading } from 'astro';
+import ProseArticleLayout from '@layouts/ProseArticleLayout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    pageTitle: string;
+    ogimage?: { src: string };
+    description?: string;
+    interests?: string[];
+  };
+  headings: MarkdownHeading[];
+}
+
+const { frontmatter, headings } = Astro.props;
+const tocHeadings = headings.filter(({ depth }) => depth === 2 || depth === 3);
+---
+
+<ProseArticleLayout
+  pageTitle={frontmatter.pageTitle}
+  ogimage={frontmatter.ogimage?.src}
+  description={frontmatter.description}
+  tocHeadings={tocHeadings.length > 0 ? tocHeadings : undefined}
+>
+  {
+    frontmatter.interests && (
+      <div class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold text-neutral-500 uppercase dark:text-neutral-400">
+        {frontmatter.interests.map((interest) => (
+          <div>{interest}</div>
+        ))}
+      </div>
+    )
+  }
+  <h1 class="text-4xl!">{frontmatter.title}</h1>
+  <slot />
+</ProseArticleLayout>
