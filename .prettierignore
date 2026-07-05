@@ -5,6 +5,8 @@ pnpm-lock.yaml
 .claude/
 .mcp.json
 .cursor/
+.worktrees/
+.wt/
 src/pages/posts/.obsidian/
 
 # do not format any md/mdx files

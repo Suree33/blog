@@ -10,10 +10,6 @@ import sys
 from pathlib import Path
 
 
-def yaml_single_quote(value: str) -> str:
-    return "'" + value.replace("'", "''") + "'"
-
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Create a new blog post markdown from template.")
     parser.add_argument("--slug", required=True, help="Output file slug (without .md)")
@@ -49,16 +45,16 @@ def format_tags(raw_tags: str) -> str:
     if not tags:
         return "tags: []"
     lines = ["tags:"]
-    lines.extend(f"  - {yaml_single_quote(tag)}" for tag in tags)
+    lines.extend(f"  - {tag}" for tag in tags)
     return "\n".join(lines)
 
 
 def render_frontmatter(template: str, pub_date: str, title: str, description: str, tags: str) -> str:
     rendered = template.replace("pubDate: {{date}}", f"pubDate: {pub_date}")
-    rendered = re.sub(r"^title:\s*$", f"title: {yaml_single_quote(title)}", rendered, flags=re.MULTILINE)
+    rendered = re.sub(r"^title:\s*$", f"title: {title}", rendered, flags=re.MULTILINE)
     rendered = re.sub(
         r"^description:\s*$",
-        f"description: {yaml_single_quote(description)}",
+        f"description: {description}",
         rendered,
         flags=re.MULTILINE,
     )
