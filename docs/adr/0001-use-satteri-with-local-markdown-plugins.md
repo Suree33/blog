@@ -1,0 +1,3 @@
+# SätteriとローカルMarkdownプラグインを使用する
+
+Astro v7の標準Markdown処理系に揃えるため、unifiedからSätteriへ移行する。まず投稿レイアウト、raw Markdownエンドポイント、`Accept: text/markdown`ルーティングを保ったままSätteriに切り替え、一時的に失われるCallout、コードタイトル、リンクカードをその順で復元する。復元時はMarkdown記法と見た目・意味を互換性の境界とし、生成HTMLの内部構造の完全一致は求めない。CalloutとリンクカードはSätteriプラグイン、コードタイトルはSätteriからメタデータを受け取るShiki transformerとして実装する。これらの拡張はフレームワークAPIとブログ固有のHTML・CSS・キャッシュ仕様に密接なため、安定するまでリポジトリ内の独立したローカル拡張として所有する。
