@@ -1,4 +1,5 @@
 ---
+layout: '@layouts/MarkdownPostLayout.astro'
 title: Astroにおけるremark-link-cardを使ったリンクカード
 pubDate: 2024-04-05
 updatedDate: 2026-02-12
@@ -38,7 +39,7 @@ bun install remark-link-card
 
 `astro.config.mjs` を以下のように追記します。
 
-```javascript:astro.config.mjs
+```javascript title=astro.config.mjs
 import remarkLinkCard from 'remark-link-card';
 
 // https://astro.build/config
@@ -68,7 +69,7 @@ export default defineConfig({
 `remark-link-card` ではCSSは提供されていないので、自分でCSSを用意する必要があります。
 CSSは以下のようにしました。
 
-```scss:remark-link-card.css
+```scss title=remark-link-card.css
 /* ブレークポイント: 60ch（Tailwindcss/Typographyのproseのmax-widthを参考に） */
 .rlc-container {
   --padding-x: 1rem;

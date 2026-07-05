@@ -109,10 +109,11 @@ const addVaryAccept = (response: Response) => {
 export default {
   async fetch(request: Request, env: Env) {
     const url = new URL(request.url);
-    const shouldReturnMarkdown =
+    const isNegotiatedPostRequest =
       (request.method === 'GET' || request.method === 'HEAD') &&
-      POSTS_PATH_PATTERN.test(url.pathname) &&
-      prefersMarkdown(request.headers.get('Accept'));
+      POSTS_PATH_PATTERN.test(url.pathname);
+    const shouldReturnMarkdown =
+      isNegotiatedPostRequest && prefersMarkdown(request.headers.get('Accept'));
 
     if (shouldReturnMarkdown) {
       const markdownUrl = new URL(request.url);
@@ -125,6 +126,8 @@ export default {
       return addVaryAccept(response);
     }
 
-    return env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+
+    return isNegotiatedPostRequest ? addVaryAccept(response) : response;
   },
 };

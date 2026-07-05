@@ -97,7 +97,7 @@ Markdownブログ記事専用のレイアウトです。ProseArticleLayoutを拡
 - **日付表示**: 公開日・更新日の表示（アイコン付き）
 - **画像対応**: Frontmatterで指定した画像の表示
 - **説明文表示**: 記事の概要を強調表示
-- **Callout対応**: rehype-callouts プラグインのスタイル設定
+- **Callout対応**: 後続のローカルSätteri拡張で復元予定。移行中はテーマCSSのみ保持
 
 ### Frontmatter対応プロパティ
 
@@ -144,10 +144,11 @@ interface Frontmatter {
 
 ### 使用例
 
-`src/pages/posts/` 配下の Markdown では `astro.config.mjs` の remark プラグインにより `MarkdownPostLayout` が自動適用されるため、frontmatter に `layout` を書く必要はありません。個別記事で別レイアウトを使いたい場合は、従来どおり `layout` を明示するとその指定が優先されます。
+`src/pages/posts/` 配下の Markdown では、Sätteriで確実に記事レイアウトを適用するため、frontmatter に `layout: '@layouts/MarkdownPostLayout.astro'` を明示します。記事テンプレートにも指定済みです。
 
 ```astro
 ---
+layout: '@layouts/MarkdownPostLayout.astro'
 title: 'ブログ記事タイトル';
 tags: ['tech', 'blog'];
 pubDate: '2024-01-01';
@@ -162,7 +163,7 @@ pubDate: '2024-01-01';
 
 - **一般的なページ**: `BaseLayout` を使用
 - **文章中心のページ**: `ProseArticleLayout` を使用
-- **ブログ記事**: `MarkdownPostLayout` を使用（`src/pages/posts/` 配下の Markdown には自動適用）
+- **ブログ記事**: frontmatter の `layout` で `MarkdownPostLayout` を明示
 
 ### カスタマイズ
 
@@ -176,5 +177,5 @@ pubDate: '2024-01-01';
 ### プラグイン依存
 
 - **astro-icon**: アイコン表示
-- **rehype-callouts**: Callout機能
+- **rehype-callouts**: Sätteri移行中にCalloutのテーマCSSだけを一時利用
 - **@tailwindcss/typography**: Proseスタイリング

@@ -162,3 +162,20 @@ jobs:
           path: test-results/
           if-no-files-found: ignore
           retention-days: 7
+
+  workers-e2e:
+    name: Workers E2E tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - *checkout
+      - *setup-pnpm
+      - *setup-node
+      - *install-deps
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Workers Playwright E2E tests
+        run: pnpm run test:e2e:workers

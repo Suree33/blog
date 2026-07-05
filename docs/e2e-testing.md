@@ -11,6 +11,7 @@ Astro のビルド結果を `astro preview` で起動し、スモークテスト
 ## コマンド
 
 - `pnpm run test:e2e`: ヘッドレスで全 E2E テストを実行
+- `pnpm run test:e2e:workers`: Cloudflare Workersプレビューでcontent negotiationを実行
 - `pnpm run test:e2e:headed`: ブラウザを表示して実行
 - `pnpm run test:e2e:ui`: Playwright UI モードで実行
 - `pnpm run test:e2e:update`: ビジュアルスナップショットを更新
@@ -30,7 +31,8 @@ pnpm exec playwright install --with-deps chromium firefox webkit
 ## ディレクトリ構成
 
 ```
-playwright.config.ts          # Playwright 設定
+playwright.config.ts           # Playwright 設定
+playwright.workers.config.ts   # Workersプレビュー専用設定
 tests/e2e/
 ├── components/               # UI 部品単位のロケーター
 │   ├── header.ts             # <header> (banner)
@@ -52,17 +54,20 @@ tests/e2e/
 │   └── regex.ts              # 正規表現ユーティリティ
 ├── styles/
 │   └── screenshot.css        # スクリーンショット用の固定スタイル
-└── specs/
-    ├── smoke.spec.ts         # 基本表示の確認
-    ├── accessibility.spec.ts # axe-coreアクセシビリティ検査
-    ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
-    ├── tag.spec.ts           # タグページ (/tags/[tag]) の確認
-    ├── theme.spec.ts         # テーマ切り替えの確認
-    ├── toc.spec.ts           # 目次 (TOC) の表示・追従
-    ├── not-found.spec.ts     # 404 ページの確認
-    ├── visual.spec.ts        # ビジュアルリグレッション
-    ├── rss.spec.ts           # RSS フィードの確認
-    └── raw-markdown.spec.ts  # raw Markdown エンドポイント
+├── specs/
+│   ├── all-posts.spec.ts     # 全16記事のレイアウトとコードハイライト
+│   ├── smoke.spec.ts         # 基本表示の確認
+│   ├── accessibility.spec.ts # axe-coreアクセシビリティ検査
+│   ├── navigation.spec.ts    # ヘッダー/フッターの遷移確認
+│   ├── tag.spec.ts           # タグページ (/tags/[tag]) の確認
+│   ├── theme.spec.ts         # テーマ切り替えの確認
+│   ├── toc.spec.ts           # 目次 (TOC) の表示・追従
+│   ├── not-found.spec.ts     # 404 ページの確認
+│   ├── visual.spec.ts        # ビジュアルリグレッション
+│   ├── rss.spec.ts           # RSS フィードの確認
+│   └── raw-markdown.spec.ts  # raw Markdown エンドポイント
+└── workers/
+    └── content-negotiation.spec.ts # Accept / Vary / HEAD の検証
 ```
 
 ビジュアルスナップショットは `tests/e2e/specs/visual.spec.ts-snapshots/` に保存します。`snapshotPathTemplate` で OS サフィックスを外し、プロジェクト名だけを付けます。例: `article-metadata-chromium.png`
@@ -264,11 +269,13 @@ pnpm exec playwright test tests/e2e/specs/visual.spec.ts --update-snapshots
 - frontmatter（`title` / `description`）と本文が含まれる
 - Astro 表示用の `layout` frontmatter は除去されている（`^layout:` 行が存在しない）
 
-通常記事 URL + `Accept: text/markdown` による content negotiation は `src/worker.ts` で実装されており Workers プレビュー側でのみ機能します。`astro preview` では Worker を経由しないため本 spec ではカバーせず、別 Issue で取り扱います。
+通常記事 URL + `Accept: text/markdown` による content negotiation は `src/worker.ts` で実装されており、`playwright.workers.config.ts` から `wrangler dev` を起動する `content-negotiation.spec.ts` で検証します。Markdown / HTMLの選択、q値、ワイルドカード、同率時の記述順、`Vary: Accept`、HEADを対象にし、`pnpm run test:e2e:workers` で実行します。
 
 ## GitHub Actions
 
 `.github/workflows/ci.yml` に `e2e` ジョブを追加しています。`lint` / `build` と同じ checkout、pnpm、Node.js、依存関係インストールのステップを YAML anchor で再利用します。
+
+`workers-e2e` ジョブはChromiumだけをインストールし、`pnpm run test:e2e:workers` を独立して実行します。通常E2EのAstro previewとは分離され、Cloudflare WorkersのHTTP境界を検証します。
 
 `e2e` ジョブでは以下を実行します。
 

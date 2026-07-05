@@ -1,4 +1,5 @@
 ---
+layout: '@layouts/MarkdownPostLayout.astro'
 title: GitHub Actions × Tailscale で Palworld サーバーを自動デプロイする
 pubDate: 2025-01-26
 tags:
@@ -79,7 +80,7 @@ Tagsには、先ほど設定したタグを指定します。
 
 GitHub Actionsの設定ファイル `.github/workflows/deploy.yml` を作成します。
 
-```yaml:deploy.yml
+```yaml title=deploy.yml
 name: Deploy to server
 on:
   release:
