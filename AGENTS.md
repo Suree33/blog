@@ -72,6 +72,18 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 
 - ユーザーとの会話には常に日本語を使用すること
 
-## Skills運用ルール
+## Agent skills
 
 - 新規ブログ記事を追加する必要がある場合、またはユーザーから新規記事追加を依頼された場合は、必ず `init-post` スキルを使用する。
+
+### Issue tracker
+
+Issues and PRDs are tracked in GitHub Issues; external pull requests are not a triage request surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Triage uses the canonical labels `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, and `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This is a single-context repository. See `docs/agents/domain.md`.
