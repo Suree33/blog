@@ -61,6 +61,20 @@ jobs:
       - name: Build
         run: pnpm run build:ci
 
+  unit:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - *checkout
+      - *setup-pnpm
+      - *setup-node
+      - *install-deps
+
+      - name: Run unit tests
+        run: pnpm run test:unit
+
   e2e:
     name: E2E tests
     runs-on: ubuntu-latest

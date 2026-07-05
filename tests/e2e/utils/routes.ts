@@ -8,6 +8,7 @@ export const routes = {
   home: '/',
   about: '/about',
   sampleArticle: '/posts/audio-interface-under-the-desk',
+  calloutArticle: '/posts/resolve-sidekick-nvim-codex-search-error',
   tagsBase: '/tags/',
   /** `routes.sampleArticle` の raw Markdown エンドポイント。 */
   sampleArticleMarkdown: '/posts/audio-interface-under-the-desk.md',
