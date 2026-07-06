@@ -14,7 +14,7 @@ describe('Callout', () => {
   test('INFO のタイトルと本文を意味的な Callout として表示する', async () => {
     const html = await render('> [!INFO]\n> 補足 **本文**');
 
-    expect(html).toContain('<aside');
+    expect(html).toContain('<div');
     expect(html).toContain('class="callout callout-info"');
     expect(html).toContain('data-callout="info"');
     expect(html).toContain('aria-label="Info"');

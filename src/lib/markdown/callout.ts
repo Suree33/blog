@@ -38,7 +38,7 @@ export function createCalloutPlugin(): HastPluginDefinition {
 
         return {
           type: 'element',
-          tagName: 'aside',
+          tagName: 'div',
           properties: {
             ariaLabel: callout.title,
             className: ['callout', `callout-${callout.type}`],
