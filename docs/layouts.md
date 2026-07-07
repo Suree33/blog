@@ -140,7 +140,7 @@ interface Frontmatter {
 
 - **Callout対応**: GitHub風のコールアウトスタイル
 - **ダークモード**: Calloutのボーダーと色をダークテーマに対応
-- **種類表示**: タイトル、色、簡潔なCSSアイコンでCallout種類を表示
+- **種類表示**: タイトル、色、LucideアイコンでCallout種類を表示
 
 ### 使用例
 

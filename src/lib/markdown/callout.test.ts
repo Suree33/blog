@@ -18,23 +18,31 @@ describe('Callout', () => {
     expect(html).toContain('class="callout callout-info"');
     expect(html).toContain('data-callout="info"');
     expect(html).toContain('aria-label="Info"');
-    expect(html).toContain('<p class="callout-title">Info</p>');
+    expect(html).toContain('data-icon="lucide:info"');
+    expect(html).toContain('aria-hidden="true"');
+    expect(html).toContain('</svg>Info</p>');
     expect(html).toContain('<p>補足 <strong>本文</strong></p>');
     expect(html).not.toContain('[!INFO]');
   });
 
   test.each([
-    { marker: 'NOTE', type: 'note', title: 'Note' },
-    { marker: 'WARNING', type: 'warning', title: 'Warning' },
+    { icon: 'pen', marker: 'NOTE', type: 'note', title: 'Note' },
+    {
+      icon: 'message-square-warning',
+      marker: 'WARNING',
+      type: 'warning',
+      title: 'Warning',
+    },
   ])(
     '$marker を $title Callout として表示する',
-    async ({ marker, type, title }) => {
+    async ({ icon, marker, type, title }) => {
       const html = await render(`> [!${marker}]\n> 本文`);
 
       expect(html).toContain(`class="callout callout-${type}"`);
       expect(html).toContain(`data-callout="${type}"`);
       expect(html).toContain(`aria-label="${title}"`);
-      expect(html).toContain(`<p class="callout-title">${title}</p>`);
+      expect(html).toContain(`data-icon="lucide:${icon}"`);
+      expect(html).toContain(`</svg>${title}</p>`);
       expect(html).toContain('<p>本文</p>');
       expect(html).not.toContain(`[!${marker}]`);
     },

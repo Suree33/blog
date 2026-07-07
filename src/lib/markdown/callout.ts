@@ -3,6 +3,7 @@ import {
   type HastNode,
   type HastPluginDefinition,
 } from 'satteri';
+import { icons } from '@iconify-json/lucide';
 
 type HastElement = Extract<HastNode, { type: 'element' }>;
 
@@ -11,12 +12,22 @@ function isParagraph(node: HastNode): node is HastElement {
 }
 
 const CALLOUTS = {
-  INFO: { title: 'Info', type: 'info' },
-  NOTE: { title: 'Note', type: 'note' },
-  WARNING: { title: 'Warning', type: 'warning' },
+  INFO: { icon: 'info', title: 'Info', type: 'info' },
+  NOTE: { icon: 'pen', title: 'Note', type: 'note' },
+  WARNING: {
+    icon: 'message-square-warning',
+    title: 'Warning',
+    type: 'warning',
+  },
 } as const;
 
 const CALLOUT_MARKER = /^\[!(INFO|NOTE|WARNING)\](?:\r?\n|$)/;
+
+function getIconBody(name: string): string {
+  const icon = icons.icons[name];
+  if (!icon) throw new Error(`Lucide icon not found: ${name}`);
+  return icon.body;
+}
 
 export function createCalloutPlugin(): HastPluginDefinition {
   return defineHastPlugin({
@@ -49,7 +60,13 @@ export function createCalloutPlugin(): HastPluginDefinition {
               type: 'element',
               tagName: 'p',
               properties: { className: ['callout-title'] },
-              children: [{ type: 'text', value: callout.title }],
+              children: [
+                {
+                  type: 'raw',
+                  value: `<svg class="callout-icon" data-icon="lucide:${callout.icon}" viewBox="0 0 24 24" aria-hidden="true">${getIconBody(callout.icon)}</svg>`,
+                },
+                { type: 'text', value: callout.title },
+              ],
             },
             ...node.children.map((child) =>
               child === paragraph
