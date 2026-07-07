@@ -56,4 +56,8 @@ export class ArticlePage {
   get sectionHeadings(): Locator {
     return this.page.getByRole('article').getByRole('heading', { level: 2 });
   }
+
+  callout(type: 'info' | 'note' | 'warning'): Locator {
+    return this.page.locator(`[data-callout="${type}"]`);
+  }
 }

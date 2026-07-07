@@ -1,8 +1,10 @@
 import partytown from '@astrojs/partytown';
+import { satteri } from '@astrojs/markdown-satteri';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import { defineConfig } from 'astro/config';
+import { createCalloutPlugin } from './src/lib/markdown/callout.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +13,9 @@ export default defineConfig({
     '/posts': '/',
   },
   markdown: {
+    processor: satteri({
+      hastPlugins: [createCalloutPlugin()],
+    }),
     shikiConfig: {
       themes: {
         dark: 'github-dark',
