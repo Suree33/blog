@@ -83,7 +83,7 @@ importers:
     devDependencies:
       '@astrojs/language-server':
         specifier: ^2.16.10
-        version: 2.16.12(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)
+        version: 2.16.13(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)
       '@axe-core/playwright':
         specifier: ^4.12.1
         version: 4.12.1(playwright-core@1.61.1)
@@ -228,8 +228,8 @@ packages:
   '@astrojs/internal-helpers@0.10.1':
     resolution: {integrity: sha512-5phcroT/vmOOrYuuAxtkbPixy5hePtlz9i8K4OeDv3dNK6/UQRuXPOSRTxIOBbUY5Sonw2UaxjbuVc43Mcir6Q==}
 
-  '@astrojs/language-server@2.16.12':
-    resolution: {integrity: sha512-3LpFphBCzveUgm5ZVDINB/v3YA4TgPa1EMOEFn3Zt/Ww6jojR25iN+kmzeUz7v/b9xkmq+hMACTX4hizN3VCEQ==}
+  '@astrojs/language-server@2.16.13':
+    resolution: {integrity: sha512-ekOa+CYprEq5n4EJC1qTIAhLk49HZIUQuFwrEuF+3JK/pdMaYnWoREFUI2A0KEPOJiFA2kamBzKzbYljDvUxLg==}
     hasBin: true
     peerDependencies:
       prettier: ^3.0.0
@@ -2065,8 +2065,8 @@ packages:
   fast-string-width@3.0.2:
     resolution: {integrity: sha512-gX8LrtNEI5hq8DVUfRQMbr5lpaS4nMIWV+7XEbXk2b8kiQIizgnlr12B4dA3ZEx3308ze0O4Q1R+cHts8kyUJg==}
 
-  fast-uri@3.1.3:
-    resolution: {integrity: sha512-i70LwGWUduXqzicKXWshooq+sWL1K3WUU5rKZNG/0i3a1OSoX3HqhH5WbWwTmqWfor4urUakGPiRQcleRZTwOg==}
+  fast-uri@3.1.4:
+    resolution: {integrity: sha512-8JnbkQ4juDyvYs4mgFGQqg4yCYtFDtUtmp2QIQq11ZZe5CFQ5wcqm1rqDgAh/QdMySuBnPzMUiJUNZG5N/AiQw==}
 
   fast-wrap-ansi@0.2.2:
     resolution: {integrity: sha512-7F2Fl+TjRSenLqlU3UjSH0iyqopqoZIu7eZVpEirP2g1GtWa2G/ecEmBdgz31+Mxr+ELclgg6sokpSFIQiZ02Q==}
@@ -3948,7 +3948,7 @@ snapshots:
 
   '@astrojs/check@0.9.9(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)':
     dependencies:
-      '@astrojs/language-server': 2.16.12(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)
+      '@astrojs/language-server': 2.16.13(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)
       chokidar: 4.0.3
       kleur: 4.1.5
       typescript: 6.0.3
@@ -4026,7 +4026,7 @@ snapshots:
       smol-toml: 1.7.0
       unified: 11.0.5
 
-  '@astrojs/language-server@2.16.12(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)':
+  '@astrojs/language-server@2.16.13(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)':
     dependencies:
       '@astrojs/compiler': 2.13.1
       '@astrojs/yaml2ts': 0.2.4
@@ -5142,7 +5142,7 @@ snapshots:
   ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.3
+      fast-uri: 3.1.4
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -5939,7 +5939,7 @@ snapshots:
     dependencies:
       fast-string-truncated-width: 3.0.3
 
-  fast-uri@3.1.3: {}
+  fast-uri@3.1.4: {}
 
   fast-wrap-ansi@0.2.2:
     dependencies:
