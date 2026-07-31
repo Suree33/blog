@@ -24,7 +24,7 @@
     "test:e2e:update": "playwright test tests/e2e/specs/visual.spec.ts --update-snapshots"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.9",
+    "@astrojs/check": "0.9.10",
     "@astrojs/markdown-remark": "^7.2.0",
     "@astrojs/partytown": "2.1.7",
     "@astrojs/rss": "4.0.19",
