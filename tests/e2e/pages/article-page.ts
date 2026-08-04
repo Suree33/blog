@@ -14,6 +14,7 @@ import { routes, sampleArticleTitle } from '../utils/routes';
  */
 export class ArticlePage {
   readonly page: Page;
+  readonly root: Locator;
   readonly header: Header;
   readonly footer: Footer;
   readonly metadata: PostMetadata;
@@ -23,6 +24,7 @@ export class ArticlePage {
 
   constructor(page: Page) {
     this.page = page;
+    this.root = page.getByRole('article');
     this.header = new Header(page);
     this.footer = new Footer(page);
     this.metadata = new PostMetadata(page);
