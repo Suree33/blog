@@ -11,15 +11,13 @@ import {
  * Astro の静的ビルドで `/posts/[slug].md` が生成され、`astro preview` から配信される。
  * 実装は `src/pages/posts/[slug].md.ts`、仕様は `docs/raw-markdown-endpoints.md` 参照。
  *
- * `Content-Type` は本番（Cloudflare Workers Static Assets）では
- * `text/markdown; charset=utf-8` になるが、E2E で使う `astro preview` は
- * `text/markdown` のみを返す。そのため charset 部分は厳密に検証せず、
- * `text/markdown` であることだけを確認する（charset の厳密検証は Workers
- * プレビューが必要なため別途切り出す）。
+ * `astro preview` は `Content-Type: text/markdown` のみを返すため、ここでは
+ * media type だけを確認する。Worker が付与する `charset=utf-8` は
+ * `tests/worker/markdown-response.test.ts` で検証する。
  *
  * 通常記事 URL + `Accept: text/markdown` による content negotiation は
  * `src/worker.ts` で実装されており、Workers プレビュー側でのみ機能する。
- * `astro preview` では Worker を経由しないため本 spec の対象外とし、別 Issue で扱う。
+ * `astro preview` では Worker を経由しないため、本 spec ではなく Worker テストで扱う。
  */
 test.describe('raw Markdown エンドポイント', () => {
   test('代表記事の .md URL が raw Markdown を返す', async ({ request }) => {

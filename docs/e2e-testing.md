@@ -11,6 +11,7 @@ Astro のビルド結果を `astro preview` で起動し、スモークテスト
 ## コマンド
 
 - `pnpm run test:e2e`: ヘッドレスで全 E2E テストを実行
+- `pnpm run test:worker`: Worker の公開 HTTP レスポンス境界を Node.js Test Runner で検証
 - `pnpm run test:e2e:headed`: ブラウザを表示して実行
 - `pnpm run test:e2e:ui`: Playwright UI モードで実行
 - `pnpm run test:e2e:update`: ビジュアルスナップショットを更新
@@ -269,11 +270,11 @@ pnpm exec playwright test tests/e2e/specs/visual.spec.ts --update-snapshots
 
 - 代表記事の `.md` URL が `200` を返す
 - `Content-Type` が `text/markdown` で始まる
-  - 本番（Cloudflare Workers Static Assets）では `text/markdown; charset=utf-8` になりますが、`astro preview` は `text/markdown` のみを返すため、spec では `text/markdown` であることだけを検証します。`charset=utf-8` の厳密検証は Workers プレビューが必要なため別途切り出します。
+  - `astro preview` は `text/markdown` のみを返すため、Playwright spec では media type だけを検証します。Worker による `charset=utf-8` の補完は `pnpm run test:worker` で厳密に検証します。
 - frontmatter（`title` / `description`）と本文が含まれる
 - Astro 表示用の `layout` frontmatter は除去されている（`^layout:` 行が存在しない）
 
-通常記事 URL + `Accept: text/markdown` による content negotiation は `src/worker.ts` で実装されており Workers プレビュー側でのみ機能します。`astro preview` では Worker を経由しないため本 spec ではカバーせず、別 Issue で取り扱います。
+通常記事 URL + `Accept: text/markdown` による content negotiation と、Cloudflare Workers Static Assets の応答に `charset=utf-8` を補う処理は `src/worker.ts` で実装しています。これらは `tests/worker/markdown-response.test.ts` で Worker の `fetch` 境界から検証し、直接の `.md` URLと content negotiation の両方が `Content-Type: text/markdown; charset=utf-8` を返すことを保証します。
 
 ## GitHub Actions
 

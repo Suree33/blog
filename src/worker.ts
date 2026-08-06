@@ -5,6 +5,7 @@ interface Env {
 }
 
 const POSTS_PATH_PATTERN = /^\/posts\/[^/.]+\/?$/;
+const MARKDOWN_POSTS_PATH_PATTERN = /^\/posts\/[^/]+\.md$/;
 
 interface AcceptPreference {
   mediaType: string;
@@ -106,6 +107,20 @@ const addVaryAccept = (response: Response) => {
   });
 };
 
+const addMarkdownCharset = (response: Response) => {
+  const headers = new Headers(response.headers);
+
+  if (headers.get('Content-Type')?.split(';', 1)[0] === 'text/markdown') {
+    headers.set('Content-Type', 'text/markdown; charset=utf-8');
+  }
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+};
+
 export default {
   async fetch(request: Request, env: Env) {
     const url = new URL(request.url);
@@ -122,9 +137,13 @@ export default {
         new Request(markdownUrl, request),
       );
 
-      return addVaryAccept(response);
+      return addVaryAccept(addMarkdownCharset(response));
     }
 
-    return env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+
+    return MARKDOWN_POSTS_PATH_PATTERN.test(url.pathname)
+      ? addMarkdownCharset(response)
+      : response;
   },
 };

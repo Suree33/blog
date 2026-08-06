@@ -22,7 +22,7 @@ Raw Markdown の生成は `src/pages/posts/[slug].md.ts` で実装していま�
 - `import.meta.glob('./*.md', { query: '?raw', import: 'default', eager: true })` で `src/pages/posts/` 直下の記事 Markdown を文字列として読み込む
 - `getStaticPaths()` で記事ごとの `slug` を列挙し、静的ビルド時に `/posts/[slug].md` を生成する
 - 読み込んだ Markdown の frontmatter から `layout` 行を除去する
-- `GET` は raw Markdown を `Content-Type: text/markdown; charset=utf-8` で返す
+- `GET` は raw Markdown を返し、Worker が最終レスポンスの `Content-Type` を `text/markdown; charset=utf-8` に正規化する
 
 `template/_blog-post.md` や画像ディレクトリ配下のファイルは、`./*.md` の対象外です。
 
@@ -33,7 +33,7 @@ Raw Markdown の生成は `src/pages/posts/[slug].md.ts` で実装していま�
 - `Accept` ヘッダーの `q` 値、ワイルドカード、同じ `q` 値での記述順を考慮する
 - キャッシュが `Accept` ごとに分かれるよう、Markdown 返却時に `Vary: Accept` を付与する
 
-Worker 側は `.md` への振り分けだけを担当し、raw Markdown の生成処理は Astro の endpoint に寄せています。別ホスティングへ移植する場合は、この振り分け層だけを移植先の middleware / edge function / rewrite に置き換えます。
+Worker 側は `.md` への振り分けに加え、Cloudflare Workers Static Assets が拡張子から付与する `text/markdown` に `charset=utf-8` を補います。raw Markdown の生成処理自体は Astro の endpoint に寄せています。別ホスティングへ移植する場合は、この振り分け・ヘッダー正規化層を移植先の middleware / edge function / rewrite に置き換えます。
 
 ## 動作確認
 
