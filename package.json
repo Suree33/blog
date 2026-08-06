@@ -18,6 +18,7 @@
     "hooks:install": "bash scripts/git-hooks/install.sh",
     "hooks:uninstall": "bash scripts/git-hooks/uninstall.sh",
     "test:git-hooks": "bash tests/git-hooks/hooks.test.sh",
+    "test:worker": "node --test tests/worker/*.test.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
