@@ -30,7 +30,7 @@
     "@astrojs/partytown": "2.1.7",
     "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.3",
-    "@astrojs/ts-plugin": "1.10.10",
+    "@astrojs/ts-plugin": "1.10.11",
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/lucide": "^1.2.98",
