@@ -61,10 +61,10 @@ importers:
         version: 2.2.0
       remark-flexible-code-titles:
         specifier: ^1.3.3
-        version: 1.3.4(unified@11.0.5)
+        version: 1.3.5(unified@11.0.5)
       remark-link-card-plus:
-        specifier: ^0.7.3
-        version: 0.7.5(supports-color@10.2.2)
+        specifier: ^0.8.0
+        version: 0.8.0(supports-color@10.2.2)
       sanitize-html:
         specifier: ^2.17.4
         version: 2.17.7
@@ -3284,17 +3284,17 @@ packages:
   rehype-stringify@10.0.1:
     resolution: {integrity: sha512-k9ecfXHmIPuFVI61B9DeLPN0qFHfawM6RsuX48hoqlaKSF61RskNjSm1lI8PhBEM0MRdLxVVm4WmTqJQccH9mA==}
 
-  remark-flexible-code-titles@1.3.4:
-    resolution: {integrity: sha512-2RkUgXEvOcvyLgbMEQ/XgDlIvoZLZuQEMa5ePrgWKKf+YPAKl4Tg+ytMhs+oJXss/7MfJfVF8LSvfWrdsqDtRg==}
+  remark-flexible-code-titles@1.3.5:
+    resolution: {integrity: sha512-l78xWW/k3C7hrp4gcb7o51EixLvMrrjtrGOg5uHPavwrhgP58AZIJFNJQQDpX0r9AoWIFJt3MzU9oev95pXz/w==}
     peerDependencies:
       unified: ^11
 
   remark-gfm@4.0.1:
     resolution: {integrity: sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==}
 
-  remark-link-card-plus@0.7.5:
-    resolution: {integrity: sha512-lNJCaM/XvDc9PykK2t2OTJLi1Rr7PbAEu65pkW/xwNCV7Pr0JMSsQPFmXCwRx4nMJcoovVLWhoFHXzxqOyapDA==}
-    engines: {node: '>=20'}
+  remark-link-card-plus@0.8.0:
+    resolution: {integrity: sha512-ugr3guxBxgzx6mtt0cvRf0fmnXlRWfd0wKg4mLvwCq8klf2f5+9MGJRP4SpkRU+hAsIqtTkXm3lvwcJf5Vnvkg==}
+    engines: {node: '>=22.13.0'}
 
   remark-parse@11.0.0:
     resolution: {integrity: sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==}
@@ -7344,7 +7344,7 @@ snapshots:
       hast-util-to-html: 9.0.5
       unified: 11.0.5
 
-  remark-flexible-code-titles@1.3.4(unified@11.0.5):
+  remark-flexible-code-titles@1.3.5(unified@11.0.5):
     dependencies:
       '@types/mdast': 4.0.4
       unified: 11.0.5
@@ -7361,8 +7361,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  remark-link-card-plus@0.7.5(supports-color@10.2.2):
+  remark-link-card-plus@0.8.0(supports-color@10.2.2):
     dependencies:
+      '@types/mdast': 4.0.4
       file-type: 22.0.2(supports-color@10.2.2)
       open-graph-scraper: 6.12.0
       sanitize-html: 2.17.7
