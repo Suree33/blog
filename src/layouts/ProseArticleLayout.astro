@@ -39,14 +39,12 @@ const { pageTitle, ogimage, description, tocHeadings } = Astro.props;
     >
       <slot />
     </article>
-    {
-      tocHeadings && (
-        <TableOfContents
-          headings={tocHeadings}
-          options={{ enableIndicator: true }}
-          class="sticky top-24 hidden xl:col-start-4 xl:block"
-        />
-      )
-    }
+    {tocHeadings && (
+      <TableOfContents
+        headings={tocHeadings}
+        options={{ enableIndicator: true }}
+        class="sticky top-24 hidden xl:col-start-4 xl:block"
+      />
+    )}
   </div>
 </BaseLayout>

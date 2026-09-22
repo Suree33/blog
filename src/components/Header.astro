@@ -34,9 +34,7 @@ import { cn } from '@lib/utils';
       </h1>
       <HeaderNav class="hidden gap-6 text-base sm:flex" />
     </div>
-    <HeaderIcons
-      class="hidden items-center justify-center gap-x-2 text-xl sm:flex"
-    />
+    <HeaderIcons class="hidden items-center justify-center gap-x-2 text-xl sm:flex" />
     <div class="flex h-full items-center sm:hidden">
       <Hamburger
         width="1.7rem"
@@ -67,15 +65,9 @@ import { cn } from '@lib/utils';
         }
       }
     </style>
-    <div
-      class="hamburger-toggle sm-menu fixed top-14 z-40 flex w-full flex-col justify-between gap-y-6 bg-white transition-all duration-500 sm:hidden dark:bg-neutral-950"
-    >
-      <HeaderNav
-        class="flex w-full basis-full flex-col items-center justify-center gap-y-8 text-2xl sm:flex sm:gap-x-6"
-      />
-      <HeaderIcons
-        class="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 text-xl"
-      />
+    <div class="hamburger-toggle sm-menu fixed top-14 z-40 flex w-full flex-col justify-between gap-y-6 bg-white transition-all duration-500 sm:hidden dark:bg-neutral-950">
+      <HeaderNav class="flex w-full basis-full flex-col items-center justify-center gap-y-8 text-2xl sm:flex sm:gap-x-6" />
+      <HeaderIcons class="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 text-xl" />
     </div>
   </div>
 </header>

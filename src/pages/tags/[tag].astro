@@ -54,21 +54,19 @@ if (!tag) {
         {tag}のタグが付いた記事
       </h1>
       <ul class="grid grid-cols-1 flex-col gap-4 gap-y-2 sm:gap-y-4">
-        {
-          posts &&
-            posts
-              .filter((post: Post) => !post.frontmatter.draft)
-              .sort((a: Post, b: Post) => {
-                return (
-                  new Date(b.frontmatter.pubDate).getTime() -
-                  new Date(a.frontmatter.pubDate).getTime()
-                );
-              })
-              .map(
-                (post: Post) =>
-                  post.url !== undefined && <PostItem post={post} />,
-              )
-        }
+        {posts &&
+          posts
+            .filter((post: Post) => !post.frontmatter.draft)
+            .sort((a: Post, b: Post) => {
+              return (
+                new Date(b.frontmatter.pubDate).getTime() -
+                new Date(a.frontmatter.pubDate).getTime()
+              );
+            })
+            .map(
+              (post: Post) =>
+                post.url !== undefined && <PostItem post={post} />,
+            )}
       </ul>
     </div>
   </div>
