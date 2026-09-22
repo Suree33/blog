@@ -22,29 +22,21 @@ const tocHeadings = headings.filter(({ depth }) => depth === 2 || depth === 3);
     pubDate={frontmatter.pubDate}
     updatedDate={frontmatter.updatedDate}
   />
-  <h1>
-    {frontmatter.title}
-  </h1>
-  {
-    frontmatter.image && (
-      <img
-        class="rounded"
-        src={frontmatter.image.src}
-        alt={frontmatter.image.alt}
-      />
-    )
-  }
-  {
-    frontmatter.description && (
-      <p class="rounded bg-neutral-100 px-4 py-3 text-left dark:bg-neutral-800">
-        {frontmatter.description}
-      </p>
-    )
-  }
-  {
-    tocHeadings.length > 0 && (
-      <TableOfContents headings={tocHeadings} class="my-5 block xl:hidden" />
-    )
-  }
+  <h1>{frontmatter.title}</h1>
+  {frontmatter.image && (
+    <img
+      class="rounded"
+      src={frontmatter.image.src}
+      alt={frontmatter.image.alt}
+    />
+  )}
+  {frontmatter.description && (
+    <p class="rounded bg-neutral-100 px-4 py-3 text-left dark:bg-neutral-800">
+      {frontmatter.description}
+    </p>
+  )}
+  {tocHeadings.length > 0 && (
+    <TableOfContents headings={tocHeadings} class="my-5 block xl:hidden" />
+  )}
   <slot />
 </ProseArticleLayout>

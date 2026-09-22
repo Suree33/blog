@@ -10,14 +10,10 @@ const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
     href={post.url}
   >
     <div>
-      <div
-        class="dot-separated flex flex-wrap text-neutral-500 dark:text-neutral-400"
-      >
-        {
-          tags.map((tag: string) => (
-            <div class="inline-flex text-sm">{tag}</div>
-          ))
-        }
+      <div class="dot-separated flex flex-wrap text-neutral-500 dark:text-neutral-400">
+        {tags.map((tag: string) => (
+          <div class="inline-flex text-sm">{tag}</div>
+        ))}
         <time class="text-sm" datetime="{formatDate(post.frontmatter.pubDate)}">
           {formatDate(post.frontmatter.pubDate)}
         </time>
@@ -25,22 +21,18 @@ const tags = post.frontmatter.tags?.slice(0, 2) ?? [];
       <div class="my-1 text-lg font-bold sm:text-xl dark:text-white">
         {post.frontmatter.title}
       </div>
-      {
-        post.frontmatter.description && (
-          <div class="line-clamp-1 text-neutral-600 dark:text-neutral-300">
-            {post.frontmatter.description}
-          </div>
-        )
-      }
+      {post.frontmatter.description && (
+        <div class="line-clamp-1 text-neutral-600 dark:text-neutral-300">
+          {post.frontmatter.description}
+        </div>
+      )}
     </div>
-    {
-      post.frontmatter.image && (
-        <img
-          class="aspect-square w-28 rounded max-sm:aspect-auto max-sm:w-full md:aspect-[1.91/1] md:w-56"
-          src={post.frontmatter.image.src}
-          alt={post.frontmatter.image.alt}
-        />
-      )
-    }
+    {post.frontmatter.image && (
+      <img
+        class="aspect-square w-28 rounded max-sm:aspect-auto max-sm:w-full md:aspect-[1.91/1] md:w-56"
+        src={post.frontmatter.image.src}
+        alt={post.frontmatter.image.alt}
+      />
+    )}
   </a>
 </li>
