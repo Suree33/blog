@@ -81,13 +81,6 @@
       "matchPackageNames": ["prettier**"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "prettier"
-    },
-    {
-      "description": "major 更新はまとめて扱う",
-      "matchManagers": ["npm"],
-      "matchUpdateTypes": ["major"],
-      "groupName": "major-updates",
-      "matchPackageNames": ["!pnpm"]
     }
   ]
 }
