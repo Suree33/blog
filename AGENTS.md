@@ -4,82 +4,22 @@
 
 Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ (sur33.com)。pnpmをパッケージマネージャーとして使用し、Cloudflare Workersでホスティング。
 
-## 開発コマンド
+## コマンド
 
-- `pnpm run dev` - 開発サーバー起動
-- `pnpm run dev:host` - ホストマシンからアクセス可能な開発サーバー起動  
-- `pnpm run build` - 本番ビルド
-- `pnpm run preview` - ビルド結果のプレビュー
-- `pnpm run preview:workers` - Workersローカルプレビュー
-- `pnpm run deploy` - Cloudflare Workersにデプロイ
-- `pnpm run deploy:dry-run` - デプロイの検証（実際のデプロイは行わない）
-- `pnpm run format` - Prettierでコード整形
-- `pnpm run lint` - ESLintでコード検証
+コマンド一覧は `package.json` の `scripts` を参照。`prebuild` で `pnpm run lint` が走るため、lint が赤いと build も失敗する点に注意。
 
-## アーキテクチャ
+## 規約
 
-### ディレクトリ構成
-
-- `src/components/` - Astroコンポーネント (Header, Footer, PostItem等)
-- `src/layouts/` - ページレイアウト (BaseLayout, MarkdownPostLayout等)
-- `src/pages/` - ページファイル、`posts/`以下にMarkdownブログ記事
-- `src/types/` - TypeScript型定義 (Post.ts等)
-- `src/scripts/` - クライアントサイドJavaScript
-- `src/styles/` - グローバルCSS、カスタムスタイル
-- `src/lib/` - 共通ユーティリティ関数
-- `src/config.json` - サイト設定 (siteName, author等)
-- `docs/` - 実装ドキュメント (機能説明、カスタムコマンド等)
-
-### ブログ記事
-
-- Markdownファイルに frontmatter でメタデータを記述
-- `Post` インターフェースで型定義済み
-- remarkプラグインでリンクカード、コードタイトル表示機能
-- rehypeプラグインでコールアウト機能
-
-### スタイリング
-
-- Tailwind CSS
-- カスタムCSS: remark-code.css (コードブロック), remark-link-card.css (リンクカード)
-
-### 設定ファイル
-
-- `astro.config.mjs` - Astro設定、remarkプラグイン、integrations
-- `wrangler.toml` - Cloudflare Workers設定、assetsディレクトリ指定
-- `eslint.config.js` - strict TypeScript + Astro + jsx-a11y ルール  
-- `tsconfig.json` - TypeScript設定
-- `.prettierrc.json` - コード整形設定
-
-## 実装ガイドライン
-
-### CSSクラス結合
-
-- 複数のCSSクラスを結合する場合は、`src/lib/utils.ts` の `cn()` を使用する
-- テンプレート文字列によるクラスの手動連結は避け、条件付きクラスも `cn()` で表現する
-
-### ドキュメント管理
-
-- 実装や修正を始める前に、関連する `docs/` のドキュメントを能動的に参照し、既存仕様・設計方針・運用手順を確認する
-- 新機能、新コンポーネント、カスタムコマンド等を実装した際は、`docs/` ディレクトリに適切なドキュメントを追加・更新する
-- ドキュメントはMarkdown形式で作成し、実装の目的、使用方法、設定方法等を記載
-- 既存機能の大幅な変更時も関連ドキュメントを更新する
-
-## 注意事項
-
-- コード変更後は `pnpm run lint` でESLintを実行してください。
+- 複数のCSSクラスを結合する場合は `src/lib/utils.ts` の `cn()` を使用する。テンプレート文字列による手動連結も、条件付きクラスの手動表現もしない
+- 実装や修正を始める前に、関連する `docs/` のドキュメントを能動的に参照する。新機能・新コンポーネント・カスタムコマンドの実装時と、既存機能の大幅な変更時は `docs/` を追加・更新する
+- コード変更後は `pnpm run lint`（eslint + astro check + tsc）を通す
 
 ## Skills
 
 - 新規ブログ記事を追加する必要がある場合、またはユーザーから新規記事追加を依頼された場合は、必ず `init-post` スキルを使用する。
 
-### Issue tracker
+## Workflow
 
-Issue と PRD は GitHub Issues で管理する（`gh` CLI を使用）。詳細は `docs/agents/issue-tracker.md` を参照。
-
-### Triage labels
-
-デフォルトの5ロールからなるトリアージ語彙（needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix）。詳細は `docs/agents/triage-labels.md` を参照。
-
-### Domain docs
-
-シングルコンテキスト: ルートの `CONTEXT.md` + `docs/adr/`。詳細は `docs/agents/domain.md` を参照。
+- Issue と PRD は GitHub Issues で管理する（`gh` CLI を使用）。詳細は `docs/agents/issue-tracker.md` を参照。
+- トリアージ語彙（needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix）。詳細は `docs/agents/triage-labels.md` を参照。
+- Domain docs の参照方法は `docs/agents/domain.md` に従う。
