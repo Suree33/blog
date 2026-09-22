@@ -20,14 +20,16 @@ CIでビルドだけを実行するためのスクリプトです。
 - CI: `pnpm run build:ci`
   - `prebuild` をスキップし、ビルドのみ実行します。
 
-## pnpm 11設定
+## pnpm 12設定
 
-CIでは `package.json` の `packageManager` に従ってpnpm 11を使用します。
+CIでは `package.json` の `packageManager` に従ってpnpm 12を使用します。
 
-- pnpm 11では `.npmrc` からauth/registry以外の設定を読みません。
-- プロジェクトのpnpm設定は `pnpm-workspace.yaml` に集約します。
+- pnpm 12でも `.npmrc` からはauth/registry設定のみを読み、プロジェクトのpnpm設定は `pnpm-workspace.yaml` に集約します。
 - 依存パッケージのビルドスクリプト許可は `allowBuilds` で明示します。
 - `strictDepBuilds` の既定値が有効なため、未レビューのビルドスクリプトがあると `pnpm install` は失敗します。
+- pnpmのバージョンは `packageManager` に正確なバージョンで固定します。固定しているため、`pnpm-workspace.yaml` に未知の設定キーがあるとpnpm 12はエラーで検出してくれます。
+- Node.jsのバージョンは `.node-version` に正確なバージョンで固定し、CIの `actions/setup-node` が `node-version-file` で読み込みます。
+- 両バージョンの更新はRenovateが担当します(pnpmはnpmマネージャ、Node.jsはnodenvマネージャ)。pnpmのmajor更新は他のmajor更新と混ぜず単独PRになります。
 
 ## Git pre-commit
 

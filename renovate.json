@@ -86,6 +86,7 @@
       "description": "major 更新はまとめて扱う",
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major"],
+      "excludePackageNames": ["pnpm"],
       "groupName": "major-updates"
     }
   ]
