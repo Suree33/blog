@@ -68,10 +68,18 @@ Astro + TypeScript + Tailwind CSSで構築されたDaiki Satoの個人ブログ 
 
 - コード変更後は `pnpm run lint` でESLintを実行してください。
 
-## その他
-
-- ユーザーとの会話には常に日本語を使用すること
-
-## Skills運用ルール
+## Skills
 
 - 新規ブログ記事を追加する必要がある場合、またはユーザーから新規記事追加を依頼された場合は、必ず `init-post` スキルを使用する。
+
+### Issue tracker
+
+Issue と PRD は GitHub Issues で管理する（`gh` CLI を使用）。詳細は `docs/agents/issue-tracker.md` を参照。
+
+### Triage labels
+
+デフォルトの5ロールからなるトリアージ語彙（needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix）。詳細は `docs/agents/triage-labels.md` を参照。
+
+### Domain docs
+
+シングルコンテキスト: ルートの `CONTEXT.md` + `docs/adr/`。詳細は `docs/agents/domain.md` を参照。
