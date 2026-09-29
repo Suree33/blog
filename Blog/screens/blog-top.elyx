@@ -1,0 +1,259 @@
+import "blocks/site-header.elyx" as headerBlock
+import "tokens/colors.elyx" as colorTokens
+import "tokens/lengths.elyx" as lengthTokens
+import "blocks/site-footer.elyx" as footerBlock
+import "controls/post-item.elyx" as controls
+
+blogTop = frame {
+  width: 1440px,
+  height: .auto,
+  layout: {direction: .column, align-items: .stretch},
+  fill: colorTokens.colors.background,
+  children: [pageHeader, pageMain, pageFooter]
+}
+
+// Same top page with the theme=dark context applied to the whole screen.
+@with-context(theme="dark")
+blogTopDark = frame : blogTop {
+  top: 2400px
+}
+
+pageHeader = frame : headerBlock.siteHeader {}
+
+pageMain = frame {
+  width: 100%,
+  height: .auto,
+  layout: {direction: .column, align-items: .center},
+  padding: [40px, 0px, 0px],
+  children: postList
+}
+
+postList = frame {
+  width: lengthTokens.lengths.page-max,
+  height: .auto,
+  layout: {direction: .column, item-gap: lengthTokens.lengths.list-gap},
+  children: [
+    rowNespresso,
+    rowZshrc,
+    rowRemarkPlus,
+    rowKeyboard,
+    rowCatppuccin,
+    rowTailscale,
+    rowIntel,
+    rowObsidian
+  ]
+}
+
+// 2026-07-05 — tags: none, description: none
+rowNespresso = frame : controls.postItem {
+  overrides: [remove(controls.thumb)],
+
+  controls.postContent {
+    width: lengthTokens.lengths.post-content-full,
+
+    controls.postDescription {
+      display: .none
+    }
+
+    controls.postMeta {
+      controls.metaDot2 {
+        display: .none
+      }
+
+      controls.metaTag2 {
+        display: .none
+      }
+
+      controls.metaDot1 {
+        display: .none
+      }
+
+      controls.metaTag1 {
+        display: .none
+      }
+
+      controls.metaDate {
+        contents: "2026年7月5日"
+      }
+    }
+
+    controls.postTitle {
+      contents: "ネスプレッソの手入れはサボるな。カビるから。"
+    }
+  }
+}
+
+// 2026-02-27 — tags: Zsh / 最適化, description: none
+rowZshrc = frame : controls.postItem {
+  overrides: [remove(controls.thumb)],
+
+  controls.postContent {
+    width: lengthTokens.lengths.post-content-full,
+
+    controls.postDescription {
+      display: .none
+    }
+
+    controls.postTitle {
+      contents: ".zshrc の起動が遅い原因を Codex に調査させたら、10倍速くなった"
+    }
+
+    controls.postMeta {
+      controls.metaDate {
+        contents: "2026年2月27日"
+      }
+
+      controls.metaTag2 {
+        contents: "最適化"
+      }
+
+      controls.metaTag1 {
+        contents: "Zsh"
+      }
+    }
+  }
+}
+
+// 2026-02-12 — tags: ウェブ開発 / Astro
+rowRemarkPlus = frame : controls.postItem {
+  overrides: [remove(controls.thumb)],
+
+  controls.postContent {
+    width: lengthTokens.lengths.post-content-full,
+
+    controls.postDescription {
+      contents: "メンテナンスの停滞している remark-link-card から remark-link-card-plus へ移行しました。"
+    }
+
+    controls.postTitle {
+      contents: "remark-link-card-plusへ移行しました"
+    }
+
+    controls.postMeta {
+      controls.metaDate {
+        contents: "2026年2月12日"
+      }
+
+      controls.metaTag2 {
+        contents: "Astro"
+      }
+
+      controls.metaTag1 {
+        contents: "ウェブ開発"
+      }
+    }
+  }
+}
+
+// 2025-08-28 — tags: キーボード / ガジェット
+rowKeyboard = frame : controls.postItem {
+  overrides: [remove(controls.thumb)],
+
+  controls.postContent {
+    width: lengthTokens.lengths.post-content-full,
+
+    controls.postDescription {
+      contents: "VIAでキーボードの設定をしている時のメモ。随時更新。"
+    }
+
+    controls.postTitle {
+      contents: "VIAでキーボードを設定していて知った/気がついたTips"
+    }
+
+    controls.postMeta {
+      controls.metaDate {
+        contents: "2025年8月28日"
+      }
+
+      controls.metaTag2 {
+        contents: "ガジェット"
+      }
+    }
+  }
+}
+
+// 2025-07-27 — tags: Catppuccin / OSS
+rowCatppuccin = frame : controls.postItem {
+  overrides: [remove(controls.thumb)],
+
+  controls.postContent {
+    width: lengthTokens.lengths.post-content-full,
+
+    controls.postDescription {
+      contents: "CotEditor向けのCatppuccinテーマを作成した。初めてのOSS貢献。"
+    }
+
+    controls.postTitle {
+      contents: "CotEditor向けCatppuccinテーマを作った"
+    }
+
+    controls.postMeta {
+      controls.metaDate {
+        contents: "2025年7月27日"
+      }
+    }
+  }
+}
+
+// 2025-01-26 — tags: Tailscale / GitHub
+rowTailscale = frame : controls.postItem {
+  overrides: [remove(controls.thumb)],
+
+  controls.postContent {
+    width: lengthTokens.lengths.post-content-full,
+
+    controls.postDescription {
+      contents: "GitHub ActionsからTailscale経由でサーバーへアクセスしてデプロイできるようにしました。"
+    }
+
+    controls.postTitle {
+      contents: "GitHub Actions × Tailscale で Palworld サーバーを自動デプロイする"
+    }
+
+    controls.postMeta {
+      controls.metaDate {
+        contents: "2025年1月26日"
+      }
+
+      controls.metaTag2 {
+        contents: "GitHub"
+      }
+
+      controls.metaTag1 {
+        contents: "Tailscale"
+      }
+    }
+  }
+}
+
+// 2024-07-31 — tags: ガジェット / PC
+rowIntel = frame : controls.postItem {
+  overrides: [remove(controls.thumb)],
+
+  controls.postContent {
+    width: lengthTokens.lengths.post-content-full,
+
+    controls.postDescription {
+      contents: "Intel Core 第13/14世代プロセッサに関する不具合により、ゲームが頻繁にクラッシュする問題に関して、試したことやIntelのサポートとのやり取りをまとめました。"
+    }
+
+    controls.postTitle {
+      contents: "Intel Core i5-13600KFでゲームがクラッシュする問題"
+    }
+
+    controls.postMeta {
+      controls.metaDate {
+        contents: "2024年7月31日"
+      }
+
+      controls.metaTag2 {
+        contents: "PC"
+      }
+    }
+  }
+}
+
+// 2024-04-15 — tags: アプリ / Obsidian — ogimage thumbnail (base content)
+rowObsidian = frame : controls.postItem {}
+
+pageFooter = frame : footerBlock.siteFooter {}

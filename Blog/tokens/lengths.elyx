@@ -1,0 +1,33 @@
+// Spacing, sizing and radii for sur33.com (desktop layout).
+export lengths = tokens {
+  // layout
+  screen-pad-x: 16,
+  page-max: 1280,
+  section-gap: 40,
+  // header
+  avatar: 40,
+  avatar-sm: 32,
+  nav-gap: 24,
+  nav-icon-gap: 8,
+  header-icon-gap: 8,
+  // post rows
+  row-pad: 20,
+  list-gap: 16,
+  meta-gap: 8,
+  title-gap: 4,
+  thumb-width: 224,
+  thumb-height: 117,
+  row-thumb-gap: 16,
+  post-content-full: 1240,
+  post-content-with-thumb: 1000,
+  // footer
+  footer-pad-y: 32,
+  footer-gap: 24,
+  footer-icon-gap: 16,
+  // radii
+  radius-sm: 4,
+  radius-full: 9999,
+  // icons
+  icon-header: 20,
+  icon-footer: 18
+}

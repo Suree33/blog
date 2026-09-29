@@ -1,0 +1,96 @@
+// Site header: avatar, nav links, social + theme icons. Translucent sticky bar.
+import "tokens/colors.elyx" as colorTokens
+import "tokens/lengths.elyx" as lengthTokens
+import "tokens/numbers.elyx" as numberTokens
+import "controls/header-nav-item.elyx" as headerNav
+import "controls/icon-link.elyx" as iconLink
+import "resources/images/profile-icon.jpg" as profilePhoto
+import "resources/icons/x.svg" as xGlyph
+import "resources/icons/instagram.svg" as instagramGlyph
+import "resources/icons/github.svg" as githubGlyph
+import "resources/icons/moon.svg" as moonGlyph
+
+export siteHeader = frame {
+  name: "Site Header",
+  top: 160px,
+  width: 1440px,
+  layout: {direction: .row, align-items: .center, justify-content: .center},
+  padding: [16px, lengthTokens.lengths.screen-pad-x],
+  height: .auto,
+  fill: {color: colorTokens.colors.background, opacity: 0.8},
+  children: [headerBar]
+}
+
+headerBar = frame {
+  name: "Bar",
+  layout: {
+    direction: .row,
+    align-items: .center,
+    justify-content: .space-between
+  },
+  width: lengthTokens.lengths.page-max,
+  height: .auto,
+  children: [headerLeft, headerActions]
+}
+
+headerLeft = frame {
+  name: "Left",
+  layout: {direction: .row, align-items: .center, item-gap: 32px},
+  height: .auto,
+  children: [headerAvatar, headerNavLinks]
+}
+
+headerAvatar = frame {
+  name: "Avatar",
+  width: lengthTokens.lengths.avatar,
+  height: lengthTokens.lengths.avatar,
+  corner-radius: lengthTokens.lengths.radius-full,
+  fill: {image: {ref: profilePhoto, sizing: .cover}},
+  border: {width: 1px, color: colorTokens.colors.content-primary}
+}
+
+headerNavLinks = frame {
+  name: "Nav",
+  layout: {
+    direction: .row,
+    align-items: .center,
+    item-gap: lengthTokens.lengths.nav-gap
+  },
+  height: .auto,
+  children: [navBlog, navAbout]
+}
+
+navBlog = frame : headerNav.activeHeaderNavItem {}
+
+navAbout = frame : headerNav.inactiveHeaderNavItem {
+  headerNav.navLabel {
+    contents: "ABOUT"
+  }
+}
+
+headerActions = frame {
+  name: "Actions",
+  layout: {
+    direction: .row,
+    align-items: .center,
+    item-gap: lengthTokens.lengths.header-icon-gap
+  },
+  height: .auto,
+  children: [actionX, actionInstagram, actionGithub, actionTheme]
+}
+
+actionX = icon : iconLink.iconLink {
+  contents: xGlyph
+}
+
+actionInstagram = icon : iconLink.iconLink {
+  contents: instagramGlyph
+}
+
+actionGithub = icon : iconLink.iconLink {
+  contents: githubGlyph
+}
+
+actionTheme = icon : iconLink.iconLink {
+  contents: moonGlyph
+}

@@ -1,0 +1,14 @@
+import "tokens/colors.elyx" as base
+
+@context(theme="dark")
+__file__
+
+export darkColors = tokens : base.colors {
+  background: rgb(3.92%, 3.92%, 3.92%),
+  background-hover: rgb(14.9%, 14.9%, 14.9%),
+  content-primary: .white,
+  content-secondary: rgb(83.1373%, 83.1373%, 83.1373%),
+  content-muted: rgb(63.92%, 63.92%, 63.92%),
+  divider: rgb(14.9%, 14.9%, 14.9%),
+  icon-muted: rgb(61.1765%, 63.92%, 68.6275%)
+}

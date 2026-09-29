@@ -1,0 +1,96 @@
+import "tokens/colors.elyx" as colorTokens
+import "tokens/lengths.elyx" as lengthTokens
+import "tokens/numbers.elyx" as numberTokens
+import "tokens/fonts.elyx" as fontTokens
+import "resources/images/setup-obsidian-livesync.png" as obsidianImage
+
+export postItem = frame {
+  left: 260px,
+  width: lengthTokens.lengths.page-max,
+  height: .auto,
+  layout: {
+    justify-content: .space-between,
+    item-gap: lengthTokens.lengths.row-thumb-gap
+  },
+  fill: colorTokens.colors.background,
+  corner-radius: lengthTokens.lengths.radius-sm,
+  padding: lengthTokens.lengths.row-pad,
+  children: [postContent, thumb]
+}
+
+postContent = frame {
+  width: lengthTokens.lengths.post-content-with-thumb,
+  height: .auto,
+  layout: {direction: .column, item-gap: lengthTokens.lengths.title-gap},
+  padding: 0px,
+  children: [postMeta, postTitle, postDescription]
+}
+
+postMeta = frame {
+  height: .auto,
+  layout: {align-items: .center, item-gap: lengthTokens.lengths.meta-gap},
+  children: [metaTag1, metaDot1, metaTag2, metaDot2, metaDate]
+}
+
+metaTag1 = text {
+  fill: colorTokens.colors.content-muted,
+  contents: "アプリ",
+  font-size: numberTokens.numbers.font-sm,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W3"
+}
+
+metaDot1 = text {
+  fill: colorTokens.colors.content-muted,
+  contents: "•",
+  font-size: numberTokens.numbers.font-sm,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W3"
+}
+
+metaTag2 = text {
+  fill: colorTokens.colors.content-muted,
+  contents: "Obsidian",
+  font-size: numberTokens.numbers.font-sm,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W3"
+}
+
+metaDot2 = text {
+  fill: colorTokens.colors.content-muted,
+  contents: "•",
+  font-size: numberTokens.numbers.font-sm,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W3"
+}
+
+metaDate = text {
+  fill: colorTokens.colors.content-muted,
+  contents: "2024年4月15日",
+  font-size: numberTokens.numbers.font-sm,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W3"
+}
+
+postTitle = text {
+  fill: colorTokens.colors.content-primary,
+  contents: "Obsidian Syncは高いので、Self-hosted LiveSyncを使う",
+  font-size: numberTokens.numbers.font-xl,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W8"
+}
+
+postDescription = text {
+  fill: colorTokens.colors.content-secondary,
+  contents: "Obsidian公式のSyncは高いので、コミュニティプラグインのSelf-hosted LiveSyncを使って同期、Obsidian Gitでバックアップするようにしてみました。",
+  font-size: numberTokens.numbers.font-base,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W3"
+}
+
+thumb = frame {
+  width: lengthTokens.lengths.thumb-width,
+  height: lengthTokens.lengths.thumb-height,
+  fill: {image: {ref: obsidianImage}},
+  corner-radius: lengthTokens.lengths.radius-sm
+}

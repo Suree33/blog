@@ -1,0 +1,9 @@
+// Type scale for sur33.com (Tailwind rem sizes).
+export numbers = tokens {
+  font-xs: 12,
+  font-sm: 14,
+  font-base: 16,
+  font-lg: 18,
+  font-xl: 20,
+  font-2xl: 24
+}

@@ -1,0 +1,86 @@
+import "tokens/colors.elyx" as colorTokens
+import "tokens/lengths.elyx" as lengthTokens
+import "tokens/numbers.elyx" as numberTokens
+import "tokens/fonts.elyx" as fontTokens
+import "controls/header-nav-item.elyx" as headerNav
+import "controls/icon-link.elyx" as iconLink
+import "resources/icons/github.svg" as githubGlyph
+import "resources/icons/x.svg" as xGlyph
+import "resources/icons/instagram.svg" as instagramGlyph
+import "resources/icons/rss.svg" as rssGlyph
+
+export siteFooter = frame {
+  top: 260px,
+  width: 1440px,
+  height: .auto,
+  layout: {direction: .column, align-items: .center},
+  fill: colorTokens.colors.background,
+  border: {color: colorTokens.colors.divider, sides: .top},
+  padding: [
+    lengthTokens.lengths.footer-pad-y,
+    lengthTokens.lengths.screen-pad-x
+  ],
+  children: footerBar
+}
+
+footerBar = frame {
+  width: lengthTokens.lengths.page-max,
+  height: .auto,
+  layout: {justify-content: .space-between, align-items: .center},
+  children: [footerSiteName, footerNav, footerIcons]
+}
+
+footerSiteName = text {
+  fill: colorTokens.colors.content-primary,
+  contents: "Daiki Sato",
+  font-size: numberTokens.numbers.font-xl,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W6"
+}
+
+footerNav = frame {
+  height: .auto,
+  layout: {align-items: .center, item-gap: lengthTokens.lengths.footer-gap},
+  children: [footerNavItemBlog, footerNavItemAbout]
+}
+
+footerNavItemBlog = frame : headerNav.headerNavItem {
+  headerNav.navLabel {
+    contents: "Blog",
+    font-size: numberTokens.numbers.font-sm,
+    font-family: fontTokens.fonts.sans,
+    font-style: "W5"
+  }
+}
+
+footerNavItemAbout = frame : headerNav.headerNavItem {
+  headerNav.navLabel {
+    fill[0].color: colorTokens.colors.icon-muted,
+    contents: "About",
+    font-size: numberTokens.numbers.font-sm,
+    font-family: fontTokens.fonts.sans,
+    font-style: "W3"
+  }
+}
+
+footerIcons = frame {
+  height: .auto,
+  layout: {align-items: .center, item-gap: lengthTokens.lengths.footer-icon-gap},
+  children: [footerIconX, footerIconInstagram, footerIconGithub, footerIconRss]
+}
+
+footerIconX = icon : iconLink.footerIconLink {
+  contents: xGlyph
+}
+
+footerIconInstagram = icon : iconLink.footerIconLink {
+  contents: instagramGlyph
+}
+
+footerIconGithub = icon : iconLink.footerIconLink {
+  contents: githubGlyph
+}
+
+footerIconRss = icon : iconLink.footerIconLink {
+  contents: rssGlyph
+}

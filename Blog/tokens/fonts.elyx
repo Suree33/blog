@@ -1,0 +1,4 @@
+// Font choices for sur33.com (System UI stack → Hiragino for CJK coverage).
+export fonts = tokens {
+  sans: "Hiragino Sans"
+}

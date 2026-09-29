@@ -1,0 +1,32 @@
+import "tokens/colors.elyx" as colorTokens
+import "tokens/numbers.elyx" as numberTokens
+import "tokens/fonts.elyx" as fontTokens
+
+export headerNavItem = frame {
+  height: .auto,
+  layout: {align-items: .center},
+  children: navLabel
+}
+
+@variant
+export activeHeaderNavItem = frame : headerNavItem {
+  top: 56px,
+
+  navLabel {
+    underline: .single
+  }
+}
+
+@variant
+export inactiveHeaderNavItem = frame : headerNavItem {
+  left: 0px,
+  top: 112px
+}
+
+export navLabel = text {
+  fill: colorTokens.colors.content-primary,
+  contents: "BLOG",
+  font-size: numberTokens.numbers.font-base,
+  font-family: fontTokens.fonts.sans,
+  font-style: "W3"
+}
