@@ -2,31 +2,47 @@ import "tokens/colors.elyx" as colorTokens
 import "tokens/lengths.elyx" as lengthTokens
 import "tokens/numbers.elyx" as numberTokens
 import "tokens/fonts.elyx" as fontTokens
-import "controls/header-nav-item.elyx" as headerNav
-import "controls/icon-link.elyx" as iconLink
+import "controls/footer-nav-item.elyx" as footerNavItems
 import "resources/icons/github.svg" as githubGlyph
 import "resources/icons/x.svg" as xGlyph
 import "resources/icons/instagram.svg" as instagramGlyph
 import "resources/icons/rss.svg" as rssGlyph
 
+// Footer.astro at sm+: a full-width top border around a `container px-4` row.
+// The border is a 1px layer so it adds to the height as CSS border-top does.
 export siteFooter = frame {
-  top: 260px,
-  width: 1440px,
+  left: 0px,
+  top: 0px,
+  width: lengthTokens.lengths.screen-width,
   height: .auto,
   layout: {direction: .column, align-items: .center},
-  fill: colorTokens.colors.background,
-  border: {color: colorTokens.colors.divider, sides: .top},
-  padding: [
-    lengthTokens.lengths.footer-pad-y,
-    lengthTokens.lengths.screen-pad-x
-  ],
-  children: footerBar
+  children: [footerDivider, footerBar]
+}
+
+footerDivider = frame {
+  width: 100%,
+  height: lengthTokens.lengths.divider-width,
+  fill: colorTokens.colors.divider
+}
+
+// Footer.astro inlines its icon links: text-lg glyphs in the subtle color.
+export footerIcon = icon {
+  left: 0px,
+  top: 160px,
+  width: lengthTokens.lengths.icon-footer,
+  height: lengthTokens.lengths.icon-footer,
+  fill: colorTokens.colors.content-subtle,
+  contents: githubGlyph
 }
 
 footerBar = frame {
   width: lengthTokens.lengths.page-max,
   height: .auto,
   layout: {justify-content: .space-between, align-items: .center},
+  padding: [
+    lengthTokens.lengths.footer-pad-y,
+    lengthTokens.lengths.screen-pad-x
+  ],
   children: [footerSiteName, footerNav, footerIcons]
 }
 
@@ -34,34 +50,21 @@ footerSiteName = text {
   fill: colorTokens.colors.content-primary,
   contents: "Daiki Sato",
   font-size: numberTokens.numbers.font-xl,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W6"
+  font-family: fontTokens.fonts.latin-display,
+  font-style: fontTokens.fonts.latin-semibold,
+  line-height: numberTokens.numbers.leading-xl,
+  letter-spacing: numberTokens.numbers.tracking-display
 }
 
 footerNav = frame {
   height: .auto,
   layout: {align-items: .center, item-gap: lengthTokens.lengths.footer-gap},
-  children: [footerNavItemBlog, footerNavItemAbout]
+  children: [footerNavBlog, footerNavAbout]
 }
 
-footerNavItemBlog = frame : headerNav.headerNavItem {
-  headerNav.navLabel {
-    contents: "Blog",
-    font-size: numberTokens.numbers.font-sm,
-    font-family: fontTokens.fonts.sans,
-    font-style: "W5"
-  }
-}
+footerNavBlog = text : footerNavItems.activeFooterNavItem {}
 
-footerNavItemAbout = frame : headerNav.headerNavItem {
-  headerNav.navLabel {
-    fill[0].color: colorTokens.colors.icon-muted,
-    contents: "About",
-    font-size: numberTokens.numbers.font-sm,
-    font-family: fontTokens.fonts.sans,
-    font-style: "W3"
-  }
-}
+footerNavAbout = text : footerNavItems.footerNavItem {}
 
 footerIcons = frame {
   height: .auto,
@@ -69,18 +72,22 @@ footerIcons = frame {
   children: [footerIconX, footerIconInstagram, footerIconGithub, footerIconRss]
 }
 
-footerIconX = icon : iconLink.footerIconLink {
+footerIconX = icon : footerIcon {
   contents: xGlyph
 }
 
-footerIconInstagram = icon : iconLink.footerIconLink {
+// fa6 glyphs keep their viewBox ratio: 448/512 and 496/512 of the 18px height.
+footerIconInstagram = icon : footerIcon {
+  width: 15.75px,
   contents: instagramGlyph
 }
 
-footerIconGithub = icon : iconLink.footerIconLink {
+footerIconGithub = icon : footerIcon {
+  width: 17.4375px,
   contents: githubGlyph
 }
 
-footerIconRss = icon : iconLink.footerIconLink {
+footerIconRss = icon : footerIcon {
+  width: 15.75px,
   contents: rssGlyph
 }

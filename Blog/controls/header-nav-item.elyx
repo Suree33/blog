@@ -2,7 +2,10 @@ import "tokens/colors.elyx" as colorTokens
 import "tokens/numbers.elyx" as numberTokens
 import "tokens/fonts.elyx" as fontTokens
 
+// HeaderNavItem.astro: uppercase link; the active page adds border-b border-current.
 export headerNavItem = frame {
+  left: 0px,
+  top: 0px,
   height: .auto,
   layout: {align-items: .center},
   children: navLabel
@@ -10,23 +13,21 @@ export headerNavItem = frame {
 
 @variant
 export activeHeaderNavItem = frame : headerNavItem {
-  top: 56px,
-
-  navLabel {
-    underline: .single
-  }
-}
-
-@variant
-export inactiveHeaderNavItem = frame : headerNavItem {
   left: 0px,
-  top: 112px
+  top: 56px,
+  border[0].color: colorTokens.colors.content-primary,
+  border[0].sides: .bottom,
+  layout.align-items: .center,
+  layout.direction: .row,
+  layout.include-borders: .true
 }
 
-export navLabel = text {
+navLabel = text {
   fill: colorTokens.colors.content-primary,
   contents: "BLOG",
   font-size: numberTokens.numbers.font-base,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W3"
+  font-family: fontTokens.fonts.latin-text,
+  font-style: fontTokens.fonts.latin-regular,
+  line-height: numberTokens.numbers.leading-base,
+  letter-spacing: numberTokens.numbers.tracking-text
 }

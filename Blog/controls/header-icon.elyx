@@ -1,0 +1,21 @@
+import "tokens/colors.elyx" as colorTokens
+import "tokens/lengths.elyx" as lengthTokens
+import "resources/icons/github.svg" as githubGlyph
+
+// HeaderIcon.astro: a `rounded p-2` box around a text-xl (20px) glyph.
+export headerIcon = frame {
+  left: 0px,
+  top: 0px,
+  height: .auto,
+  layout: {justify-content: .center, align-items: .center},
+  corner-radius: lengthTokens.lengths.radius-sm,
+  padding: lengthTokens.lengths.header-icon-pad,
+  children: headerGlyph
+}
+
+headerGlyph = icon {
+  width: lengthTokens.lengths.icon-header,
+  height: lengthTokens.lengths.icon-header,
+  fill: colorTokens.colors.content-primary,
+  contents: githubGlyph
+}

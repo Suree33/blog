@@ -1,96 +1,111 @@
-// Site header: avatar, nav links, social + theme icons. Translucent sticky bar.
 import "tokens/colors.elyx" as colorTokens
 import "tokens/lengths.elyx" as lengthTokens
-import "tokens/numbers.elyx" as numberTokens
 import "controls/header-nav-item.elyx" as headerNav
-import "controls/icon-link.elyx" as iconLink
+import "controls/header-icon.elyx" as headerIcons
+import "resources/icons/github.svg" as githubGlyph
 import "resources/images/profile-icon.jpg" as profilePhoto
 import "resources/icons/x.svg" as xGlyph
 import "resources/icons/instagram.svg" as instagramGlyph
-import "resources/icons/github.svg" as githubGlyph
+import "resources/icons/sun.svg" as sunGlyph
 import "resources/icons/moon.svg" as moonGlyph
 
+// Header.astro at sm+: translucent sticky bar with avatar, nav, and icon links.
 export siteHeader = frame {
-  name: "Site Header",
-  top: 160px,
-  width: 1440px,
-  layout: {direction: .row, align-items: .center, justify-content: .center},
-  padding: [16px, lengthTokens.lengths.screen-pad-x],
+  left: 0px,
+  top: 0px,
+  width: lengthTokens.lengths.screen-width,
   height: .auto,
+  layout: {justify-content: .center, align-items: .center},
   fill: {color: colorTokens.colors.background, opacity: 0.8},
-  children: [headerBar]
+  padding: [
+    lengthTokens.lengths.header-pad-y,
+    lengthTokens.lengths.screen-pad-x
+  ],
+  children: headerBar
+}
+
+// ThemeToggle.astro shows lucide:moon once the dark theme is chosen; the base
+// shows lucide:sun for the light theme.
+@variant
+export darkThemeSiteHeader = frame : siteHeader {
+  left: 0px,
+  top: 120px,
+
+  headerBar {
+    headerActions {
+      actionTheme {
+        headerIcons.headerGlyph {
+          contents: moonGlyph
+        }
+      }
+    }
+  }
 }
 
 headerBar = frame {
-  name: "Bar",
-  layout: {
-    direction: .row,
-    align-items: .center,
-    justify-content: .space-between
-  },
   width: lengthTokens.lengths.page-max,
   height: .auto,
+  layout: {justify-content: .space-between, align-items: .center},
   children: [headerLeft, headerActions]
 }
 
 headerLeft = frame {
-  name: "Left",
-  layout: {direction: .row, align-items: .center, item-gap: 32px},
   height: .auto,
+  layout: {align-items: .center, item-gap: lengthTokens.lengths.header-left-gap},
   children: [headerAvatar, headerNavLinks]
 }
 
 headerAvatar = frame {
-  name: "Avatar",
   width: lengthTokens.lengths.avatar,
   height: lengthTokens.lengths.avatar,
-  corner-radius: lengthTokens.lengths.radius-full,
-  fill: {image: {ref: profilePhoto, sizing: .cover}},
-  border: {width: 1px, color: colorTokens.colors.content-primary}
+  fill: {image: {ref: profilePhoto}},
+  border: colorTokens.colors.content-primary,
+  corner-radius: lengthTokens.lengths.radius-full
 }
 
 headerNavLinks = frame {
-  name: "Nav",
-  layout: {
-    direction: .row,
-    align-items: .center,
-    item-gap: lengthTokens.lengths.nav-gap
-  },
   height: .auto,
+  layout: {align-items: .center, item-gap: lengthTokens.lengths.nav-gap},
   children: [navBlog, navAbout]
 }
 
 navBlog = frame : headerNav.activeHeaderNavItem {}
 
-navAbout = frame : headerNav.inactiveHeaderNavItem {
+navAbout = frame : headerNav.headerNavItem {
   headerNav.navLabel {
     contents: "ABOUT"
   }
 }
 
 headerActions = frame {
-  name: "Actions",
-  layout: {
-    direction: .row,
-    align-items: .center,
-    item-gap: lengthTokens.lengths.header-icon-gap
-  },
   height: .auto,
+  layout: {align-items: .center, item-gap: lengthTokens.lengths.header-icon-gap},
   children: [actionX, actionInstagram, actionGithub, actionTheme]
 }
 
-actionX = icon : iconLink.iconLink {
-  contents: xGlyph
+actionX = frame : headerIcons.headerIcon {
+  headerIcons.headerGlyph {
+    contents: xGlyph
+  }
 }
 
-actionInstagram = icon : iconLink.iconLink {
-  contents: instagramGlyph
+// fa6 glyphs keep their viewBox ratio: instagram 448/512, github 496/512.
+actionInstagram = frame : headerIcons.headerIcon {
+  headerIcons.headerGlyph {
+    width: 17.5px,
+    contents: instagramGlyph
+  }
 }
 
-actionGithub = icon : iconLink.iconLink {
-  contents: githubGlyph
+actionGithub = frame : headerIcons.headerIcon {
+  headerIcons.headerGlyph {
+    width: 19.375px,
+    contents: githubGlyph
+  }
 }
 
-actionTheme = icon : iconLink.iconLink {
-  contents: moonGlyph
+actionTheme = frame : headerIcons.headerIcon {
+  headerIcons.headerGlyph {
+    contents: sunGlyph
+  }
 }

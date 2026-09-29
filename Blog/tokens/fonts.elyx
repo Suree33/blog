@@ -1,4 +1,15 @@
-// Font choices for sur33.com (System UI stack → Hiragino for CJK coverage).
+// Font choices for sur33.com. The site's --font-sans stack draws Latin glyphs in
+// SF Pro (system-ui: Text below 20px, Display from 20px) and falls back to
+// Hiragino Sans for Japanese. Chrome on macOS draws Japanese font-bold as W6
+// (compared against a screenshot).
 export fonts = tokens {
-  sans: "Hiragino Sans"
+  japanese: "Hiragino Sans",
+  latin-text: "SF Pro Text",
+  latin-display: "SF Pro Display",
+  japanese-normal: "W3",
+  japanese-bold: "W6",
+  latin-regular: "Regular",
+  latin-medium: "Medium",
+  latin-semibold: "Semibold",
+  latin-bold: "Bold"
 }

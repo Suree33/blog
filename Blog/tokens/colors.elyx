@@ -1,11 +1,11 @@
 // sur33.com color tokens — light (context-free fallback).
-// Sourced from src/styles/global.css + Tailwind v4 defaults.
+// Sourced from src/styles/global.css + Tailwind v4 theme.css (oklch → sRGB).
 export colors = tokens {
   background: .white,
-  background-hover: rgb(89.8%, 89.8%, 89.8%),
   content-primary: .black,
+  content-strong: rgb(6.27%, 9.41%, 15.6863%),
   content-secondary: rgb(32.1569%, 32.1569%, 32.1569%),
   content-muted: rgb(45.098%, 45.098%, 45.098%),
-  divider: rgb(89.8%, 90.5882%, 92.1569%),
-  icon-muted: rgb(29.41%, 33.33%, 38.82%)
+  content-subtle: rgb(29.0196%, 33.33%, 39.6078%),
+  divider: rgb(89.8%, 90.5882%, 92.1569%)
 }

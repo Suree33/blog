@@ -1,0 +1,26 @@
+import "tokens/colors.elyx" as colorTokens
+import "tokens/numbers.elyx" as numberTokens
+import "tokens/fonts.elyx" as fontTokens
+
+// FooterNavItem.astro: gray text-sm link; the active page adds font-medium and
+// the strong color.
+export footerNavItem = text {
+  left: 0px,
+  top: 0px,
+  fill: colorTokens.colors.content-subtle,
+  contents: "About",
+  font-size: numberTokens.numbers.font-sm,
+  font-family: fontTokens.fonts.latin-text,
+  font-style: fontTokens.fonts.latin-regular,
+  line-height: numberTokens.numbers.leading-sm,
+  letter-spacing: numberTokens.numbers.tracking-text
+}
+
+@variant
+export activeFooterNavItem = text : footerNavItem {
+  left: 0px,
+  top: 40px,
+  contents: "Blog",
+  font-style: fontTokens.fonts.latin-medium,
+  fill[0].color: colorTokens.colors.content-strong
+}

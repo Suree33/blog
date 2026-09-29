@@ -1,30 +1,38 @@
-import "blocks/site-header.elyx" as headerBlock
 import "tokens/colors.elyx" as colorTokens
 import "tokens/lengths.elyx" as lengthTokens
+import "blocks/site-header.elyx" as headerBlock
 import "blocks/site-footer.elyx" as footerBlock
-import "controls/post-item.elyx" as controls
+import "controls/post-item.elyx" as postItems
 
+// index.astro: every non-draft post, newest pubDate first, no pagination.
 blogTop = frame {
-  width: 1440px,
+  left: 0px,
+  top: 0px,
+  width: lengthTokens.lengths.screen-width,
   height: .auto,
   layout: {direction: .column, align-items: .stretch},
   fill: colorTokens.colors.background,
   children: [pageHeader, pageMain, pageFooter]
 }
 
-// Same top page with the theme=dark context applied to the whole screen.
+// The same page with the theme=dark context applied to the whole screen.
 @with-context(theme="dark")
 blogTopDark = frame : blogTop {
-  top: 2400px
+  left: 1540px,
+  top: 0px,
+
+  @use-variant(headerBlock.darkThemeSiteHeader)
+  pageHeader {}
 }
 
 pageHeader = frame : headerBlock.siteHeader {}
 
+// mt-10 above the list; the footer's mt-12 is folded into the bottom padding.
 pageMain = frame {
-  width: 100%,
   height: .auto,
   layout: {direction: .column, align-items: .center},
-  padding: [40px, 0px, 0px],
+  padding-top: lengthTokens.lengths.main-pad-top,
+  padding-bottom: lengthTokens.lengths.footer-margin-top,
   children: postList
 }
 
@@ -33,227 +41,496 @@ postList = frame {
   height: .auto,
   layout: {direction: .column, item-gap: lengthTokens.lengths.list-gap},
   children: [
-    rowNespresso,
-    rowZshrc,
-    rowRemarkPlus,
-    rowKeyboard,
-    rowCatppuccin,
-    rowTailscale,
-    rowIntel,
-    rowObsidian
+    rowNespressoMold,
+    rowZshrcStartupSlowCauseAndFix,
+    rowResolveSidekickNvimCodexSearchError,
+    rowRemarkLinkCardPlus,
+    rowKeyboardSettingsTips,
+    rowCatppuccinCoteditor,
+    rowTailscaleGithubActionsToDeployPalworldServerDocker,
+    rowIntelCoreI513600kfGameCrash,
+    rowNatureRemoLapis,
+    rowAudioInterfaceUnderTheDesk,
+    rowWishlist202404,
+    rowSetupObsidianLivesync,
+    rowPerplexityProIsCheaperOnIosApp,
+    rowRemarkLinkCardWithAstro,
+    rowLogiMxMasterIsBetterThanLift,
+    rowFanForMyRightHand
   ]
 }
 
-// 2026-07-05 — tags: none, description: none
-rowNespresso = frame : controls.postItem {
-  overrides: [remove(controls.thumb)],
-
-  controls.postContent {
-    width: lengthTokens.lengths.post-content-full,
-
-    controls.postDescription {
-      display: .none
-    }
-
-    controls.postMeta {
-      controls.metaDot2 {
+// 2026-07-05 — src/pages/posts/nespresso-mold.md
+rowNespressoMold = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
         display: .none
       }
 
-      controls.metaTag2 {
+      postItems.metaDot1 {
         display: .none
       }
 
-      controls.metaDot1 {
+      postItems.metaTag2 {
         display: .none
       }
 
-      controls.metaTag1 {
+      postItems.metaDot2 {
         display: .none
       }
 
-      controls.metaDate {
+      postItems.metaDate {
         contents: "2026年7月5日"
       }
     }
 
-    controls.postTitle {
-      contents: "ネスプレッソの手入れはサボるな。カビるから。"
-    }
-  }
-}
-
-// 2026-02-27 — tags: Zsh / 最適化, description: none
-rowZshrc = frame : controls.postItem {
-  overrides: [remove(controls.thumb)],
-
-  controls.postContent {
-    width: lengthTokens.lengths.post-content-full,
-
-    controls.postDescription {
+    postItems.postDescription {
       display: .none
     }
 
-    controls.postTitle {
-      contents: ".zshrc の起動が遅い原因を Codex に調査させたら、10倍速くなった"
+    postItems.postTitle {
+      contents: "ネスプレッソの手入れはサボるな。カビるから。"
     }
 
-    controls.postMeta {
-      controls.metaDate {
-        contents: "2026年2月27日"
+    padding-bottom: lengthTokens.lengths.title-gap
+  }
+}
+
+// 2026-02-27 — src/pages/posts/zshrc-startup-slow-cause-and-fix.md
+rowZshrcStartupSlowCauseAndFix = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postDescription {
+      display: .none
+    }
+
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "Zsh"
       }
 
-      controls.metaTag2 {
+      postItems.metaTag2 {
         contents: "最適化"
       }
 
-      controls.metaTag1 {
-        contents: "Zsh"
+      postItems.metaDate {
+        contents: "2026年2月27日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: ".zshrc の起動が遅い原因を Codex に調査させたら、10倍速くなった"
+    }
+
+    padding-bottom: lengthTokens.lengths.title-gap
+  }
+}
+
+// 2026-02-16 — src/pages/posts/resolve-sidekick-nvim-codex-search-error.md
+rowResolveSidekickNvimCodexSearchError = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "AI"
+      }
+
+      postItems.metaTag2 {
+        contents: "Neovim"
+      }
+
+      postItems.metaDate {
+        contents: "2026年2月16日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "sidekick.nvimでCodexを使うと表示される [features].web_search_request is deprecated を解消する"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "sidekick.nvimでCodexを使うと毎回エラーが表示されてしまうので、PRを作成しつつ、一時的な回避策を講じることにしました。"
       }
     }
   }
 }
 
-// 2026-02-12 — tags: ウェブ開発 / Astro
-rowRemarkPlus = frame : controls.postItem {
-  overrides: [remove(controls.thumb)],
-
-  controls.postContent {
-    width: lengthTokens.lengths.post-content-full,
-
-    controls.postDescription {
-      contents: "メンテナンスの停滞している remark-link-card から remark-link-card-plus へ移行しました。"
-    }
-
-    controls.postTitle {
-      contents: "remark-link-card-plusへ移行しました"
-    }
-
-    controls.postMeta {
-      controls.metaDate {
-        contents: "2026年2月12日"
+// 2026-02-12 — src/pages/posts/remark-link-card-plus.md
+rowRemarkLinkCardPlus = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "ウェブ開発"
       }
 
-      controls.metaTag2 {
+      postItems.metaTag2 {
         contents: "Astro"
       }
 
-      controls.metaTag1 {
-        contents: "ウェブ開発"
+      postItems.metaDate {
+        contents: "2026年2月12日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "remark-link-card-plusへ移行しました"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "メンテナンスの停滞している remark-link-card から remark-link-card-plus へ移行しました。"
       }
     }
   }
 }
 
-// 2025-08-28 — tags: キーボード / ガジェット
-rowKeyboard = frame : controls.postItem {
-  overrides: [remove(controls.thumb)],
+// 2025-08-28 — src/pages/posts/keyboard-settings-tips.md
+rowKeyboardSettingsTips = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "キーボード"
+      }
 
-  controls.postContent {
-    width: lengthTokens.lengths.post-content-full,
+      postItems.metaTag2 {
+        contents: "ガジェット"
+      }
 
-    controls.postDescription {
-      contents: "VIAでキーボードの設定をしている時のメモ。随時更新。"
+      postItems.metaDate {
+        contents: "2025年8月28日"
+      }
     }
 
-    controls.postTitle {
+    postItems.postTitle {
       contents: "VIAでキーボードを設定していて知った/気がついたTips"
     }
 
-    controls.postMeta {
-      controls.metaDate {
-        contents: "2025年8月28日"
-      }
-
-      controls.metaTag2 {
-        contents: "ガジェット"
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "VIAでキーボードの設定をしている時のメモ。随時更新。"
       }
     }
   }
 }
 
-// 2025-07-27 — tags: Catppuccin / OSS
-rowCatppuccin = frame : controls.postItem {
-  overrides: [remove(controls.thumb)],
+// 2025-07-27 — src/pages/posts/catppuccin-coteditor.md
+rowCatppuccinCoteditor = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "Catppuccin"
+      }
 
-  controls.postContent {
-    width: lengthTokens.lengths.post-content-full,
+      postItems.metaTag2 {
+        contents: "OSS"
+      }
 
-    controls.postDescription {
-      contents: "CotEditor向けのCatppuccinテーマを作成した。初めてのOSS貢献。"
-    }
-
-    controls.postTitle {
-      contents: "CotEditor向けCatppuccinテーマを作った"
-    }
-
-    controls.postMeta {
-      controls.metaDate {
+      postItems.metaDate {
         contents: "2025年7月27日"
       }
     }
+
+    postItems.postTitle {
+      contents: "CotEditor向けCatppuccinテーマを作った"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "CotEditor向けのCatppuccinテーマを作成した。初めてのOSS貢献。"
+      }
+    }
   }
 }
 
-// 2025-01-26 — tags: Tailscale / GitHub
-rowTailscale = frame : controls.postItem {
-  overrides: [remove(controls.thumb)],
-
-  controls.postContent {
-    width: lengthTokens.lengths.post-content-full,
-
-    controls.postDescription {
-      contents: "GitHub ActionsからTailscale経由でサーバーへアクセスしてデプロイできるようにしました。"
-    }
-
-    controls.postTitle {
-      contents: "GitHub Actions × Tailscale で Palworld サーバーを自動デプロイする"
-    }
-
-    controls.postMeta {
-      controls.metaDate {
-        contents: "2025年1月26日"
+// 2025-01-26 — src/pages/posts/tailscale-github-actions-to-deploy-palworld-server-docker.md
+rowTailscaleGithubActionsToDeployPalworldServerDocker = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "Tailscale"
       }
 
-      controls.metaTag2 {
+      postItems.metaTag2 {
         contents: "GitHub"
       }
 
-      controls.metaTag1 {
-        contents: "Tailscale"
+      postItems.metaDate {
+        contents: "2025年1月26日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "GitHub Actions × Tailscale で Palworld サーバーを自動デプロイする"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "GitHub ActionsからTailscale経由でサーバーへアクセスしてデプロイできるようにしました。"
       }
     }
   }
 }
 
-// 2024-07-31 — tags: ガジェット / PC
-rowIntel = frame : controls.postItem {
-  overrides: [remove(controls.thumb)],
+// 2024-07-31 — src/pages/posts/intel-core-i5-13600kf-game-crash.md
+rowIntelCoreI513600kfGameCrash = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "ガジェット"
+      }
 
-  controls.postContent {
-    width: lengthTokens.lengths.post-content-full,
+      postItems.metaTag2 {
+        contents: "PC"
+      }
 
-    controls.postDescription {
-      contents: "Intel Core 第13/14世代プロセッサに関する不具合により、ゲームが頻繁にクラッシュする問題に関して、試したことやIntelのサポートとのやり取りをまとめました。"
+      postItems.metaDate {
+        contents: "2024年7月31日"
+      }
     }
 
-    controls.postTitle {
+    postItems.postTitle {
       contents: "Intel Core i5-13600KFでゲームがクラッシュする問題"
     }
 
-    controls.postMeta {
-      controls.metaDate {
-        contents: "2024年7月31日"
-      }
-
-      controls.metaTag2 {
-        contents: "PC"
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "Intel Core 第13/14世代プロセッサに関する不具合により、ゲームが頻繁にクラッシュする問題に関して、試したことやIntelのサポートとのやり取りをまとめました。"
       }
     }
   }
 }
 
-// 2024-04-15 — tags: アプリ / Obsidian — ogimage thumbnail (base content)
-rowObsidian = frame : controls.postItem {}
+// 2024-07-12 — src/pages/posts/nature-remo-lapis.md
+// The description is cut where the site's line-clamp-1 cuts it, "…" included.
+rowNatureRemoLapis = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "ガジェット"
+      }
+
+      postItems.metaTag2 {
+        contents: "スマートホーム"
+      }
+
+      postItems.metaDate {
+        contents: "2024年7月12日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "Nature Remo Lapis does not Matter with Sesame 5"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "Matter対応と、Sesame 5連携機能に期待してNature Remo Lapisを買ってみましたが、Matter経由ではSesame 5は連携されませんでした。ただ、オートエコ機能は思った…"
+      }
+    }
+  }
+}
+
+// 2024-05-16 — src/pages/posts/audio-interface-under-the-desk.md
+rowAudioInterfaceUnderTheDesk = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "ガジェット"
+      }
+
+      postItems.metaTag2 {
+        contents: "DIY"
+      }
+
+      postItems.metaDate {
+        contents: "2024年5月16日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "オーディオインターフェースを机の裏に設置した"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "オーディオインターフェースを両面テープで机の下に設置するために、突っ張り棒を使って仮固定しました。"
+      }
+    }
+  }
+}
+
+// 2024-04-18 — src/pages/posts/wishlist-2024-04.md
+rowWishlist202404 = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "ガジェット"
+      }
+
+      postItems.metaTag2 {
+        contents: "ゲーム"
+      }
+
+      postItems.metaDate {
+        contents: "2024年4月18日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "欲しいものリスト 2024.04"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "欲しいものがありすぎるので、自分の中で整理するためにまとめました。お金が足りない。"
+      }
+    }
+  }
+}
+
+// 2024-04-15 — src/pages/posts/setup-obsidian-livesync.md
+rowSetupObsidianLivesync = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "アプリ"
+      }
+
+      postItems.metaTag2 {
+        contents: "Obsidian"
+      }
+
+      postItems.metaDate {
+        contents: "2024年4月15日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "Obsidian Syncは高いので、Self-hosted LiveSyncを使う"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "Obsidian公式のSyncは高いので、コミュニティプラグインのSelf-hosted LiveSyncを使って同期、Obsidian Gitでバックアップするようにしてみました。"
+      }
+    }
+  }
+}
+
+// 2024-04-14 — src/pages/posts/perplexity-pro-is-cheaper-on-ios-app.md
+rowPerplexityProIsCheaperOnIosApp = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "AI"
+      }
+
+      postItems.metaTag2 {
+        contents: "Perplexity"
+      }
+
+      postItems.metaDate {
+        contents: "2024年4月14日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "Perplexity Proを契約してみた"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "ChatGPT PlusやClaude Proの代わりにPerplexity Proを契約してみました。"
+      }
+    }
+  }
+}
+
+// 2024-04-05 — src/pages/posts/remark-link-card-with-astro.md
+rowRemarkLinkCardWithAstro = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "ウェブ開発"
+      }
+
+      postItems.metaTag2 {
+        contents: "Astro"
+      }
+
+      postItems.metaDate {
+        contents: "2024年4月5日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "Astroにおけるremark-link-cardを使ったリンクカード"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "Astroで、remarkプラグインであるremark-link-cardを使いリンクをカード形式で表示できるようにしました。"
+      }
+    }
+  }
+}
+
+// 2024-03-25 — src/pages/posts/logi-mx-master-is-better-than-lift.md
+rowLogiMxMasterIsBetterThanLift = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postDescription {
+      display: .none
+    }
+
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "ガジェット"
+      }
+
+      postItems.metaTag2 {
+        contents: "マウス"
+      }
+
+      postItems.metaDate {
+        contents: "2024年3月25日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "Logicool MX Liftを買ってみて、MX Masterの良さを再認識した"
+    }
+
+    padding-bottom: lengthTokens.lengths.title-gap
+  }
+}
+
+// 2024-03-10 — src/pages/posts/fan-for-my-right-hand.md
+rowFanForMyRightHand = frame : postItems.postItem {
+  postItems.postContent {
+    postItems.postMeta {
+      postItems.metaTag1 {
+        contents: "ガジェット"
+      }
+
+      postItems.metaTag2 {
+        contents: "ゲーム"
+      }
+
+      postItems.metaDate {
+        contents: "2024年3月10日"
+      }
+    }
+
+    postItems.postTitle {
+      contents: "手を乾かすために卓上扇風機を買った"
+    }
+
+    postItems.postDescription {
+      postItems.descriptionText {
+        contents: "手汗対策のためにエレコムの卓上扇風機を買ってみました。"
+      }
+    }
+  }
+}
 
 pageFooter = frame : footerBlock.siteFooter {}

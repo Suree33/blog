@@ -1,9 +1,15 @@
-// Type scale for sur33.com (Tailwind rem sizes).
+// Type scale for sur33.com: Tailwind text-* sizes in px and their line-height
+// multipliers (--text-*--line-height).
 export numbers = tokens {
-  font-xs: 12,
   font-sm: 14,
   font-base: 16,
-  font-lg: 18,
   font-xl: 20,
-  font-2xl: 24
+  leading-sm: 1.4286,
+  leading-base: 1.5,
+  leading-xl: 1.4,
+  // letter-spacing in % of the font size, fitted to measured site widths: Chrome
+  // sizes SF Pro optically between the Text and Display cuts. Keep them
+  // unitless: a % token value is stored as a fraction (1.5% -> 0.015).
+  tracking-text: -0.75,
+  tracking-display: 1.5
 }

@@ -4,25 +4,40 @@ import "tokens/numbers.elyx" as numberTokens
 import "tokens/fonts.elyx" as fontTokens
 import "resources/images/setup-obsidian-livesync.png" as obsidianImage
 
+// PostItem.astro. The thumbnail renders only when frontmatter.image is set,
+// which no current post does, so the base hides it.
 export postItem = frame {
-  left: 260px,
+  left: 0px,
+  top: 0px,
   width: lengthTokens.lengths.page-max,
   height: .auto,
   layout: {
     justify-content: .space-between,
     item-gap: lengthTokens.lengths.row-thumb-gap
   },
-  fill: colorTokens.colors.background,
   corner-radius: lengthTokens.lengths.radius-sm,
   padding: lengthTokens.lengths.row-pad,
   children: [postContent, thumb]
 }
 
+@variant
+export postItemWithThumb = frame : postItem {
+  left: 0px,
+  top: 200px,
+
+  postContent {
+    width: lengthTokens.lengths.post-content-with-thumb
+  }
+
+  thumb {
+    display: .visible
+  }
+}
+
 postContent = frame {
-  width: lengthTokens.lengths.post-content-with-thumb,
+  width: 100%,
   height: .auto,
   layout: {direction: .column, item-gap: lengthTokens.lengths.title-gap},
-  padding: 0px,
   children: [postMeta, postTitle, postDescription]
 }
 
@@ -34,63 +49,122 @@ postMeta = frame {
 
 metaTag1 = text {
   fill: colorTokens.colors.content-muted,
+  subrange: {
+    range: [0, 100000],
+    font-family: fontTokens.fonts.latin-text,
+    font-style: fontTokens.fonts.latin-regular,
+    letter-spacing: numberTokens.numbers.tracking-text
+  },
   contents: "アプリ",
   font-size: numberTokens.numbers.font-sm,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W3"
+  font-family: fontTokens.fonts.japanese,
+  font-style: fontTokens.fonts.japanese-normal,
+  line-height: numberTokens.numbers.leading-sm
 }
 
 metaDot1 = text {
   fill: colorTokens.colors.content-muted,
+  subrange: {
+    range: [0, 100000],
+    font-family: fontTokens.fonts.latin-text,
+    font-style: fontTokens.fonts.latin-regular,
+    letter-spacing: numberTokens.numbers.tracking-text
+  },
   contents: "•",
   font-size: numberTokens.numbers.font-sm,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W3"
+  font-family: fontTokens.fonts.japanese,
+  font-style: fontTokens.fonts.japanese-normal,
+  line-height: numberTokens.numbers.leading-sm
 }
 
 metaTag2 = text {
   fill: colorTokens.colors.content-muted,
+  subrange: {
+    range: [0, 100000],
+    font-family: fontTokens.fonts.latin-text,
+    font-style: fontTokens.fonts.latin-regular,
+    letter-spacing: numberTokens.numbers.tracking-text
+  },
   contents: "Obsidian",
   font-size: numberTokens.numbers.font-sm,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W3"
+  font-family: fontTokens.fonts.japanese,
+  font-style: fontTokens.fonts.japanese-normal,
+  line-height: numberTokens.numbers.leading-sm
 }
 
 metaDot2 = text {
   fill: colorTokens.colors.content-muted,
+  subrange: {
+    range: [0, 100000],
+    font-family: fontTokens.fonts.latin-text,
+    font-style: fontTokens.fonts.latin-regular,
+    letter-spacing: numberTokens.numbers.tracking-text
+  },
   contents: "•",
   font-size: numberTokens.numbers.font-sm,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W3"
+  font-family: fontTokens.fonts.japanese,
+  font-style: fontTokens.fonts.japanese-normal,
+  line-height: numberTokens.numbers.leading-sm
 }
 
 metaDate = text {
   fill: colorTokens.colors.content-muted,
+  subrange: {
+    range: [0, 100000],
+    font-family: fontTokens.fonts.latin-text,
+    font-style: fontTokens.fonts.latin-regular,
+    letter-spacing: numberTokens.numbers.tracking-text
+  },
   contents: "2024年4月15日",
   font-size: numberTokens.numbers.font-sm,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W3"
+  font-family: fontTokens.fonts.japanese,
+  font-style: fontTokens.fonts.japanese-normal,
+  line-height: numberTokens.numbers.leading-sm
 }
 
 postTitle = text {
   fill: colorTokens.colors.content-primary,
+  subrange: {
+    range: [0, 100000],
+    font-family: fontTokens.fonts.latin-display,
+    font-style: fontTokens.fonts.latin-bold,
+    letter-spacing: numberTokens.numbers.tracking-display
+  },
   contents: "Obsidian Syncは高いので、Self-hosted LiveSyncを使う",
   font-size: numberTokens.numbers.font-xl,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W8"
+  font-family: fontTokens.fonts.japanese,
+  font-style: fontTokens.fonts.japanese-bold,
+  line-height: numberTokens.numbers.leading-xl
 }
 
-postDescription = text {
+// line-clamp-1: one line, overflow clipped. Elyx draws no trailing ellipsis.
+postDescription = frame {
+  width: 100%,
+  height: lengthTokens.lengths.description-height,
+  layout: {direction: .column},
+  children: descriptionText
+}
+
+descriptionText = text {
+  width: 100%,
   fill: colorTokens.colors.content-secondary,
+  subrange: {
+    range: [0, 100000],
+    font-family: fontTokens.fonts.latin-text,
+    font-style: fontTokens.fonts.latin-regular,
+    letter-spacing: numberTokens.numbers.tracking-text
+  },
   contents: "Obsidian公式のSyncは高いので、コミュニティプラグインのSelf-hosted LiveSyncを使って同期、Obsidian Gitでバックアップするようにしてみました。",
   font-size: numberTokens.numbers.font-base,
-  font-family: fontTokens.fonts.sans,
-  font-style: "W3"
+  font-family: fontTokens.fonts.japanese,
+  font-style: fontTokens.fonts.japanese-normal,
+  line-height: numberTokens.numbers.leading-base
 }
 
 thumb = frame {
   width: lengthTokens.lengths.thumb-width,
   height: lengthTokens.lengths.thumb-height,
+  display: .none,
   fill: {image: {ref: obsidianImage}},
   corner-radius: lengthTokens.lengths.radius-sm
 }
