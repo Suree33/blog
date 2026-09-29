@@ -23,15 +23,13 @@ const tocHeadings = headings.filter(({ depth }) => depth === 2 || depth === 3);
   description={frontmatter.description}
   tocHeadings={tocHeadings.length > 0 ? tocHeadings : undefined}
 >
-  {
-    frontmatter.interests && (
-      <div class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold text-neutral-500 uppercase dark:text-neutral-400">
-        {frontmatter.interests.map((interest) => (
-          <div>{interest}</div>
-        ))}
-      </div>
-    )
-  }
+  {frontmatter.interests && (
+    <div class="dot-separated flex list-none flex-wrap justify-center p-0 text-base font-bold text-neutral-500 uppercase dark:text-neutral-400">
+      {frontmatter.interests.map((interest) => (
+        <div>{interest}</div>
+      ))}
+    </div>
+  )}
   <h1 class="text-4xl!">{frontmatter.title}</h1>
   <slot />
 </ProseArticleLayout>
