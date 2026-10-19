@@ -16,9 +16,6 @@ export PATH="$PNPM_HOME/bin:$PATH"
 EOF
 fi
 
-# pnpm と Node.js のバージョンは package.json が持つ。
-# `packageManager` に従って pnpm 自身が切り替わり、`pnpm install` が
-# `devEngines.runtime` の Node.js を導入して `pnpm run` の実行環境にする。
 pnpm install --frozen-lockfile
 
 sudo apt-get update

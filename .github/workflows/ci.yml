@@ -28,10 +28,8 @@ jobs:
         with:
           persist-credentials: false
 
-      # pnpm のバージョンは package.json の packageManager から読み取る。
-      # Node.js は devEngines.runtime に従って pnpm install が導入する。
       - &setup-pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@v6.1.0
         with:
           cache: true
 
