@@ -29,9 +29,10 @@ jobs:
           persist-credentials: false
 
       - &setup-pnpm
-        uses: pnpm/action-setup@v6.1.0
+        uses: pnpm/setup@v3
         with:
           cache: true
+          install: false
 
       - &install-deps
         name: Install dependencies

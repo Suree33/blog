@@ -29,7 +29,7 @@ CIでは `package.json` の `packageManager` に従ってpnpm 12を使用しま�
 - `strictDepBuilds` の既定値が有効なため、未レビューのビルドスクリプトがあると `pnpm install` は失敗します。
 - pnpmのバージョンは `package.json` の `packageManager` に正確なバージョンで固定します。pnpmは自身のバージョンが一致しない場合に宣言された版へ自動で切り替えます。固定しているため、`pnpm-workspace.yaml` に未知の設定キーがあるとpnpm 12はエラーで検出してくれます。
 - Node.jsのバージョンは `package.json` の `devEngines.runtime` に正確なバージョンで固定します。`pnpm install` がそのruntimeをダウンロードし、`pnpm run` はそのNode.jsでスクリプトを実行します。解決済みのバージョンとチェックサムは `pnpm-lock.yaml` に記録されます。
-- そのためCIは `actions/setup-node` を使いません。`pnpm/action-setup` が `cache: true` でpnpmストア(Node.js runtimeを含む)をキャッシュし、`pnpm exec node` で宣言した版のNode.jsを明示的に使います。
+- そのためCIは `actions/setup-node` を使いません。`pnpm/setup` が `package.json` の `packageManager` と `devEngines.runtime` を読み、pnpm とNode.jsを導入します。`cache: true` でpnpmストア(Node.js runtimeを含む)をキャッシュし、`install: false` で導入だけを行ったあと `pnpm install --frozen-lockfile` を明示的に実行します。
 - 両バージョンの更新はRenovateが担当します(いずれもnpmマネージャが `packageManager` と `devEngines.runtime` を更新)。pnpmのmajor更新は他のmajor更新と混ぜず単独PRになります。
 
 ## Git pre-commit
