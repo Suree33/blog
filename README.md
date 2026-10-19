@@ -15,6 +15,10 @@
 pnpm install
 ```
 
+Node.js と pnpm のバージョンは `package.json` の `devEngines.runtime` と `packageManager` で管理しています。
+`pnpm install` が指定バージョンの Node.js を導入し、`pnpm run` と `pnpm exec` はその Node.js で実行します。
+シェルから直接 `node` を実行すると別バージョンになることがあるため、その場合は `pnpm exec node` を使ってください。
+
 ### ローカルサーバーの起動
 
 ```bash

@@ -4,7 +4,7 @@
   "minimumReleaseAge": "3 days",
   "timezone": "Asia/Tokyo",
   "schedule": ["* 10 * * *"],
-  "enabledManagers": ["github-actions", "nodenv", "npm"],
+  "enabledManagers": ["github-actions", "npm"],
   "lockFileMaintenance": {
     "enabled": true
   },

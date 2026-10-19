@@ -28,14 +28,12 @@ jobs:
         with:
           persist-credentials: false
 
+      # pnpm のバージョンは package.json の packageManager から読み取る。
+      # Node.js は devEngines.runtime に従って pnpm install が導入する。
       - &setup-pnpm
         uses: pnpm/action-setup@v6
-
-      - &setup-node
-        uses: actions/setup-node@v7
         with:
-          node-version-file: .node-version
-          cache: pnpm
+          cache: true
 
       - &install-deps
         name: Install dependencies
@@ -58,7 +56,6 @@ jobs:
     steps:
       - *checkout
       - *setup-pnpm
-      - *setup-node
       - *install-deps
 
       - name: Build
@@ -72,7 +69,6 @@ jobs:
     steps:
       - *checkout
       - *setup-pnpm
-      - *setup-node
       - *install-deps
 
       - name: Install fonts
@@ -128,7 +124,7 @@ jobs:
             exit 0
           fi
 
-          if ! report_url="$(node -e '
+          if ! report_url="$(pnpm exec node -e '
             const fs = require("fs");
             const lines = fs
               .readFileSync(process.env.WRANGLER_OUTPUT_FILE_PATH, "utf8")

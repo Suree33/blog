@@ -27,9 +27,10 @@ CIでは `package.json` の `packageManager` に従ってpnpm 12を使用しま�
 - pnpm 12でも `.npmrc` からはauth/registry設定のみを読み、プロジェクトのpnpm設定は `pnpm-workspace.yaml` に集約します。
 - 依存パッケージのビルドスクリプト許可は `allowBuilds` で明示します。
 - `strictDepBuilds` の既定値が有効なため、未レビューのビルドスクリプトがあると `pnpm install` は失敗します。
-- pnpmのバージョンは `packageManager` に正確なバージョンで固定します。固定しているため、`pnpm-workspace.yaml` に未知の設定キーがあるとpnpm 12はエラーで検出してくれます。
-- Node.jsのバージョンは `.node-version` に正確なバージョンで固定し、CIの `actions/setup-node` が `node-version-file` で読み込みます。
-- 両バージョンの更新はRenovateが担当します(pnpmはnpmマネージャ、Node.jsはnodenvマネージャ)。pnpmのmajor更新は他のmajor更新と混ぜず単独PRになります。
+- pnpmのバージョンは `package.json` の `packageManager` に正確なバージョンで固定します。pnpmは自身のバージョンが一致しない場合に宣言された版へ自動で切り替えます。固定しているため、`pnpm-workspace.yaml` に未知の設定キーがあるとpnpm 12はエラーで検出してくれます。
+- Node.jsのバージョンは `package.json` の `devEngines.runtime` に正確なバージョンで固定します。`pnpm install` がそのruntimeをダウンロードし、`pnpm run` はそのNode.jsでスクリプトを実行します。解決済みのバージョンとチェックサムは `pnpm-lock.yaml` に記録されます。
+- そのためCIは `actions/setup-node` を使いません。`pnpm/action-setup` が `cache: true` でpnpmストア(Node.js runtimeを含む)をキャッシュし、`pnpm exec node` で宣言した版のNode.jsを明示的に使います。
+- 両バージョンの更新はRenovateが担当します(いずれもnpmマネージャが `packageManager` と `devEngines.runtime` を更新)。pnpmのmajor更新は他のmajor更新と混ぜず単独PRになります。
 
 ## Git pre-commit
 
