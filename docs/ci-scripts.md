@@ -30,7 +30,7 @@ CIでは `package.json` の `packageManager` に従ってpnpm 12を使用しま�
 - pnpmのバージョンは `package.json` の `packageManager` に正確なバージョンで固定します。pnpmは自身のバージョンが一致しない場合に宣言された版へ自動で切り替えます。固定しているため、`pnpm-workspace.yaml` に未知の設定キーがあるとpnpm 12はエラーで検出してくれます。
 - Node.jsのバージョンは `package.json` の `devEngines.runtime` にメジャーの範囲(`^24.0.0`)で指定します。`pnpm install` が範囲内の最新版を導入し、解決した正確なバージョンとチェックサムは `pnpm-lock.yaml` に記録されます。`pnpm run` はそのNode.jsでスクリプトを実行します。
 - 範囲で指定しているのは、Cloudflare Workers Builds のビルド環境が独自の Node.js(既定 24.18.0)で動くためです。完全一致で固定するとビルド環境の Node.js と一致せずデプロイが失敗します。Workers Builds の既定がメジャーをまたいだら範囲も更新します。
-- そのためCIは `actions/setup-node` を使いません。`pnpm/setup` が `package.json` の `packageManager` と `devEngines.runtime` を読み、pnpm とNode.jsを導入します。`cache: true` でpnpmストア(Node.js runtimeを含む)をキャッシュし、`install: false` で導入だけを行ったあと `pnpm install --frozen-lockfile` を明示的に実行します。
+- そのためCIは `actions/setup-node` を使いません。`pnpm/setup` が `package.json` の `packageManager` と `devEngines.runtime` を読み、pnpm とNode.jsを導入します。`cache: true` でpnpmストア(Node.js runtimeを含む)をキャッシュし、`require-lockfile: true` で `pnpm install --frozen-lockfile` まで実行します。lockfileと `package.json` がずれていればセットアップの時点で失敗します。
 - 両バージョンの更新はRenovateが担当します(いずれもnpmマネージャが `packageManager` と `devEngines.runtime` を更新)。pnpmのmajor更新は他のmajor更新と混ぜず単独PRになります。
 
 ## Git pre-commit
