@@ -29,17 +29,10 @@ jobs:
           persist-credentials: false
 
       - &setup-pnpm
-        uses: pnpm/action-setup@v6
-
-      - &setup-node
-        uses: actions/setup-node@v7
+        uses: pnpm/setup@v3
         with:
-          node-version-file: .node-version
-          cache: pnpm
-
-      - &install-deps
-        name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          cache: true
+          require-lockfile: true
 
       - name: Check formatting
         run: pnpm run format:check
@@ -58,8 +51,6 @@ jobs:
     steps:
       - *checkout
       - *setup-pnpm
-      - *setup-node
-      - *install-deps
 
       - name: Build
         run: pnpm run build:ci
@@ -72,8 +63,6 @@ jobs:
     steps:
       - *checkout
       - *setup-pnpm
-      - *setup-node
-      - *install-deps
 
       - name: Install fonts
         run: |
@@ -128,7 +117,7 @@ jobs:
             exit 0
           fi
 
-          if ! report_url="$(node -e '
+          if ! report_url="$(pnpm exec node -e '
             const fs = require("fs");
             const lines = fs
               .readFileSync(process.env.WRANGLER_OUTPUT_FILE_PATH, "utf8")

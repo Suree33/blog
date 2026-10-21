@@ -6,8 +6,6 @@ cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PNPM_HOME/bin:$PATH"
 
-pnpm runtime --global set node "$(cat .node-version)"
-
 profile_marker="# sur33-blog orb toolchain"
 if ! grep -Fqx "$profile_marker" "$HOME/.bash_profile" 2>/dev/null; then
   cat >> "$HOME/.bash_profile" <<'EOF'
